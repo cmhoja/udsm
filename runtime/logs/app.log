@@ -1,0 +1,1425 @@
+2017-05-19 19:51:18 [127.0.0.1][-][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php:630
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php(630): PDO->__construct('mysql:host=loca...', 'root', '', NULL)
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php(563): yii\db\Connection->createPdoInstance()
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php(896): yii\db\Connection->open()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php(883): yii\db\Connection->getMasterPdo()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Command.php(896): yii\db\Command->prepare('<span class="ke...')
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Command.php(405): yii\db\Command->queryInternal('<span class="st...', '<span class="nu...')
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/mysql/Schema.php(352): yii\db\Command->queryColumn()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Schema.php(234): yii\db\mysql\Schema->findTableNames('<span class="st...')
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/generators/model/Generator.php(158): yii\db\Schema->getTableNames()
+#10 [internal function]: yii\gii\generators\model\Generator->yii\gii\generators\model\{closure}()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/components/ActiveField.php(41): call_user_func(Object(Closure))
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Object.php(107): yii\gii\components\ActiveField->init()
+#13 [internal function]: yii\base\Object->__construct(Array)
+#14 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/di/Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#15 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\gii\\compone...', Array, Array)
+#16 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\gii\\compone...', Array, Array)
+#17 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/widgets/ActiveForm.php(302): yii\BaseYii::createObject(Array)
+#18 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/generators/model/form.php(9): yii\widgets\ActiveForm->field(Object(yii\gii\generators\model\Generator), 'tableName')
+#19 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): require('/var/www/udsm.a...')
+#20 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile('/var/www/udsm.a...', Array)
+#21 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/views/default/view.php(38): yii\base\View->renderFile('/var/www/udsm.a...', Array)
+#22 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): require('/var/www/udsm.a...')
+#23 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile('/var/www/udsm.a...', Array)
+#24 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile('/var/www/udsm.a...', Array, Object(yii\gii\controllers\DefaultController))
+#25 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(381): yii\base\View->render('view', Array, Object(yii\gii\controllers\DefaultController))
+#26 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/controllers/DefaultController.php(61): yii\base\Controller->render('view', Array)
+#27 [internal function]: yii\gii\controllers\DefaultController->actionView('model')
+#28 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#29 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#30 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('view', Array)
+#31 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('gii/default/vie...', Array)
+#32 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#33 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#34 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php:568
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php(896): yii\db\Connection->open()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Connection.php(883): yii\db\Connection->getMasterPdo()
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Command.php(896): yii\db\Command->prepare('<span class="ke...')
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Command.php(405): yii\db\Command->queryInternal('<span class="st...', '<span class="nu...')
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/mysql/Schema.php(352): yii\db\Command->queryColumn()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/db/Schema.php(234): yii\db\mysql\Schema->findTableNames('<span class="st...')
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/generators/model/Generator.php(158): yii\db\Schema->getTableNames()
+#8 [internal function]: yii\gii\generators\model\Generator->yii\gii\generators\model\{closure}()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/components/ActiveField.php(41): call_user_func(Object(Closure))
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Object.php(107): yii\gii\components\ActiveField->init()
+#11 [internal function]: yii\base\Object->__construct(Array)
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/di/Container.php(381): ReflectionClass->newInstanceArgs(Array)
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\gii\\compone...', Array, Array)
+#14 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\gii\\compone...', Array, Array)
+#15 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/widgets/ActiveForm.php(302): yii\BaseYii::createObject(Array)
+#16 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/generators/model/form.php(9): yii\widgets\ActiveForm->field(Object(yii\gii\generators\model\Generator), 'tableName')
+#17 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): require('/var/www/udsm.a...')
+#18 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile('/var/www/udsm.a...', Array)
+#19 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/views/default/view.php(38): yii\base\View->renderFile('/var/www/udsm.a...', Array)
+#20 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): require('/var/www/udsm.a...')
+#21 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile('/var/www/udsm.a...', Array)
+#22 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile('/var/www/udsm.a...', Array, Object(yii\gii\controllers\DefaultController))
+#23 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(381): yii\base\View->render('view', Array, Object(yii\gii\controllers\DefaultController))
+#24 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/controllers/DefaultController.php(61): yii\base\Controller->render('view', Array)
+#25 [internal function]: yii\gii\controllers\DefaultController->actionView('model')
+#26 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#27 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#28 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('view', Array)
+#29 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('gii/default/vie...', Array)
+#30 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#31 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#32 {main}
+Additional Information:
+
+2017-05-19 19:51:17 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'gii/default/view'
+    'id' => 'model'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => '45bfoeoe1p82i1ksm941k7duv2'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=gii'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=45bfoeoe1p82i1ksm941k7duv2; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '55062'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=gii%2Fdefault%2Fview&id=model'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=gii%2Fdefault%2Fview&id=model'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495223477.029
+    'REQUEST_TIME' => 1495223477
+]
+2017-05-19 20:12:13 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'app\models\TblAcademicAdministrativeUnit' not found' in /var/www/udsm.ac.tz/models/Users.php:41
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Model.php(411): yii\base\Model->createValidators()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Model.php(187): yii\base\Model->getValidators()
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Model.php(751): yii\base\Model->scenarios()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/generators/crud/default/views/_form.php(11): yii\base\Model->safeAttributes()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): ::unknown()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/Generator.php(317): yii\base\View->renderFile()
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/generators/crud/Generator.php(182): yii\gii\Generator->render()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2-gii/controllers/DefaultController.php(50): yii\gii\generators\crud\Generator->generate()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): yii\gii\controllers\DefaultController->actionView()
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#14 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#15 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#16 {main}
+2017-05-19 20:12:13 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'gii/default/view'
+    'id' => 'crud'
+]
+
+$_POST = [
+    '_csrf' => 'SEVWa3p0R3UPAhouADUpIj91AVI8DnIfOTQ3PRw/LBM6Ixc8NEUXHQ=='
+    'Generator' => [
+        'modelClass' => 'app\\models\\Users'
+        'searchModelClass' => 'app\\models\\UsersSearch'
+        'controllerClass' => 'app\\controllers\\UsersController'
+        'viewPath' => ''
+        'baseControllerClass' => 'yii\\web\\Controller'
+        'indexWidgetType' => 'grid'
+        'enableI18N' => '0'
+        'enablePjax' => '0'
+        'messageCategory' => 'app'
+        'template' => 'default'
+    ]
+    'preview' => ''
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => '45bfoeoe1p82i1ksm941k7duv2'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '492'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=gii%2Fdefault%2Fview&id=crud'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=45bfoeoe1p82i1ksm941k7duv2; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '42495'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=gii%2Fdefault%2Fview&id=crud'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=gii%2Fdefault%2Fview&id=crud'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495224733.735
+    'REQUEST_TIME' => 1495224733
+]
+2017-05-19 20:35:05 [127.0.0.1][-][pjdcifnl7s0578a6tj9i770qh4][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined index: SoteName' in /var/www/udsm.ac.tz/views/layouts/main.php:30
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#3 /var/www/udsm.ac.tz/controllers/SiteController.php(83): yii\base\Controller->render()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionLogin()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#10 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#11 {main}
+2017-05-19 20:35:05 [127.0.0.1][-][pjdcifnl7s0578a6tj9i770qh4][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'pjdcifnl7s0578a6tj9i770qh4'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=pjdcifnl7s0578a6tj9i770qh4'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '42588'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495226105.294
+    'REQUEST_TIME' => 1495226105
+]
+2017-05-19 20:38:00 [127.0.0.1][-][pjdcifnl7s0578a6tj9i770qh4][error][yii\base\ErrorException:64] exception 'yii\base\ErrorException' with message 'Cannot use [] for reading' in /var/www/udsm.ac.tz/views/site/login.php:10
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(381): yii\base\View->render()
+#2 /var/www/udsm.ac.tz/controllers/SiteController.php(83): yii\base\Controller->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionLogin()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#9 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#10 {main}
+2017-05-19 20:38:00 [127.0.0.1][-][pjdcifnl7s0578a6tj9i770qh4][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'pjdcifnl7s0578a6tj9i770qh4'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=pjdcifnl7s0578a6tj9i770qh4'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '42632'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495226280.749
+    'REQUEST_TIME' => 1495226280
+]
+2017-05-19 20:41:48 [127.0.0.1][-][pjdcifnl7s0578a6tj9i770qh4][error][yii\base\ErrorException:4] exception 'yii\base\ErrorException' with message 'syntax error, unexpected '?>'' in /var/www/udsm.ac.tz/views/layouts/main.php:71
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#2 /var/www/udsm.ac.tz/controllers/SiteController.php(83): yii\base\Controller->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionLogin()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#9 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#10 {main}
+2017-05-19 20:41:48 [127.0.0.1][-][pjdcifnl7s0578a6tj9i770qh4][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'pjdcifnl7s0578a6tj9i770qh4'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=pjdcifnl7s0578a6tj9i770qh4'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '42653'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495226508.529
+    'REQUEST_TIME' => 1495226508
+]
+2017-05-19 21:27:19 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Trying to get property of non-object' in /var/www/udsm.ac.tz/views/layouts/cms_main_menu.php:21
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#2 /var/www/udsm.ac.tz/views/layouts/main.php(28): yii\base\View->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): ::unknown()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#7 /var/www/udsm.ac.tz/controllers/SiteController.php(83): yii\base\Controller->render()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionLogin()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#14 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2017-05-19 21:27:19 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'eo8c1cn659n4d3bdd5bmurnpg2'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=eo8c1cn659n4d3bdd5bmurnpg2'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '43277'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495229239.233
+    'REQUEST_TIME' => 1495229239
+]
+2017-05-19 21:28:28 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Trying to get property of non-object' in /var/www/udsm.ac.tz/views/layouts/cms_main_menu.php:21
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#2 /var/www/udsm.ac.tz/views/layouts/main.php(28): yii\base\View->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): ::unknown()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#7 /var/www/udsm.ac.tz/controllers/SiteController.php(83): yii\base\Controller->render()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionLogin()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#14 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2017-05-19 21:28:28 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'eo8c1cn659n4d3bdd5bmurnpg2'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=eo8c1cn659n4d3bdd5bmurnpg2'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '43286'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495229308.325
+    'REQUEST_TIME' => 1495229308
+]
+2017-05-19 21:28:31 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Trying to get property of non-object' in /var/www/udsm.ac.tz/views/layouts/cms_main_menu.php:21
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#2 /var/www/udsm.ac.tz/views/layouts/main.php(28): yii\base\View->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): ::unknown()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#7 /var/www/udsm.ac.tz/controllers/SiteController.php(83): yii\base\Controller->render()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionLogin()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#14 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2017-05-19 21:28:30 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'eo8c1cn659n4d3bdd5bmurnpg2'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=eo8c1cn659n4d3bdd5bmurnpg2'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '43287'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495229310.963
+    'REQUEST_TIME' => 1495229310
+]
+2017-05-19 21:28:50 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Trying to get property of non-object' in /var/www/udsm.ac.tz/views/layouts/cms_main_menu.php:21
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#2 /var/www/udsm.ac.tz/views/layouts/main.php(28): yii\base\View->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): ::unknown()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#7 /var/www/udsm.ac.tz/controllers/SiteController.php(83): yii\base\Controller->render()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionLogin()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#14 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2017-05-19 21:28:50 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'eo8c1cn659n4d3bdd5bmurnpg2'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=eo8c1cn659n4d3bdd5bmurnpg2'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '43293'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495229330.764
+    'REQUEST_TIME' => 1495229330
+]
+2017-05-19 21:29:04 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Trying to get property of non-object' in /var/www/udsm.ac.tz/views/layouts/cms_main_menu.php:21
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#2 /var/www/udsm.ac.tz/views/layouts/main.php(28): yii\base\View->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): ::unknown()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#7 /var/www/udsm.ac.tz/controllers/SiteController.php(63): yii\base\Controller->render()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionIndex()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#14 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2017-05-19 21:29:04 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][info][application] $_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'eo8c1cn659n4d3bdd5bmurnpg2'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=eo8c1cn659n4d3bdd5bmurnpg2'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '43297'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/udsm.ac.tz/web/'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495229343.981
+    'REQUEST_TIME' => 1495229343
+]
+2017-05-19 21:29:08 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Trying to get property of non-object' in /var/www/udsm.ac.tz/views/layouts/cms_main_menu.php:21
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(152): yii\base\View->renderFile()
+#2 /var/www/udsm.ac.tz/views/layouts/main.php(28): yii\base\View->render()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(328): ::unknown()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/View.php(250): yii\base\View->renderPhpFile()
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(396): yii\base\View->renderFile()
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(382): yii\base\Controller->renderContent()
+#7 /var/www/udsm.ac.tz/controllers/SiteController.php(63): yii\base\Controller->render()
+#8 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): app\controllers\SiteController->actionIndex()
+#9 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array()
+#10 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams()
+#11 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction()
+#12 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#13 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#14 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#15 {main}
+2017-05-19 21:29:08 [127.0.0.1][-][eo8c1cn659n4d3bdd5bmurnpg2][info][application] $_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'eo8c1cn659n4d3bdd5bmurnpg2'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=eo8c1cn659n4d3bdd5bmurnpg2'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '43298'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/udsm.ac.tz/web/'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495229348.029
+    'REQUEST_TIME' => 1495229348
+]
+2017-05-19 21:31:03 [127.0.0.1][100][db3f0u17h033a5j9rhh8fc3mh5][error][yii\web\HttpException:405] exception 'yii\web\MethodNotAllowedHttpException' with message 'Method Not Allowed. This url can only handle the following request methods: POST.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/filters/VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(272): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Controller.php(164): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(154): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('logout', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('site/logout', Array)
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2017-05-19 21:31:03 [127.0.0.1][100][db3f0u17h033a5j9rhh8fc3mh5][info][application] $_GET = [
+    'r' => 'site/logout'
+]
+
+$_COOKIE = [
+    '_csrf' => 'c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph\";}'
+    'PHPSESSID' => 'db3f0u17h033a5j9rhh8fc3mh5'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=c2b68a01170491b8dc198d2c68f3af9836695487c842c8a7821cfa6b468789d4a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GGLEzAnWw0W9Fz5jqqaVfKkfrfAWN1Ph%22%3B%7D; PHPSESSID=db3f0u17h033a5j9rhh8fc3mh5; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '43312'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogout'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495229463.765
+    'REQUEST_TIME' => 1495229463
+]
+2017-05-22 18:58:37 [127.0.0.1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "login".' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('login', Array)
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2017-05-22 18:58:37 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'login'
+]
+
+$_COOKIE = [
+    '_csrf' => 'eabc263c22a931aec18e94adfa38e5c13ee517312f64393f68a1e9770ee02e18a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"ZFHIgzSJ_ZkM_bV6LY2hWjc2yX9Oza5C\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=eabc263c22a931aec18e94adfa38e5c13ee517312f64393f68a1e9770ee02e18a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22ZFHIgzSJ_ZkM_bV6LY2hWjc2yX9Oza5C%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37362'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=login'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=login'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495479517.828
+    'REQUEST_TIME' => 1495479517
+]
+2017-05-22 19:05:16 [127.0.0.1][-][-][error][yii\base\UnknownMethodException] exception 'yii\base\UnknownMethodException' with message 'Calling unknown method: app\controllers\SiteController::rediect()' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php:290
+Stack trace:
+#0 /var/www/udsm.ac.tz/controllers/SiteController.php(61): yii\base\Component->__call('rediect', Array)
+#1 /var/www/udsm.ac.tz/controllers/SiteController.php(61): app\controllers\SiteController->rediect(Array)
+#2 [internal function]: app\controllers\SiteController->actionIndex()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('', Array)
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2017-05-22 19:05:14 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    '_csrf' => 'eabc263c22a931aec18e94adfa38e5c13ee517312f64393f68a1e9770ee02e18a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"ZFHIgzSJ_ZkM_bV6LY2hWjc2yX9Oza5C\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=eabc263c22a931aec18e94adfa38e5c13ee517312f64393f68a1e9770ee02e18a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22ZFHIgzSJ_ZkM_bV6LY2hWjc2yX9Oza5C%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37393'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/udsm.ac.tz/web/'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495479914.267
+    'REQUEST_TIME' => 1495479914
+]
+2017-05-22 19:38:40 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][error][yii\web\HttpException:405] exception 'yii\web\MethodNotAllowedHttpException' with message 'Method Not Allowed. This url can only handle the following request methods: POST.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/filters/VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(272): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Controller.php(164): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(154): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('logout', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('site/logout', Array)
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2017-05-22 19:38:40 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][info][application] $_GET = [
+    'r' => 'site/logout'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '7o8p3fcf583qjq4vqj9kei33a0'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => 'PHPSESSID=7o8p3fcf583qjq4vqj9kei33a0; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D; _csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37810'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogout'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495481920.573
+    'REQUEST_TIME' => 1495481920
+]
+2017-05-22 19:38:51 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][error][yii\web\HttpException:405] exception 'yii\web\MethodNotAllowedHttpException' with message 'Method Not Allowed. This url can only handle the following request methods: POST.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/filters/VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(272): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Controller.php(164): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(154): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('logout', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('site/logout', Array)
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2017-05-22 19:38:51 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][info][application] $_GET = [
+    'r' => 'site/logout'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '7o8p3fcf583qjq4vqj9kei33a0'
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => 'PHPSESSID=7o8p3fcf583qjq4vqj9kei33a0; _csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37820'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogout'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495481931.609
+    'REQUEST_TIME' => 1495481931
+]
+2017-05-22 19:38:59 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][error][yii\web\HttpException:405] exception 'yii\web\MethodNotAllowedHttpException' with message 'Method Not Allowed. This url can only handle the following request methods: POST.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/filters/VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(272): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Controller.php(164): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(154): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('logout', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('site/logout', Array)
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2017-05-22 19:38:59 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][info][application] $_GET = [
+    'r' => 'site/logout'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '7o8p3fcf583qjq4vqj9kei33a0'
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => 'PHPSESSID=7o8p3fcf583qjq4vqj9kei33a0; _csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37821'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogout'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495481939.78
+    'REQUEST_TIME' => 1495481939
+]
+2017-05-22 19:39:01 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][error][yii\web\HttpException:405] exception 'yii\web\MethodNotAllowedHttpException' with message 'Method Not Allowed. This url can only handle the following request methods: POST.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/filters/VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(272): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Controller.php(164): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(154): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('logout', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('site/logout', Array)
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2017-05-22 19:39:01 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][info][application] $_GET = [
+    'r' => 'site/logout'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '7o8p3fcf583qjq4vqj9kei33a0'
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => 'PHPSESSID=7o8p3fcf583qjq4vqj9kei33a0; _csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37821'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogout'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495481941.012
+    'REQUEST_TIME' => 1495481941
+]
+2017-05-22 19:39:22 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][error][yii\web\HttpException:405] exception 'yii\web\MethodNotAllowedHttpException' with message 'Method Not Allowed. This url can only handle the following request methods: POST.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/filters/VerbFilter.php:105
+Stack trace:
+#0 [internal function]: yii\filters\VerbFilter->beforeAction(Object(yii\base\ActionEvent))
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(272): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Controller.php(164): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(154): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('logout', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('site/logout', Array)
+#7 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#9 {main}
+2017-05-22 19:39:22 [127.0.0.1][100][7o8p3fcf583qjq4vqj9kei33a0][info][application] $_GET = [
+    'r' => 'site/logout'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '7o8p3fcf583qjq4vqj9kei33a0'
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => 'PHPSESSID=7o8p3fcf583qjq4vqj9kei33a0; _csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37825'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogout'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogout'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495481962.336
+    'REQUEST_TIME' => 1495481962
+]
+2017-05-22 19:39:54 [127.0.0.1][-][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Getting unknown property: app\controllers\SiteController::password' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Component.php:147
+Stack trace:
+#0 /var/www/udsm.ac.tz/controllers/SiteController.php(76): yii\base\Component->__get('password')
+#1 [internal function]: app\controllers\SiteController->actionLogin()
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('login', Array)
+#5 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('site/login', Array)
+#6 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#8 {main}
+2017-05-22 19:39:54 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = [
+    '_csrf' => 'ak9tazZYRXNSDAQbdCIvEF8FPFNpKDMSWwAsLVNgKQsCDBgcQhELFw=='
+    'LoginForm' => [
+        'username' => 'admin'
+        'password' => 'admin'
+    ]
+    'login-button' => ''
+]
+
+$_COOKIE = [
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+    'PHPSESSID' => '7oa9dnr38ic5l9mjsdbs1rbcp5'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '140'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_DNT' => '1'
+    'HTTP_REFERER' => 'http://localhost/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D; PHPSESSID=7oa9dnr38ic5l9mjsdbs1rbcp5'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37844'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495481994.676
+    'REQUEST_TIME' => 1495481994
+]
+2017-05-22 19:41:21 [127.0.0.1][-][-][error][yii\base\ErrorException:4] exception 'yii\base\ErrorException' with message 'syntax error, unexpected '$model' (T_VARIABLE), expecting ',' or ';'' in /var/www/udsm.ac.tz/controllers/SiteController.php:75
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(633): ::class_exists()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(591): yii\base\Module->createControllerByID()
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(517): yii\base\Module->createController()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#5 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#6 {main}
+2017-05-22 19:41:21 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+    'PHPSESSID' => '7oa9dnr38ic5l9mjsdbs1rbcp5'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D; PHPSESSID=7oa9dnr38ic5l9mjsdbs1rbcp5'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37856'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495482081.22
+    'REQUEST_TIME' => 1495482081
+]
+2017-05-22 19:41:34 [127.0.0.1][-][-][error][yii\base\ErrorException:4] exception 'yii\base\ErrorException' with message 'syntax error, unexpected 'if' (T_IF), expecting ',' or ';'' in /var/www/udsm.ac.tz/controllers/SiteController.php:77
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(633): ::class_exists()
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(591): yii\base\Module->createControllerByID()
+#2 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php(517): yii\base\Module->createController()
+#3 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction()
+#4 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest()
+#5 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#6 {main}
+2017-05-22 19:41:33 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_COOKIE = [
+    '_csrf' => '1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"8CipBzjc5JQ8_pva1OAFe8lxhCuwtINd\";}'
+    'PHPSESSID' => '7oa9dnr38ic5l9mjsdbs1rbcp5'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=1e0871e7b6d6c2a5209a88f7c07b7929518d0b8ed037548a15df5eed8399f0f8a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%228CipBzjc5JQ8_pva1OAFe8lxhCuwtINd%22%3B%7D; PHPSESSID=7oa9dnr38ic5l9mjsdbs1rbcp5'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '37857'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495482093.988
+    'REQUEST_TIME' => 1495482093
+]
+2017-05-30 19:54:53 [127.0.0.1][100][mh4fdurhn6fqmuntmk5c1mal63][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "user".' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Module.php:532
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('user', Array)
+#1 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in /var/www/udsm.ac.tz/vendor/yiisoft/yii2/web/Application.php:114
+Stack trace:
+#0 /var/www/udsm.ac.tz/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/udsm.ac.tz/web/index.php(12): yii\base\Application->run()
+#2 {main}
+2017-05-30 19:54:53 [127.0.0.1][100][mh4fdurhn6fqmuntmk5c1mal63][info][application] $_GET = [
+    'r' => 'user'
+]
+
+$_COOKIE = [
+    '_csrf' => 'ed1916026f66878b78c256e8ef65692ea9e698f756bc6305ae1b7470e87bed94a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"qU-p9efdt0Mzn88UGYdmhCGFTF6wfEXB\";}'
+    'PHPSESSID' => 'mh4fdurhn6fqmuntmk5c1mal63'
+    '_identity' => '400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'
+    'HTTP_DNT' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8'
+    'HTTP_COOKIE' => '_csrf=ed1916026f66878b78c256e8ef65692ea9e698f756bc6305ae1b7470e87bed94a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22qU-p9efdt0Mzn88UGYdmhCGFTF6wfEXB%22%3B%7D; PHPSESSID=mh4fdurhn6fqmuntmk5c1mal63; _identity=400f614a47f571f929f9e0a00f189d80a93d66b48e233097244f621a6b3d4f7fa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/bin:/usr/bin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.2.22 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/udsm.ac.tz/web/index.php'
+    'REMOTE_PORT' => '34092'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user'
+    'REQUEST_URI' => '/udsm.ac.tz/web/index.php?r=user'
+    'SCRIPT_NAME' => '/udsm.ac.tz/web/index.php'
+    'PHP_SELF' => '/udsm.ac.tz/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1496174093.524
+    'REQUEST_TIME' => 1496174093
+]
