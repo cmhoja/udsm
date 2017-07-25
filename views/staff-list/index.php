@@ -11,28 +11,28 @@ $this->title = 'Staff Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="staff-list-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
-        <?= Html::a('Create Staff List', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Staff', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+       // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
             'FName',
             'LName',
             'Education',
             'Position',
             // 'Summary',
-            // 'UnitID',
-
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ),
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

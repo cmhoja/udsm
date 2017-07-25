@@ -28,6 +28,11 @@ class SectionsController extends Controller
             ],
         ];
     }
+    
+     public function init() {
+        $this->layout = 'backend/main';
+        parent::init();
+    }
 
     /**
      * Lists all Sections models.

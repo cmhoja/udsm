@@ -12,31 +12,35 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="research-projects-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Research Projects', ['create'], ['class' => 'btn btn-success']) ?>
+    <p style="clear: both">
+        <?= Html::a('Post/Add Research Projects', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
             'ProjectNameEn',
-            'ProjectNameSw',
-            'UnitID',
-            'DetailsEn:ntext',
-            // 'DetailsSw:ntext',
-            // 'Principal',
-            // 'OtherResearcher',
-            // 'Funding',
-            // 'StartYear',
-            // 'EndYear',
-
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ),
+            'Principal',
+            'StartYear',
+            //'EndYear',
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getprogrammeStatusName();
+                }
+            ),
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

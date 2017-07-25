@@ -8,28 +8,23 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="menu-search">
+<div class="search">
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
-
-    <?= $form->field($model, 'Id') ?>
+    <?php
+    $form = ActiveForm::begin([
+                'action' => ['index'],
+                'method' => 'get',
+    ]);
+    ?>
 
     <?= $form->field($model, 'MenuName') ?>
-
-    <?= $form->field($model, 'Description') ?>
 
     <?= $form->field($model, 'MenuType') ?>
 
     <?= $form->field($model, 'UnitID') ?>
 
-    <?php // echo $form->field($model, 'ShowOnPage') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

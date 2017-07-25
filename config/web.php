@@ -1,15 +1,32 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
-
+$url_manager = require(__DIR__ . '/url_manager.php');
 $config = [
     'id' => 'basic',
+    'language' => 'en', //default language of the application
+    'name' => ['en' => 'University of Dar es salaam', 'sw' => 'Chuo Kikuu cha Dar es salaam'],
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+    ],
     'components' => [
+        'view' => [
+            'theme' => [
+                'basePath' => '@app/themes/udsm',
+                'baseUrl' => '@web/themes/udsm',
+                'pathMap' => ['@app/views' => 'themes/udsm'],
+            ],
+        ],
+        'as access' => [
+            'class' => 'mdm\admin\components\AccessControl',
+            'allowActions' => [
+                '*'
+            ],
+        ],
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '0vLZ7TjStyYDbAwqVUvV',
+// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => '3-5-N5uagjTNYGcLvmOUl1QV9iFCZE8F',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -18,14 +35,17 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
+// 'useFileTransport' to false and configure a transport
+// for the mailer to send real emails.
             'useFileTransport' => true,
         ],
         'log' => [
@@ -38,14 +58,44 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+//        'urlManager' => [
+//            'enablePrettyUrl' => false,
+//            'showScriptName' => false,
+//            'enableStrictParsing' => true,
+//            'suffix' => '.html',
+//            'rules' => [
+//                'study' => 'about/index',
+//                'study/<id:\d+>' => 'about/view',
+//            ]
+//        ],
+        'urlManager' => $url_manager,
+    ],
+    'modules' =>
+    [
+        'gridview' =>
+        [
+            'class' => 'kartik\grid\Module',
+        ],
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+//            'layout' => 'top-menu', // avaliable value 'left-menu', 'right-menu' and 'top-menu'
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'app\models\User',
+                    'idField' => 'id'
+                ]
+            ],
+            'menus' => [
+                'assignment' => [
+                    'label' => 'Grand Access' // change label
+                ],
+                'route' => [
+//                    'en/site' => 'site/index',
+//                    '*' => 'en/site'
+                ],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
@@ -55,15 +105,11 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 

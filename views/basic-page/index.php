@@ -1,0 +1,40 @@
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\BasicPageSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->params['breadcrumbs'][] = 'Manage Basic Pages';
+?>
+<div class="basic-page-index">
+        <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <p>
+    <?= Html::a('Add Basic Page', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?=
+    GridView::widget([
+        'dataProvider' => $dataProvider,
+        //'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ), 'PageTitleEn',
+            'PageSeoUrl:url',
+            'DateCreated',
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getStatusName();
+                }),
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]);
+    ?>
+</div>

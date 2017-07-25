@@ -11,28 +11,32 @@ $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
-        <?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
             'FName',
             'LName',
             'UserName',
-            'Password',
-            // 'UserType',
-            // 'UnitID',
-
+            array(
+                'attribute' => 'UserType',
+                'value' => function($model) {
+                   return $model->getUserTypeName();
+                },
+            ),
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model){
+                   return $model->UnitID ? $model->unit->UnitNameEn : NULL;
+                }
+            ),
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

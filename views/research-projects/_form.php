@@ -1,41 +1,72 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use app\models\AcademicAdministrativeUnit;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ResearchProjects */
+/* @var $model app\models\AcademicAdministrativeUnit */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="research-projects-form">
+<div class="add-form">
+    <?php
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]);
+    ?>
+    <?php
+    echo Form::widget([
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
+            'onClick' => 'this.disabled=true;this.form.submit();',
+            'ProjectNameEn' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
+            ],
+            'ProjectNameSw' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
+            ],
+            'UnitID' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'options' => ['prompt' => '--- select --'],
+                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement'=> AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
+            ], 'DetailsEn' => [
+                'type' => Form::INPUT_TEXTAREA,
+                'columnOptions' => ['width' => '185px']
+            ],
+            'DetailsSw' => [
+                'type' => Form::INPUT_TEXTAREA,
+                'columnOptions' => ['width' => '185px', 'height' => '10px']
+            ],
+            'Principal' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
+            ],
+            'OtherResearcher' => [
+                'type' => Form::INPUT_TEXTAREA,
+                'columnOptions' => ['width' => '185px']
+            ],
+            'StartYear' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
+            ], 'EndYear' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
+            ]
+        ]
+    ]);
+    echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);
+    echo Html::submitButton('Save & Publish', ['value' => 'publish', 'name' => 'publish', 'class' => 'btn btn-primary']);
+    ActiveForm::end();
+    ?>
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'ProjectNameEn')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'ProjectNameSw')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'UnitID')->textInput() ?>
-
-    <?= $form->field($model, 'DetailsEn')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'DetailsSw')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'Principal')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'OtherResearcher')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Funding')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'StartYear')->textInput() ?>
-
-    <?= $form->field($model, 'EndYear')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
 
 </div>
+
+

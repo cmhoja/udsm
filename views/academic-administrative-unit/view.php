@@ -6,33 +6,46 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\AcademicAdministrativeUnit */
 
-$this->title = $model->Id;
-$this->params['breadcrumbs'][] = ['label' => 'Academic Administrative Units', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'UDSM Units and Sections';
+$this->params['breadcrumbs'][] = ['label' => 'UDSM Units and Sections', 'url' => ['index']];
+$this->params['breadcrumbs'][] = 'Details';
 ?>
 <div class="academic-administrative-unit-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->Id], [
+        <?=
+        Html::a('Delete', ['delete', 'id' => $model->Id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ])
+        ?>
     </p>
 
-    <?= DetailView::widget([
+    <?=
+    DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'Id',
             'UnitNameEn',
             'UnitNameSw',
-            'UnitType',
+            [
+                'attribute' => 'UnitType',
+                'value' => function($model) {
+                    return $model->getUnitTypeName();
+                }
+            ],
+            [
+                'attribute' => 'ParentUnitId',
+                'label' => 'Member Of',
+                'value' => function($model) {
+                    return $model->getParentUnitName();
+                }
+            ],
         ],
-    ]) ?>
+    ])
+    ?>
 
 </div>

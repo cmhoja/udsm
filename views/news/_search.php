@@ -1,41 +1,36 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model app\models\NewsSearch */
-/* @var $form yii\widgets\ActiveForm */
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use app\models\AcademicAdministrativeUnit;
 ?>
 
-<div class="news-search">
-
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
-
-    <?= $form->field($model, 'Id') ?>
-
-    <?= $form->field($model, 'TitleEn') ?>
-
-    <?= $form->field($model, 'TitleSw') ?>
-
-    <?= $form->field($model, 'DetailsEn') ?>
-
-    <?= $form->field($model, 'DetailsSw') ?>
-
-    <?php // echo $form->field($model, 'Attachment') ?>
-
-    <?php // echo $form->field($model, 'Photo') ?>
-
-    <?php // echo $form->field($model, 'UnitID') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
+<div class="search" style="clear: both; width: 90%">
+    <?php
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
+    ?><?php
+    echo Form::widget([
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
+            'UnitID' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'options' => ['prompt' => '--- select --'],
+               'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement'=> AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
+            ], 'TitleEn' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Title of the Nes in English'],
+                'columnOptions' => ['width' => '185px']
+            ],
+        ]
+    ]);
+    echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+    ActiveForm::end();
+    ?>
 
 </div>

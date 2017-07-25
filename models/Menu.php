@@ -17,27 +17,35 @@ use Yii;
  * @property TblAcademicAdministrativeUnit $unit
  * @property TblMenuItem[] $tblMenuItems
  */
-class Menu extends \yii\db\ActiveRecord
-{
+class Menu extends \yii\db\ActiveRecord {
+
+    const MENU_TYPE_MAIN_MENU = 0;
+    const MENU_TYPE_SIDE_MENU = 1;
+    const MENU_TYPE_OTHER_MENU = 2;
+    ///status
+    const STATUS_SAVED = 0;
+    const STATUS_PUBLISHED = 1;
+    const STATUS_UNPUBLISHED = 2;
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'tbl_menu';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['MenuName', 'MenuType'], 'required'],
+            [['MenuName', 'MenuType', 'MenuPlacementAreaRegion'], 'required'],
             [['MenuType', 'UnitID'], 'integer'],
-            [['MenuName', 'ShowOnPage'], 'string', 'max' => 50],
+            [['MenuName'], 'string', 'max' => 50],
+            [['ShowOnPage'], 'string', 'max' => 300],
             [['Description'], 'string', 'max' => 255],
             [['MenuName'], 'unique'],
+            [['MenuCSSClass', 'DisplayNameEn', 'DisplayNameSw'], 'safe'],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }
@@ -45,31 +53,93 @@ class Menu extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'Id' => 'ID',
             'MenuName' => 'Menu Name',
+            'DisplayNameEn' => 'Display Name En',
+            'DisplayNameSw' => 'Display Name Sw',
             'Description' => 'Description',
             'MenuType' => 'Menu Type',
-            'UnitID' => 'Unit ID',
-            'ShowOnPage' => 'Show On Page',
+            'UnitID' => 'Academic Units/Section',
+            'ShowOnPage' => 'Show Menu only on Page',
+            'MenuPlacementAreaRegion' => 'Menu Placement Area',
+            'MenuCSSClass' => 'Menu CSS Class'
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUnit()
-    {
+    public function getUnit() {
         return $this->hasOne(AcademicAdministrativeUnit::className(), ['Id' => 'UnitID']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblMenuItems()
-    {
+    public function getTblMenuItems() {
         return $this->hasMany(MenuItem::className(), ['MenuID' => 'Id']);
     }
+
+    static function getMenuTypes() {
+        return array(
+            self::MENU_TYPE_MAIN_MENU => 'Site/Section/Unit Main Menu',
+            self::MENU_TYPE_SIDE_MENU => 'Page/Side menu',
+            self::MENU_TYPE_OTHER_MENU => 'Other Menu(s)',
+        );
+    }
+
+    function getMenuTypeName() {
+        $type = self::getMenuTypes();
+        if ($type && isset($type[$this->MenuType])) {
+            return $type[$this->MenuType];
+        }return NULL;
+    }
+
+    function getStatusName() {
+        $statuses = self::getStatusList();
+        if ($statuses && isset($statuses[$this->Status])) {
+            return $statuses[$this->Status];
+        }
+        return NULL;
+    }
+
+    function getStatusList() {
+        return array(
+            self::STATUS_SAVED => 'Saved',
+            self::STATUS_PUBLISHED => 'Published',
+            self::STATUS_UNPUBLISHED => 'Un Published'
+        );
+    }
+
+    static function getActivemenuByRegionMenuTypePageType($RegionId, $MenuType, $PageType, $Unit = NULL) {
+        return self::find()
+                        ->select('MenuName,Description,Id')
+                        ->where(array('MenuType' => $MenuType, 'ShowOnPage' => $PageType, 'MenuPlacementAreaRegion' => $RegionId, 'Status' => Menu::STATUS_PUBLISHED))
+                        ->all();
+    }
+
+    static function getActiveMenuByMenuTypeRegionAndTemplateByUnitID($MenuType, $MenuPlacementAreaRegion, $UnitID = NULL, $ShowOnPage = 0) {
+        $condition = array();
+        $condition['Status'] = Menu::STATUS_PUBLISHED;
+        if ($ShowOnPage != 0) {
+            $condition['ShowOnPage'] = $ShowOnPage;
+        } else {
+            $condition['ShowOnPage'] = 0;
+        }
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        } else {
+            $condition['UnitID'] = NULL;
+        }
+        $condition['MenuType'] = $MenuType;
+        $condition['MenuPlacementAreaRegion'] = $MenuPlacementAreaRegion;
+        return self::find()
+                        ->select('Id, MenuName,MenuType,UnitID,ShowOnPage,MenuPlacementAreaRegion')
+                        ->where($condition)
+                        ->orderBy('Id ASC,MenuName ASC')
+                        ->all();
+    }
+
 }

@@ -7,29 +7,38 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\AcademicAdministrativeUnitSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Academic Administrative Units';
+$this->title = 'UDSM Units and Sections';
 $this->params['breadcrumbs'][] = $this->title;
+?>
+<?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+<?php
+echo $this->render('menu');
 ?>
 <div class="academic-administrative-unit-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Academic Administrative Unit', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
             'UnitNameEn',
-            'UnitNameSw',
-            'UnitType',
-
+           // 'UnitNameSw',
+            [
+                'attribute' => 'UnitType',
+                'value' => function($model) {
+                    return $model->getUnitTypeName();
+                }
+            ],
+            [
+                'attribute' => 'TypeContentManagement',
+                'value' => function($model) {
+                    return $model->getContentMangementTypesName();
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

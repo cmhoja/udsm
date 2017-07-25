@@ -28,6 +28,11 @@ class AcademicAdministrativeUnitController extends Controller
             ],
         ];
     }
+    
+     public function init() {
+        $this->layout = 'backend/main';
+        parent::init();
+    }
 
     /**
      * Lists all AcademicAdministrativeUnit models.

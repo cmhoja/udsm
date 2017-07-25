@@ -13,27 +13,46 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="news-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create News', ['create'], ['class' => 'btn btn-success']) ?>
+    <p style="clear: both">
+        <?= Html::a('Create/Post News', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
+            'DateCreated',
             'TitleEn',
-            'TitleSw',
-            'DetailsEn:ntext',
-            'DetailsSw:ntext',
-            // 'Attachment',
-            // 'Photo',
-            // 'UnitID',
-
-            ['class' => 'yii\grid\ActionColumn'],
+//            'TitleSw',
+            // 'DetailsEn:ntext',
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ),
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getStatusName();
+                }
+            ),
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Options',
+                'headerOptions' => ['style' => 'color:#337ab7'],
+                'template' => '{view}{update}{delete}',
+                'buttons' => [
+//                    'update' => [
+//                        'visible' => TRUE,
+//                    ],
+//                    'delete' => ['visible' => TRUE,]
+                ]
+            ],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

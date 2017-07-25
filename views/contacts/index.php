@@ -13,26 +13,33 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="contacts-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);   ?>
 
     <p>
         <?= Html::a('Create Contacts', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
             'ContactTitle',
             'PhoneNo',
             'FaxNo',
             'EmailAddress:email',
-            // 'GoogleMapCode:ntext',
-            // 'UnitID',
-
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ), array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getStatusName();
+                }),
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

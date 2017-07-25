@@ -6,32 +6,40 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ResearchProjects */
 
-$this->title = $model->Id;
+$this->title = 'Project Details';
 $this->params['breadcrumbs'][] = ['label' => 'Research Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="research-projects-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->Id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php if ($model->Status != app\models\ResearchProjects::PROJECT_STATUS_PUBLISHED) { ?>
+            <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-primary']) ?>
+            <?=
+            Html::a('Delete', ['delete', 'id' => $model->Id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ])
+            ?>
+        <?php } ?>
     </p>
 
-    <?= DetailView::widget([
+    <?=
+    DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'Id',
             'ProjectNameEn',
             'ProjectNameSw',
-            'UnitID',
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ),
             'DetailsEn:ntext',
             'DetailsSw:ntext',
             'Principal',
@@ -39,7 +47,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'Funding',
             'StartYear',
             'EndYear',
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getprogrammeStatusName();
+                }
+            ),
         ],
-    ]) ?>
+    ])
+    ?>
 
 </div>
+<p>
+    <?php if ($model->Status != app\models\ResearchProjects::PROJECT_STATUS_PUBLISHED) { ?>
+        <?= Html::a('Publish', ['publish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to publish this news?')])
+        ?>
+    <?php } ?>
+
+    <?php if ($model->Status == app\models\ResearchProjects::PROJECT_STATUS_PUBLISHED) { ?>
+        <?= Html::a('Un Publish', ['unpublish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to publish this news?')])
+        ?>
+    <?php } ?>
+</p>

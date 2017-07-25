@@ -8,6 +8,16 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Users;
+use app\models\Events;
+use app\models\News;
+use app\models\Announcement;
+use app\models\CustomBlocks;
+use app\models\Video;
+use app\models\MenuItem;
+use app\models\Menu;
+use app\components\SiteRegions;
+use app\models\SlideShows;
 
 class SiteController extends Controller {
 
@@ -20,17 +30,23 @@ class SiteController extends Controller {
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
                 'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+//                    [
+//                        'actions' => ['logout'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                    [
+//                        'actions' => ['login', 'index', 'basic-page'],
+//                        'allow' => true,
+//                        'roles' => ['?'],
+//                    ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                //   'logout' => ['post'],
+//                    'logout' => ['post'],
+                    'login' => ['post'],
                 ],
             ],
         ];
@@ -57,10 +73,34 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(array('site/login'));
+        ///getting page url
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        if (empty($url) OR is_null($url) OR $url == 'index.php') {
+            $content = array();
+            ///contents for top area slide show
+            $content['home_content_slideshow_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::MAIN_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, NULL, 0);
+            $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID(NULL, NULL);
+            //getting data for the home page top area
+            $content['events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 3);
+            $content['news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 8);
+            $content['announcements'] = Announcement::getLatestAnnouncementsByStatusAndUnit(Announcement::STATUS_PUBLISHED, NULL, 3);
+            //$content['content_homepage_botton_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, \app\components\SiteRegions::MAIN_TEMPLATE_CONTENT_HOMEPAGE_BOTTOM_RIGHT, NULL, 0);
+            $content['content_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE);
+            ///getting information for the home page bottom area
+            $content['videos'] = Video::getLatestVideosByStatusAndUnit(Video::STATUS_PUBLISHED, NULL, 5);
+            $content['content_home_page_bottom_area_menu'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::MAIN_TEMPLATE_CONTENT_HOMEPAGE_BOTTOM_RIGHT, NULL, 0);
+
+            ////getting contend to the content bottom area
+            $content['content_bottom_column1'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, NULL);
+            $content['content_bottom_column2'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, NULL);
+            $content['content_bottom_column3'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, NULL);
+            $content['content_bottom_column4'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_CONTENT_BOTTOM_COLUMN4, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, NULL);
+            //getting contents for promotion are i.e MAIN_TEMPLATE_FOOTER_TOP_AREA
+            $content['content_footer_top_area'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_FOOTER_TOP_AREA, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, NULL);
+            return $this->render('home/index', $content);
+        } else {
+            $this->redirect(['site/page', 'url' => $url]);
         }
-        return $this->render('index');
     }
 
     /**
@@ -69,17 +109,43 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionLogin() {
+        $this->layout = 'login'; //loading the login layout
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
         $model = new LoginForm();
-        $model->password = 'admin';
-        if ($model->load(Yii::$app->request->post())) {
-            $oldPassword = $model->password;
-//            if ($model->password) {
-//                $model->password = $model->createHashedPassword();
-//            }
-            if ($model->login()) {
-                return $this->goBack();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            ///getiing user roles ans initilizing session values
+            $userRoles = Users::find(array('Password' => $model->password, 'Username' => $model->username))->one();
+            if ($userRoles) {
+                if ($userRoles->UnitID) {
+                    \Yii::$app->session->set('UNIT_ID', $userRoles->UnitID);
+                } else {
+                    \Yii::$app->session->destroy();
+                }
+                switch ($userRoles->UserType) {
+                    case Users::USER_TYPE_ADMINISTRATOR: //administrator
+                        \Yii::$app->session->set('USER_TYPE_ADMINISTRATOR', TRUE);
+
+                        break;
+
+                    case Users::USER_TYPE_CONTENT_MANAGER: //for content admin
+                        \Yii::$app->session->set('USER_TYPE_CONTENT_MANAGER', TRUE);
+                        break;
+
+                    default:
+                        break;
+                }
             }
-            $model->password = $oldPassword;
+
+
+            /* Logs the Logins History */
+            $loginsModel = new \app\models\Logins();
+            $loginsModel->UserId = \yii::$app->user->identity->id;
+            $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
+            $loginsModel->Details = 'User logged into the system successful using browser :-' . Yii::$app->getRequest()->getUserAgent();
+            $loginsModel->save();
+            return $this->goBack();
         }
         return $this->render('login', [
                     'model' => $model,
@@ -92,6 +158,13 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionLogout() {
+        /* Logs the Logins History */
+        $loginsModel = new \app\models\Logins();
+        $loginsModel->UserId = Yii::$app->user->id;
+        $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
+        $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
+        $loginsModel->save();
+
         Yii::$app->user->logout();
 
         return $this->goHome();
@@ -102,15 +175,11 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionContact() {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-                    'model' => $model,
+    public function actionContacts() {
+        $contacts_main = \app\models\Contacts::getActiveMainSiteContacts();
+        $contacts_others = \app\models\Contacts::getActiveOtherUnitsContacts();
+        return $this->render('//site/pages/contacts', [
+                    'contacts_main' => $contacts_main, 'contacts_others' => $contacts_others
         ]);
     }
 
@@ -119,8 +188,35 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionAbout() {
-        return $this->render('about');
+    public function actionPage($url) {
+        //getting user current langauage;
+        $page_side_menus = $page_content = $custom_blocks = NULL;
+        $lang = Yii::$app->language;
+        $url = htmlspecialchars($url);
+        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+        if ($page_content) {
+            $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
+            $custom_page_block_regions = SiteRegions::getCustomPageTemplateRegions();
+            if ($custom_page_block_regions) {
+                foreach ($custom_page_block_regions as $RegionID => $RegionName) {
+                    $CustomBlock = CustomBlocks::getActiveBlocksByRegionId($RegionID, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url);
+                    if ($CustomBlock) {
+                        $custom_blocks[$RegionId] = $CustomBlock;
+                    }
+                }
+            }
+        }
+        $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
+        return $this->render('//site/basic_page', $content);
+    }
+
+    /**
+     * Displays forbidden page.
+     *
+     * @return string
+     */
+    public function actionForbidden() {
+        return $this->render('forbidden');
     }
 
 }

@@ -12,30 +12,39 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="programmes-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Programmes', ['create'], ['class' => 'btn btn-success']) ?>
+    <p style="clear: both">
+        <?= Html::a('Add a Programme', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
             'ProgrammeNameEn',
-            'ProgrammeNameSw',
-            'ProgrammeUrl:url',
             'Duration',
-            // 'DescriptionEn:ntext',
-            // 'DescriptionSw:ntext',
-            // 'UnitID',
-            // 'EntryRequirements:ntext',
-            // 'ProgrammeType',
-
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ),
+            array(
+                'attribute' => 'ProgrammeType',
+                'value' => function($model) {
+                    return $model->getProgrammeTypeName();
+                }
+            ),
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getProgrammeStatusName();
+                }
+            ),
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>
