@@ -62,7 +62,7 @@ $this->title = 'Programmes';
                             ?>
                         <!--#list1-->
                             <li>
-                                <a href="<?php echo $value; ?>"><?php echo $value; ?></a>
+                                <a href="<?php echo app\components\Utilities::generateUrl('study/catalogue/'.$value); ?>"><?php echo $value; ?></a>
                             </li>
                             <?php }
                         ?>

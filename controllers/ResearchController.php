@@ -65,7 +65,7 @@ class ResearchController extends Controller {
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
 
         $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
-        
+
         if ($page_content) {
             $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
             $custom_page_block_regions = SiteRegions::getCustomPageTemplateRegions();
@@ -157,8 +157,25 @@ class ResearchController extends Controller {
         return $this->render('//site/pages/research', $content);
     }
 
-    function actionDocuments() {
-        $content = NULL;
+    public function actionProject() {
+        $lang = Yii::$app->language;
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $page_content = \app\models\Documents::getActiveDocumentsByTypeAndUnit(\app\models\Documents::DOC_TYPE_ANNUAL_REPORT);
+        if ($page_content) {
+            $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
+        }
+        $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus);
+        return $this->render('//site/pages/prpject', $content);
+    }
+
+    public function actionDocuments() {
+        $lang = Yii::$app->language;
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $page_content = \app\models\Documents::getActiveDocumentsByTypeAndUnit(\app\models\Documents::DOC_TYPE_ANNUAL_REPORT_RESEARCH_POLICY_GUIDELINE);
+        if ($page_content) {
+            $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
+        }
+        $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus);
         return $this->render('//site/pages/research_documents', $content);
     }
 

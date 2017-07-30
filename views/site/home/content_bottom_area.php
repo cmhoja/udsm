@@ -33,9 +33,9 @@
                     }
                     ?>
 
-                        <!--                <a href="#" ><img src="<?php //echo $this->theme->baseUrl;              ?>/img/ud3.jpg"></a>
-                                        <h5><a href="#" class="promotions">Undergraduate</a></h5>
-                                        <p>Aenean sit amet nulla a massa vestibulum sagittis eleifend ut mi. Maecenas eget ex diam. Aenean sit amet venenatis lectus.</p>-->
+                            <!--                <a href="#" ><img src="<?php //echo $this->theme->baseUrl;               ?>/img/ud3.jpg"></a>
+                                            <h5><a href="#" class="promotions">Undergraduate</a></h5>
+                                            <p>Aenean sit amet nulla a massa vestibulum sagittis eleifend ut mi. Maecenas eget ex diam. Aenean sit amet venenatis lectus.</p>-->
 
                 </div>
 
@@ -70,7 +70,7 @@
                     }
                     ?>            
                     <!--                <a href="#" >
-                                        <img src="<?php //echo $this->theme->baseUrl;          ?>/img/ud8.jpg">
+                                        <img src="<?php //echo $this->theme->baseUrl;           ?>/img/ud8.jpg">
                                     </a>
                                     <h5><a href="#" class="promotions">Postgraduate</a></h5>
                                     <p>Aenean sit amet nulla a massa vestibulum sagittis eleifend ut mi. Maecenas eget ex diam. Aenean sit amet venenatis lectus.</p>-->
@@ -106,7 +106,7 @@
                         }
                     }
                     ?> 
-    <!--                <a href="#" ><img src="<?php //echo $this->theme->baseUrl;          ?>/img/ud5.jpg"></a>
+    <!--                <a href="#" ><img src="<?php //echo $this->theme->baseUrl;           ?>/img/ud5.jpg"></a>
     <h5><a href="#" class="promotions">International Students</a></h5>
     <p>Aenean sit amet nulla a massa vestibulum sagittis eleifend ut mi. Maecenas eget ex diam. Aenean sit amet venenatis lectus.</p>-->
                 </div>
@@ -141,9 +141,6 @@
                         }
                     }
                     ?> 
-    <!--                <a href="#" ><img src="<?php //echo $this->theme->baseUrl;          ?>/img/ud2.jpg"></a>
-    <h5><a href="#" class="promotions">Continuing Education</a></h5>
-    <p>Aenean sit amet nulla a massa vestibulum sagittis eleifend ut mi. Maecenas eget ex diam. Aenean sit amet venenatis lectus.</p>-->
                 </div>
             </div>
 

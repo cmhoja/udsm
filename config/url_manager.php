@@ -6,16 +6,18 @@
 return [
     'enablePrettyUrl' => TRUE,
     'showScriptName' => TRUE,
-    //'enableStrictParsing' => TRUE,
+    'enableStrictParsing' => TRUE,
     'rules' => [
         'backend' => 'backend/index',
         'login' => 'backend/index',
         ///about us routes
         'background|introduction' => 'about/index',
-        'leadership' => 'about/leadership',
         'about|about-us|aboutus' => 'about/index',
-        'aboutus/leadership' => 'about/leadership',
+        'about-us/leadership' => 'about/leadership',
+        'about/leadership' => 'about/leadership',
+        'about-us/annual-reports|about/annual-reports' => 'about/reports',
         'about/<category:\w+>' => 'about/index',
+        'site/annual-reports'=>'about/reports',
         //study routes
         'study/programmes' => 'study/programmes',
         'study/catalogue' => 'study/programmes',
@@ -38,6 +40,8 @@ return [
         'announcements|connect/announcements|site/announcements' => 'connect/announcements',
         'site/news|news|connect/news' => 'connect/news',
         'site/events|events|connect/events' => 'connect/events',
+        'site/leadership' => 'about/leadership',
+        'leadership' => 'about/leadership',
 //        'menu'=>'menu/index'
         //sitr default routes
         '<front>' => 'site/index',

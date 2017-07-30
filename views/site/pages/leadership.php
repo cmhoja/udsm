@@ -3,7 +3,7 @@ $page_content = $page_content;
 //$content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
 
 if (isset($page_content) && $page_content) {
-    $title = (Yii::$app->language == 'sw') ? $page_content->PageTitleSw : $page_content->PageTitleEn;
+    $title = Yii::$app->params['static_items']['leadership_and_administration'][Yii::$app->language];
     ?>
     <div class="page-header page-title-left">
         <div class="container">
@@ -23,28 +23,51 @@ if (isset($page_content) && $page_content) {
         </div>
     </div>
 
-
     <section class="page-section">
         <div class="container">
-
             <div class="row">
                 <div class="pull-right col-sm-12 col-md-9">
-                    <h4><?php echo $title; ?></h4>
-                    <p><?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn; ?></p>
-                    <?php if ($page_content->Photo) { ?>
-                        <img src = "<?php $page_content->Photo ?>"/>
+                    <div class="section-title">
+                        <!--<h2 class="title">Who is Who</h2>-->
+                    </div>
+                    <?php
+                    foreach ($page_content as $leadership) {
+                        ?>
 
-                    <?php } ?>
-                    <?php if ($page_content->EmbededVideo) { ?>
-                        <div class="videoWrapper" style="max-width:100%">
-                            <?php echo $page_content->EmbededVideo; ?>
-                            <!--<iframe width="560" height="315" src="<?php //echo $page_content->EmbededVideo; ?>" frameborder="0" allowfullscreen></iframe>-->
+                        <div class = "row">
+                            <!--.employee -->
+
+                            <div class="col-sm-3 col-md-3 bottom-xs-pad-20">
+                                <?php if ($leadership->Photo):
+                                    ?>
+                                    <div class="image">
+                                        <!-- Image -->
+                                        <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $leadership->Photo; ?>" alt="" title="">
+                                    </div>
+
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-sm-9 col-md-9 bottom-xs-pad-20">
+                                <div class="description">
+                                    <!-- Name -->
+                                    <h4 class="name"><?php echo $leadership->FName . ' ' . $leadership->LNames; ?></h4>
+                                    <!-- Designation -->
+                                    <div class="role"><strong><?php echo (Yii::$app->language == 'sw') ? $leadership->PositionSw : $leadership->PositionEn ?></strong></div>
+                                    <!-- Text -->
+                                    <p><?php echo (Yii::$app->language == 'sw') ? $leadership->SummarySw : $leadership->SummaryEn ?></p>
+                                </div>
+                            </div>
+
                         </div>
-                    <?php } ?>
+                        <hr>
+                        <?php
+                    }
+                    ?>
+
 
                 </div>
 
-                <div id="sidebar" class="sidebar col-sm-12 col-md-3">
+                <div id="sidebar" class="sidebar col-sm-12 col-md-3">   
                     <div class="widget">
                         <div class="widget-title">
                             <h3 class="title"> <?php echo Yii::$app->params['static_items']['other_pages'][Yii::$app->language]; ?></h3>
@@ -68,6 +91,7 @@ if (isset($page_content) && $page_content) {
             </div>
         </div>
     </section>
+
     <?php
 } else {
     echo $this->render('//site/emptypage');

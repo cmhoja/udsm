@@ -106,7 +106,7 @@
                                 width: 55px;
                                 height: 55px;
                                 cursor: pointer;
-                                background: url('img/a15.png') no-repeat;
+                                background: url('<?php echo $this->theme->baseUrl; ?>/img/a15.png') no-repeat;
                                 overflow: hidden;
                             }
                             .jssora02l { background-position: -3px -33px; }

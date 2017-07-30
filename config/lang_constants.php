@@ -7,6 +7,9 @@ return [
     'view_all_events' => ['en' => 'View All Events', 'sw' => 'Matukio Zaidi'],
     'view_all_announcement' => ['en' => 'View All Announcement', 'sw' => 'Matangazo Zaidi'],
     'read_more' => ['en' => 'Read More', 'sw' => 'Soma Zaidi'],
+    'More' => ['en' => 'More', 'sw' => 'Zaidi'],
+    'more_videos' => ['en' => 'More Videos', 'sw' => 'Video nyingine'],
+    'video_now_playing' => ['en' => 'Now Playing', 'sw' => 'Inayocheza'],
     'search' => ['en' => 'Search', 'sw' => 'Tafuta'],
     'read' => ['en' => 'Read', 'sw' => 'Soma'],
     'videos' => ['en' => 'Videos', 'sw' => 'Video'],
@@ -43,4 +46,8 @@ return [
     'other_events' => ['en' => 'Other Events', 'sw' => 'Matukio Mengine'],
     'other_news' => ['en' => 'Other News', 'sw' => 'Habari Nyingine'],
     'other_announcement' => ['en' => 'Other Announcements', 'sw' => 'Matangazo Mengine'],
+    'leadership_and_administration' => ['en' => 'Leadership & Administration', 'sw' => 'Uongozi & Utawala'],
+    'annual_reports'=>['en' => 'Annual Reports', 'sw' => 'Ripoti za Mwisho wa Mwaka'],
+     'aboutus'=>['en' => 'About Us', 'sw' => 'KUhusu sis'],
+     'research_document'=>['en' => 'Research Documents', 'sw' => 'Utafiti'],
 ];
