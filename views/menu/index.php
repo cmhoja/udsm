@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'UnitID',
                 'value' => function($model) {
-                    return app\models\AcademicAdministrativeUnit::getUnitNameById($model->Id);
+                    return app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
                 }
             ],
             // 'ShowOnPage',

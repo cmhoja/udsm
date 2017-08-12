@@ -52,20 +52,32 @@ use app\models\AcademicAdministrativeUnit;
                 'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
             ], 'Duration' => [
                 'type' => Form::INPUT_TEXT,
-                'options' => ['placeholder' => 'Duration of the Pragrm'],
+                'options' => ['placeholder' => 'Duration of the Pragrm In En'],
                 'columnOptions' => ['width' => '185px']
-            ], 'DescriptionEn' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'options' => ['placeholder' => 'Enter Unit Name in English'],
+            ],
+            'DurationSw' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Duration of the Pragrm in SW'],
                 'columnOptions' => ['width' => '185px']
+            ],
+             'DescriptionEn' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
             ],
             'DescriptionSw' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'columnOptions' => ['width' => '185px', 'height' => '10px']
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ], 'EntryRequirements' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
             ],
-            'EntryRequirements' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'columnOptions' => ['width' => '185px']
+            'EntryRequirementsSw' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
             ],
         ]
     ]);

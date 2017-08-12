@@ -18,7 +18,7 @@ class AnnouncementSearch extends Announcement
     public function rules()
     {
         return [
-            [['Id', 'Status'], 'integer'],
+            [['Id', 'Status','UnitID'], 'integer'],
             [['TitleEn', 'TitleSw', 'DetailsEn', 'DetailsSw', 'Attachment', 'DatePosted'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class AnnouncementSearch extends Announcement
             'Id' => $this->Id,
             'DatePosted' => $this->DatePosted,
             'Status' => $this->Status,
+            'UnitId'=>$this->UnitID
         ]);
 
         $query->andFilterWhere(['like', 'TitleEn', $this->TitleEn])

@@ -40,7 +40,7 @@ class ResearchProjects extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['ProjectNameEn', 'UnitID', 'DetailsEn', 'ProjectLinkUrl'], 'required'],
+            [['ProjectNameEn','ProjectNameSw', 'UnitID', 'DetailsEn', 'ProjectLinkUrl'], 'required'],
             [['UnitID'], 'integer'],
             [['DetailsEn', 'DetailsSw'], 'string'],
             [['StartYear', 'EndYear'], 'safe'],

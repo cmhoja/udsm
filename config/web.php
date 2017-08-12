@@ -6,6 +6,8 @@ $config = [
     'id' => 'basic',
     'language' => 'en', //default language of the application
     'name' => ['en' => 'University of Dar es salaam', 'sw' => 'Chuo Kikuu cha Dar es salaam'],
+    'name' => ['en' => '', 'sw' => ''],
+    
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
@@ -33,7 +35,10 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
+            'enableSession' => true,
+            'authTimeout' => 30,
+            'loginUrl' => ['backend/login'],
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
@@ -58,16 +63,6 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-//        'urlManager' => [
-//            'enablePrettyUrl' => false,
-//            'showScriptName' => false,
-//            'enableStrictParsing' => true,
-//            'suffix' => '.html',
-//            'rules' => [
-//                'study' => 'about/index',
-//                'study/<id:\d+>' => 'about/view',
-//            ]
-//        ],
         'urlManager' => $url_manager,
     ],
     'modules' =>

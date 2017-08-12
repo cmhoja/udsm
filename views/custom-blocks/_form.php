@@ -11,6 +11,8 @@ use app\models\AcademicAdministrativeUnit;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
+
 <div class="add-form">
     <?php
     $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
@@ -105,10 +107,5 @@ use app\models\AcademicAdministrativeUnit;
 </div>
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-       // int block_type=$('select#BlockType').val();
-        alert('block TYpe');
-   });
-</script>
+
 

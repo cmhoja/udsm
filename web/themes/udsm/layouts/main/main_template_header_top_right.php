@@ -24,13 +24,15 @@ if ($top_right_menus) {
         foreach ($supportedLanguages as $key => $language) {
             if (html_entity_decode(Yii::$app->language) == $key) {
                 ?>
-                <a class = "selected" href = "#"><?php echo html_entity_decode($language); ?> &nbsp;
+                <a class = "hidden" href = "#"><?php echo html_entity_decode($language); ?> &nbsp;
                     <i class = "fa fa-caret-down lightblue" aria-hidden = "true"></i>
                 </a>
                 <?php
             } else {
                 ?>
-                <a  class = "hidden" href = "#"><?php echo html_entity_decode($language); ?> &nbsp;</a>
+                <a  class = "active" href = "#"><?php echo html_entity_decode($language); ?> &nbsp;
+                 <i class = "fa fa-caret-down lightblue" aria-hidden = "true"></i>
+               </a>
                 <?php
             }
         }

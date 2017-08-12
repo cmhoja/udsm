@@ -115,7 +115,10 @@ class MenuItem extends \yii\db\ActiveRecord {
         $ret = '<ul id="menu_tree">';
         if ($parent_menu) {
             foreach ($parent_menu as $key => $menu) {
-                $ret .= '<li><p><a href="' . self::getUrl($menu->Id) . '">' . $menu->ItemNameEn . ' / ' . $menu->ItemNameSw . '</a> <span>' . yii\helpers\Html::a('Delete', ['delete-item', 'id' => $menu->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?')]) . '</span></p>';
+                $ret .= '<li style="border-bottom:1px solid gray"><p><a href="' . self::getUrl($menu->Id) . '">' . $menu->ItemNameEn . ' / ' . $menu->ItemNameSw . '</a> ';
+                $ret .= '<span>' . yii\helpers\Html::a('Delete', ['delete-item', 'id' => $menu->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?')]) . ' ';
+                $ret .= yii\helpers\Html::a('Edit', ['edit-item', 'id' => $menu->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to Edit this item?')]) . '</span></p>';
+
                 $submenus = self::find()->where(array('ParentItemID' => $menu->Id))->all();
 //submenu level1
                 if ($submenus) {
@@ -283,6 +286,17 @@ class MenuItem extends \yii\db\ActiveRecord {
             }
             return NULL;
         }
+    }
+
+    static function getMenuItemsByMenuGroupIDAndStatus($Id, $Status = NULL) {
+        if ($Id && $Id > 0) {
+            $condition = array('MenuID' => $Id);
+            if (!empty($Status)) {
+                $condition['Status'] = self::STATUS_ENABLED;
+            }
+            return self::find()->select('Id,menuClasses,ItemNameEn,ItemNameSw,LinkUrl')->where($condition)->orderBy('ParentItemID ASC, ListOrder ASC')->all();
+        }
+        return NULL;
     }
 
 }

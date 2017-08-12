@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = 'Menu Details';
                     return $model->getMenuTypeName();
                 }
             ],
+            'DisplayNameEn', 'DisplayNameSw',
             'Description',
             [
                 'attribute' => 'UnitID',
@@ -46,7 +47,18 @@ $this->params['breadcrumbs'][] = 'Menu Details';
                     return app\models\AcademicAdministrativeUnit::getUnitNameById($model->Id);
                 }
             ],
+            [
+                'attribute' => 'MenuPlacementAreaRegion',
+                'value' => function($model) {
+                    return $model->getRegionName();
+                }
+            ],
             'ShowOnPage',
+            ['attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getStatusName();
+                }
+            ]
         ],
     ])
     ?>
@@ -68,7 +80,8 @@ $this->params['breadcrumbs'][] = 'Menu Details';
 </p>
 
 <h5 style="clear: both;float: left;">Menu Structure</h5>
-
-<?php
-echo $this->render('//menu/_menu_items', array('menu_items' => $menu_items));
-?>
+<div style="clear: both;position: relative;float: left; height: 425px; padding: 0.4%;margin-bottom: 4%;">
+    <?php
+    echo $this->render('//menu/_menu_items', array('menu_items' => $menu_items));
+    ?>
+</div>

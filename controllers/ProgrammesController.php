@@ -28,11 +28,11 @@ class ProgrammesController extends Controller {
         ];
     }
 
-    
-     public function init() {
+    public function init() {
         $this->layout = 'backend/main';
         parent::init();
     }
+
     /**
      * Lists all Programmes models.
      * @return mixed
@@ -101,6 +101,10 @@ class ProgrammesController extends Controller {
         $model = $this->findModel($id);
         if ($model && $model->Status == Programmes::PROGRAME_STATUS_PUBLISHED) {
             return $this->redirect(['index']);
+        }
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
         }
         $oldname = $model->ProgrammeNameEn;
         if ($model->load(Yii::$app->request->post())) {

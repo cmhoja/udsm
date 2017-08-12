@@ -4,9 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use yii\debug\Toolbar;
-
-// You can use the registerAssetBundle function if you'd like
-//$this->registerAssetBundle('app');
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
@@ -15,7 +12,7 @@ use yii\debug\Toolbar;
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>University of Dar Es Salaam</title>
+        <title><?php echo Yii::$app->name[Yii::$app->language].'-'.$this->title;  ?></title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="keywords" content="<?php echo Html::encode($this->title); ?>">
         <meta name="description" content="<?php echo Html::encode($this->title); ?>">
@@ -55,7 +52,6 @@ use yii\debug\Toolbar;
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/icons/css/icons.min.css" />
 
         <!-- Main Stylesheet -->
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/youtube-video-player.min.css" />
         <!-- Perfect Scrollbar -->
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/perfect-scrollbar.css" />
         <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/util.js"></script>
@@ -110,7 +106,7 @@ use yii\debug\Toolbar;
                                                 <span class="icon-bar"></span></button> 
                                             <!-- Logo -->
                                             <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                                <img class="site_logo" alt="Site Logo" src="<?php echo $this->theme->baseUrl; ?>/img/logo.png">
+                                                <img style="max-height: 50px;"class="site_logo" alt="UDSM Official Logo" src="<?php //echo $this->theme->baseUrl; ?>/img/logo.png">
                                                 <span><?php echo Yii::$app->name[Yii::$app->language]; ?></span>
                                             </a>
                                         </div>
@@ -191,7 +187,6 @@ use yii\debug\Toolbar;
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/scripts.js"></script> 
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/tweetie.min.js"></script> 
             <!-- Background Video -->
-
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.mb.YTPlayer.js"></script> 
             <!-- FlexSlider -->
             <script defer src="<?php echo $this->theme->baseUrl; ?>/js/jquery.flexslider.js"></script>
@@ -215,78 +210,100 @@ use yii\debug\Toolbar;
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/shBrushXml.js"></script>
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/shBrushJScript.js"></script>
             <!-- Custom Js Code -->
-            <!-- Main For youtube player Javascript -->
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/youtube-video-player.jquery.min.js"></script>
-
-
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.mousewheel.js"></script>
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/perfect-scrollbar.js"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $("#playlist").youtube_video({
-                        playlist: 'PLncTFGctaqZupp4iNer4nKBqXCrhcszvC',
-                        channel: false,
-                        user: false,
-                        videos: false,
-                        shuffle: false,
-                        max_results: 50,
-                        pagination: true,
-                        continuous: true,
-                        first_video: 0,
-                        show_playlist: 'auto',
-                        playlist_type: 'vertical',
-                        show_channel_in_playlist: true,
-                        show_channel_in_title: true,
-                        width: false,
-                        show_annotations: false,
-                        now_playing_text: 'Now Playing',
-                        load_more_text: 'Load More',
-                        autoplay: false,
-                        force_hd: false,
-                        hide_youtube_logo: false,
-                        play_control: true,
-                        time_indicator: 'full',
-                        volume_control: true,
-                        share_control: true,
-                        fwd_bck_control: true,
-                        youtube_link_control: true,
-                        fullscreen_control: true,
-                        playlist_toggle_control: true,
-                        volume: false,
-                        show_controls_on_load: true,
-                        show_controls_on_pause: true,
-                        show_controls_on_play: false,
-                        player_vars: {},
-                        colors: {},
 
-                        on_load: function (snippet) {
-                            set_log('loaded', snippet)
-                        },
-                        on_done_loading: function (videos) {
-                            set_log('videos', videos)
-                        },
-                        on_state_change: function (state) {
-                            set_log('state', state)
-                        },
-                        on_seek: function (seconds) {
-                            set_log('seek', seconds)
-                        },
-                        on_volume: function (volume) {
-                            set_log('volume', volume)
-                        },
-                        on_time_update: function (seconds) {
-                            set_log('time', seconds)
-                        },
-
-                    });
-                });
-
-                function set_log(title, val) {
-                    $(".log").html('<div><span>' + title + '</span>' + val + '</div>' + $(".log").html());
+            <!-- CSS & JS SCRIPTS FOR YOUTUBE VIDEOPLAYER FOR HOME PAGE ONLY THIS IS AVAILABLE AT HOME PAGE ONLY-->
+            <!-- JS Main For youtube player Javascript on home page-->
+            <?php
+            $pageUrl = app\components\Utilities::getPageUrl();
+            if (empty($pageUrl) OR $pageUrl == '' OR $pageUrl == '/'):
+                $videos_list = NULL;
+                if (isset($videos) && $videos) {
+                    foreach ($videos as $video) {
+                        $videoLink = explode('=', $video->VideoLink);
+                        if ($videoLink) {
+                            $videos_list .= Trim(',' . $videoLink);
+                        }
+                        //                        https://www.youtube.com/watch?v=hNMWa8e6WZI
+                    }
+                    if ($videos_list) {
+                        $videos_list = substr($videos_list, 1);
+                    }
                 }
+                ?>
+                <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/youtube-video-player.min.css" />
+                <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/youtube-video-player.jquery.min.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $("#playlist").youtube_video({
+    //                      playlist: 'PLncTFGctaqZupp4iNer4nKBqXCrhcszvC',
+                            playlist: 'PLncTFGctaqZupp4iNer4nKBqXCrhcszvC',
+                            channel: true,
+                            user: false,
+                            videos: false,
+//                            videos:'<?php echo $videos_list; ?>'
+                            shuffle: false,
+                            max_results: 3,
+                            pagination: true,
+                            continuous: true,
+                            first_video: 0,
+                            show_playlist: 'auto',
+                            playlist_type: 'vertical',
+                            show_channel_in_playlist: true,
+                            show_channel_in_title: true,
+                            width: false,
+                            show_annotations: false,
+                            now_playing_text: '<?php echo Yii::$app->params['static_items']['video_now_playing'][Yii::$app->language]; ?>',
+                            load_more_text: '<?php echo Yii::$app->params['static_items']['more_videos'][Yii::$app->language]; ?>',
+                            autoplay: false,
+                            force_hd: false,
+                            hide_youtube_logo: true,
+                            play_control: true,
+                            time_indicator: 'full',
+                            volume_control: true,
+                            share_control: true,
+                            fwd_bck_control: true,
+                            youtube_link_control: true,
+                            fullscreen_control: true,
+                            playlist_toggle_control: true,
+                            volume: false,
+                            show_controls_on_load: true,
+                            show_controls_on_pause: true,
+                            show_controls_on_play: false,
+                            player_vars: {},
+                            colors: {},
 
-            </script>
+                            on_load: function (snippet) {
+                                set_log('loaded', snippet)
+                            },
+                            on_done_loading: function (videos) {
+                                set_log('videos', videos)
+                            },
+                            on_state_change: function (state) {
+                                set_log('state', state)
+                            },
+                            on_seek: function (seconds) {
+                                set_log('seek', seconds)
+                            },
+                            on_volume: function (volume) {
+                                set_log('volume', volume)
+                            },
+                            on_time_update: function (seconds) {
+                                set_log('time', seconds)
+                            },
 
+                        });
+                    });
+
+                    function set_log(title, val) {
+                        $(".log").html('<div><span>' + title + '</span>' + val + '</div>' + $(".log").html());
+                    }
+
+                </script>
+
+            <?php endif; ?>
+            <!--END YOU TUBE PLAYER CSS--> 
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/custom.js"></script> 
             <!-- Scripts -->
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/js"></script>

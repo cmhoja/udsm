@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use app\models\Users;
+use app\models\AcademicAdministrativeUnit;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
@@ -20,10 +21,12 @@ use app\models\Users;
         'form' => $form,
         'columns' => 2,
         'attributes' => [
-            'UnitID' => [
+           'UnitID' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
-                'items' => ArrayHelper::map(app\models\AcademicAdministrativeUnit::find()->orderBy('UnitNameEn')->asArray()->all(), 'Id', 'UnitNameEn'), 'options' => ['prompt' => '-- Select --'],
-                'columnOptions' => ['width' => '185px']
+                'options' => ['prompt' => '--- select --'],
+                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement' => AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
             ],
             'FName' => [
                 'type' => Form::INPUT_TEXT,

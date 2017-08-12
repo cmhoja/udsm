@@ -44,7 +44,7 @@ class Programmes extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['ProgrammeNameEn', 'ProgrammeNameSw', 'Duration', 'ProgrammeUrl', 'DescriptionEn', 'DescriptionSw', 'UnitID', 'ProgrammeType', 'FieldOfStudy', 'Status'], 'required'],
+            [['ProgrammeNameEn', 'ProgrammeNameSw', 'Duration', 'DurationSw', 'ProgrammeUrl', 'DescriptionEn', 'DescriptionSw', 'UnitID', 'ProgrammeType', 'FieldOfStudy', 'Status'], 'required'],
             [['DescriptionEn', 'DescriptionSw', 'EntryRequirements'], 'string'],
             [['UnitID'], 'integer'],
             [['ProgrammeNameEn', 'ProgrammeNameSw', 'ProgrammeUrl'], 'string', 'max' => 100],
@@ -65,11 +65,13 @@ class Programmes extends \yii\db\ActiveRecord {
             'ProgrammeNameEn' => 'Programme Name (English)',
             'ProgrammeNameSw' => 'Programme Name (Swahili)',
             'ProgrammeUrl' => 'Page Link',
-            'Duration' => 'Duration',
+            'Duration' => 'Duration EN',
+            'DurationSw' => 'Duration SW',
             'DescriptionEn' => 'Description (English)',
             'DescriptionSw' => 'Description (Swahili)',
             'UnitID' => 'Offered By',
-            'EntryRequirements' => 'Entry Requirements',
+            'EntryRequirements' => 'Entry Requirements EN',
+            'EntryRequirementsSw' => 'EntryRequirements SW',
             'ProgrammeType' => 'Programme Type',
             'FieldOfStudy' => 'Field Of Study'
         ];
@@ -116,7 +118,7 @@ class Programmes extends \yii\db\ActiveRecord {
 
     static function getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword = NULL, $UnitID = NULL, $Type = NULL, $FieldOfStudy = NULL, $lang = NULL) {
         $condition = $where = $orderBy = NULL;
-        if (!empty($Keyword) && $Keyword>0) {
+        if (!empty($Keyword) && $Keyword > 0) {
             $condition = "(ProgrammeNameEn LIKE '%" . $Keyword . "%' OR ProgrammeNameSw  LIKE '%" . $Keyword . "%')";
         }
         if ($UnitID > 0) {

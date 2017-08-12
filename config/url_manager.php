@@ -8,8 +8,6 @@ return [
     'showScriptName' => TRUE,
     'enableStrictParsing' => TRUE,
     'rules' => [
-        'backend' => 'backend/index',
-        'login' => 'backend/index',
         ///about us routes
         'background|introduction' => 'about/index',
         'about|about-us|aboutus' => 'about/index',
@@ -17,7 +15,9 @@ return [
         'about/leadership' => 'about/leadership',
         'about-us/annual-reports|about/annual-reports' => 'about/reports',
         'about/<category:\w+>' => 'about/index',
-        'site/annual-reports'=>'about/reports',
+        'site/annual-reports' => 'about/reports',
+        'site/student-corner|student-corner' => 'site/student-corner',
+        'site/staff-corner|staff-corner' => 'site/staff/staff-corner',
         //study routes
         'study/programmes' => 'study/programmes',
         'study/catalogue' => 'study/programmes',
@@ -42,9 +42,34 @@ return [
         'site/events|events|connect/events' => 'connect/events',
         'site/leadership' => 'about/leadership',
         'leadership' => 'about/leadership',
-//        'menu'=>'menu/index'
+        ///STUDY MENUS REOUTES
+        'college/<category:\w+>' => 'college/index',
+        'colleges/<category:\w+>' => 'college/index',
+        'college/conas/*' => 'college/index',
+        // 'menu'=>'menu/index'
         //sitr default routes
+        //backend rules
+        'backend/logout' => 'backend/logout',
+        'backend|login' => 'backend/login',
+        'backend/<category>' => 'backend/<category>',
+        'users/<category>' => 'users/<category>',
+        'habari/<category>' => 'habari/<category>',
+        'matukio/<category>' => 'matukio/<category>',
+        'video/<category>' => 'video/<category>',
+        'announcement/<category>' => 'announcement/<category>',
+        'slide-shows/<category>' => 'slide-shows/<category>',
+        'basic-page/<category>' => 'basic-page/<category>',
+        'programmes/<category>' => 'programmes/<category>',
+        'projects/<category>' => 'projects/<category>',
+        'staff-list/<category>' => 'staff-list/<category>',
+        'contacts/<category>' => 'contacts/<category>',
+        'social-media-accounts/<category>' => 'social-media-accounts/<category>',
+        'contacts/<category>' => 'contacts/<category>',
+        'menu/<category>' => 'menu/<category>',
+        'custom-blocks/<category>' => 'custom-blocks/<category>',
+        ///default route
         '<front>' => 'site/index',
         '/' => 'site/index',
+    ///BACKEND
     ],
 ];

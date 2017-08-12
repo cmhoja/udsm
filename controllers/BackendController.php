@@ -22,12 +22,12 @@ class BackendController extends Controller {
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['login', 'index'],
+                        'actions' => ['login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -68,11 +68,7 @@ class BackendController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->render('//backend/index');
-        } else {
-            return $this->redirect(['backend/login']);
-        }
+        return $this->redirect(['backend/login']);
     }
 
     /**
@@ -95,25 +91,31 @@ class BackendController extends Controller {
                 $model->password = \app\components\Utilities::setHashedValue($model->password);
             }
 
-            // echo $model->password;
+            $identity = \app\models\User::findByUsername($model->username,$model->password);
 
-            if ($model->login()) {
+            if (Yii::$app->user->login($identity)) {
+                $userRoles = Users::find()->where(array('Password' => $model->password, 'Username' => $model->username))->one();
 
-                $userRoles = Users::find(array('Password' => $model->password, 'Username' => $model->username))->one();
                 if ($userRoles) {
+                    $session = Yii::$app->session;
+                    if (!$session->isActive) {
+                        // open a session
+                        $session->open();
+                    }
+
                     if ($userRoles->UnitID) {
-                        \Yii::$app->session->set('UNIT_ID', $userRoles->UnitID);
+                        $session->set('UNIT_ID', $userRoles->UnitID);
                     } else {
-                        \Yii::$app->session->destroy('UNIT_ID');
+                        $session->remove('UNIT_ID');
                     }
                     switch ($userRoles->UserType) {
                         case Users::USER_TYPE_ADMINISTRATOR: //administrator
-                            \Yii::$app->session->set('USER_TYPE_ADMINISTRATOR', TRUE);
+                            $session->set('USER_TYPE_ADMINISTRATOR', TRUE);
 
                             break;
 
                         case Users::USER_TYPE_CONTENT_MANAGER: //for content admin
-                            \Yii::$app->session->set('USER_TYPE_CONTENT_MANAGER', TRUE);
+                            $session->set('USER_TYPE_CONTENT_MANAGER', TRUE);
                             break;
 
                         default:
@@ -152,9 +154,16 @@ class BackendController extends Controller {
         $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
         $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
         $loginsModel->save();
-
-        Yii::$app->user->logout();
-
+        $session = Yii::$app->session;
+        $session->destroy();
+        //$session->remove('UNIT_ID');
+        if ($session->isActive) {
+            // destroys all user data registered to a session.
+            $session->destroy();
+            /// close a session
+            $session->close();
+            Yii::$app->user->logout();
+        }
         return $this->goHome();
     }
 

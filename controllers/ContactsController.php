@@ -27,8 +27,8 @@ class ContactsController extends Controller {
             ],
         ];
     }
-    
-     public function init() {
+
+    public function init() {
         $this->layout = 'backend/main';
         parent::init();
     }
@@ -39,6 +39,10 @@ class ContactsController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new ContactsSearch();
+        $session = Yii::$app->session;
+        if ($session['UNIT_ID']) {
+            $searchModel->UnitID = $session['UNIT_ID'];
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,8 +69,9 @@ class ContactsController extends Controller {
      */
     public function actionCreate() {
         $model = new Contacts();
-        if (Yii::$app->session->get('UNIT_ID')) {
-            $model->UnitID = Yii::$app->session->get('UNIT_ID');
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
         }
 
         if ($model->load(Yii::$app->request->post())) {
@@ -92,7 +97,7 @@ class ContactsController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-        if ($model -> Status == Contacts::STATUS_PUBLISHED) {
+        if ($model->Status == Contacts::STATUS_PUBLISHED) {
             $this->redirect(array('index'));
         }
         if (Yii::$app->session->get('UNIT_ID')) {
@@ -121,7 +126,7 @@ class ContactsController extends Controller {
      */
     public function actionDelete($id) {
         $model = $this->findModel($id);
-        if ($model-> Status == Contacts::STATUS_SAVED OR $model->Status == Contacts::STATUS_UNPUBLISHED) {
+        if ($model->Status == Contacts::STATUS_SAVED OR $model->Status == Contacts::STATUS_UNPUBLISHED) {
             $this->findModel($id)->delete();
         }
         return $this->redirect(['index']);

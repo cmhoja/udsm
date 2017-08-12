@@ -37,6 +37,7 @@ class Users extends \yii\db\ActiveRecord {
             [['FName', 'LName', 'UserName', 'Password', 'UserType'], 'required'],
             [['UserType', 'UnitID'], 'integer'],
             [['FName', 'LName'], 'string', 'max' => 50],
+             [['UnitID'], 'safe'],
             [['UserName'], 'string', 'max' => 20],
             [['Password'], 'string', 'max' => 255],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],

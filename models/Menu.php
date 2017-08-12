@@ -135,11 +135,44 @@ class Menu extends \yii\db\ActiveRecord {
         }
         $condition['MenuType'] = $MenuType;
         $condition['MenuPlacementAreaRegion'] = $MenuPlacementAreaRegion;
+
         return self::find()
                         ->select('Id, MenuName,MenuType,UnitID,ShowOnPage,MenuPlacementAreaRegion')
                         ->where($condition)
                         ->orderBy('Id ASC,MenuName ASC')
                         ->all();
+    }
+
+    static function getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID($MenuType, $MenuPlacementAreaRegion, $UnitID = NULL, $ShowOnPage = 0) {
+        $condition = array();
+        $condition['Status'] = Menu::STATUS_PUBLISHED;
+        if ($ShowOnPage != 0) {
+            $condition['ShowOnPage'] = $ShowOnPage;
+        } else {
+            $condition['ShowOnPage'] = 0;
+        }
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        } else {
+            $condition['UnitID'] = NULL;
+        }
+        $condition['MenuType'] = $MenuType;
+        $condition['MenuPlacementAreaRegion'] = $MenuPlacementAreaRegion;
+
+        return self::find()
+                        ->select('Id, MenuName,DisplayNameEn,DisplayNameSw,MenuCSSClass')
+                        ->where($condition)
+                        ->orderBy('Id ASC,MenuName ASC')
+                        ->all();
+    }
+
+    function getRegionName() {
+        $regions = \app\components\SiteRegions::getAllPlacementRegions();
+        if (isset($regions[$this->MenuPlacementAreaRegion])) {
+            return $regions[$this->MenuPlacementAreaRegion];
+        }
+
+        return NULL;
     }
 
 }

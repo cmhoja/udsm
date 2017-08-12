@@ -66,7 +66,7 @@ class CustomBlocksController extends Controller {
     public function actionCreate() {
         $model = new CustomBlocks();
         if (Yii::$app->session->get('UNIT_ID')) {
-            $model->UnitID = Yii::$app->session->get('UNIT_ID');
+            $model->BlockUnitID = Yii::$app->session->get('UNIT_ID');
         }
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = CustomBlocks::STATUS_SAVED;
@@ -99,7 +99,7 @@ class CustomBlocksController extends Controller {
                 }
                 return $this->redirect(['view', 'id' => $model->Id]);
             }
-            var_dump($model->errors);
+            //var_dump($model->errors);
         }
         return $this->render('create', [
                     'model' => $model,
@@ -115,7 +115,7 @@ class CustomBlocksController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         if (Yii::$app->session->get('UNIT_ID')) {
-            $model->UnitID = Yii::$app->session->get('UNIT_ID');
+            $model->BlockUnitID = Yii::$app->session->get('UNIT_ID');
         }
         if ($model && $model->Status == CustomBlocks::STATUS_PUBLISHED) {
             $this->redirect(array('index'));

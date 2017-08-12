@@ -115,7 +115,7 @@
                         ?>
                         <div class = "widget-title">
                             <!--Title -->
-                            <h3 class = "title">Social Media</h3>
+                            <h3 class = "title"><?php echo Yii::$app->params['static_items']['social_media'][Yii::$app->language]; ?></h3>
                         </div>
                         <?php
                         foreach ($social_accounts as $social_account) {
@@ -164,8 +164,8 @@
                     ?> <a href="<?php echo Yii::$app->homeUrl; ?>"><?php echo Yii::$app->name[Yii::$app->language]; ?></a>
                     <br>
                     <!-- Terms Link -->
-                    <a href="#">Terms of Use</a> / 
-                    <a href="#">Privacy Policy</a></div>
+                    <a href="#"><?php echo Yii::$app->params['static_items']['term_of_use'][Yii::$app->language]; ?></a> / 
+                    <a href="#"><?php echo Yii::$app->params['static_items']['privacy_policy'][Yii::$app->language]; ?></a></div>
                 <div class="col-xs-2 col-sm-6 col-md-6 text-right page-scroll icons-circle i-3x">
                     <!-- Goto Top -->
                     <a href="#page">

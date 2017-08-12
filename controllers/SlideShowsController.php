@@ -27,8 +27,8 @@ class SlideShowsController extends Controller {
             ],
         ];
     }
-    
-     public function init() {
+
+    public function init() {
         $this->layout = 'backend/main';
         parent::init();
     }
@@ -39,6 +39,10 @@ class SlideShowsController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new SlideShowsSearch();
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $searchModel->UnitID = $session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,9 +69,11 @@ class SlideShowsController extends Controller {
      */
     public function actionCreate() {
         $model = new SlideShows();
-        if (Yii::$app->session->get('UNIT_ID')) {
-            $model->UnitID = Yii::$app->session->get('UNIT_ID');
+         $session = Yii::$app->session;
+        if ($session->get('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
         }
+       
         if ($model->load(Yii::$app->request->post())) {
             $model->TitleEn = strtolower($model->TitleEn);
             $model->TitleSw = strtolower($model->TitleSw);

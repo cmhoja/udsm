@@ -27,8 +27,8 @@ class SocialMediaAccountsController extends Controller {
             ],
         ];
     }
-    
-     public function init() {
+
+    public function init() {
         $this->layout = 'backend/main';
         parent::init();
     }
@@ -39,6 +39,10 @@ class SocialMediaAccountsController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new SocialMediaAccountsSearch();
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $searchModel->UnitID = $session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,7 +69,10 @@ class SocialMediaAccountsController extends Controller {
      */
     public function actionCreate() {
         $model = new SocialMediaAccounts();
-
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->Id]);
         } else {

@@ -112,15 +112,16 @@ class CustomBlocks extends \yii\db\ActiveRecord {
     }
 
     function getRegionName() {
-        $regions = \app\components\SiteRegions::getMainHomeTemplateRegions();
+        $regions = \app\components\SiteRegions::getAllPlacementRegions();
         if (isset($regions[$this->BlockPlacementAreaRegion])) {
             return $regions[$this->BlockPlacementAreaRegion];
-        } else {
-            $regions = \app\components\SiteRegions::getCustomPageTemplateRegions();
-            if ($regions[$this->BlockPlacementAreaRegion]) {
-                return $regions[$this->BlockPlacementAreaRegion];
-            }
-        }
+        } 
+//        else {
+//            $regions = \app\components\SiteRegions::getCustomPageTemplateRegions();
+//            if (isset($regions[$this->BlockPlacementAreaRegion])) {
+//                return $regions[$this->BlockPlacementAreaRegion];
+//            }
+//        }
         return NULL;
     }
 
@@ -128,9 +129,18 @@ class CustomBlocks extends \yii\db\ActiveRecord {
         if ($ShowOnPage) {
             $ShowOnPage = 'LIKE "%' . $ShowOnPage . '%"';
         }
+        $condition = array(
+            'BlockType' => $BlockType,
+            'BlockPlacementAreaRegion' => $RegionID,
+            'BlockUnitID' => $BlockUnitID,
+            'ShowOnPage' => $ShowOnPage,
+            'Status' => CustomBlocks::STATUS_PUBLISHED
+        );
+
+
         return self::find()
                         ->select('BlockName,BlockTitleEn,BlockTitleSw,BlockDetailsEn,BlockDetailsSw,BlockIconPicture,BlockIconCSSClass,LinkToPage,BlockIconVideo')
-                        ->where(array('BlockType' => $BlockType, 'BlockPlacementAreaRegion' => $RegionID, 'BlockUnitID' => $BlockUnitID, 'ShowOnPage' => $ShowOnPage, 'Status' => CustomBlocks::STATUS_PUBLISHED))
+                        ->where($condition)
                         ->all();
     }
 

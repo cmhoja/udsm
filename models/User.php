@@ -56,19 +56,30 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface {
     public static function findByUsername($username, $password) {
         $users = [];
         $user = Users::find()->where(['UserName' => $username, 'Password' => $password])->one();
+
+//        if ($user) {
+//            $users[$user->Id] = [
+//                'id' => $user->Id,
+//                'username' => $user->UserName,
+//                'password' => $user->Password,
+//                'authKey' => 'test101key' . $user->Id . $user->Password,
+//                'accessToken' => '101-token' . $user->Password,
+//            ];
+//        }
+//        foreach ($users as $user) {
+//            if (strcasecmp($user['username'], $username) === 0) {
+//                return new static($user);
+//            }
+//        }
+
         if ($user) {
-            $users[$user->Id] = [
+            return new static([
                 'id' => $user->Id,
                 'username' => $user->UserName,
                 'password' => $user->Password,
                 'authKey' => 'test101key' . $user->Id . $user->Password,
                 'accessToken' => '101-token' . $user->Password,
-            ];
-        }
-        foreach ($users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
+            ]);
         }
 
         return null;

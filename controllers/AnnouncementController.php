@@ -24,6 +24,7 @@ class AnnouncementController extends Controller {
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+              
             ],
         ];
     }
@@ -39,6 +40,10 @@ class AnnouncementController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new AnnouncementSearch();
+         $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $searchModel->UnitID = $session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

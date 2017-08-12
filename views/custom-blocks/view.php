@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Details';
 ?>
 <div class="custom-blocks-view">
 
-      <p>
+    <p>
         <?php if ($model->Status != \app\models\CustomBlocks::STATUS_PUBLISHED) { ?>
             <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-primary'])
             ?>
@@ -51,6 +51,7 @@ $this->params['breadcrumbs'][] = 'Details';
             ),
             'BlockIconPicture',
             'BlockIconVideo',
+            'BlockIconCSSClass',
             'LinkToPage',
             array(
                 'attribute' => 'BlockPlacementAreaRegion',

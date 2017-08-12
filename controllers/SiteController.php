@@ -30,11 +30,11 @@ class SiteController extends Controller {
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
                 'rules' => [
-//                    [
-//                        'actions' => ['logout'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
 //                    [
 //                        'actions' => ['login', 'index', 'basic-page'],
 //                        'allow' => true,
@@ -108,67 +108,67 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionLogin() {
-        $this->layout = 'login'; //loading the login layout
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            ///getiing user roles ans initilizing session values
-            $userRoles = Users::find(array('Password' => $model->password, 'Username' => $model->username))->one();
-            if ($userRoles) {
-                if ($userRoles->UnitID) {
-                    \Yii::$app->session->set('UNIT_ID', $userRoles->UnitID);
-                } else {
-                    \Yii::$app->session->destroy();
-                }
-                switch ($userRoles->UserType) {
-                    case Users::USER_TYPE_ADMINISTRATOR: //administrator
-                        \Yii::$app->session->set('USER_TYPE_ADMINISTRATOR', TRUE);
-
-                        break;
-
-                    case Users::USER_TYPE_CONTENT_MANAGER: //for content admin
-                        \Yii::$app->session->set('USER_TYPE_CONTENT_MANAGER', TRUE);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-
-            /* Logs the Logins History */
-            $loginsModel = new \app\models\Logins();
-            $loginsModel->UserId = \yii::$app->user->identity->id;
-            $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
-            $loginsModel->Details = 'User logged into the system successful using browser :-' . Yii::$app->getRequest()->getUserAgent();
-            $loginsModel->save();
-            return $this->goBack();
-        }
-        return $this->render('login', [
-                    'model' => $model,
-        ]);
-    }
+//    public function actionLogin() {
+//        $this->layout = 'login'; //loading the login layout
+//        if (!Yii::$app->user->isGuest) {
+//            return $this->goHome();
+//        }
+//        $model = new LoginForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+//            ///getiing user roles ans initilizing session values
+//            $userRoles = Users::find(array('Password' => $model->password, 'Username' => $model->username))->one();
+//            if ($userRoles) {
+//                if ($userRoles->UnitID) {
+//                    \Yii::$app->session->set('UNIT_ID', $userRoles->UnitID);
+//                } else {
+//                    \Yii::$app->session->destroy();
+//                }
+//                switch ($userRoles->UserType) {
+//                    case Users::USER_TYPE_ADMINISTRATOR: //administrator
+//                        \Yii::$app->session->set('USER_TYPE_ADMINISTRATOR', TRUE);
+//
+//                        break;
+//
+//                    case Users::USER_TYPE_CONTENT_MANAGER: //for content admin
+//                        \Yii::$app->session->set('USER_TYPE_CONTENT_MANAGER', TRUE);
+//                        break;
+//
+//                    default:
+//                        break;
+//                }
+//            }
+//
+//
+//            /* Logs the Logins History */
+//            $loginsModel = new \app\models\Logins();
+//            $loginsModel->UserId = \yii::$app->user->identity->id;
+//            $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
+//            $loginsModel->Details = 'User logged into the system successful using browser :-' . Yii::$app->getRequest()->getUserAgent();
+//            $loginsModel->save();
+//            return $this->goBack();
+//        }
+//        return $this->render('login', [
+//                    'model' => $model,
+//        ]);
+//    }
 
     /**
      * Logout action.
      *
      * @return string
      */
-    public function actionLogout() {
-        /* Logs the Logins History */
-        $loginsModel = new \app\models\Logins();
-        $loginsModel->UserId = Yii::$app->user->id;
-        $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
-        $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
-        $loginsModel->save();
-
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
+//    public function actionLogout() {
+//        /* Logs the Logins History */
+//        $loginsModel = new \app\models\Logins();
+//        $loginsModel->UserId = Yii::$app->user->id;
+//        $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
+//        $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
+//        $loginsModel->save();
+//
+//        Yii::$app->user->logout();
+//
+//        return $this->goHome();
+//    }
 
     /**
      * Displays contact page.
@@ -217,6 +217,37 @@ class SiteController extends Controller {
      */
     public function actionForbidden() {
         return $this->render('forbidden');
+    }
+
+    function actionStudentCorner() {
+        $page_side_menus = $page_content = $custom_blocks = NULL;
+        $lang = Yii::$app->language;
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $page_content['quick_links'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, \app\components\SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
+        $page_content['latest_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 5);
+        $page_content['latest_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 5);
+        $page_content['campus_life'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
+        $page_content['top_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
+        $page_content['bottom_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
+
+        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+        return $this->render('//site/pages/student_corner', ['page_content' => $page_content]);
+    }
+
+    function actionStaffCorner() {
+        $page_side_menus = $page_content = $custom_blocks = NULL;
+        $lang = Yii::$app->language;
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+
+        $page_content['quick_links'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, \app\components\SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
+        //$page_content['latest_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 5);
+        $page_content['latest_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 5);
+        $page_content['middle_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
+        $page_content['top_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
+        $page_content['bottom_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
+
+        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+        return $this->render('//site/pages/staff_corner', ['page_content' => $page_content]);
     }
 
 }

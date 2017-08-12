@@ -17,3 +17,14 @@ $this->params['breadcrumbs'][] ='Add Custom Block';
     ]) ?>
 
 </div>
+<?php
+//$this->registerJs(
+//    "  $(document).ready(function () {
+//       // int block_type=$('select#BlockType').val();
+//        alert('block TYpe');
+//       });",
+//      View::POS_READY,
+//    'my-button-handler'
+//);
+//$this->registerJsFile('@web/js/specific.js');
+?>

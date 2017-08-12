@@ -44,6 +44,10 @@ class UsersController extends Controller {
     public function actionIndex() {
 
         $searchModel = new UsersSearch();
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $searchModel->UnitID = $session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -70,7 +74,9 @@ class UsersController extends Controller {
      */
     public function actionCreate() {
         $model = new Users();
-
+        if (Yii::$app->session->get('UNIT_ID')) {
+            $model->UnitID = Yii::$app->session->get('UNIT_ID');
+        }
         if ($model->load(Yii::$app->request->post())) {
             if (empty($model->Password)) {
                 $model->Password = $model->UserName;
@@ -99,6 +105,8 @@ class UsersController extends Controller {
         $model = $this->findModel($id);
         $OldPassword = $model->Password;
         if ($model->load(Yii::$app->request->post())) {
+            echo $model->UnitID;
+            exit;
             if (!empty($model->Password)) {
                 if ($model->Password) {
                     $model->Password = \app\components\Utilities::setHashedValue($model->Password);

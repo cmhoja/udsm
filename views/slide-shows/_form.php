@@ -4,6 +4,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
+use kartik\widgets\FileInput;
 use app\models\AcademicAdministrativeUnit;
 
 /* @var $this yii\web\View */
@@ -37,19 +38,22 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Title of the News in Swahili'],
                 'columnOptions' => ['width' => '185px']
-            ],
-            'DetailsEn' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'options' => ['placeholder' => 'Enter Unit Name in English'],
-                'columnOptions' => ['width' => '185px','height'=>'100px']
+            ], 'DetailsEn' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
             ],
             'DetailsSw' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'columnOptions' => ['width' => '185px', 'height' => '10px']
-            ], 'Image' => [
-                'type' => Form::INPUT_FILE,
-                'columnOptions' => ['width' => '185px']
-            ],
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ], 
+//            'Image' => [
+//                'type' => Form::INPUT_FILE,
+//                'widgetClass' => FileInput::classname(), [
+//                    'options' => ['accept' => 'image/*'],
+//                ]
+//            ],
             'LinkToPage' => [
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Enter Url to link this slide show to page'],
@@ -57,6 +61,14 @@ use app\models\AcademicAdministrativeUnit;
             ],
         ]
     ]);
+
+    echo '<label class="control-label">Add Photo</label>';
+    echo FileInput::widget([
+        'model' => $model,
+        'attribute' => 'Image[]',
+        'options' => ['multiple' => false,'accept' => 'image/*','resizeImages'=>true]
+    ]);
+
     echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);
     echo Html::submitButton('Save & Publish', ['value' => 'publish', 'name' => 'publish', 'class' => 'btn btn-primary']);
     ActiveForm::end();

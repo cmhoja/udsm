@@ -22,8 +22,19 @@ class MenuController extends Controller {
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
+            ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view'],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ]
             ],
         ];
     }
@@ -39,6 +50,10 @@ class MenuController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new MenuSearch();
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $searchModel->UnitID = $session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -172,6 +187,30 @@ class MenuController extends Controller {
         return $this->render('addItem', [
                     'model' => $model, 'menu_item_model' => $menu_item_model
         ]);
+    }
+
+    public function actionEditItem($id) {
+        $menu_item_model = \app\models\MenuItem::findOne($id);
+        if ($menu_item_model) {
+            $model = Menu::findOne($menu_item_model->MenuID);
+            if ($menu_item_model->load(Yii::$app->request->post())) {
+                if (!$menu_item_model->ParentItemID) {
+                    $menu_item_model->ParentItemID = 0;
+                } else {
+                    $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                    if ($parentUrl) {
+                        $menu_item_model->LinkUrl = $parentUrl . '/' . $menu_item_model->LinkUrl;
+                    }
+                }
+                $menu_item_model->Status = \app\models\MenuItem::STATUS_ENABLED;
+                if ($menu_item_model->save()) {
+                    return $this->redirect(['view', 'id' => $menu_item_model->MenuID]);
+                }
+            }
+            return $this->render('addItem', [
+                        'model' => $model, 'menu_item_model' => $menu_item_model
+            ]);
+        }
     }
 
     function actionPublish($id) {

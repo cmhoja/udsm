@@ -35,11 +35,11 @@ class Contacts extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['ContactTitle','ContactTitleSw', 'PhoneNo'], 'required'],
+            [['ContactTitle', 'ContactTitleSw', 'PhoneNo'], 'required'],
             [['GoogleMapCode'], 'string'],
-            [['PoBox', 'StreetRegion','Descriptions','DescriptionsSw'], 'safe'],
+            [['PoBox', 'StreetRegion', 'Descriptions', 'DescriptionsSw'], 'safe'],
             [['UnitID'], 'integer'],
-            [['ContactTitle','ContactTitleSw'], 'string', 'max' => 255],
+            [['ContactTitle', 'ContactTitleSw'], 'string', 'max' => 255],
             [['PhoneNo', 'FaxNo'], 'string', 'max' => 255],
             [['EmailAddress'], 'string', 'max' => 250],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
@@ -53,9 +53,9 @@ class Contacts extends \yii\db\ActiveRecord {
         return [
             'Id' => 'ID',
             'ContactTitle' => 'Contact Title EN',
-            'Descriptions'=>'Descriptions EN',
+            'Descriptions' => 'Descriptions EN',
             'ContactTitleSw' => 'Contact Title Sw',
-            'DescriptionsSw'=>'Descriptions SW',
+            'DescriptionsSw' => 'Descriptions SW',
             'PhoneNo' => 'Phone No',
             'FaxNo' => 'Fax No',
             'EmailAddress' => 'Email Address',
@@ -96,6 +96,10 @@ class Contacts extends \yii\db\ActiveRecord {
 
     static function getActiveOtherUnitsContacts() {
         return self::find()->where(['Status' => self::STATUS_PUBLISHED, 'UnitID' => '>0'])->all();
+    }
+
+    static function getActiveUnitsContacts($UnitID) {
+        return self::find()->where(['Status' => self::STATUS_PUBLISHED, 'UnitID' => $UnitID])->one();
     }
 
 }

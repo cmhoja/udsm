@@ -28,17 +28,21 @@ class StaffListController extends Controller {
         ];
     }
 
-    
-     public function init() {
+    public function init() {
         $this->layout = 'backend/main';
         parent::init();
     }
+
     /**
      * Lists all StaffList models.
      * @return mixed
      */
     public function actionIndex() {
         $searchModel = new StaffListSearch();
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $searchModel->UnitID = $session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,7 +69,10 @@ class StaffListController extends Controller {
      */
     public function actionCreate() {
         $model = new StaffList();
-
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
+        }
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = StaffList::STATUS_SAVED;
             if (Yii::$app->request->post('save') == 'save') {
@@ -73,6 +80,7 @@ class StaffListController extends Controller {
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = StaffList::STATUS_PUBLISHED;
             }
+
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->Id]);
             }
@@ -90,6 +98,10 @@ class StaffListController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
+        }
         if ($model && $model->Status == StaffList::STATUS_PUBLISHED) {
             $this->redirect(array('index'));
         }

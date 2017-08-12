@@ -39,6 +39,11 @@ class VideoController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new VideoSearch();
+
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $searchModel->UnitID = $session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,8 +70,9 @@ class VideoController extends Controller {
      */
     public function actionCreate() {
         $model = new Video();
-        if (Yii::$app->session->get('UNIT_ID')) {
-            $model->UnitID = Yii::$app->session->get('UNIT_ID');
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
         }
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = Video::STATUS_SAVED;
@@ -98,8 +104,9 @@ class VideoController extends Controller {
         if ($model && $model->Status == Video::STATUS_PUBLISHED) {
             $this->redirect(array('index'));
         }
-        if (Yii::$app->session->get('UNIT_ID')) {
-            $model->UnitID = Yii::$app->session->get('UNIT_ID');
+        $session = Yii::$app->session;
+        if ($session->has('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
         }
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = Video::STATUS_SAVED;

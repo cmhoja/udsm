@@ -1,32 +1,43 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model app\models\MenuSearch */
-/* @var $form yii\widgets\ActiveForm */
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use app\models\AcademicAdministrativeUnit;
 ?>
 
 <div class="search">
 
+
     <?php
-    $form = ActiveForm::begin([
-                'action' => ['index'],
-                'method' => 'get',
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL,'method'=>'get']);
+    ?><?php
+    echo Form::widget([
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
+            'UnitID' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'options' => ['prompt' => '--- select --'],
+                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement' => AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
+            ], 'MenuName' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Title of the Nes in English'],
+                'columnOptions' => ['width' => '185px']
+            ],
+//            'MenuType' => [
+//                'type' => Form::INPUT_TEXT,
+//                'options' => ['placeholder' => 'Title of the Nes in English'],
+//                'columnOptions' => ['width' => '185px']
+//            ],
+        ]
     ]);
+    echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+    ActiveForm::end();
     ?>
-
-    <?= $form->field($model, 'MenuName') ?>
-
-    <?= $form->field($model, 'MenuType') ?>
-
-    <?= $form->field($model, 'UnitID') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
 
 </div>

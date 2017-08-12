@@ -20,10 +20,14 @@ class SocialMediaAccounts extends \yii\db\ActiveRecord {
     const STATUS_SAVED = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 3;
+    
+    ///Accout types
     const ACC_TYPE_FACEBOOK = 1;
     const ACC_TYPE_TWITTER = 2;
     const ACC_TYPE_LINKEDIN = 3;
     const ACC_TYPE_YOUTUBE = 4;
+    const ACC_TYPE_GOOGLE_PLUS = 5;
+    const ACC_TYPE_INSTAGRAM = 6;
 
     /**
      * @inheritdoc
@@ -97,7 +101,9 @@ class SocialMediaAccounts extends \yii\db\ActiveRecord {
             self::ACC_TYPE_FACEBOOK => 'FaceBook A/C',
             self::ACC_TYPE_TWITTER => 'Twitter A/C',
             self::ACC_TYPE_LINKEDIN => 'LinkedIn A/C',
-            self::ACC_TYPE_YOUTUBE => 'Youtube A/C'
+            self::ACC_TYPE_YOUTUBE => 'Youtube A/C',
+            self::ACC_TYPE_GOOGLE_PLUS=>'Google Plus',
+            self::ACC_TYPE_INSTAGRAM=>'Instagram'
         );
     }
 

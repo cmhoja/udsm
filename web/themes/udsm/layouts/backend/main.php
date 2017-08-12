@@ -17,8 +17,8 @@ LteAsset::register($this);
         <meta charset="<?= Yii::$app->charset ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode("UDSM Website| CMS") ?></title>
-        <!--<title><?= Html::encode($this->title) ?></title>-->
+        <title><?php //echo =Html::encode("UDSM Website| CMS")   ?></title>
+        <!--<title><?php //= Html::encode($this->title)   ?></title>-->
         <?php $this->head() ?>
     </head>
     <!--    <body class="skin-blue sidebar-mini">-->
@@ -33,7 +33,7 @@ LteAsset::register($this);
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>UDSM</b> CMS</span>-->
                     <span class="logo-lg"> 
-                        <img style="height: 55px;position: relative; float: none;padding: 1%;"src="<?php echo Yii::getAlias('@web') . '/themes/udsm/layouts/backend/images/logo-udsm.png'; ?>" />
+                        <img style="height: 55px;position: relative; float: none;padding: 1%;"src="<?php //echo Yii::getAlias('@web') . '/themes/udsm/layouts/backend/images/logo-udsm.png';   ?>" />
                     </span>
                     <!-- logo for regular state and mobile devices -->
                  <!--<span class="logo-lg"><b>UDSM</b> CMS</span>-->
@@ -44,13 +44,14 @@ LteAsset::register($this);
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>
                     </a>
-                    <p style="text-orientation: inherit;text-transform: uppercase;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight: 300;position: relative; float: left; margin: 0; margin-left: 5%; color: white; font-size: 17px;display: block; padding: 1%; text-align: center;vertical-align: middle">
+<!--                    <p style="text-orientation: inherit;text-transform: uppercase;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight: 300;position: relative; float: left; margin: 0; margin-left: 5%; color: white; font-size: 17px;display: block; padding: 1%; text-align: center;vertical-align: middle">
                         <b>Website Content Management System (CMS)</b>
-                    </p>
+                    </p>-->
                     <div class="navbar-custom-menu">
                         <div></div>
                         <ul class="nav navbar-nav" >
                             <?php
+                            //var_dump(Yii::$app->user);
                             if (Yii::$app->user->isGuest) {
                                 echo '<li><a href="' . Url::to(['/backend/login']) . '">Login</a></li>';
                             } else {
@@ -63,10 +64,11 @@ LteAsset::register($this);
             </header>
             <!-- Left side column. contains the logo and sidebar -->
             <?php
-            if (!Yii::$app->user->isGuest) {
+            if (!Yii::$app->user->isGuest && (Yii::$app->session->has('USER_TYPE_ADMINISTRATOR') OR Yii::$app->session->has('USER_TYPE_CONTENT_MANAGER'))) {
                 echo $this->render('//layouts/backend/cms_main_menu');
             }
             ?>
+
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">

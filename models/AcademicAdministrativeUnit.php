@@ -28,11 +28,12 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
      */
 
     const UNIT_TYPE_ADMINISTRATIVE = 0;
-    const UNIT_TYPE_COLLEGE = 1;
-    const UNIT_TYPE_SCHOOL = 2;
-    const UNIT_TYPE_INSTITUTE = 3;
-    const UNIT_TYPE_CENTRE = 4;
-    const UNIT_TYPE_DEPARTMENT = 5;
+    const UNIT_TYPE_CONSTINTUENT_COLLEGE = 1;
+    const UNIT_TYPE_COLLEGE = 2;
+    const UNIT_TYPE_SCHOOL = 3;
+    const UNIT_TYPE_INSTITUTE = 4;
+    const UNIT_TYPE_CENTRE = 5;
+    const UNIT_TYPE_DEPARTMENT = 6;
     //content management type
     const CONTENTMANAGEMENT_INTERNAL = 1;
     const CONTENTMANAGEMENT_EXTERNAL = 2;
@@ -51,7 +52,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
         return [
             [['UnitNameEn', 'UnitType', 'UnitNameSw', 'TypeContentManagement'], 'required'],
             [['UnitType'], 'integer'],
-            [['ParentUnitId'], 'safe'],
+            [['ParentUnitId', 'UnitAbreviationCode', 'Logo'], 'safe'],
             [['UnitNameEn', 'UnitNameSw'], 'string', 'max' => 255],
         ];
     }
@@ -136,6 +137,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
     static function getUnitTypes() {
         return array(
             self::UNIT_TYPE_ADMINISTRATIVE => 'Administrative',
+            self::UNIT_TYPE_CONSTINTUENT_COLLEGE => 'Constituent College',
             self::UNIT_TYPE_COLLEGE => 'College',
             self::UNIT_TYPE_SCHOOL => 'School',
             self::UNIT_TYPE_INSTITUTE => 'Institute',
@@ -215,7 +217,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
     }
 
     static function getAcademicTopUnitsInHirrach() {
-        $condition = array('ParentUnitId' =>0, 'TypeContentManagement' => self::CONTENTMANAGEMENT_INTERNAL);
+        $condition = array('ParentUnitId' => 0, 'TypeContentManagement' => self::CONTENTMANAGEMENT_INTERNAL);
 
         $ParentUnits = AcademicAdministrativeUnit::findAll($condition);
         if ($ParentUnits) {
