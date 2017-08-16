@@ -49,7 +49,15 @@ $this->params['breadcrumbs'][] = 'Details';
                     return $model->getBlockTypeName();
                 }
             ),
-            'BlockIconPicture',
+            array(
+                'attribute' => 'BlockIconPicture',
+                'attribute' => 'Icon Picture Preview:',
+                'value' => function($model) {
+
+                    return ($model->BlockIconPicture)?'<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . Yii::$app->params['file_upload_main_site'] . '/' . $model->BlockIconPicture . '">':'Not set';
+                },
+                'format' => 'html'
+            ),
             'BlockIconVideo',
             'BlockIconCSSClass',
             'LinkToPage',

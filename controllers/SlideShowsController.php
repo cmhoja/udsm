@@ -69,11 +69,10 @@ class SlideShowsController extends Controller {
      */
     public function actionCreate() {
         $model = new SlideShows();
-         $session = Yii::$app->session;
+        $session = Yii::$app->session;
         if ($session->get('UNIT_ID')) {
             $model->UnitID = $session->get('UNIT_ID');
         }
-       
         if ($model->load(Yii::$app->request->post())) {
             $model->TitleEn = strtolower($model->TitleEn);
             $model->TitleSw = strtolower($model->TitleSw);
@@ -85,21 +84,26 @@ class SlideShowsController extends Controller {
                 $model->Status = SlideShows::STATUS_PUBLISHED;
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
-            if ($model->save()) {
-                $update = 0;
-                if ($model->Image) {
-                    $model->Image = UploadedFile::getInstance($model, 'Image');
-                    $file_name = $model->uploadPhoto(); //uploading the Photo if any
-                    if ($file_name) {
-                        $model->Photo = $file_name;
-                    }
-                    $update++;
-                }
+            $model->Upload = \yii\web\UploadedFile::getInstance($model, 'Upload');
+            if ($model->validate()) {
+                if ($model->Upload) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Upload->extension);
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
 
-                if ($update) {
-                    $model->update();
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Upload->extension);
+                        $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_units_site'] . '/' . $fileName;
+                    }
+                    if ($model->Upload->saveAs($filePath)) {
+                        $model->Image = $fileName;
+                        //resize the image to a required size
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 90);
+                    }
                 }
-                return $this->redirect(['view', 'id' => $model->Id]);
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
         return $this->render('create', [
@@ -118,6 +122,12 @@ class SlideShowsController extends Controller {
         if ($model && $model->Status == SlideShows::STATUS_PUBLISHED) {
             $this->redirect(array('index'));
         }
+
+
+        $session = Yii::$app->session;
+        if ($session->get('UNIT_ID')) {
+            $model->UnitID = $session->get('UNIT_ID');
+        }
         if ($model->load(Yii::$app->request->post())) {
             $model->TitleEn = strtolower($model->TitleEn);
             $model->TitleSw = strtolower($model->TitleSw);
@@ -129,22 +139,30 @@ class SlideShowsController extends Controller {
                 $model->Status = SlideShows::STATUS_PUBLISHED;
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
-            if ($model->save()) {
-                $update = 0;
-                if ($model->Image) {
-                    $model->Image = UploadedFile::getInstance($model, 'Image');
-                    $file_name = $model->uploadPhoto(); //uploading the Photo if any
-                    if ($file_name) {
-                        $model->Photo = $file_name;
+            $model->Upload = \yii\web\UploadedFile::getInstance($model, 'Upload');
+            if ($model->validate()) {
+                if ($model->Upload) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Upload->extension);
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Upload->extension);
+                        $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_units_site'] . '/' . $fileName;
                     }
-                    $update++;
+                    if ($model->Upload->saveAs($filePath)) {
+                        $model->Image = $fileName;
+                        //resize the image to a required size
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 90);
+                        //  Image::getImagine()->open($filePath)->thumbnail(new Box($newWidth, $newHeight))->save($filePath, ['quality' => 90]);
+                    }
                 }
-                if ($update) {
-                    $model->update();
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
                 }
-                return $this->redirect(['view', 'id' => $model->Id]);
             }
         }
+
         return $this->render('update', [
                     'model' => $model,
         ]);
@@ -184,17 +202,18 @@ class SlideShowsController extends Controller {
         if ($model->Status == SlideShows::STATUS_SAVED OR $model->Status == SlideShows::STATUS_UNPUBLISHED) {
             $model->Status = SlideShows::STATUS_PUBLISHED;
             $model->DatePosted = Date('Y-m-d H:i:s', time());
-            $model->save();
+            $model->save(FALSE);
         }
         return $this->redirect(['view', 'id' => $model->Id]);
     }
 
     function actionUnpublish($id) {
         $model = SlideShows::findOne($id);
+
         if ($model->Status == SlideShows::STATUS_PUBLISHED) {
             $model->Status = SlideShows::STATUS_UNPUBLISHED;
             $model->DatePosted = NULL;
-            $model->save();
+            $model->save(false);
         }
         return $this->redirect(['view', 'id' => $model->Id]);
     }

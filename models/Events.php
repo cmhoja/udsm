@@ -44,6 +44,7 @@ class Events extends \yii\db\ActiveRecord {
             [['EventUrl', 'EventTitleEn', 'EventTitleSw', 'DescriptionEn', 'DescriptionSw', 'StartDate'], 'required'],
             [['DescriptionEn', 'DescriptionSw'], 'string'],
             [['UnitID', 'Status'], 'integer'],
+            [['Photo'], 'file', 'maxFiles' => 1, 'extensions' => 'png, jpg,jpeg', 'mimeTypes' => 'image/jpeg, image/png',],
             [['EventTitleEn', 'EventTitleSw'], 'string', 'max' => 130],
             [['EventUrl', 'Attachment'], 'string', 'max' => 255],
         ];
@@ -88,7 +89,7 @@ class Events extends \yii\db\ActiveRecord {
 
     static function getLatestEventsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
-             return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
+        return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
     }
 
 }

@@ -83,23 +83,26 @@ class CustomBlocksController extends Controller {
                     $model->BlockPlacementAreaRegion = $model->BlockPlacementAreaRegion2;
                     break;
             }
+            $model->Upload = \yii\web\UploadedFile::getInstance($model, 'Upload');
+            if ($model->validate()) {
+                if ($model->Upload) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_BLOCK_' . $model->BlockTitleEn . '.' . $model->Upload->extension);
+                    if ($model->BlockUnitID > 0) {
+                        $fileName = trim('UNIT_BLOCK_' . $model->BlockTitleEn . '.' . $model->Upload->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
 
-            if ($model->save()) {
-                $update = 0;
-                if ($model->BlockIconPicture) {
-                    $model->BlockIconPicture = UploadedFile::getInstance($model, 'BlockIconPicture');
-                    $file_name = $model->uploadPhoto(); //uploading the Photo if any
-                    if ($file_name) {
-                        $model->BlockIconPicture = $file_name;
-                        $update++;
+                    if ($model->Upload->saveAs($filePath)) {
+                        $model->BlockIconPicture = $fileName;
+                        //resize the image to a required size
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 270, 270, 90);
                     }
                 }
-                if ($update) {
-                    $model->update();
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
                 }
-                return $this->redirect(['view', 'id' => $model->Id]);
             }
-            //var_dump($model->errors);
         }
         return $this->render('create', [
                     'model' => $model,
@@ -148,24 +151,26 @@ class CustomBlocksController extends Controller {
                     $model->BlockPlacementAreaRegion = $model->BlockPlacementAreaRegion2;
                     break;
             }
+            $model->Upload = \yii\web\UploadedFile::getInstance($model, 'Upload');
+            if ($model->validate()) {
+                if ($model->Upload) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_BLOCK_' . $model->BlockTitleEn . '.' . $model->Upload->extension);
+                    if ($model->BlockUnitID > 0) {
+                        $fileName = trim('UNIT_BLOCK_' . $model->BlockTitleEn . '.' . $model->Upload->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
 
-
-            if ($model->save()) {
-                $update = 0;
-                if ($model->BlockIconPicture) {
-                    $model->BlockIconPicture = UploadedFile::getInstance($model, 'BlockIconPicture');
-                    $file_name = $model->uploadPhoto(); //uploading the Photo if any
-                    if ($file_name) {
-                        $model->BlockIconPicture = $file_name;
-                        $update++;
+                    if ($model->Upload->saveAs($filePath)) {
+                        $model->BlockIconPicture = $fileName;
+                        //resize the image to a required size
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 270, 270, 90);
                     }
                 }
-                if ($update) {
-                    $model->update();
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
                 }
-                return $this->redirect(['view', 'id' => $model->Id]);
             }
-            var_dump($model->errors);
         }
         return $this->render('create', [
                     'model' => $model,

@@ -89,8 +89,27 @@ class MatukioController extends Controller {
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
 
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id]);
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            if ($model->validate()) {
+                if ($model->Photo) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('MAIN_NEWS_PHOTO' . $model->BlockTitleEn . '.' . $model->Photo->extension);
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT_NEWS_PHOTO_' . $model->BlockTitleEn . '.' . $model->Photo->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_units_site'] . '/' . $fileName;
+
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $fileName;
+                        //resize the image to a required size
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 273, 200, 90);
+                    }
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
         return $this->render('//events/create', [

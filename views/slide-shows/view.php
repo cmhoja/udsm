@@ -37,8 +37,16 @@ $this->params['breadcrumbs'][] = 'Details';
             'DetailsEn',
             'DetailsSw',
             'LinkToPage',
-            'Image',
-             array(
+            array(
+                'attribute' => 'Image',
+                'attribute' => 'Image/Photo Preview:',
+                'value' => function($model) {
+
+                    return '<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . Yii::$app->params[($model->UnitID) ? 'file_upload_units_site' : 'file_upload_main_site'] . '/' . $model->Image . '">';
+                },
+                'format' => 'html'
+            ),
+            array(
                 'attribute' => 'UnitID',
                 'value' => function($model) {
                     return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);

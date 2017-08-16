@@ -22,7 +22,8 @@ use Yii;
  * @property integer $Status
  */
 class CustomBlocks extends \yii\db\ActiveRecord {
-
+public $Upload;
+    
     const STATUS_SAVED = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
@@ -49,6 +50,7 @@ class CustomBlocks extends \yii\db\ActiveRecord {
             [['BlockType', 'BlockName', 'BlockDetailsEn', 'BlockDetailsSw', 'BlockPlacementAreaRegion'], 'required'],
             [['BlockUnitID', 'BlockType', 'BlockPlacementAreaRegion', 'BlockPlacementAreaRegion1', 'BlockPlacementAreaRegion2', 'Status'], 'integer'],
             [['BlockDetailsSw'], 'string'],
+            [['Upload'], 'file', 'maxFiles' => 1, 'extensions' => 'png, jpg,jpeg', 'mimeTypes' => 'image/jpeg, image/png',],
             [['BlockPlacementAreaRegion2', 'BlockPlacementAreaRegion1', 'BlockIconCSSClass'], 'safe'],
             [['BlockIconCSSClass', 'BlockTitleEn', 'BlockTitleSw'], 'string', 'max' => 100],
             [['BlockIconPicture', 'BlockIconVideo', 'LinkToPage', 'ShowOnPage'], 'string', 'max' => 255],
@@ -77,6 +79,7 @@ class CustomBlocks extends \yii\db\ActiveRecord {
             'BlockPlacementAreaRegion2' => 'Block Placement Area Region',
             'ShowOnPage' => 'Show On Page',
             'Status' => 'Status',
+            'Upload'=>'Block Icon Picture'
         ];
     }
 
@@ -115,7 +118,7 @@ class CustomBlocks extends \yii\db\ActiveRecord {
         $regions = \app\components\SiteRegions::getAllPlacementRegions();
         if (isset($regions[$this->BlockPlacementAreaRegion])) {
             return $regions[$this->BlockPlacementAreaRegion];
-        } 
+        }
 //        else {
 //            $regions = \app\components\SiteRegions::getCustomPageTemplateRegions();
 //            if (isset($regions[$this->BlockPlacementAreaRegion])) {

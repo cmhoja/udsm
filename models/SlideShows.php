@@ -25,6 +25,8 @@ class SlideShows extends \yii\db\ActiveRecord {
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
 
+    public $Upload;
+
     /**
      * @inheritdoc
      */
@@ -37,10 +39,11 @@ class SlideShows extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['TitleEn', 'TitleSw'], 'required'],
+            [['TitleEn', 'TitleSw','Upload'], 'required'],
             [['UnitID', 'Status'], 'integer'],
             [['TitleEn', 'TitleSw', 'LinkToPage'], 'string', 'max' => 120],
-            [['DetailsEn', 'DetailsSw', 'Image'], 'string', 'max' => 400],
+            [['DetailsEn', 'DetailsSw'], 'string', 'max' => 400],
+            [['Upload'], 'file','maxFiles' => 1, 'extensions' => 'png, jpg,jpeg','mimeTypes' => 'image/jpeg, image/png',],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }
@@ -59,6 +62,7 @@ class SlideShows extends \yii\db\ActiveRecord {
             'Image' => 'Image',
             'UnitID' => 'Unit/Section',
             'Status' => 'Status',
+            'Upload'=>'Upload Picture'
         ];
     }
 

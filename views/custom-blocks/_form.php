@@ -15,7 +15,7 @@ use app\models\AcademicAdministrativeUnit;
 
 <div class="add-form">
     <?php
-    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'options' => ['enctype' => 'multipart/form-data']]);
     ?>
     <?php
     echo Form::widget([
@@ -40,7 +40,7 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_DROPDOWN_LIST,
                 'options' => ['prompt' => '--- select --'],
                 'items' => \app\models\CustomBlocks::getBlockTypes(),
-                'columnOptions' => ['width' => '185px', 'height' => '10px','id'=>'BlockType'],
+                'columnOptions' => ['width' => '185px', 'height' => '10px', 'id' => 'BlockType'],
             ],
             'BlockPlacementAreaRegion1' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
@@ -74,7 +74,7 @@ use app\models\AcademicAdministrativeUnit;
                 'options' => ['placeholder' => 'Summary text content for information to be shown on the block'],
                 'columnOptions' => ['width' => '185px', 'height' => '10px']
             ],
-            'BlockIconPicture' => [
+            'Upload' => [
                 'type' => Form::INPUT_FILE,
                 'options' => ['placeholder' => 'Block Photo to be shown on the page if any. Will be used insteady of video'],
                 'columnOptions' => ['width' => '185px']
@@ -83,7 +83,7 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Fill here a specific Block Icon CSS Class for Formating'],
                 'columnOptions' => ['width' => '185px']
-            ],            
+            ],
             'BlockIconVideo' => [
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Block Embeded Video Code to be shown if the block has no Picture Use this if There is no picture'],
@@ -93,7 +93,7 @@ use app\models\AcademicAdministrativeUnit;
                 'options' => ['placeholder' => 'List the Pages where the block has to be shows. For multiple pages use a comma(,) separation for each page'],
                 'columnOptions' => ['width' => '185px']
             ],
-             'LinkToPage' => [
+            'LinkToPage' => [
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Enter url of the page or website that this block point when clicked'],
                 'columnOptions' => ['width' => '185px']

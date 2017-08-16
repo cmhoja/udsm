@@ -64,9 +64,9 @@ LteAsset::register($this);
             </header>
             <!-- Left side column. contains the logo and sidebar -->
             <?php
-            if (!Yii::$app->user->isGuest && (Yii::$app->session->has('USER_TYPE_ADMINISTRATOR') OR Yii::$app->session->has('USER_TYPE_CONTENT_MANAGER'))) {
+           // if (!Yii::$app->user->isGuest && (Yii::$app->session->has('USER_TYPE_ADMINISTRATOR') OR Yii::$app->session->has('USER_TYPE_CONTENT_MANAGER'))) {
                 echo $this->render('//layouts/backend/cms_main_menu');
-            }
+//            }
             ?>
 
 
