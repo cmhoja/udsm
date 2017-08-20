@@ -60,18 +60,18 @@
                                 <!-- Top Contact -->
                                 <div class="top-contact link-hover-black">
                                     <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                        <img class="site_logo" alt="Site Logo" src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/logo.png" />
+                                        <img class="site_logo" style="width: 20%;margin: 2%;" alt="Site Logo" src="<?php //echo $this->theme->baseUrl; ?>/layouts/college/img/logo.png" />
                                     </a>
                                     <?php if (isset($this->params['unit_logo']) && $this->params['unit_logo']) { ?>
                                         <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                            <img class="site-right" alt="Site Logo" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $this->params['unit_logo']; ?>" />
+                                            <img class="site-right" style="width: 20%;margin: 2%;" alt="Site Logo" src="<?php //echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $this->params['unit_logo']; ?>" />
                                         </a>
                                     <?php } ?>
 
                                 </div>
                                 <div class="top-banner">
-                                    <div class="description-main"><?php echo strtoupper(Yii::$app->name[Yii::$app->language]); ?></div>
-                                    <div class="top-description" style="margin: 0.5%;font-size: 16px;font-weight: bold"><?php echo $this->params['unit_name']; ?> (<?php echo strtoupper($this->params['unit_abbreviation_code']); ?>)</div>
+                                    <div class="description-main"><?php //echo strtoupper(Yii::$app->name[Yii::$app->language]); ?></div>
+                                    <div class="top-description" style="margin: 0.5%;font-size: 16px;font-weight: bold"><?php //echo $this->params['unit_name']; ?> (<?php //echo strtoupper($this->params['unit_abbreviation_code']); ?>)</div>
                                 </div>
 
 

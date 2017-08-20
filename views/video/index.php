@@ -25,12 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'VideoNameEn',
             'VideoLink',
-            array(
-                'attribute' => 'UnitID',
-                'value' => function($model) {
-                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
-                }
-            ), array(
+//            array(
+//                'attribute' => 'UnitID',
+//                'value' => function($model) {
+//                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+//                }
+//            ), 
+        array(
                 'attribute' => 'Status',
                 'value' => function($model) {
                     return $model->getStatusName();

@@ -39,11 +39,11 @@ class SlideShows extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['TitleEn', 'TitleSw','Upload'], 'required'],
+            [['TitleEn', 'TitleSw', 'Upload'], 'required'],
             [['UnitID', 'Status'], 'integer'],
             [['TitleEn', 'TitleSw', 'LinkToPage'], 'string', 'max' => 120],
             [['DetailsEn', 'DetailsSw'], 'string', 'max' => 400],
-            [['Upload'], 'file','maxFiles' => 1, 'extensions' => 'png, jpg,jpeg','mimeTypes' => 'image/jpeg, image/png',],
+            [['Upload'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => false, 'extensions' => 'png, jpg,jpeg', 'mimeTypes' => 'image/jpeg, image/png',],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }
@@ -62,7 +62,7 @@ class SlideShows extends \yii\db\ActiveRecord {
             'Image' => 'Image',
             'UnitID' => 'Unit/Section',
             'Status' => 'Status',
-            'Upload'=>'Upload Picture'
+            'Upload' => 'Upload Picture'
         ];
     }
 

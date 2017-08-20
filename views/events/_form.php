@@ -15,8 +15,8 @@ use dosamigos\ckeditor\CKEditor;
 
 <div class="add-form">
     <?php
-    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
-    ?>
+   $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL,'options' => ['enctype' => 'multipart/form-data']]);
+     ?>
     <?php
     echo Form::widget([
         'model' => $model,

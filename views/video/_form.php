@@ -22,13 +22,14 @@ use app\models\AcademicAdministrativeUnit;
         'columns' => 1,
         'attributes' => [
             'onClick' => 'this.disabled=true;this.form.submit();',
-            'UnitID' => [
-                'type' => Form::INPUT_DROPDOWN_LIST,
-                'options' => ['prompt' => '--- select --'],
-                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement'=> AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
-                'columnOptions' => ['width' => '185px', 'height' => '10px'],
-                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
-            ], 'VideoNameEn' => [
+//            'UnitID' => [
+//                'type' => Form::INPUT_DROPDOWN_LIST,
+//                'options' => ['prompt' => '--- select --'],
+//                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement'=> AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+//                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+//                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
+//            ],
+            'VideoNameEn' => [
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Title of the News in English'],
                 'columnOptions' => ['width' => '185px']

@@ -34,7 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'TitleSw',
             'DetailsEn:ntext',
             'DetailsSw:ntext',
-            'Attachment',
+            array(
+                'attribute' => 'Attachment',
+                'value' => function($model) {
+                    return ($model->Attachment) ? '<a target="_blank" href= "' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $model->Attachment) . '">Download here to Preview </a>' : '';
+                },
+                'format' => 'html'
+            ),
             'DatePosted',
             array(
                 'attribute' => 'Status',

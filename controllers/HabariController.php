@@ -89,31 +89,40 @@ class HabariController extends Controller {
             if ($model->TitleEn) {
                 $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
             }
-            // var_dump($model->attributes);
-            if ($model->save()) {
-                $update = 0;
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+            if ($model->validate()) {
+                //uploading the news photo
                 if ($model->Photo) {
-                    $model->Photo = UploadedFile::getInstance($model, 'Photo');
-                    $file_name = $model->uploadPhoto(); //uploading the Photo if any
-                    if ($file_name) {
-                        $model->Photo = $file_name;
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Photo->extension);
                     }
-                    $update++;
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $fileName;
+                        //resize the image to a required size
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1000, 500, 90);
+                    }
                 }
+
+                //uploading the attachement related to the news
                 if ($model->Attachment) {
-                    $model->Attachment = UploadedFile::getInstance($model, 'Attachment');
-//                    var_dump($model->Attachment);
-//                    exit;
-                    $Attachment_name = $model->uploadAttachment(); //uploading the attchment if any
-                    if ($Attachment_name) {
-                        $model->Attachment = $Attachment_name;
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Attachment->extension);
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Attachment->extension);
                     }
-                    $update++;
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
                 }
-                if ($update) {
-                    $model->update();
+
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
                 }
-                return $this->redirect(['view', 'id' => $model->Id]);
             }
         }
         return $this->render('//news/create', [
@@ -136,39 +145,54 @@ class HabariController extends Controller {
         if ($session['UNIT_ID']) {
             $model->UnitID = $session['UNIT_ID'];
         }
-
+        $Attachment = $model->Attachment;
+        $Photo = $model->Photo;
         if ($model->load(Yii::$app->request->post())) {
             $model->TitleEn = strtolower($model->TitleEn);
             $model->TitleSw = strtolower($model->TitleSw);
             if ($model->TitleEn) {
                 $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
             }
-            if ($model->save()) {
-                if (Yii::$app->request->post('save') == 'save') {
-                    $model->Status = News::NEWS_STATUS_SAVED;
-                    $model->DatePosted = NULL;
-                } elseif (Yii::$app->request->post('publish') == 'publish') {
-                    $model->Status = News::NEWS_STATUS_PUBLISHED;
-                    $model->DatePosted = Date('Y-m-d H:i:s', time());
-                }
-                if (isset($_FILES['News']['name']['Photo'])) {
-                    $model->Photo = UploadedFile::getInstance($model, 'Photo');
-                    $file_name = $model->uploadPhoto(); //uploading the Photo if any
-                    if ($file_name) {
-                        $model->Photo = $file_name;
+            $model->Photo = $Photo;
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+
+            if ($model->validate()) {
+                //uploading the news photo
+                if ($model->Photo) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Photo->extension);
                     }
-                    $model->update();
-                }
-                if (isset($_FILES['News']['name']['Attachment'])) {
-                    $model->Attachment = UploadedFile::getInstance($model, 'Attachment');
-                    $Attachment_name = $model->uploadAttachment(); //uploading the attchment if any
-                    if ($Attachment_name) {
-                        $model->Attachment = $Attachment_name;
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $fileName;
+                        //resize the image to a required size
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1000, 500, 90);
                     }
-                    $model->update();
                 }
 
-                return $this->redirect(['view', 'id' => $model->Id]);
+
+
+                //uploading the attachement related to the news
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Attachment->extension);
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
+                } else {
+                    $model->Attachment = $Attachment;
+                }
+
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
         return $this->render('//news/update', [
@@ -187,7 +211,7 @@ class HabariController extends Controller {
         if ($model && $model->Status != News::NEWS_STATUS_PUBLISHED) {
             $this->findModel($id)->delete();
         }
-        return $this->redirect(['//news/index']);
+        return $this->redirect('index');
     }
 
     /**
@@ -210,9 +234,9 @@ class HabariController extends Controller {
         if ($model->Status == News::NEWS_STATUS_SAVED OR $model->Status == News::NEWS_STATUS_UNPUBLISHED) {
             $model->Status = News::NEWS_STATUS_PUBLISHED;
             $model->DatePosted = Date('Y-m-d H:i:s', time());
-            $model->save();
+            $model->save(FALSE);
         }
-        return $this->redirect(['//news/view', 'id' => $model->Id]);
+        return $this->redirect(['view', 'id' => $model->Id]);
     }
 
     function actionUnpublish($id) {
@@ -220,9 +244,9 @@ class HabariController extends Controller {
         if ($model->Status == News::NEWS_STATUS_PUBLISHED) {
             $model->Status = News::NEWS_STATUS_UNPUBLISHED;
             $model->DatePosted = NULL;
-            $model->save();
+            $model->save(FALSE);
         }
-        return $this->redirect(['//news/view', 'id' => $model->Id]);
+        return $this->redirect(['view', 'id' => $model->Id]);
     }
 
 }

@@ -60,20 +60,18 @@ $title = Yii::$app->params['static_items']['news_events'][Yii::$app->language];
 
                 <div data-example-id="togglable-tabs" role="tabpanel" class="bs-example-tabs">
                     <ul role="tablist" class="nav nav-tabs" id="myTab">
-                        <li class="active" role="presentation"><a aria-expanded="true" aria-controls="twitter" data-toggle="tab" role="tab" id="twitter-tab" href="#twitter"><i class= "fa fa-twitter"></i> Twitter</a></li>
+                        <li class="active" role="presentation"><a aria-expanded="true" aria-controls="twitter" data-toggle="tab" role="tab" id="twitter-tab" href="#twitter"><i class= "fa fa-twitter"></i> <?php echo Yii::$app->params['static_items']['twitter'][Yii::$app->language]; ?></a></li>
                         <li role="presentation"><a aria-controls="facebook" data-toggle="tab" id="facebook-tab" role="tab" href="#facebook">
-                                <i class= "fa fa-facebook-square"></i> Facebook</a></li>
+                                <i class= "fa fa-facebook-square"></i> <?php echo Yii::$app->params['static_items']['facebook'][Yii::$app->language]; ?></a></li>
 
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div aria-labelledby="twitter-tab" id="twitter" class="tab-pane fade in active" role="tabpanel">
-                            <a class="twitter-timeline" data-height="500" href="https://twitter.com/UdsmAlumni">Tweets by UdsmAlumni</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <a class="twitter-timeline" data-height="500" href="<?php echo \app\models\SocialMediaAccounts::getAccoutLinkByTypeAndUnitID(\app\models\SocialMediaAccounts::ACC_TYPE_TWITTER, \app\models\SocialMediaAccounts::STATUS_PUBLISHED, NULL); ?>"><?php echo Yii::$app->params['static_items']['tweets_by'][Yii::$app->language]; ?>  UdsmAlumni</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                         </div>
                         <div aria-labelledby="facebook-tab" id="facebook" class="tab-pane fade" role="tabpanel">
-
-                            <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FUniversity-Of-Dar-es-Salaam-126213247437175&width=370&colorscheme=light&show_faces=true&border_color&stream=true&header=true&height=500" scrolling="yes" frameborder="0" style="border:none; overflow:hidden; width:100%; height:500px; background: white; float:left; " allowtransparency="true"></iframe>
-
+                            <iframe src="<?php echo trim('www.facebook.com/plugins/likebox.php?href=' . \app\models\SocialMediaAccounts::getAccoutLinkByTypeAndUnitID(\app\models\SocialMediaAccounts::ACC_TYPE_FACEBOOK, \app\models\SocialMediaAccounts::STATUS_PUBLISHED, NULL) . '&width=370&colorscheme=light&show_faces=true&border_color&stream=true&header=true&height=500'); ?>" scrolling="yes" frameborder="0" style="border:none; overflow:hidden; width:100%; height:500px; background: white; float:left; " allowtransparency="true"></iframe>
                         </div>
 
                     </div>
@@ -97,7 +95,7 @@ $title = Yii::$app->params['static_items']['news_events'][Yii::$app->language];
                                 <?php
                                 if ($new->Photo) {
                                     ?><div class="pull-left">
-                                        <img src=" <?php echo $this->theme->baseUrl . '/' . Yii::$app->params['file_upload_main_site'] . '/' . $new->Photo; ?>" alt="" title="" />
+                                        <img src=" <?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $new->Photo; ?>" alt="" title="" />
                                     </div>
                                     <?php
                                 }

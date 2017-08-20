@@ -24,176 +24,80 @@ $title = Yii::$app->params['static_items']['staff_corner'][Yii::$app->language];
         <div class="row">
 
             <div class="col-md-8 col-md-12 pull-right">
-                <div class="section-title">
-                    <!-- Heading -->
-                    <h3 class="title"><?php echo Yii::$app->params['static_items']['staff_directory'][Yii::$app->language];  ?></h3>
-
-
-                </div>
-
-                <form class="form-inline">
-                    <div class="form-group">
-
-                        <input type="text" class="form-control" d="exampleKeyword" placeholder="Search Keyword">
-                    </div>
-                    <div class="form-group">
-
-                        <select class="form-control" >
-                            <option value="field1">Select Department</option>
-                            <option value="field2">Information Technology</option>
-                            <option value="field3">Engineering</option>
-                            <option value="field4">Education</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <a class="btn btn-default btn-sm form-control" href="staff-details.html">Search Staff</a>
-                    </div>
-                </form>
+                <!--                <div class="section-title">
+                                     Heading 
+                                    <h3 class="title"><?php //echo Yii::$app->params['static_items']['staff_directory'][Yii::$app->language];                    ?></h3>
+                
+                
+                                </div>
+                
+                                <form class="form-inline">
+                                    <div class="form-group">
+                
+                                        <input type="text" class="form-control" d="exampleKeyword" placeholder="Search Keyword">
+                                    </div>
+                                    <div class="form-group">
+                
+                                        <select class="form-control" >
+                                            <option value="field1">Select Department</option>
+                                            <option value="field2">Information Technology</option>
+                                            <option value="field3">Engineering</option>
+                                            <option value="field4">Education</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <a class="btn btn-default btn-sm form-control" href="staff-details.html">Search Staff</a>
+                                    </div>
+                                </form>-->
 
 
 
                 <br>
                 <div class="section-title">
                     <!-- Heading -->
-                    <h3 class="title">Staff News</h3>
+                    <h3 class="title"><?php echo Yii::$app->params['static_items']['news'][Yii::$app->language]; ?></h3>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4 col-md-4">
+                    <?php
+                    if (isset($page_content['latest_news']) && $page_content['latest_news']) {
+                        foreach ($page_content['latest_news'] as $news) {
+                            ?>
+                            <div class="row">
+                                <?php if ($news->Photo) { ?>
+                                    <div class="col-sm-4 col-md-4">
+                                        <div class="pull-left">
+                                            <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo ?>" alt="" title="" />
+                                        </div>
+                                    </div>
+                                    <?php
+                                    $class = 'col-sm-8 col-md-8';
+                                } else {
+                                    $class = 'col-sm-8 col-md-12';
+                                }
+                                ?>
 
-                        <div class="pull-left">
-                            <img src="img/img1.jpg" alt="" title="" />
-                        </div>
+                                <div class="<?php echo $class; ?>">
+                                    <h2 class="post-title">
+                                        <a href="<?php echo app\components\Utilities::generateUrl('/news/' . $news->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn; ?></a>
+                                    </h2>
+                                    <div class="post-meta">
 
+                                        <span class="time">
+                                            <i class="fa fa-calendar"></i> <?php echo Date('d.M.Y', strtotime($news->DatePosted)); ?></span>
+                                    </div>
+                                    <div class="post-content"> <?php echo substr(((Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn), 0, 180); ?> </div>
 
-                    </div>
+                                    <a href="<?php echo app\components\Utilities::generateUrl('/news/' . $news->LinkUrl); ?>" class="btn btn-default btn-sm" style="float: right;">Read More</a>
 
-                    <div class="col-sm-8 col-md-8">
-                        <h2 class="post-title">
-                            <a href="news-details.html">News Title</a>
-                        </h2>
-                        <div class="post-meta">
+                                </div>
 
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 03.11.2014</span>
-                        </div>
-
-                        <div class="post-content">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
-                        <a href="news-details.html" class="btn btn-default btn-sm">Read More</a>
-
-                    </div>
-
+                            </div>
+                            <hr>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-4 col-md-4">
-
-                        <div class="pull-left">
-                            <img src="img/img1.jpg" alt="" title="" />
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-sm-8 col-md-8">
-                        <h2 class="post-title">
-                            <a href="news-details.html">News Title</a>
-                        </h2>
-                        <div class="post-meta">
-
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 03.11.2014</span>
-                        </div>
-                        <div class="post-content">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
-                        <a href="news-details.html" class="btn btn-default btn-sm">Read More</a>
-
-                    </div>
-
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-4 col-md-4">
-
-                        <div class="pull-left">
-                            <img src="img/img1.jpg" alt="" title="" />
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-sm-8 col-md-8">
-                        <h2 class="post-title">
-                            <a href="news-details.html">News Title</a>
-                        </h2>
-                        <div class="post-meta">
-
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 03.11.2014</span>
-                        </div>
-                        <div class="post-content">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
-                        <a href="news-details.html" class="btn btn-default btn-sm">Read More</a>
-
-                    </div>
-
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-4 col-md-4">
-
-                        <div class="pull-left">
-                            <img src="img/img1.jpg" alt="" title="" />
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-sm-8 col-md-8">
-                        <h2 class="post-title">
-                            <a href="news-details.html">News Title</a>
-                        </h2>
-                        <div class="post-meta">
-
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 03.11.2014</span>
-                        </div>
-                        <div class="post-content">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
-                        <a href="news-details.html" class="btn btn-default btn-sm">Read More</a>
-
-                    </div>
-
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-4 col-md-4">
-
-                        <div class="pull-left">
-                            <img src="img/img1.jpg" alt="" title="" />
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-sm-8 col-md-8">
-                        <h2 class="post-title">
-                            <a href="news-details.html">News Title</a>
-                        </h2>
-                        <div class="post-meta">
-
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 03.11.2014</span>
-                        </div>
-                        <div class="post-content">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
-                        <a href="news-details.html" class="btn btn-default btn-sm">Read More</a>
-
-                    </div>
-
-                </div>
-                <hr>
-
             </div>
             <div class="col-md-4 col-md-12">
 
@@ -363,7 +267,8 @@ $title = Yii::$app->params['static_items']['staff_corner'][Yii::$app->language];
 
 
             </div>
-        </div> 
+
+        </div>
     </div>
 
 </section>

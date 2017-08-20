@@ -42,7 +42,7 @@ $session = Yii::$app->session;
                 ?>
 
                 <?php
-                if (!Yii::$app->session->has('UNIT_ID')) {
+                if (($session->has('USER_TYPE_ADMINISTRATOR') OR $session->has('USER_TYPE_CONTENT_MANAGER')) && !Yii::$app->session->has('UNIT_ID')) {
                     echo '<li><a href="' . Url::to(['/video/index']) . '">' . '<i class="fa fa-bar-chart"></i>'
                     . '<span>Manage Videos</span>'
                     . '</a></li>';
@@ -68,7 +68,7 @@ $session = Yii::$app->session;
             <?php endif; ?>
 
             <?php
-            if ($session->has('USER_TYPE_ADMINISTRATOR')):
+            if ($session->has('USER_TYPE_ADMINISTRATOR') && !$session->has('USER_TYPE_CONTENT_MANAGER')):
                 ?>
                 <?php
                 echo '<li class="treeview">
@@ -110,7 +110,7 @@ $session = Yii::$app->session;
                 ?>
 
                 <?php
-                if (!$session->has('UNIT_ID')) {
+                if ($session->has('USER_TYPE_ADMINISTRATOR') && !$session->has('UNIT_ID')) {
                     echo '<li><a href="' . Url::to(['/logins/index']) . '">
                             <i class="fa fa-circle-o"></i> Login History</a>
                           </li> ';

@@ -119,14 +119,17 @@ class SlideShowsController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $Image = NULL;
         if ($model && $model->Status == SlideShows::STATUS_PUBLISHED) {
             $this->redirect(array('index'));
         }
 
-
         $session = Yii::$app->session;
         if ($session->get('UNIT_ID')) {
             $model->UnitID = $session->get('UNIT_ID');
+        }
+        if ($model) {
+            $Image = $model->Image;
         }
         if ($model->load(Yii::$app->request->post())) {
             $model->TitleEn = strtolower($model->TitleEn);
@@ -156,6 +159,8 @@ class SlideShowsController extends Controller {
                         \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 90);
                         //  Image::getImagine()->open($filePath)->thumbnail(new Box($newWidth, $newHeight))->save($filePath, ['quality' => 90]);
                     }
+                } else {
+                    $model->Image = $Image;
                 }
                 if ($model->save(false)) {
                     return $this->redirect(['view', 'id' => $model->Id]);

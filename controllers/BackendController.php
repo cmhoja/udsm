@@ -19,7 +19,7 @@ class BackendController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+               // 'only' => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['logout', 'index'],
@@ -56,6 +56,8 @@ class BackendController extends Controller {
             ],
         ];
     }
+    
+  
 
     public function init() {
         $this->layout = 'backend/main';
@@ -91,7 +93,7 @@ class BackendController extends Controller {
                 $model->password = \app\components\Utilities::setHashedValue($model->password);
             }
 
-            $identity = \app\models\User::findByUsername($model->username,$model->password);
+            $identity = \app\models\User::findByUsername($model->username, $model->password);
 
             if (Yii::$app->user->login($identity)) {
                 $userRoles = Users::find()->where(array('Password' => $model->password, 'Username' => $model->username))->one();
@@ -111,11 +113,12 @@ class BackendController extends Controller {
                     switch ($userRoles->UserType) {
                         case Users::USER_TYPE_ADMINISTRATOR: //administrator
                             $session->set('USER_TYPE_ADMINISTRATOR', TRUE);
-
+                            $session->remove('USER_TYPE_CONTENT_MANAGER');
                             break;
 
                         case Users::USER_TYPE_CONTENT_MANAGER: //for content admin
                             $session->set('USER_TYPE_CONTENT_MANAGER', TRUE);
+                            $session->remove('USER_TYPE_ADMINISTRATOR');
                             break;
 
                         default:
@@ -184,13 +187,13 @@ class BackendController extends Controller {
         ]);
     }
 
-    /**
+      /**
      * Displays forbidden page.
      *
      * @return string
      */
     public function actionForbidden() {
-        return $this->render('forbidden');
+        return $this->render('//site/forbidden');
     }
 
 }

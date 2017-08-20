@@ -38,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'EventUrl:url',
             'EventTitleEn',
             'EventTitleSw',
-            'DescriptionEn:ntext',
-            'DescriptionSw:ntext',
+            'DescriptionEn:html',
+            'DescriptionSw:html',
             'StartDate',
             'EndDate',
             array(
@@ -48,7 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
                 }
             ),
-            'Attachment',
+            array(
+                'attribute' => 'Attachment',
+                'value' => function($model) {
+                    return ($model->Attachment) ? '<a target="_blank" href= "' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $model->Attachment) . '">Download here to Preview </a>' : '';
+                },
+                'format' => 'html'
+            ),
             array(
                 'attribute' => 'Status',
                 'value' => function($model) {

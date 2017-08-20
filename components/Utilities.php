@@ -6,6 +6,13 @@ use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\helpers\Url;
 
+//
+//image resizing libraries
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
+use Imagine\Image\BoxInterface;
+
 /**
  * Description of Utilities component
  * This is Utililties/Helpers class containing the definitions of the functions/methods 
@@ -135,6 +142,15 @@ class Utilities {
             }
         }
         return $page_link;
+    }
+
+    /*
+     * resize and image and maintains an aspect ratio
+     */
+
+    static function ResizeImage($OriginalFilePath, $NewfilePath, $newWidth, $newHeight, $quality) {
+       
+        Image::getImagine()->open($OriginalFilePath)->thumbnail(new Box($newWidth, $newHeight))->save($NewfilePath, ['quality' => $quality]);
     }
 
     //end of class

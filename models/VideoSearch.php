@@ -44,7 +44,6 @@ class VideoSearch extends Video
         $query = Video::find();
 
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -56,7 +55,6 @@ class VideoSearch extends Video
             // $query->where('0=1');
             return $dataProvider;
         }
-
         // grid filtering conditions
         $query->andFilterWhere([
             'Id' => $this->Id,

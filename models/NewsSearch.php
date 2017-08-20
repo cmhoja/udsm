@@ -10,13 +10,12 @@ use app\models\News;
 /**
  * NewsSearch represents the model behind the search form about `app\models\News`.
  */
-class NewsSearch extends News
-{
+class NewsSearch extends News {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['Id', 'UnitID'], 'integer'],
             [['TitleEn', 'TitleSw', 'DetailsEn', 'DetailsSw', 'Attachment', 'Photo'], 'safe'],
@@ -26,8 +25,7 @@ class NewsSearch extends News
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class NewsSearch extends News
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = News::find();
 
         // add conditions that should always apply here
@@ -64,12 +61,14 @@ class NewsSearch extends News
         ]);
 
         $query->andFilterWhere(['like', 'TitleEn', $this->TitleEn])
-            ->andFilterWhere(['like', 'TitleSw', $this->TitleSw])
-            ->andFilterWhere(['like', 'DetailsEn', $this->DetailsEn])
-            ->andFilterWhere(['like', 'DetailsSw', $this->DetailsSw])
-            ->andFilterWhere(['like', 'Attachment', $this->Attachment])
-            ->andFilterWhere(['like', 'Photo', $this->Photo]);
+                ->andFilterWhere(['like', 'TitleSw', $this->TitleSw])
+                ->andFilterWhere(['like', 'DetailsEn', $this->DetailsEn])
+                ->andFilterWhere(['like', 'DetailsSw', $this->DetailsSw])
+                ->andFilterWhere(['like', 'Attachment', $this->Attachment])
+                ->andFilterWhere(['like', 'Photo', $this->Photo])
+                ->orderBy('DateCreated DESC');
 
         return $dataProvider;
     }
+
 }

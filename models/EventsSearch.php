@@ -73,7 +73,8 @@ class EventsSearch extends Events
             ->andFilterWhere(['like', 'EventTitleSw', $this->EventTitleSw])
             ->andFilterWhere(['like', 'DescriptionEn', $this->DescriptionEn])
             ->andFilterWhere(['like', 'DescriptionSw', $this->DescriptionSw])
-            ->andFilterWhere(['like', 'Attachment', $this->Attachment]);
+            ->andFilterWhere(['like', 'Attachment', $this->Attachment])
+                ->orderBy('DateCreated DESC');
 
         return $dataProvider;
     }

@@ -38,7 +38,8 @@ class Announcement extends \yii\db\ActiveRecord {
             [['DetailsEn', 'DetailsSw'], 'string'],
             [['DatePosted'], 'safe'],
             [['Status'], 'integer'],
-            [['TitleEn', 'TitleSw', 'Attachment'], 'string', 'max' => 255],
+            [['Attachment'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => true], // 'extensions' => 'zip, pdf, .docx, .doc, ppt, odt, .xlsx, .xls'],
+            [['TitleEn', 'TitleSw'], 'string', 'max' => 255],
         ];
     }
 
@@ -74,7 +75,7 @@ class Announcement extends \yii\db\ActiveRecord {
         );
     }
 
-    static function getLatestAnnouncementsByStatusAndUnit($Status, $UnitID = NULL,$limit = NULL) {
+    static function getLatestAnnouncementsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
         return self::find()->select('TitleEn,TitleSw,DetailsEn,DetailsSw,DatePosted,LinkUrl')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
     }

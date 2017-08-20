@@ -4,10 +4,9 @@ $params = require(__DIR__ . '/params.php');
 $url_manager = require(__DIR__ . '/url_manager.php');
 $config = [
     'id' => 'basic',
-    'language' => 'en', //default language of the application
+    'language' => 'sw', //default language of the application
     'name' => ['en' => 'University of Dar es salaam', 'sw' => 'Chuo Kikuu cha Dar es salaam'],
     'name' => ['en' => '', 'sw' => ''],
-    
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',

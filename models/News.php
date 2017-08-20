@@ -25,6 +25,10 @@ class News extends \yii\db\ActiveRecord {
     const NEWS_STATUS_SAVED = 0;
     const NEWS_STATUS_PUBLISHED = 1;
     const NEWS_STATUS_UNPUBLISHED = 2;
+    //NEWS TYPES
+    const NEWS_TYPE_GENERIC_NEWS = 0;
+    const NEWS_TYPE_STUDENT_NEWS = 1;
+    const NEWS_TYPE_STAFF_NEWS = 2;
 
 //    public $Photo;
 //    public $Attachment;
@@ -43,10 +47,9 @@ class News extends \yii\db\ActiveRecord {
             [['TitleEn', 'DetailsEn', 'TitleSw', 'DetailsSw', 'Status'], 'required'],
             [['DetailsEn', 'DetailsSw'], 'string'],
             [['UnitID', 'Status'], 'integer'],
-            [['TitleEn', 'TitleSw'], 'string', 'max' => 60],
-            //[['Attachment', 'Photo'], 'string', 'max' => 200],
-            [['Photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png,jpeg,jpg'],
-            [['Attachment'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip, pdf, docx, doc,ppt,odt,xlsx,xls'],
+            [['TitleEn', 'TitleSw'], 'string', 'max' => 150],
+            [['Photo'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => false, 'extensions' => 'png,jpeg,jpg'],
+            [['Attachment'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => true], // 'extensions' => 'zip, pdf, .docx, .doc, ppt, odt, .xlsx, .xls'],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }
@@ -91,15 +94,15 @@ class News extends \yii\db\ActiveRecord {
         );
     }
 
-    public function uploadPhoto() {
-        if ($this->validate() && $this->Photo) {
-            $this->Photo->saveAs(\Yii::$app->params['file_upload'] . $this->Photo->baseName . '.' . $this->Photo->extension);
-//           echo $this->Photo->baseName . '.' . $this->Photo->extension;
-//           exit;
-            return $this->Photo->baseName . '.' . $this->Photo->extension;
-        }
-        return false;
-    }
+//    public function uploadPhoto() {
+//        if ($this->validate() && $this->Photo) {
+//            $this->Photo->saveAs(\Yii::$app->params['file_upload'] . $this->Photo->baseName . '.' . $this->Photo->extension);
+////           echo $this->Photo->baseName . '.' . $this->Photo->extension;
+////           exit;
+//            return $this->Photo->baseName . '.' . $this->Photo->extension;
+//        }
+//        return false;
+//    }
 
     public function uploadAttachment() {
         if ($this->validate() && $this->Attachment) {
@@ -109,9 +112,18 @@ class News extends \yii\db\ActiveRecord {
         return false;
     }
 
-    static function getLatestNewsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL) {
+    static function getLatestNewsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $NewsType = NULL) {
+        echo $UnitID;
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
-        return self::find()->select('LinkUrl,TitleEn,TitleSw,DetailsEn,DetailsSw,Photo,DatePosted')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
+        if ($NewsType >= 0) {
+            $condition['NewsType'] = $NewsType;
+        }
+        return self::find()
+                        ->select('LinkUrl,TitleEn,TitleSw,DetailsEn,DetailsSw,Photo,DatePosted')
+                        ->where($condition)
+                        ->limit($limit)
+                        ->orderBy('DatePosted DESC')
+                        ->all();
     }
 
 }

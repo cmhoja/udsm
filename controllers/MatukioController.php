@@ -88,23 +88,26 @@ class MatukioController extends Controller {
                 $model->Status = Events::EVENT_STATUS_PUBLISHED;
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
-
-            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            $model->StartDate = Date('', strtotime($model->StartDate));
+            if ($model->EndDate) {
+                $model->StartDate = Date('', strtotime($model->EndDate));
+            }
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
             if ($model->validate()) {
-                if ($model->Photo) {
+                if ($model->Attachment) {
                     //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
-                    $fileName = trim('MAIN_NEWS_PHOTO' . $model->BlockTitleEn . '.' . $model->Photo->extension);
+                    $fileName = trim('MAIN_EVENT_' . $model->BlockTitleEn . '.' . $model->Attachment->extension);
                     $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
 
                     if ($model->UnitID > 0) {
-                        $fileName = trim('UNIT_NEWS_PHOTO_' . $model->BlockTitleEn . '.' . $model->Photo->extension);
+                        $fileName = trim('UNIT_EVENT_' . $model->BlockTitleEn . '.' . $model->Attachment->extension);
                     }
                     $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_units_site'] . '/' . $fileName;
 
-                    if ($model->Photo->saveAs($filePath)) {
-                        $model->Photo = $fileName;
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 273, 200, 90);
+                        //  \app\components\Utilities::ResizeImage($filePath, $filePath, 273, 200, 90);
                     }
                 }
                 if ($model->save(FALSE)) {
@@ -132,6 +135,7 @@ class MatukioController extends Controller {
         if ($session->has('UNIT_ID')) {
             $model->UnitID = $session->get('UNIT_ID');
         }
+        $Attachment = $model->Attachment;
         if ($model->load(Yii::$app->request->post())) {
             $model->EventTitleEn = strtolower($model->EventTitleEn);
             $model->EventTitleSw = strtolower($model->EventTitleSw);
@@ -146,8 +150,31 @@ class MatukioController extends Controller {
                 $model->Status = Events::EVENT_STATUS_PUBLISHED;
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id]);
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+            if ($model->validate()) {
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('MAIN_EVENT_' . $model->BlockTitleEn . '.' . $model->Attachment->extension);
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT_EVENT_' . $model->BlockTitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_units_site'] . '/' . $fileName;
+
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                        //resize the image to a required size
+                        //  \app\components\Utilities::ResizeImage($filePath, $filePath, 273, 200, 90);
+                    } else {
+                        $model->Attachment = $Attachment;
+                    }
+                } else {
+                    $model->Attachment = $Attachment;
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
         return $this->render('//events/update', [

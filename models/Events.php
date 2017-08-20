@@ -44,7 +44,7 @@ class Events extends \yii\db\ActiveRecord {
             [['EventUrl', 'EventTitleEn', 'EventTitleSw', 'DescriptionEn', 'DescriptionSw', 'StartDate'], 'required'],
             [['DescriptionEn', 'DescriptionSw'], 'string'],
             [['UnitID', 'Status'], 'integer'],
-            [['Photo'], 'file', 'maxFiles' => 1, 'extensions' => 'png, jpg,jpeg', 'mimeTypes' => 'image/jpeg, image/png',],
+            [['Attachment'], 'file', 'maxFiles' => 1, 'extensions' => 'docx, doc, pdf,xlsx,xls,odt, jpg,jpeg',],
             [['EventTitleEn', 'EventTitleSw'], 'string', 'max' => 130],
             [['EventUrl', 'Attachment'], 'string', 'max' => 255],
         ];

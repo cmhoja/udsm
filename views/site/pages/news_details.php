@@ -31,10 +31,10 @@ if (isset($news) && $news) {
                             <div id="owl-demo" class="owl-carousel custom-styles" data-items="1" data-singleitem="true" data-pagination="false" data-navigation="true">
                                 <div class="item">
                                     <a href="#">
-                                        <img src="img/img1.jpg" alt="" />
+                                        <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' .$news->Photo ?>" alt="" />
                                     </a>
                                 </div>
-                                <div class="item">
+<!--                                <div class="item">
                                     <a href="#">
                                         <img src="img/img2.png" alt="" />
                                     </a>
@@ -43,7 +43,7 @@ if (isset($news) && $news) {
                                     <a href="#">
                                         <img src="img/img3.jpg" alt="" />
                                     </a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     <?php } ?>

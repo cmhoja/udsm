@@ -17,7 +17,7 @@ return [
         'about/<category:\w+>' => 'about/index',
         'site/annual-reports' => 'about/reports',
         'site/student-corner|student-corner' => 'site/student-corner',
-        'site/staff-corner|staff-corner' => 'site/staff/staff-corner',
+        'site/staff-corner|staff-corner' => 'site/staff-corner',
         //study routes
         'study/programmes' => 'study/programmes',
         'study/catalogue' => 'study/programmes',
@@ -45,7 +45,8 @@ return [
         ///STUDY MENUS REOUTES
         'college/<category:\w+>' => 'college/index',
         'colleges/<category:\w+>' => 'college/index',
-        'college/conas/*' => 'college/index',
+        'college/*' => 'college/index',
+        'colleges/*' => 'college/index',
         // 'menu'=>'menu/index'
         //sitr default routes
         //backend rules
@@ -64,6 +65,7 @@ return [
         'staff-list/<category>' => 'staff-list/<category>',
         'contacts/<category>' => 'contacts/<category>',
         'social-media-accounts/<category>' => 'social-media-accounts/<category>',
+        'connect/social-media' => 'site/social-media',
         'contacts/<category>' => 'contacts/<category>',
         'menu/<category>' => 'menu/<category>',
         'custom-blocks/<category>' => 'custom-blocks/<category>',

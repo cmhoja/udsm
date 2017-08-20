@@ -14,7 +14,7 @@ use app\models\AcademicAdministrativeUnit;
 
 <div class="add-form">
     <?php
-    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'options'=>['enctype' => 'multipart/form-data']]);
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'options' => ['enctype' => 'multipart/form-data']]);
     ?>
     <?php
     echo Form::widget([

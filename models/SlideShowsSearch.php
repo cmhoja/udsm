@@ -10,13 +10,12 @@ use app\models\SlideShows;
 /**
  * SlideShowsSearch represents the model behind the search form about `app\models\SlideShows`.
  */
-class SlideShowsSearch extends SlideShows
-{
+class SlideShowsSearch extends SlideShows {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['Id', 'UnitID', 'Status'], 'integer'],
             [['TitleEn', 'TitleSw', 'DetailsEn', 'DetailsSw', 'LinkToPage', 'Image'], 'safe'],
@@ -26,8 +25,7 @@ class SlideShowsSearch extends SlideShows
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class SlideShowsSearch extends SlideShows
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = SlideShows::find();
 
         // add conditions that should always apply here
@@ -64,13 +61,16 @@ class SlideShowsSearch extends SlideShows
             'Status' => $this->Status,
         ]);
 
+
         $query->andFilterWhere(['like', 'TitleEn', $this->TitleEn])
-            ->andFilterWhere(['like', 'TitleSw', $this->TitleSw])
-            ->andFilterWhere(['like', 'DetailsEn', $this->DetailsEn])
-            ->andFilterWhere(['like', 'DetailsSw', $this->DetailsSw])
-            ->andFilterWhere(['like', 'LinkToPage', $this->LinkToPage])
-            ->andFilterWhere(['like', 'Image', $this->Image]);
+                ->andFilterWhere(['like', 'TitleSw', $this->TitleSw])
+                ->andFilterWhere(['like', 'DetailsEn', $this->DetailsEn])
+                ->andFilterWhere(['like', 'DetailsSw', $this->DetailsSw])
+                ->andFilterWhere(['like', 'LinkToPage', $this->LinkToPage])
+                ->andFilterWhere(['like', 'Image', $this->Image])
+                ->orderBy('DateCreated DESC');
 
         return $dataProvider;
     }
+
 }

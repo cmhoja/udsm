@@ -24,7 +24,6 @@ class AnnouncementController extends Controller {
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-              
             ],
         ];
     }
@@ -40,7 +39,7 @@ class AnnouncementController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new AnnouncementSearch();
-         $session = Yii::$app->session;
+        $session = Yii::$app->session;
         if ($session->has('UNIT_ID')) {
             $searchModel->UnitID = $session->get('UNIT_ID');
         }
@@ -87,8 +86,26 @@ class AnnouncementController extends Controller {
             if ($model->TitleEn) {
                 $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id]);
+
+            //uploading the attachement related to the news
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+//            var_dump($model->attributes);
+//            exit;
+            if ($model->validate()) {
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Attachment->extension);
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
+                }
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
 
@@ -125,8 +142,25 @@ class AnnouncementController extends Controller {
             if ($model->TitleEn) {
                 $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id]);
+            //uploading the attachement related to the news
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+//            var_dump($model->attributes);
+//            exit;
+            if ($model->validate()) {
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('UDSM_' . $model->TitleEn . '.' . $model->Attachment->extension);
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT' . $model->UnitID . '_' . $model->TitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
+                }
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
         return $this->render('update', [

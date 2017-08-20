@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'VideoNameEn',
             'VideoNameSw',
-            array(
-                'attribute' => 'UnitID',
-                'value' => function($model) {
-                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
-                }
-            ),
+//            array(
+//                'attribute' => 'UnitID',
+//                'value' => function($model) {
+//                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+//                }
+//            ),
             'VideoLink',
             array(
                 'attribute' => 'Status',

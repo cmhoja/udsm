@@ -237,3 +237,9 @@ ul#menu_tree li p ul li p{
     width: 100%;
 }
 
+p{
+    text-align: justify !important;
+}
+div{
+    text-align: justify !important;
+}

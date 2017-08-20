@@ -43,12 +43,18 @@ $this->params['breadcrumbs'][] = 'News Details';
             'TitleSw',
             'DetailsEn:html',
             'DetailsSw:html',
-            'Attachment',
+            array(
+                'attribute' => 'Attachment',
+                'value' => function($model) {
+                    return ($model->Attachment) ? '<a target="_blank" href= "' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $model->Attachment) . '">Download here to Preview </a>' : '';
+                },
+                'format' => 'html'
+            ),
             array(
                 'attribute' => 'Photo',
                 'header' => 'Icon Picture Preview:',
                 'value' => function($model) {
-                    return ($model->Photo) ? '<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (($model->Photo) ? Yii::$app->params['file_upload_units_site'] : Yii::$app->params['file_upload_main_site'] . '/' . $model->Photo) . '">' : 'Not set';
+                    return ($model->Photo) ? '<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $model->Photo) . '">' : 'NOT SET ';
                 },
                 'format' => 'html'
             ),
