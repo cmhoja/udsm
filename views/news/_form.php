@@ -15,7 +15,7 @@ use dosamigos\ckeditor\CKEditor;
 
 <div class="add-form">
     <?php
-    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL,'options' => ['enctype' => 'multipart/form-data']]);
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'options' => ['enctype' => 'multipart/form-data']]);
     ?>
     <?php
     echo Form::widget([
@@ -28,6 +28,12 @@ use dosamigos\ckeditor\CKEditor;
                 'type' => Form::INPUT_DROPDOWN_LIST,
                 'options' => ['prompt' => '--- select --'],
                 'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement' => AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
+            ], 'NewsType' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'options' => ['prompt' => '--- select --'],
+                'items' => \app\models\News::getNewsTypes(),
                 'columnOptions' => ['width' => '185px', 'height' => '10px'],
                 'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
             ], 'TitleEn' => [

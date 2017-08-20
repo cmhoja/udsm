@@ -8,10 +8,10 @@ $title = Yii::$app->params['static_items']['staff_corner'][Yii::$app->language];
             <h1 class="title"><?php echo $title; ?> </h1>
             <ul class = "breadcrumb">
                 <li>
-                    <a href = "<?php echo yii\helpers\Url::home(); ?>">Home</a>
+                    <a href = "<?php echo yii\helpers\Url::home(); ?>"><?php echo Yii::$app->params['static_items']['home'][Yii::$app->language]; ?></a>
                 </li>
                 <li>
-                    <a href = "#"><?php echo Yii::$app->params['static_items']['staff_corner'][Yii::$app->language]; ?></a>
+                    <a href = "#"><?php echo Yii::$app->params['static_items']['page'][Yii::$app->language]; ?></a>
                 </li>
                 <li class = "active"><?php echo $title; ?></li>
             </ul>
@@ -26,7 +26,7 @@ $title = Yii::$app->params['static_items']['staff_corner'][Yii::$app->language];
             <div class="col-md-8 col-md-12 pull-right">
                 <!--                <div class="section-title">
                                      Heading 
-                                    <h3 class="title"><?php //echo Yii::$app->params['static_items']['staff_directory'][Yii::$app->language];                    ?></h3>
+                                    <h3 class="title"><?php //echo Yii::$app->params['static_items']['staff_directory'][Yii::$app->language];                                                     ?></h3>
                 
                 
                                 </div>
@@ -55,7 +55,7 @@ $title = Yii::$app->params['static_items']['staff_corner'][Yii::$app->language];
                 <br>
                 <div class="section-title">
                     <!-- Heading -->
-                    <h3 class="title"><?php echo Yii::$app->params['static_items']['news'][Yii::$app->language]; ?></h3>
+                    <h3 class="title"><?php echo Yii::$app->params['static_items']['staff_news'][Yii::$app->language]; ?></h3>
                 </div>
                 <div class="row">
                     <?php
@@ -103,167 +103,125 @@ $title = Yii::$app->params['static_items']['staff_corner'][Yii::$app->language];
 
                 <div class="section-title">
                     <!-- Heading -->
-                    <h3 class="title">Staff Announcements/ Notice Board</h3>
+                    <h3 class="title"><?php echo Yii::$app->params['static_items']['staff_announcement'][Yii::$app->language]; ?></h3>
 
                 </div>
 
-                <li>
-                    <a href="announcement-details.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur....</a>
-                    <div class="post-meta">
+                <?php
+                if (isset($page_content['latest_announcements']) && $page_content['latest_announcements']) {
+                    foreach ($page_content['latest_announcements'] as $announcements) {
+                        ?>
+                        <li>
+                            <a href="<?php echo app\components\Utilities::generateUrl('/announcement/' . $announcements->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $announcements->TitleSw : $announcements->TitleEn ?></a>
+                            <div class="post-meta">
 
-                        <span class="time">
-                            <i class="fa fa-calendar"></i> 13.01.2017</span>
-                        <span class="time">
-                            <i class="fa fa-clock-o"></i> 14.00</span>
-                    </div>
-                </li>
-                <hr>
-                <li>
-                    <a href="announcement-details.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur....</a>
-                    <div class="post-meta">
-
-                        <span class="time">
-                            <i class="fa fa-calendar"></i> 13.01.2017</span>
-                        <span class="time">
-                            <i class="fa fa-clock-o"></i> 14.00</span>
-                    </div>
-                </li>
-                <hr>
-                <li>
-                    <a href="announcement-details.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur....</a>
-                    <div class="post-meta">
-
-                        <span class="time">
-                            <i class="fa fa-calendar"></i> 13.01.2017</span>
-                        <span class="time">
-                            <i class="fa fa-clock-o"></i> 14.00</span>
-                    </div>
-                </li>
-                <hr>
-
-
+                                <span class="time">
+                                    <i class="fa fa-calendar"></i> <?php echo Date('d.M.Y', strtotime($announcements->DatePosted)); ?></span>
+                                <span class="time">
+                                    <i class="fa fa-clock-o"></i> <?php echo Date('H.i.s', strtotime($announcements->DatePosted)); ?></span>
+                            </div>
+                        </li>
+                        <hr>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <li>
+                        <div class="post-meta">
+                            <?php echo Yii::$app->params['static_items']['no_details'][Yii::$app->language]; ?>
+                        </div>
+                    </li>
+                    <hr>
+                    <?php
+                }
+                ?>
 
                 <div class="section-title">
                     <!-- Heading -->
-                    <h3 class="title">Upcoming Staff Events</h3>
+                    <h3 class="title"><?php echo Yii::$app->params['static_items']['staff_events'][Yii::$app->language]; ?></h3>
                 </div>
-                <div class="row">
-                    <div class=" col-md-12">
-                        <h4><a href="event-details.html">Event Title</a></h4>
-                        <div class="post-meta">
+                <?php
+                if (isset($page_content['latest_events']) && $page_content['latest_events']) {
+                    foreach ($page_content['latest_events'] as $events) {
+                        ?>
+                        <div class="row">
+                            <div class=" col-md-12">
+                                <h4><a href="<?php echo app\components\Utilities::generateUrl('/events/' . $events->EventUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $events->EventTitleSw : $events->EventTitleEn ?></a></h4>
+                                <div class="post-meta">
 
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 13.01.2017</span>
-                            <span class="time">
-                                <i class="fa fa-clock-o"></i> 14.00 -16.00 </span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class=" col-md-12">
-                        <h4><a href="event-details.html"">Event Title</a></h4>
-                        <div class="post-meta">
-
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 13.01.2017</span>
-                            <span class="time">
-                                <i class="fa fa-clock-o"></i> 14.00 -16.00 </span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class=" col-md-12">
-                        <h4><a href="event-details.html"">Event Title</a></h4>
-                        <div class="post-meta">
-
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 13.01.2017</span>
-                            <span class="time">
-                                <i class="fa fa-clock-o"></i> 14.00 -16.00 </span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class=" col-md-12">
-                        <h4><a href="event-details.html"">Event Title</a></h4>
-                        <div class="post-meta">
-
-                            <span class="time">
-                                <i class="fa fa-calendar"></i> 13.01.2017</span>
-                            <span class="time">
-                                <i class="fa fa-clock-o"></i> 14.00 -16.00 </span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-
-
-
-
-
-                <div class="section-title">
-                    <!-- Heading -->
-                    <h3 class="title">Quick Links</h3>
-                </div>
-
-
-
-
-                <div id="sidebar" class="sidebar">
-                    <div class="widget">
-
-                        <div id="MainMenu">
-                            <div class="list-group panel">
-
-
-
-                                <a href="#" class="list-group-item main-item">Admin Mail</a>
-                                <a href="#" class="list-group-item main-item">Staff Mail</a>
-                                <a href="#" class="list-group-item main-item">ARIS</a>
-                                <a href="#" class="list-group-item main-item">OPRAS</a>
-                                <a href="#" class="list-group-item main-item">ICT Support Services</a>
-                                <a href="#" class="list-group-item main-item">Timetable/Almanac</a>
-                                <a href="#" class="list-group-item main-item">Staff Intranet</a>
-                                <a href="#" class="list-group-item main-item">E-learning</a>
-                                <a href="#" class="list-group-item main-item">UDSM Research Repository</a>
-                                <a href="#" class="list-group-item main-item">iLab</a>
-                                <a href="#" class="list-group-item main-item">Postgraduate Online Application</a>
-                                <a href="#" class="list-group-item main-item">Alumni Portal</a>
+                                    <span class="time">
+                                        <i class="fa fa-calendar"></i> <?php echo Date('d.M.Y', strtotime($events->DatePosted)); ?>
+                                    </span>
+                                    <span class="time">
+                                        <i class="fa fa-clock-o"></i> <?php echo Date('H.i.s', strtotime($events->DatePosted)); ?>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        <!-- page-list -->
-                    </div>
-                </div>
-
-
-
-                <div class="section-title">
-                    <!-- Heading -->
-                    <h3 class="title">Academic Units</h3>
-                </div>
-
-
-                <div id="sidebar" class="sidebar">
-                    <div class="widget">
-
-                        <div id="MainMenu">
-                            <div class="list-group panel">
-
-
-
-                                <a href="#" class="list-group-item main-item">CoET</a>
-                                <a href="#" class="list-group-item main-item">CoICT</a>
-                                <a href="#" class="list-group-item main-item">Law</a>
-                                <a href="#" class="list-group-item main-item">Education</a>
-
-                            </div>
+                        <hr>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <?php echo Yii::$app->params['static_items']['no_details'][Yii::$app->language]; ?>
                         </div>
-                        <!-- page-list -->
                     </div>
-                </div>
+                    <hr>
+                    <?php
+                }
+                ?>
+
+                <?php if (isset($page_content['quick_links']) && $page_content['quick_links']): ?>
+                    <div class="section-title">
+                        <!-- Heading -->
+                        <h3 class="title"> <?php echo Yii::$app->params['static_items']['quick_links'][Yii::$app->language]; ?></h3>
+                    </div>
+                    <div id="sidebar" class="sidebar">
+                        <div class="widget">
+
+                            <div id="MainMenu">
+                                <div class="list-group panel">
+                                    <?php
+                                    foreach ($page_content['quick_links'] as $quick_link) {
+                                        ?>
+                                        <a href="<?php echo app\components\Utilities::generateUrl($quick_link->LinkUrl); ?>" class="list-group-item main-item"><?php echo (Yii::$app->language == 'sw') ? $quick_link->ItemNameSw : $quick_link->ItemNameEn ?></a>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                            <!-- page-list -->
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <!--
+                                <div class="section-title">
+                                     Heading 
+                                    <h3 class="title"> <?php //echo Yii::$app->params['static_items']['adacemic_units'][Yii::$app->language];           ?></h3>
+                                </div>-->
+                <!--
+                
+                                <div id="sidebar" class="sidebar">
+                                    <div class="widget">
+                
+                                        <div id="MainMenu">
+                                            <div class="list-group panel">
+                
+                
+                
+                                                <a href="#" class="list-group-item main-item">CoET</a>
+                                                <a href="#" class="list-group-item main-item">CoICT</a>
+                                                <a href="#" class="list-group-item main-item">Law</a>
+                                                <a href="#" class="list-group-item main-item">Education</a>
+                
+                                            </div>
+                                        </div>
+                                         page-list 
+                                    </div>
+                                </div>-->
 
 
             </div>

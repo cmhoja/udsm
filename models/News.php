@@ -48,6 +48,7 @@ class News extends \yii\db\ActiveRecord {
             [['DetailsEn', 'DetailsSw'], 'string'],
             [['UnitID', 'Status'], 'integer'],
             [['TitleEn', 'TitleSw'], 'string', 'max' => 150],
+            [['NewsType'], 'safe'],
             [['Photo'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => false, 'extensions' => 'png,jpeg,jpg'],
             [['Attachment'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => true], // 'extensions' => 'zip, pdf, .docx, .doc, ppt, odt, .xlsx, .xls'],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
@@ -67,7 +68,8 @@ class News extends \yii\db\ActiveRecord {
             'Attachment' => 'Attachment (News Attachment)',
             'Photo' => 'Photo (News Picture)',
             'UnitID' => 'Unit',
-            'Status' => 'Status'
+            'Status' => 'Status',
+            'NewsType' => 'News Type'
         ];
     }
 
@@ -94,16 +96,6 @@ class News extends \yii\db\ActiveRecord {
         );
     }
 
-//    public function uploadPhoto() {
-//        if ($this->validate() && $this->Photo) {
-//            $this->Photo->saveAs(\Yii::$app->params['file_upload'] . $this->Photo->baseName . '.' . $this->Photo->extension);
-////           echo $this->Photo->baseName . '.' . $this->Photo->extension;
-////           exit;
-//            return $this->Photo->baseName . '.' . $this->Photo->extension;
-//        }
-//        return false;
-//    }
-
     public function uploadAttachment() {
         if ($this->validate() && $this->Attachment) {
             $this->Attachment->saveAs(\Yii::$app->params['file_upload'] . $this->Attachment->baseName . '.' . $this->Attachment->extension);
@@ -113,9 +105,8 @@ class News extends \yii\db\ActiveRecord {
     }
 
     static function getLatestNewsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $NewsType = NULL) {
-        echo $UnitID;
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
-        if ($NewsType >= 0) {
+        if (!is_null($NewsType) && $NewsType >= 0) {
             $condition['NewsType'] = $NewsType;
         }
         return self::find()
@@ -124,6 +115,14 @@ class News extends \yii\db\ActiveRecord {
                         ->limit($limit)
                         ->orderBy('DatePosted DESC')
                         ->all();
+    }
+
+    static function getNewsTypes() {
+        return array(
+            self::NEWS_TYPE_GENERIC_NEWS => 'Generic News',
+            self::NEWS_TYPE_STUDENT_NEWS => 'Student News',
+            self::NEWS_TYPE_STAFF_NEWS => 'Staff News'
+        );
     }
 
 }

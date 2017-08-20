@@ -111,7 +111,7 @@ class SocialMediaAccounts extends \yii\db\ActiveRecord {
      */
 
     static function getActiveAccountsByUnitID($UnitID = NULL) {
-        if ($UnitID) {
+        if (!is_null($UnitID) && $UnitID) {
             $condition = array('Status' => self::STATUS_PUBLISHED, 'UnitID' => $UnitID);
         } else {
             $condition = array('Status' => self::STATUS_PUBLISHED, 'UnitID' => NULL);
@@ -121,7 +121,7 @@ class SocialMediaAccounts extends \yii\db\ActiveRecord {
 
     static function getAccoutLinkByTypeAndUnitID($AccountType, $Status, $UnitID = NULL) {
         $condition = array('AccountType' => $AccountType, 'Status' => $Status);
-        if ($UnitID > 0) {
+        if (!is_null($UnitID) && $UnitID > 0) {
             $condition['UnitID'] = $UnitID;
         }
         $data = self::find()

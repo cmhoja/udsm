@@ -82,7 +82,7 @@ class SiteController extends Controller {
             $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID(NULL, NULL);
             //getting data for the home page top area
             $content['events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 3);
-            $content['news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 8,News::NEWS_TYPE_GENERIC_NEWS);
+            $content['news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 8, News::NEWS_TYPE_GENERIC_NEWS);
             $content['announcements'] = Announcement::getLatestAnnouncementsByStatusAndUnit(Announcement::STATUS_PUBLISHED, NULL, 3);
             //$content['content_homepage_botton_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, \app\components\SiteRegions::MAIN_TEMPLATE_CONTENT_HOMEPAGE_BOTTOM_RIGHT, NULL, 0);
             $content['content_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE);
@@ -226,12 +226,11 @@ class SiteController extends Controller {
         $lang = Yii::$app->language;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $page_content['quick_links'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, \app\components\SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
-        $page_content['latest_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 5);
-        $page_content['latest_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 5);
+        $page_content['latest_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 5, Events::EVENT_TYPE_STUDENT_EVENT);
+        $page_content['latest_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 5, News::NEWS_TYPE_STUDENT_NEWS);
         $page_content['campus_life'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
         $page_content['top_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
         $page_content['bottom_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
-        //$page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
         return $this->render('//site/pages/student_corner', ['page_content' => $page_content]);
     }
 
@@ -241,14 +240,9 @@ class SiteController extends Controller {
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
 
         $page_content['quick_links'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, \app\components\SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
-        $page_content['latest_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 5);
+        $page_content['latest_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, NULL, 5, Events::EVENT_TYPE_STAFF_EVENT);
         $page_content['latest_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, NULL, 5, News::NEWS_TYPE_STAFF_NEWS);
-        $page_content['latest_announcements'] = Announcement::getLatestAnnouncementsByStatusAndUnit(Announcement::STATUS_PUBLISHED, NULL, 5);
-
-        $page_content['middle_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
-        $page_content['top_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
-        $page_content['bottom_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
-
+        $page_content['latest_announcements'] = Announcement::getLatestAnnouncementsByStatusAndUnit(Announcement::STATUS_PUBLISHED, NULL, 5, Announcement::ANNOUNCEMENT_TYPE_STAFF_ANNOUNCEMENT);
         return $this->render('//site/pages/staff_corner', ['page_content' => $page_content]);
     }
 

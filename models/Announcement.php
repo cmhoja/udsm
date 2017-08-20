@@ -21,6 +21,10 @@ class Announcement extends \yii\db\ActiveRecord {
     const STATUS_SAVED = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
+    //Announcement type
+    const ANNOUNCEMENT_TYPE_GENERIC_ANNOUNCEMENT = 0;
+    const ANNOUNCEMENT_TYPE_STUDENT_ANNOUNCEMENT = 1;
+    const ANNOUNCEMENT_TYPE_STAFF_ANNOUNCEMENT = 2;
 
     /**
      * @inheritdoc
@@ -75,9 +79,20 @@ class Announcement extends \yii\db\ActiveRecord {
         );
     }
 
-    static function getLatestAnnouncementsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL) {
+    static function getLatestAnnouncementsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $Type = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
+        if ($Type >= 0) {
+            $condition['AnnouncementType'] = $Type;
+        }
         return self::find()->select('TitleEn,TitleSw,DetailsEn,DetailsSw,DatePosted,LinkUrl')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
+    }
+
+    static function getAnnouncementTypes() {
+        return array(
+            self::ANNOUNCEMENT_TYPE_GENERIC_ANNOUNCEMENT => 'General Announcemnt',
+            self::ANNOUNCEMENT_TYPE_STUDENT_ANNOUNCEMENT => 'Student Announcement',
+            self::ANNOUNCEMENT_TYPE_STAFF_ANNOUNCEMENT => 'Staff Announcement'
+        );
     }
 
 }

@@ -27,6 +27,10 @@ class Events extends \yii\db\ActiveRecord {
     const EVENT_STATUS_SAVED = 0;
     const EVENT_STATUS_PUBLISHED = 1;
     const EVENT_STATUS_UNPUBLISHED = 2;
+    ///Event type
+    const EVENT_TYPE_GENERIC_EVENT = 0;
+    const EVENT_TYPE_STUDENT_EVENT = 1;
+    const EVENT_TYPE_STAFF_EVENT = 2;
 
     /**
      * @inheritdoc
@@ -87,9 +91,20 @@ class Events extends \yii\db\ActiveRecord {
         );
     }
 
-    static function getLatestEventsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL) {
+    static function getLatestEventsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $EventType = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
+        if (!is_null($EventType) && $EventType >= 0) {
+            $condition['EventType'] = $EventType;
+        }
         return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
+    }
+
+    static function getEventTypes() {
+        return array(
+            self::EVENT_TYPE_GENERIC_EVENT => 'Generic Events',
+            self::EVENT_TYPE_STUDENT_EVENT => 'Student Events',
+            self::EVENT_TYPE_STAFF_EVENT => 'Staff Events'
+        );
     }
 
 }
