@@ -19,7 +19,7 @@ class BackendController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-               // 'only' => ['logout'],
+                // 'only' => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['logout', 'index'],
@@ -56,8 +56,6 @@ class BackendController extends Controller {
             ],
         ];
     }
-    
-  
 
     public function init() {
         $this->layout = 'backend/main';
@@ -89,14 +87,44 @@ class BackendController extends Controller {
 
         if ($model->load(Yii::$app->request->post())) {
             $password = $model->password;
-            if ($model->password) {
-                $model->password = \app\components\Utilities::setHashedValue($model->password);
+
+            $authType = Yii::$app->params['authType'];
+
+            switch ($authType) {
+                case 'ldap':
+                    $exist = Users::find()->where('Username=:Username', array(':Username' => $model->username))->one();
+                    if ($exist) {
+                        ///checking user details in ldap
+                        $LdapSettings = \Yii::$app->params['LDap']; //getting the array containing all the ldap settings fro  the main configuration file
+                        $host = $LdapSettings['host'];
+                        $dn = $LdapSettings['dn'];
+                        //connecting to the ldap server
+                        $ldap = ldap_connect($host) or die("Failed to connect to the server, please contact your administrator");
+                    }
+                    exit;
+
+                    break;
+                case 'system':
+                    if ($model->password) {
+                        $model->password = \app\components\Utilities::setHashedValue($model->password);
+                    }
+                   // echo $model->password;
+                    //exit;
+                    $identity = \app\models\User::findByUsername($model->username, $model->password);
+                    //var_dump($identity);
+//                    exit;
+                    $loggedin = Yii::$app->user->login($identity);
+                    break;
+
+                default :
+                    $loggedin = NULL;
+                    break;
             }
 
-            $identity = \app\models\User::findByUsername($model->username, $model->password);
 
-            if (Yii::$app->user->login($identity)) {
-                $userRoles = Users::find()->where(array('Password' => $model->password, 'Username' => $model->username))->one();
+            if ($loggedin) {
+                Yii::$app->user->identity->id = $identity->id;
+                $userRoles = Users::find()->where('Username=:Username', array(':Username' => $model->username))->one();
 
                 if ($userRoles) {
                     $session = Yii::$app->session;
@@ -104,7 +132,8 @@ class BackendController extends Controller {
                         // open a session
                         $session->open();
                     }
-
+                $session->set('UID', $userRoles->Id);
+                $session->set('U_NAME', $userRoles->UserName);
                     if ($userRoles->UnitID) {
                         $session->set('UNIT_ID', $userRoles->UnitID);
                     } else {
@@ -187,7 +216,7 @@ class BackendController extends Controller {
         ]);
     }
 
-      /**
+    /**
      * Displays forbidden page.
      *
      * @return string

@@ -31,6 +31,8 @@ class Programmes extends \yii\db\ActiveRecord {
     const PROGRAME_STATUS_UNPUBLISHED = 2;
 
     public $ProgrameName;
+    public $PTYpe;
+    public $FieldStudy;
 
     /**
      * @inheritdoc
@@ -51,6 +53,7 @@ class Programmes extends \yii\db\ActiveRecord {
             [['Duration'], 'string', 'max' => 45],
             [['ProgrammeType'], 'string', 'max' => 50],
             [['ProgrammeNameEn'], 'unique'],
+            [['ProgrameName', 'PTYpe', 'FieldStudy'], 'safe'],
             [['ProgrammeUrl'], 'unique'],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
@@ -84,16 +87,28 @@ class Programmes extends \yii\db\ActiveRecord {
         return $this->hasOne(AcademicAdministrativeUnit::className(), ['Id' => 'UnitID']);
     }
 
-    static function getProgrameTypesList() {
-        return array(
-            self::PROGRAME_TYPE_UNDERGRADUATE => 'Undergraduate Program',
-            self::PROGRAME_TYPE_POSTUNDERGRADUATE => 'Post Graduate Program',
-            self::PROGRAME_TYPE_NON_DEGREE => 'Non degree Program'
-        );
+    static function getProgrameTypesList($lang = NULL) {
+        switch ($lang) {
+            case 'sw':
+                return array(
+                    self::PROGRAME_TYPE_UNDERGRADUATE => 'Shahada ya kwanza',
+                    self::PROGRAME_TYPE_POSTUNDERGRADUATE => 'Shahada ya Uzamivu',
+                    self::PROGRAME_TYPE_NON_DEGREE => 'Kozi Fupi/Isiyo ya Shahada'
+                );
+                break;
+
+            default :
+                return array(
+                    self::PROGRAME_TYPE_UNDERGRADUATE => 'Undergraduate Program',
+                    self::PROGRAME_TYPE_POSTUNDERGRADUATE => 'Post Graduate Program',
+                    self::PROGRAME_TYPE_NON_DEGREE => 'Non degree Program'
+                );
+                break;
+        }
     }
 
-    function getProgrammeTypeName() {
-        $data = self::getProgrameTypesList();
+    function getProgrammeTypeName($lang = NULL) {
+        $data = self::getProgrameTypesList($lang);
         if ($data && isset($data[$this->ProgrammeType])) {
             return $data[$this->ProgrammeType];
         }
@@ -118,20 +133,22 @@ class Programmes extends \yii\db\ActiveRecord {
 
     static function getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword = NULL, $UnitID = NULL, $Type = NULL, $FieldOfStudy = NULL, $lang = NULL) {
         $condition = $where = $orderBy = NULL;
-        if (!empty($Keyword) && $Keyword > 0) {
-            $condition = "(ProgrammeNameEn LIKE '%" . $Keyword . "%' OR ProgrammeNameSw  LIKE '%" . $Keyword . "%')";
+
+        if (!empty($Keyword)) {
+            $condition = "(ProgrammeNameEn LIKE '" . $Keyword . "%' OR ProgrammeNameSw  LIKE '" . $Keyword . "%')";
         }
         if ($UnitID > 0) {
-            //$where['UnitID'] = $UnitID;
+            $where['UnitID'] = $UnitID;
         }
 
-        if ($Type > 0) {
+        if (!empty($Type) && $Type > 0) {
             $where['ProgrammeType'] = $Type;
         }
 
-        if ($FieldOfStudy > 0) {
+        if (!empty($FieldOfStudy) && $FieldOfStudy > 0) {
             $where['FieldOfStudy'] = $FieldOfStudy;
         }
+
         if (!empty($lang)) {
             switch ($lang) {
                 case 'sw':
@@ -145,8 +162,9 @@ class Programmes extends \yii\db\ActiveRecord {
                     break;
             }
         }
-        return self::find($condition)
-                        ->where($where)
+
+        return self::find()
+                        ->where($condition, $where)
                         ->orderBy($orderBy)
                         ->all();
     }

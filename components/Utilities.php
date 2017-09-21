@@ -5,7 +5,6 @@ namespace app\components;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\helpers\Url;
-
 //
 //image resizing libraries
 use yii\imagine\Image;
@@ -114,25 +113,25 @@ class Utilities {
     }
 
     static function generateUrl($string) {
-        //if (strpos($string, 'www.') != FALSE OR strpos($string, 'http://.') != FALSE OR strpos($string, 'https://.') != FALSE) {
         if (filter_var($string, FILTER_VALIDATE_URL)) {
+            // if (strpos($string, 'http://.') >= 0 OR strpos($string, 'https://.') >= 0) {
+            $string = \yii\helpers\Url::to($string);
             return $string;
         } else {
             if ($string == 'site/index.php' OR $string == 'web/index.php' OR $string == '<front>' OR $string == 'home/page') {
                 return Yii::$app->homeUrl;
             }
-//            return \Yii::$app->getUrlManager()->createUrl($string);
         }
         return \yii\helpers\Url::toRoute($string);
     }
 
     static function getPageUrl() {
-        $request_url_pattern = html_entity_decode(trim(Yii::$app->request->url));
+        $request_url_pattern = \yii\helpers\Html::encode(trim(Yii::$app->request->url));
         $request_url_pattern = explode('index.php', $request_url_pattern);
         $page_link = NULL;
         if (isset($request_url_pattern[1])) {
             if (empty($request_url_pattern[1]) OR ( $request_url_pattern[1] == '/') OR ( $request_url_pattern[1] == '<front>') OR ( $request_url_pattern[1] == '/%3Cfront%3E')) {
-                
+                $page_link = NULL;
             } else {
                 if (strpos($request_url_pattern[1], '/') == 0) {
                     $page_link = $request_url_pattern[1]; //substr($request_url_pattern[1], 1);
@@ -149,8 +148,60 @@ class Utilities {
      */
 
     static function ResizeImage($OriginalFilePath, $NewfilePath, $newWidth, $newHeight, $quality) {
-       
+
         Image::getImagine()->open($OriginalFilePath)->thumbnail(new Box($newWidth, $newHeight))->save($NewfilePath, ['quality' => $quality]);
+    }
+
+    static function getProgramFieldOfStudy($lang = NULL) {
+        $list = array();
+        $field_of_study = Yii::$app->params['field_of_study'];
+        if (is_array($field_of_study)) {
+            if (is_null($lang)) {
+                $lang = 'en'; //setting default language to english
+            }
+
+            foreach ($field_of_study as $key => $value) {
+                $list[$key] = $value[$lang];
+            }
+        }
+        return $list;
+    }
+
+    static function getFieldOfStudyNameByValue($lang = NULL, $value) {
+        $fiels_of_study = self::getProgramFieldOfStudy($lang);
+        if ($fiels_of_study && $value) {
+            return $fiels_of_study[$value];
+        }
+        return NULL;
+    }
+
+    static function setLanguageLink($key) {
+        $key = \yii\helpers\Html::encode($key);
+        $page = '/site/index';
+        $user_url = \yii\helpers\Html::encode(Yii::$app->request->pathInfo);
+        if ($user_url) {
+            $page = '/' . $user_url;
+        }
+        $url = \yii\helpers\Html::encode('/site/language/?key=' . $key . '&page_url=' . $page);
+        return \yii\helpers\Url::toRoute($url);
+    }
+
+    static function setvisitorLanguage() {
+        if (Yii::$app->session->has('lang')) {
+            Yii::$app->language = Yii::$app->session->get('lang');
+        }
+    }
+
+    static function userUrl() {
+        $url = Utilities::getPageUrl();
+        if (empty($url) OR is_null($url) OR $url == '') {
+            $url = Yii::$app->basePath;
+            $url = '/';
+        } else {
+            $url_pattern = explode('?', $url);
+            $url = $url_pattern[0];
+        }
+        return $url;
     }
 
     //end of class

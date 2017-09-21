@@ -91,6 +91,13 @@ class BasicPage extends \yii\db\ActiveRecord {
                         ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
                         ->one();
     }
+    
+     static function getActivePageAllDetailsByUrl($url, $UnitID = NULL) {
+
+        return self::find()
+                        ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
+                        ->one();
+    }
 
     static function getSectionList($UnitID) {
         $section_list = array();

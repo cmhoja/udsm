@@ -58,7 +58,7 @@ class PublicServiceController extends Controller {
      *
      * @return string
      */
-    public function actionIndex() {
+    public function actionIndex($lang=null) {
         //getting user current langauage;
         $page_side_menus = $page_content = $custom_blocks = NULL;
         $lang = Yii::$app->language;

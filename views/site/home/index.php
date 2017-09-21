@@ -19,7 +19,7 @@ echo $this->render('main_template_content_homepage_news_area', array('news' => $
 
 <!-- CONTENT HOME PAGE BOTTOM-->
 <?php
-echo $this->render('content_home_page_bottom_area', ['content_home_page_bottom_area_menu' => $content_home_page_bottom_area_menu, 'videos' => $videos]);
+echo $this->render('content_home_page_bottom_area', ['content_home_page_bottom_area_menu' => $content_home_page_bottom_area_menu, 'videos' =>$videos]);
 ?>
 <!--END CONTENT HOME PAGE BOTTOM-->
 

@@ -8,8 +8,8 @@ if (isset($news) && $news) {
             <div class="col-md-12 no-pad">
                 <h1 class="title"><?php echo $title; ?> </h1>
                 <ul class = "breadcrumb">
-                    <li>
-                        <a href = "<?php echo yii\helpers\Url::home(); ?>">Home</a>
+                   <li>
+                        <a href = "<?php echo yii\helpers\Url::home(); ?>"><?php echo Yii::$app->params['static_items']['home'][Yii::$app->language]; ?></a>
                     </li>
                     <li>
                         <a href = "#"><?php echo Yii::$app->params['static_items']['Connect'][Yii::$app->language]; ?></a>
@@ -44,7 +44,7 @@ if (isset($news) && $news) {
 
                         <div class="post-content"><?php echo substr((Yii::$app->language == 'sw' ? $new->DetailsSw : $new->DetailsEn), 0, 200); ?></div>
 
-                        <a href="<?php echo app\components\Utilities::createUrlString('/connect/news/' . $new->LinkUrl) ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language] ?></a>
+                        <a href="<?php echo app\components\Utilities::createUrlString('connect/news/' . $new->LinkUrl) ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language] ?></a>
 
                     </div>
                 </div>

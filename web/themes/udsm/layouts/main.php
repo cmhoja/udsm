@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use yii\debug\Toolbar;
+use app\assets\LteAsset;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
@@ -12,7 +15,7 @@ use yii\debug\Toolbar;
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title><?php echo Yii::$app->name[Yii::$app->language].'-'.$this->title;  ?></title>
+        <title><?php echo Yii::$app->name[Yii::$app->language] . '-' . $this->title; ?></title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="keywords" content="<?php echo Html::encode($this->title); ?>">
         <meta name="description" content="<?php echo Html::encode($this->title); ?>">
@@ -56,6 +59,7 @@ use yii\debug\Toolbar;
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/perfect-scrollbar.css" />
         <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/util.js"></script>
         <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/js/stats.js"></script>
+
         <?php $this->head(); ?>
     </head>
 
@@ -70,7 +74,7 @@ use yii\debug\Toolbar;
                             <!-- Top Contact -->
                             <div class="top-contact link-hover-black">
                                 <?php
-                                //loading social network accounts for main site
+//loading social network accounts for main site
                                 echo $this->render('main/main_template_header_top_left'); //loading the main template header top left
                                 ?>
                             </div>
@@ -106,8 +110,8 @@ use yii\debug\Toolbar;
                                                 <span class="icon-bar"></span></button> 
                                             <!-- Logo -->
                                             <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                                <img style="max-height: 50px;"class="site_logo" alt="UDSM Official Logo" src="<?php //echo $this->theme->baseUrl; ?>/img/logo.png">
-                                                <span><?php echo Yii::$app->name[Yii::$app->language]; ?></span>
+                                                <img style="vertical-align: middle;"class="site_logo" alt="UDSM Official Logo" src="<?php echo \yii\helpers\HtmlPurifier::process($this->theme->baseUrl.'/img/logo.png');?>">
+                                                <span style="vertical-align: middle"><?php echo Yii::$app->name[Yii::$app->language]; ?></span>
                                             </a>
                                         </div>
                                         <!-- Navbar Collapse -->
@@ -214,35 +218,23 @@ use yii\debug\Toolbar;
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/perfect-scrollbar.js"></script>
 
             <!-- CSS & JS SCRIPTS FOR YOUTUBE VIDEOPLAYER FOR HOME PAGE ONLY THIS IS AVAILABLE AT HOME PAGE ONLY-->
-            <!-- JS Main For youtube player Javascript on home page-->
-            <?php
-            $pageUrl = app\components\Utilities::getPageUrl();
-            if (empty($pageUrl) OR $pageUrl == '' OR $pageUrl == '/'):
-                $videos_list = NULL;
-                if (isset($videos) && $videos) {
-                    foreach ($videos as $video) {
-                        $videoLink = explode('=', $video->VideoLink);
-                        if ($videoLink) {
-                            $videos_list .= Trim(',' . $videoLink);
-                        }
-                        //                        https://www.youtube.com/watch?v=hNMWa8e6WZI
-                    }
-                    if ($videos_list) {
-                        $videos_list = substr($videos_list, 1);
-                    }
-                }
-                ?>
+            <!-- JS Main For youtube player Javascript on home page-->           
+            <?php if (isset($this->params['videos'])): ?>
                 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/youtube-video-player.min.css" />
                 <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/youtube-video-player.jquery.min.js"></script>
+                <?php
+                $videos_list = NULL;
+                if ($this->params['videos']) {
+                    $videos_list = $this->params['videos'];
+                }
+                ?>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $("#playlist").youtube_video({
-    //                      playlist: 'PLncTFGctaqZupp4iNer4nKBqXCrhcszvC',
-                            playlist: 'PLncTFGctaqZupp4iNer4nKBqXCrhcszvC',
-                            channel: true,
+                            playlist: false,
+                            channel: false,
                             user: false,
-                            videos: false,
-//                            videos:'<?php echo $videos_list; ?>'
+                            videos: [<?php echo $videos_list; ?>],
                             shuffle: false,
                             max_results: 3,
                             pagination: true,
@@ -301,7 +293,6 @@ use yii\debug\Toolbar;
                     }
 
                 </script>
-
             <?php endif; ?>
             <!--END YOU TUBE PLAYER CSS--> 
             <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/custom.js"></script> 

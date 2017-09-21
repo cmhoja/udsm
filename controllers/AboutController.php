@@ -13,6 +13,7 @@ use app\models\CustomBlocks;
 
 class AboutController extends Controller {
 
+    
     /**
      * @inheritdoc
      */

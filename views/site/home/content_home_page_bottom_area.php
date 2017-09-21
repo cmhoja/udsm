@@ -36,65 +36,7 @@
                                 <?php
                             }
                             ?>
-                            <!--                            <li class="features-list-item">
-                                                            <a href="#">
-                                                                <a href="#">
-                                                                     Icon 
-                                                                    <i class="fa fa-home fa-2x border-blue"></i>
-                                                                    <div class="features-content">
-                                                                         Title 
-                                                                        <h5>Accomodation</h5>
-                                                                    </div>
-                                                                </a>
-                                                        </li>
-                            
-                            
-                                                        <li class="features-list-item">
-                                                             Icon 
-                                                            <a href="#">
-                                                                <i class="fa fa-medkit fa-2x border-blue"></i>
-                                                                <div class="features-content">
-                                                                     Title 
-                                                                    <h5>Health & Services</h5>
-                            
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                            
-                                                        <li class="features-list-item">
-                                                             Icon 
-                                                            <a href="#">
-                                                                <i class="fa fa-trophy fa-2x border-blue"></i>
-                                                                <div class="features-content">
-                                                                     Title 
-                                                                    <h5>Sports & Games</h5>
-                            
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="features-list-item">
-                                                             Icon 
-                                                            <a href="#">
-                                                                <i class="fa fa-users fa-2x border-blue"></i>
-                                                                <div class="features-content">
-                                                                     Title 
-                                                                    <h5>Student's Organization</h5>
-                            
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                            
-                                                        <li class="features-list-item">
-                                                             Icon 
-                                                            <a href="#">
-                                                                <i class="fa fa-map fa-2x border-blue"></i>
-                                                                <div class="features-content">
-                                                                     Title 
-                                                                    <h5>Counselling & Career Guide</h5>
-                            
-                                                                </div>
-                                                            </a>
-                                                        </li>-->
+                          
                         </ul>
                     <?php } ?>
                 </div>

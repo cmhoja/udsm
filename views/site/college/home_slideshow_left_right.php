@@ -145,23 +145,7 @@
                                     <?php
                                 }
                                 ?>
-                                <!--
-                                                                <div data-p="112.50">
-                                                                    <img data-u="image" src="img/ud3.jpg" />
-                                                                    <div data-u="caption" class="slider-caption">Title 1</div>
-                                                                </div>
-                                                                <div data-p="112.50">
-                                                                    <img data-u="image" src="img/ud5.jpg" />
-                                                                    <div data-u="caption" class="slider-caption">Title 2</div>
-                                
-                                                                </div>
-                                                                <div data-p="112.50">
-                                                                    <img data-u="image" src="img/ud4.jpg" />
-                                                                    <div data-u="caption" class="slider-caption">Title 3</div>
-                                
-                                                                </div>-->
-
-
+                          
 
                             </div>
                             <!-- Bullet Navigator -->

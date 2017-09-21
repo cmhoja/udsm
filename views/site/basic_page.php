@@ -11,10 +11,11 @@ if (isset($page_content) && $page_content) {
                 <h1 class="title"><?php echo $title; ?> </h1>
                 <ul class = "breadcrumb">
                     <li>
-                        <a href = "<?php echo yii\helpers\Url::home(); ?>">Home</a>
+                        <a href = "<?php echo yii\helpers\Url::home(); ?>"><?php echo Yii::$app->params['static_items']['home'][Yii::$app->language]; ?></a>
                     </li>
                     <li>
-                        <a href = "#"><?php echo Yii::$app->params['static_items']['page'][Yii::$app->language]; ?></a>
+                        <a href = "#"><?php echo Yii::$app->params['static_items']['page'][Yii::$app->language];
+    ?></a>
                     </li>
                     <li class = "active"><?php echo $title; ?></li>
                 </ul>
@@ -41,9 +42,7 @@ if (isset($page_content) && $page_content) {
                         </div>
                     <?php } ?>
 
-                    <!--                    <a href="#">Link Title</a> <br>
-                                        <a href="#">Link Title</a> <br>
-                                        <a href="#">Link Title</a>-->
+                 
                 </div>
 
                 <div id="sidebar" class="sidebar col-sm-12 col-md-3">

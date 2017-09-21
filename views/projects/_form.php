@@ -63,7 +63,15 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_WIDGET,
                 'widgetClass' => yii\jui\DatePicker::className(),
                 'columnOptions' => ['dateFormat' => 'Y-m-d']
-            ]
+            ],
+            'FundingSw' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
+            ],
+            'FundingEn' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
+            ],
         ]
     ]);
     echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);

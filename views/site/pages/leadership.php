@@ -11,7 +11,7 @@ if (isset($page_content) && $page_content) {
                 <h1 class="title"><?php echo $title; ?> </h1>
                 <ul class = "breadcrumb">
                     <li>
-                        <a href = "<?php echo yii\helpers\Url::home(); ?>">Home</a>
+                        <a href = "<?php echo yii\helpers\Url::home(); ?>"><?php echo Yii::$app->params['static_items']['home'][Yii::$app->language]; ?></a>
                     </li>
                     <li>
                         <a href = "#"><?php echo Yii::$app->params['static_items']['page'][Yii::$app->language]; ?></a>

@@ -18,6 +18,7 @@ use app\models\MenuItem;
 use app\models\Menu;
 use app\components\SiteRegions;
 use app\models\SlideShows;
+use app\components\Utilities;
 
 class SiteController extends Controller {
 
@@ -72,7 +73,7 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionIndex() {
+    public function actionIndex($lang = NULL) {
         ///getting page url
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         if (empty($url) OR is_null($url) OR $url == 'index.php') {
@@ -87,7 +88,21 @@ class SiteController extends Controller {
             //$content['content_homepage_botton_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, \app\components\SiteRegions::MAIN_TEMPLATE_CONTENT_HOMEPAGE_BOTTOM_RIGHT, NULL, 0);
             $content['content_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE);
             ///getting information for the home page bottom area
-            $content['videos'] = Video::getLatestVideosByStatusAndUnit(Video::STATUS_PUBLISHED, NULL, 5);
+            $content['videos'] = FALSE;
+            $videos = Video::getLatestVideosByStatusAndUnit(Video::STATUS_PUBLISHED, NULL, 5);
+            $videos_list = NULL;
+            if (isset($videos) && $videos) {
+                foreach ($videos as $video) {
+                    $videoLink = explode('=', $video->VideoLink);
+                    if ($videoLink) {
+                        $videos_list .= Trim("'" . $videoLink[count($videoLink) - 1] . "',");
+                    }
+                }
+            }
+            if ($videos_list) {
+                $content['videos'] = TRUE;
+                Yii::$app->view->params['videos'] = $videos_list;
+            }
             $content['content_home_page_bottom_area_menu'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::MAIN_TEMPLATE_CONTENT_HOMEPAGE_BOTTOM_RIGHT, NULL, 0);
 
             ////getting contend to the content bottom area
@@ -102,73 +117,6 @@ class SiteController extends Controller {
             $this->redirect(['site/page', 'url' => $url]);
         }
     }
-
-    /**
-     * Login action.
-     *
-     * @return string
-     */
-//    public function actionLogin() {
-//        $this->layout = 'login'; //loading the login layout
-//        if (!Yii::$app->user->isGuest) {
-//            return $this->goHome();
-//        }
-//        $model = new LoginForm();
-//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-//            ///getiing user roles ans initilizing session values
-//            $userRoles = Users::find(array('Password' => $model->password, 'Username' => $model->username))->one();
-//            if ($userRoles) {
-//                if ($userRoles->UnitID) {
-//                    \Yii::$app->session->set('UNIT_ID', $userRoles->UnitID);
-//                } else {
-//                    \Yii::$app->session->destroy();
-//                }
-//                switch ($userRoles->UserType) {
-//                    case Users::USER_TYPE_ADMINISTRATOR: //administrator
-//                        \Yii::$app->session->set('USER_TYPE_ADMINISTRATOR', TRUE);
-//
-//                        break;
-//
-//                    case Users::USER_TYPE_CONTENT_MANAGER: //for content admin
-//                        \Yii::$app->session->set('USER_TYPE_CONTENT_MANAGER', TRUE);
-//                        break;
-//
-//                    default:
-//                        break;
-//                }
-//            }
-//
-//
-//            /* Logs the Logins History */
-//            $loginsModel = new \app\models\Logins();
-//            $loginsModel->UserId = \yii::$app->user->identity->id;
-//            $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
-//            $loginsModel->Details = 'User logged into the system successful using browser :-' . Yii::$app->getRequest()->getUserAgent();
-//            $loginsModel->save();
-//            return $this->goBack();
-//        }
-//        return $this->render('login', [
-//                    'model' => $model,
-//        ]);
-//    }
-
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-//    public function actionLogout() {
-//        /* Logs the Logins History */
-//        $loginsModel = new \app\models\Logins();
-//        $loginsModel->UserId = Yii::$app->user->id;
-//        $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
-//        $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
-//        $loginsModel->save();
-//
-//        Yii::$app->user->logout();
-//
-//        return $this->goHome();
-//    }
 
     /**
      * Displays contact page.
@@ -247,6 +195,7 @@ class SiteController extends Controller {
     }
 
     public function actionSocialMedia() {
+
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $contents['social_media'] = \app\models\SocialMediaAccounts::getActiveAccountsByUnitID();
         $contents['blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
@@ -254,6 +203,31 @@ class SiteController extends Controller {
         return $this->render('//site/pages/social_media', [
                     'content' => $contents
         ]);
+    }
+
+    /*
+     * process the customr language change proposal
+     */
+
+    public function actionLanguage() {
+        $url = '';
+        $url_key_link = Yii::$app->request->get();
+        if (is_array($url_key_link) && isset($url_key_link['key']) && isset($url_key_link['page_url'])) {
+            $lang = \yii\helpers\Html::encode(trim($url_key_link['key']));
+            $url = \yii\helpers\Html::encode(trim($url_key_link['page_url']));
+            $supportedLanguages = \Yii::$app->params['supportedLanguages'];
+            if (isset($supportedLanguages[$lang]) && !empty($supportedLanguages[$lang])) {
+                Yii::$app->language = $lang;
+                Yii::$app->session->set('lang', Yii::$app->language);
+            } else {
+                // Yii::$app->language = Yii::$app->params['language'];
+                Yii::$app->session->set('lang', Yii::$app->language);
+            }
+        } else {
+            //Yii::$app->language = Yii::$app->params['language'];
+            Yii::$app->session->set('lang', Yii::$app->language);
+        }
+        $this->redirect(Utilities::generateUrl($url));
     }
 
 }

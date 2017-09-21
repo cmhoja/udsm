@@ -3,10 +3,10 @@
         <div class="row">
             <!--EVENTS AREA OR MAIN_TEMPLATE_CONTENT_TOP_LEFT-->
             <div class="col-md-4">
+                <h3 class="title"><i class="fa fa-calendar"></i> <?php echo Yii::$app->params['static_items']['recently_events'][Yii::$app->language]; ?></h3>   
                 <?php
-                if (isset($events)) {
+                if (isset($events) && $events) {
                     ?>
-                    <h3 class="title"><i class="fa fa-calendar"></i> <?php echo Yii::$app->params['static_items']['recently_events'][Yii::$app->language]; ?></h3>   
                     <?php
                     foreach ($events as $event) {
                         $date = explode('-', date('d-M-Y', strtotime($event->StartDate)));
@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-xs-10 pad-10">
                                 <div class="event-home">
-                                    <a href="<?php echo \app\components\Utilities::generateUrl('/events/'.$event->EventUrl); ?>"><p class="event-title"><?php echo html_entity_decode((Yii::$app->language == 'sw') ? $event->EventTitleEn : $event->EventTitleSw); ?></p></a>
+                                    <a href="<?php echo \app\components\Utilities::generateUrl('/events/' . $event->EventUrl); ?>"><p class="event-title"><?php echo html_entity_decode((Yii::$app->language == 'sw') ? $event->EventTitleEn : $event->EventTitleSw); ?></p></a>
                                 </div>
 
                             </div>
@@ -33,17 +33,18 @@
                         <a href="<?php echo \app\components\Utilities::generateUrl('/events'); ?>"><?php echo Yii::$app->params['static_items']['view_all_events'][Yii::$app->language]; ?></a>
                     </div>
                     <?php
+                } else {
+                    echo Yii::$app->params['static_items']['no_record'][Yii::$app->language];
                 }
                 ?>
             </div>
 
             <!--ANNOUNCEMENT AREA OR MAIN_TEMPLATE_CONTENT_TOP_CENTRE-->
             <div class="col-md-4 announcements">
+                <h3 class="title"><i class="fa fa-bullhorn"></i><?php echo Yii::$app->params['static_items']['announcement'][Yii::$app->language]; ?></h3>
                 <?php
-                if (isset($announcements)) {
-                    ?>
-                    <h3 class="title"><i class="fa fa-bullhorn"></i><?php echo Yii::$app->params['static_items']['announcement'][Yii::$app->language]; ?></h3>
-                    <?php
+                if (isset($announcements) && $announcements) {
+
                     foreach ($announcements as $announcement) {
                         $date = explode(' ', Date('d.m.Y H:i:s', strtotime($announcement->DatePosted)));
                         ?>
@@ -63,6 +64,8 @@
                         <a href="<?php echo \app\components\Utilities::generateUrl('/announcements'); ?>"><?php echo Yii::$app->params['static_items']['view_all_announcement'][Yii::$app->language]; ?></a>
                     </div>
                     <?php
+                } else {
+                    echo Yii::$app->params['static_items']['no_record'][Yii::$app->language];
                 }
                 ?>
 
@@ -72,7 +75,7 @@
             <!--MAIN_TEMPLATE_CONTENT_TOP_CENTRE-->
             <div class="col-md-4">
                 <?php
-                if (isset($content_right_blocks)) {
+                if (isset($content_right_blocks) && $content_right_blocks) {
                     foreach ($content_right_blocks as $block) {
                         if ($block->BlockTitleSw || $block->BlockTitleEn) {
                             $IconClass = yii\helpers\Html::decode($block->BlockIconCSSClass);

@@ -42,9 +42,9 @@ class ResearchProjects extends \yii\db\ActiveRecord {
         return [
             [['ProjectNameEn', 'ProjectNameSw', 'UnitID', 'DetailsEn', 'DetailsSw', 'ProjectLinkUrl'], 'required'],
             [['UnitID'], 'integer'],
-            [['DetailsEn', 'DetailsSw'], 'string'],
+            [['DetailsEn', 'DetailsSw', 'FundingEn', 'FundingSw',], 'string'],
             [['StartYear', 'EndYear'], 'safe'],
-            [['ProjectNameSw', 'OtherResearcher', 'ProjectNameEn', 'Funding'], 'string', 'max' => 255],
+            [['ProjectNameSw', 'OtherResearcher', 'ProjectNameEn', 'FundingEn', 'FundingSw',], 'string', 'max' => 255],
             [['Principal'], 'string', 'max' => 50],
             [['ProjectLinkUrl'], 'unique'],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
@@ -64,7 +64,8 @@ class ResearchProjects extends \yii\db\ActiveRecord {
             'DetailsSw' => 'Details (Swahili)',
             'Principal' => 'Principal Researcher',
             'OtherResearcher' => 'Other/Supporting Researcher',
-            'Funding' => 'Funding',
+            'FundingEn' => 'Funding(En)',
+            'FundingSw' => 'Funding(Sw)',
             'StartYear' => 'Start Year',
             'EndYear' => 'End Year',
             'ProjectLinkUrl' => 'Project Page Link Url'
@@ -92,6 +93,30 @@ class ResearchProjects extends \yii\db\ActiveRecord {
             self::PROJECT_STATUS_PUBLISHED => 'Published',
             self::PROJECT_STATUS_UNPUBLISHED => 'Un Published'
         );
+    }
+
+    static function getProjectsByUnitID($UnitID = NULL) {
+        $condition = $columns = NULL;
+        if ($UnitID) {
+            $columns = 'UnitID=:UnitID';
+            $condition = array(
+                ':UnitID' => $UnitID
+            );
+        }
+
+        return self::find()
+                        ->select('Id,ProjectNameEn,ProjectNameSw,ProjectLinkUrl,PageLinkUrl,UnitID,StartYear,Principal,FundingEn,FundingSw')
+                        ->where($columns, $condition)
+                        ->orderBy('UnitID')
+                        ->all();
+    }
+
+    static function getProjectsDetailsByLinkUrl($PageLinkUrl) {
+        $condition = array(
+            ':PageLinkUrl' => $PageLinkUrl
+        );
+
+        return self::find()->where('PageLinkUrl=:PageLinkUrl', $condition)->one();
     }
 
 }

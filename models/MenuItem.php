@@ -183,6 +183,7 @@ class MenuItem extends \yii\db\ActiveRecord {
         $filter = NULL;
         $condition['tbl_menu.Status'] = Menu::STATUS_PUBLISHED;
         $condition['tbl_menu_item.Status'] = self::STATUS_ENABLED;
+  
         if ($ShowOnPage) {
             $filter = '(tbl_menu.ShowOnPage LIKE "%' . $ShowOnPage . '%")';
         } else {

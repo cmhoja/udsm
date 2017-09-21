@@ -19,9 +19,14 @@ use Yii;
 class Documents extends \yii\db\ActiveRecord {
 
     const DOC_TYPE_ANNUAL_REPORT = 1;
-    const DOC_TYPE_BOOKS = 2;
-    const DOC_TYPE_ANNUAL_REPORT_RESEARCH_POLICY_GUIDELINE = 3;
-    const DOC_TYPE_ALMANAC_PROSPOECTUS = 4;
+    const DOC_TYPE_PUBLICATION_BOOKS = 2;
+    const DOC_TYPE_PUBLICATION_JOURNALS = 3;
+    const DOC_TYPE_POLICY_GUIDELINE = 4;
+    const DOC_TYPE_ALMANAC_PROSPECTUS = 5;
+////document status
+    Const DOC_STATUS_SAVED = 0;
+    Const DOC_STATUS_PUBLISHED = 1;
+    Const DOC_STATUS_UNPUBLISHED = 2;
 
     /**
      * @inheritdoc
@@ -58,11 +63,56 @@ class Documents extends \yii\db\ActiveRecord {
         ];
     }
 
-    static function getActiveDocumentsByTypeAndUnit($DocType, $UnitID = NULL) {
+    static function getActiveDocumentsByTypeAndUnit($DocType = NULL, $UnitID = NULL, $Status = NULL) {
+        $condition = array();
+        if ($DocType) {
+            $condition['DocumentType'] = $DocType;
+        }
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        }
+        if ($Status) {
+            $condition['Status'] = $Status;
+        }
         return self::find()
-                        ->where(array('DocumentType' => $DocType, 'UnitID' => $UnitID))
+                        ->where($condition)
                         ->orderBy('Id DESC')
                         ->all();
+    }
+
+    static function getDocumentTypes($lang = NULL) {
+        if (isset($lang)) {
+            switch ($lang) {
+                case 'sw':
+                    return array(
+                        self::DOC_TYPE_ANNUAL_REPORT => 'Ripoti Ya Mwaka',
+                        self::DOC_TYPE_PUBLICATION_BOOKS => 'Vitabu/Machapisho',
+                        // self::DOC_TYPE_PUBLICATION_JOURNALS => 'Journal',
+                        self::DOC_TYPE_POLICY_GUIDELINE => ' Sera/Mwongozo',
+                        self::DOC_TYPE_ALMANAC_PROSPECTUS => 'Takwimu/Prospectus',
+                    );
+
+                    break;
+
+                default:
+                    return array(
+                        self::DOC_TYPE_ANNUAL_REPORT => 'Annual Report',
+                        self::DOC_TYPE_PUBLICATION_BOOKS => 'Books',
+                        // self::DOC_TYPE_PUBLICATION_JOURNALS => 'Journals',
+                        self::DOC_TYPE_POLICY_GUIDELINE => ' Policy/Guideline',
+                        self::DOC_TYPE_ALMANAC_PROSPECTUS => 'Almanac/Prospectus',
+                    );
+                    break;
+            }
+        }
+    }
+
+    function getDocumentType($lang = NULL) {
+        $items = self::getDocumentTypes($lang);
+        if (isset($items[$this->DocumentType])) {
+            return $items[$this->DocumentType];
+        }
+        return NULL;
     }
 
 }

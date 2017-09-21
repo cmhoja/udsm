@@ -162,7 +162,15 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
         if ($Id) {
             $unit = self::findOne($Id); //->where(['Id'=>$this->ParentUnitId])->One();
             if ($unit) {
-                return $unit->UnitNameEn;
+                switch (Yii::$app->language) {
+                    case 'sw':
+                        return $unit->UnitNameSw;
+                        break;
+
+                    default:
+                        return $unit->UnitNameEn;
+                        break;
+                }
             }
         }
         return NULL;

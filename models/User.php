@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface {
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
 
     public $id;
     public $username;
@@ -55,31 +55,21 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface {
      */
     public static function findByUsername($username, $password) {
         $users = [];
-        $user = Users::find()->where(['UserName' => $username, 'Password' => $password])->one();
-
-//        if ($user) {
-//            $users[$user->Id] = [
-//                'id' => $user->Id,
-//                'username' => $user->UserName,
-//                'password' => $user->Password,
-//                'authKey' => 'test101key' . $user->Id . $user->Password,
-//                'accessToken' => '101-token' . $user->Password,
-//            ];
-//        }
-//        foreach ($users as $user) {
-//            if (strcasecmp($user['username'], $username) === 0) {
-//                return new static($user);
-//            }
-//        }
+        $user = Users::find()->where('UserName=:UserName AND Password=:Password', [':UserName' => $username, ':Password' => $password])->one();
 
         if ($user) {
-            return new static([
-                'id' => $user->Id,
-                'username' => $user->UserName,
-                'password' => $user->Password,
-                'authKey' => 'test101key' . $user->Id . $user->Password,
-                'accessToken' => '101-token' . $user->Password,
-            ]);
+            //self::$users[$user->Id]=[];
+            //$this->id= $user->Id;
+            $user_details= new User;
+            $user_details->id=$user->Id;
+            $user_details->username=$user->UserName;
+            $user_details->accessToken='dAG@as'.\app\components\Utilities::generateRandomString(35).'8Msx3';
+            $user_details->authKey=\app\components\Utilities::generateRandomString(50);
+            $user_details->password= $user->Password;
+//         
+            return $user_details;
+           //return \yii\web\User::setIdentity($user_details);
+           // return new static($user_details);
         }
 
         return null;

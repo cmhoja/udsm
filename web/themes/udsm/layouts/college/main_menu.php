@@ -106,16 +106,32 @@ It has all the view logic to show dynamic menus from the Cms as managed by the C
                 </li>
                 <!-- Ends Search Box Block -->
 
-                <li class="top-parent language-dropdown">
-                    <a href="#" class="has-submenu"><img src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/uk.png"> ENG</a><span class="sub-arrow">...</span></a>
-                    <ul class="dropdown-menu right sm-nowrap" style="width: auto; display: none; top: auto; left: 0px; margin-left: 0px; margin-top: 0px; min-width: 200px; max-width: 400px;">
+                <li class="top-parent " style="position: relative;float: right;text-align: left">
+                    <?php
+                    $language = Yii::$app->params['supportedLanguages'];
+                    if ($language && is_array($language)) {
+                        foreach ($language as $key => $label) {
+                            $lang_key = \yii\helpers\Html::encode($key);
+                            switch ($lang_key) {
+                                case 'en':
+                                    $flag = '/layouts/college/img/en.png';
+                                    break;
 
-                        <li>
-                            <a href="#">
-                                <img src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/tz.png"> SWA</a>
-                        </li>
+                                case 'sw':
+                                    $flag = '/layouts/college/img/sw.png';
+                                    break;
 
-                    </ul>
+                                default :
+                                    $flag = '';
+                                    break;
+                            }
+                            ?>
+                            <a style="font-size: 0.85em;float: left;"href="<?php echo \app\components\Utilities::setLanguageLink($key); ?>" class=""><img src="<?php echo $this->theme->baseUrl . $flag; ?>"> <?php echo \yii\helpers\Html::encode($label); ?></a><span class="sub-arrow"> </span></a>
+                                <?php
+                            }
+                        }
+                        ?>
+
                 </li>
             </ul>
             <?php
