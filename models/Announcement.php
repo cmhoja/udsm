@@ -87,6 +87,18 @@ class Announcement extends \yii\db\ActiveRecord {
         return self::find()->select('TitleEn,TitleSw,DetailsEn,DetailsSw,DatePosted,LinkUrl')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
     }
 
+    /*
+     * provides other announcements other than the one shown
+     */
+
+    static function getLatestOtherAnnouncementsByIDStatusAndUnit($Id, $Status, $UnitID = NULL, $limit = NULL, $Type = NULL) {
+        $condition = array('Status' => $Status, 'UnitID' => $UnitID);
+        if ($Type >= 0) {
+            $condition['AnnouncementType'] = $Type;
+        }
+        return self::find()->select('TitleEn,TitleSw,DetailsEn,DetailsSw,DatePosted,LinkUrl')->where($condition)->andWhere(['<>', 'Id', $Id])->limit($limit)->orderBy('DatePosted DESC')->all();
+    }
+
     static function getAnnouncementTypes() {
         return array(
             self::ANNOUNCEMENT_TYPE_GENERIC_ANNOUNCEMENT => 'General Announcemnt',

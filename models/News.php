@@ -106,12 +106,26 @@ class News extends \yii\db\ActiveRecord {
 
     static function getLatestNewsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $NewsType = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
-        if (!is_null($NewsType) && $NewsType >= 0) {
+        if ($NewsType >= 0) {
             $condition['NewsType'] = $NewsType;
         }
         return self::find()
                         ->select('LinkUrl,TitleEn,TitleSw,DetailsEn,DetailsSw,Photo,DatePosted')
                         ->where($condition)
+                        ->limit($limit)
+                        ->orderBy('DatePosted DESC')
+                        ->all();
+    }
+
+    static function getLatestOtherNewsByIDStatusAndUnit($Id, $Status, $UnitID = NULL, $limit = NULL, $NewsType = NULL) {
+        $condition = array('Status' => $Status, 'UnitID' => $UnitID);
+        if ($NewsType >= 0) {
+            $condition['NewsType'] = $NewsType;
+        }
+        return self::find()
+                        ->select('LinkUrl,TitleEn,TitleSw,DetailsEn,DetailsSw,Photo,DatePosted')
+                        ->where($condition)
+                        ->andWhere(['<>', 'Id', $Id])
                         ->limit($limit)
                         ->orderBy('DatePosted DESC')
                         ->all();

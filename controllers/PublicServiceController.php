@@ -58,10 +58,10 @@ class PublicServiceController extends Controller {
      *
      * @return string
      */
-    public function actionIndex($lang=null) {
+    public function actionIndex() {
         //getting user current langauage;
         $page_side_menus = $page_content = $custom_blocks = NULL;
-        $lang = Yii::$app->language;
+//        $lang = Yii::$app->language;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
         if ($page_content) {

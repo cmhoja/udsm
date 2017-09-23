@@ -96,7 +96,22 @@ class Events extends \yii\db\ActiveRecord {
         if (!is_null($EventType) && $EventType >= 0) {
             $condition['EventType'] = $EventType;
         }
-        return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
+        return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')
+                        ->where($condition)
+                        ->limit($limit)
+                        ->orderBy('DatePosted DESC')->all();
+    }
+
+    static function getLatestOtherEventsByStatusAndUnit($Id, $Status, $UnitID = NULL, $limit = NULL, $EventType = NULL) {
+        $condition = array('Status' => $Status, 'UnitID' => $UnitID);
+        if ($EventType >= 0) {
+            $condition['EventType'] = $EventType;
+        }
+        return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')
+                        ->where($condition)
+                        ->addWhere(['<>', 'Id', $Id])
+                        ->limit($limit)
+                        ->orderBy('DatePosted DESC')->all();
     }
 
     static function getEventTypes() {

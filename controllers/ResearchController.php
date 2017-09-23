@@ -131,21 +131,26 @@ class ResearchController extends Controller {
             switch ($url_item) {
                 case 'policies':
                     $doc_type = \app\models\Documents::DOC_TYPE_POLICY_GUIDELINE;
+                    $page_title = Yii::$app->params['static_items']['policies'][Yii::$app->language];
                     break;
 
                 case 'guidelines':
                     $doc_type = \app\models\Documents::DOC_TYPE_POLICY_GUIDELINE;
+                    $page_title = Yii::$app->params['static_items']['guidelines'][Yii::$app->language];
                     break;
 
                 case 'books':
                     $doc_type = \app\models\Documents::DOC_TYPE_PUBLICATION_BOOKS;
+                    $page_title = Yii::$app->params['static_items']['books'][Yii::$app->language];
                     break;
 
                 case 'journals':
                     $doc_type = \app\models\Documents::DOC_TYPE_PUBLICATION_JOURNALS;
+                    $page_title = Yii::$app->params['static_items']['journals'][Yii::$app->language];
                     break;
                 default :
                     $doc_type = NULL;
+                    $page_title = Yii::$app->params['static_items']['research_document'][Yii::$app->language];
                     break;
             }
             $page_content = \app\models\Documents::getActiveDocumentsByTypeAndUnit($doc_type, NULL, \app\models\Documents::DOC_STATUS_PUBLISHED);
@@ -158,7 +163,7 @@ class ResearchController extends Controller {
     }
 
     public function actionPublications() {
-        $page_side_menus = $page_content = NULL;
+        $page_side_menus = $page_content = $page_title = NULL;
         $lang = Yii::$app->language;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_paterrn = explode('/', $url);
@@ -172,21 +177,26 @@ class ResearchController extends Controller {
             switch ($url_item) {
                 case 'policies':
                     $doc_type = \app\models\Documents::DOC_TYPE_POLICY_GUIDELINE;
+                    $page_title = Yii::$app->params['static_items']['policies'][Yii::$app->language];
                     break;
 
                 case 'guidelines':
                     $doc_type = \app\models\Documents::DOC_TYPE_POLICY_GUIDELINE;
+                    $page_title = Yii::$app->params['static_items']['guidelines'][Yii::$app->language];
                     break;
 
                 case 'books':
                     $doc_type = \app\models\Documents::DOC_TYPE_PUBLICATION_BOOKS;
+                    $page_title = Yii::$app->params['static_items']['books'][Yii::$app->language];
                     break;
 
                 case 'journals':
                     $doc_type = \app\models\Documents::DOC_TYPE_PUBLICATION_JOURNALS;
+                    $page_title = Yii::$app->params['static_items']['journals'][Yii::$app->language];
                     break;
                 default :
                     $doc_type = NULL;
+                    $page_title = Yii::$app->params['static_items']['publication_document'][Yii::$app->language];
                     break;
             }
             $page_content = \app\models\Documents::getActiveDocumentsByTypeAndUnit($doc_type, NULL, \app\models\Documents::DOC_STATUS_PUBLISHED);
@@ -194,7 +204,7 @@ class ResearchController extends Controller {
         if ($page_content) {
             $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
         }
-        $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus);
+        $content = array('page_content' => $page_content, 'title' => $page_title, 'side_menus' => $page_side_menus);
         return $this->render('//site/pages/publication_documents', $content);
     }
 

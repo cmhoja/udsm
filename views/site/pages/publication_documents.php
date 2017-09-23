@@ -1,7 +1,5 @@
 
-<?php
-$title = Yii::$app->params['static_items']['publication_document'][Yii::$app->language];
-?>
+
 <div class="page-header page-title-left">
     <div class="container">
         <div class="col-md-12 no-pad">
