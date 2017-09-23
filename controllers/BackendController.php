@@ -87,8 +87,7 @@ class BackendController extends Controller {
 
         if ($model->load(Yii::$app->request->post())) {
             $password = $model->password;
-
-            $authType = Yii::$app->params['authType'];
+            $authType = Yii::$app->params['authType']; ///getting authentication type used
 
             switch ($authType) {
                 case 'ldap':
@@ -108,11 +107,8 @@ class BackendController extends Controller {
                     if ($model->password) {
                         $model->password = \app\components\Utilities::setHashedValue($model->password);
                     }
-                   // echo $model->password;
-                    //exit;
                     $identity = \app\models\User::findByUsername($model->username, $model->password);
-                    //var_dump($identity);
-//                    exit;
+
                     $loggedin = Yii::$app->user->login($identity);
                     break;
 
@@ -132,8 +128,8 @@ class BackendController extends Controller {
                         // open a session
                         $session->open();
                     }
-                $session->set('UID', $userRoles->Id);
-                $session->set('U_NAME', $userRoles->UserName);
+                    $session->set('UID', $userRoles->Id);
+                    $session->set('U_NAME', $userRoles->UserName);
                     if ($userRoles->UnitID) {
                         $session->set('UNIT_ID', $userRoles->UnitID);
                     } else {

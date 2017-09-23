@@ -5,7 +5,7 @@ $field_of_study = require(__DIR__ . '/fields_of_study.php');
 
 return [
     //defining the authentication type to be used. ldap=for ldap/ACtive Direcotry(AD) authentication, system=for system authentication
-    'authType' => 'ldap', ///this parameter defines the authentication system to be used to authenticte user of the system. only one of the two( ldap or system) authentication is require
+    'authType' => 'system', //ldap///this parameter defines the authentication system to be used to authenticte user of the system. only one of the two( ldap or system) authentication is require
     ///parameters for the ldap authenticatio system
     ///put this parameters only when ypu use ldap as authentication mechanism
     'LDap' => [
