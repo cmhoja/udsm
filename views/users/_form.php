@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
@@ -21,7 +22,12 @@ use app\models\AcademicAdministrativeUnit;
         'form' => $form,
         'columns' => 2,
         'attributes' => [
-           'UnitID' => [
+            'UserType' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => Users::getUserTypes(), 'options' => ['prompt' => '-- Select --'],
+                'columnOptions' => ['width' => '185px', 'height' => '10px']
+            ],
+            'UnitID' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
                 'options' => ['prompt' => '--- select --'],
                 'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement' => AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
@@ -42,15 +48,18 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Enter User Name'],
                 'columnOptions' => ['width' => '185px']
-            ], 'Password' => [
+            ],
+            'Password' => [
                 'type' => Form::INPUT_PASSWORD,
                 'options' => ['placeholder' => 'Enter User Name'],
-                'columnOptions' => ['width' => '185px']
+                'columnOptions' => ['width' => '185px'],
+                'visible' => (isset(Yii::$app->params['authType']) && Yii::$app->params['authType'] != 'ldap') ? TRUE : FALSE
             ],
-            'UserType' => [
-               'type' => Form::INPUT_DROPDOWN_LIST,
-                'items' => Users::getUserTypes(), 'options' => ['prompt' => '-- Select --'],
-                'columnOptions' => ['width' => '185px', 'height' => '10px']
+            'Status' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => Users::getUserStatuses(),
+                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+                'visible' => (!$model->isNewRecord) ? TRUE : FALSE
             ],
         ]
     ]);

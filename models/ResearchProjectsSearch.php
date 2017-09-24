@@ -19,7 +19,7 @@ class ResearchProjectsSearch extends ResearchProjects
     {
         return [
             [['Id', 'UnitID'], 'integer'],
-            [['ProjectNameEn', 'ProjectNameSw', 'DetailsEn', 'DetailsSw', 'Principal', 'OtherResearcher', 'Funding', 'StartYear', 'EndYear'], 'safe'],
+            [['ProjectNameEn', 'ProjectNameSw', 'DetailsEn', 'DetailsSw', 'Principal', 'OtherResearcher', 'StartYear', 'EndYear'], 'safe'],
         ];
     }
 
@@ -70,8 +70,7 @@ class ResearchProjectsSearch extends ResearchProjects
             ->andFilterWhere(['like', 'DetailsEn', $this->DetailsEn])
             ->andFilterWhere(['like', 'DetailsSw', $this->DetailsSw])
             ->andFilterWhere(['like', 'Principal', $this->Principal])
-            ->andFilterWhere(['like', 'OtherResearcher', $this->OtherResearcher])
-            ->andFilterWhere(['like', 'Funding', $this->Funding]);
+            ->andFilterWhere(['like', 'OtherResearcher', $this->OtherResearcher]);
 
         return $dataProvider;
     }

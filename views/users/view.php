@@ -39,8 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ),
             array(
                 'attribute' => 'UnitID',
-                'label' => 'User Type',
                 'value' => $model->UnitID?$model->unit->UnitNameEn:NULL,
+            ),
+            array(
+                'attribute' => 'Status',
+                'label' => 'Account Status',
+                'value' => $model->getUserStatusName(),
             ),
         ],
     ])

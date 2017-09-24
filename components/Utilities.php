@@ -204,6 +204,34 @@ class Utilities {
         return $url;
     }
 
+    static function lDapAuthenticate($LdapSettings, $username, $password) {
+        $host = $LdapSettings['host'];
+        $dn = $LdapSettings['dn'];
+        $username = \yii\helpers\HtmlPurifier::process($username);
+        $password = \yii\helpers\HtmlPurifier::process($password);
+        //connecting to the ldap server
+        $ldap_connect = ldap_connect($host);
+        if ($ldap_connect) {
+            ldap_set_option($ldap_connect, LDAP_OPT_PROTOCOL_VERSION, 3);
+            ldap_set_option($ldap_connect, LDAP_OPT_REFERRALS, 0);
+            $ldaprdn = $username;     // normal user
+            if (isset($LdapSettings['domain'])) {
+                $domain = $LdapSettings['domain'];
+                $ldaprdn = $username . '@' . $domain;   // ldap rdn or dn
+            }
+            $bind = @ldap_bind($ldap_connect, $username, $password);
+            if ($bind) {
+                // log them in!
+                return TRUE;
+            } else {
+                $sms = "Can not authenticate using the details provided Please contact youe administrator";
+            }
+        } else {
+            $sms = "Failed to connect to the server, please contact your administrator";
+        }
+        return array('sms' => $sms, 'status' => FALSE);
+    }
+
     //end of class
 }
 

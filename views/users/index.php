@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'FName',
@@ -26,13 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
             array(
                 'attribute' => 'UserType',
                 'value' => function($model) {
-                   return $model->getUserTypeName();
+                    return $model->getUserTypeName();
                 },
             ),
             array(
                 'attribute' => 'UnitID',
-                'value' => function($model){
-                   return $model->UnitID ? $model->unit->UnitNameEn : NULL;
+                'value' => function($model) {
+                    return $model->UnitID ? $model->unit->UnitNameEn : NULL;
+                }
+            ),
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getUserStatusName();
                 }
             ),
             ['class' => 'yii\grid\ActionColumn'],

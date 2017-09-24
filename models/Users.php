@@ -21,6 +21,9 @@ class Users extends \yii\db\ActiveRecord {
 
     const USER_TYPE_ADMINISTRATOR = 1;
     const USER_TYPE_CONTENT_MANAGER = 2;
+    ///account status options
+    const ACC_STATUS_ACTIVE = 1;
+    const ACC_STATUS_INACTIVE = 0;
 
     /**
      * @inheritdoc
@@ -34,10 +37,11 @@ class Users extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['FName', 'LName', 'UserName', 'Password', 'UserType'], 'required'],
+            [['FName', 'LName', 'UserName', 'UserType', 'Status'], 'required'],
+            [['Password'], 'required','on'=>'require_user_password'],
             [['UserType', 'UnitID'], 'integer'],
             [['FName', 'LName'], 'string', 'max' => 50],
-             [['UnitID'], 'safe'],
+            [['UnitID'], 'safe'],
             [['UserName'], 'string', 'max' => 20],
             [['Password'], 'string', 'max' => 255],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
@@ -56,6 +60,7 @@ class Users extends \yii\db\ActiveRecord {
             'Password' => 'Password',
             'UserType' => 'User Type',
             'UnitID' => 'Unit/Department/College',
+            'Status' => 'Status'
         ];
     }
 
@@ -71,6 +76,29 @@ class Users extends \yii\db\ActiveRecord {
             self::USER_TYPE_CONTENT_MANAGER => 'Content Manager',
             self::USER_TYPE_ADMINISTRATOR => 'Administrator',
         );
+    }
+
+    static function getUserStatuses() {
+        return array(
+            self::ACC_STATUS_ACTIVE => 'Active',
+            self::ACC_STATUS_INACTIVE => 'In Active',
+        );
+    }
+
+    function getUserStatusName() {
+        $statuses = self::getUserStatuses();
+        if (isset($statuses[$this->Status])) {
+            return $statuses[$this->Status];
+        }
+        return NULL;
+    }
+
+    function getUserStatusNameByValue($Status) {
+        $statuses = self::getUserStatuses();
+        if (isset($statuses[$Status])) {
+            return $statuses[$Status];
+        }
+        return NULL;
     }
 
     function getUserTypeName() {

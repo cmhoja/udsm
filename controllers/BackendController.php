@@ -22,12 +22,12 @@ class BackendController extends Controller {
                 // 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['login'],
+                        'actions' => ['logout', 'login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -78,37 +78,44 @@ class BackendController extends Controller {
      */
     public function actionLogin() {
         //$this->layout = 'login'; //loading the login layout
-        if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) {
             // return $this->goHome();
             return $this->render('//backend/index');
         }
-
         $model = new LoginForm();
-
         if ($model->load(Yii::$app->request->post())) {
             $password = $model->password;
             $authType = Yii::$app->params['authType']; ///getting authentication type used
-
             switch ($authType) {
                 case 'ldap':
-                    $exist = Users::find()->where('Username=:Username', array(':Username' => $model->username))->one();
-                    if ($exist) {
+                    $exist = Users::find()->where('Username=:Username AND Status=:Status', array(':Username' => $model->username, ':Status' => Users::ACC_STATUS_ACTIVE))->one();
+                    ///https://github.com/Adldap2/Adldap2
+                   if ($exist) {
                         ///checking user details in ldap
-                        $LdapSettings = \Yii::$app->params['LDap']; //getting the array containing all the ldap settings fro  the main configuration file
-                        $host = $LdapSettings['host'];
-                        $dn = $LdapSettings['dn'];
-                        //connecting to the ldap server
-                        $ldap = ldap_connect($host) or die("Failed to connect to the server, please contact your administrator");
+                        $LdapSettings = \Yii::$app->params['LDap'];
+                        $ldap_authenticate = \app\components\Utilities::lDapAuthenticate($LdapSettings, $model->username, $model->password);
+                        if ($ldap_authenticate) {
+                            $identity = \app\models\User::findByUsername($model->username);
+                            $loggedin = Yii::$app->user->login($identity);
+                        } else {
+                            $sms = $ldap_authenticate['sms'];
+                            Yii::$app->session->setFlash('sms', $sms);
+                            $loggedin = FALSE;
+                        }
+                    } else {
+                        //user not exist in our system
+                        $sms = 'Account Doesnot exist, Please contact you administrator';
+                        Yii::$app->session->setFlash('sms', $sms);
+                        $loggedin = FALSE;
                     }
-                    exit;
+
 
                     break;
                 case 'system':
                     if ($model->password) {
                         $model->password = \app\components\Utilities::setHashedValue($model->password);
                     }
-                    $identity = \app\models\User::findByUsername($model->username, $model->password);
-
+                    $identity = \app\models\User::findByUsernameAndPassword($model->username, $model->password);
                     $loggedin = Yii::$app->user->login($identity);
                     break;
 
@@ -121,7 +128,6 @@ class BackendController extends Controller {
             if ($loggedin) {
                 Yii::$app->user->identity->id = $identity->id;
                 $userRoles = Users::find()->where('Username=:Username', array(':Username' => $model->username))->one();
-
                 if ($userRoles) {
                     $session = Yii::$app->session;
                     if (!$session->isActive) {
@@ -150,8 +156,6 @@ class BackendController extends Controller {
                             break;
                     }
                 }
-
-
                 /* Logs the Logins History */
                 $loginsModel = new \app\models\Logins();
                 $loginsModel->UserId = \yii::$app->user->identity->id;
@@ -178,7 +182,12 @@ class BackendController extends Controller {
     public function actionLogout() {
         /* Logs the Logins History */
         $loginsModel = new \app\models\Logins();
-        $loginsModel->UserId = Yii::$app->user->id;
+        if (Yii::$app->user->id) {
+            $UserId = Yii::$app->user->id;
+        } else {
+            $UserId = Yii::$app->session->get('UID');
+        }
+        $loginsModel->UserId = $UserId;
         $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
         $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
         $loginsModel->save();
@@ -192,7 +201,7 @@ class BackendController extends Controller {
             $session->close();
             Yii::$app->user->logout();
         }
-        return $this->goHome();
+        return $this->redirect(['backend/login']);
     }
 
     /**

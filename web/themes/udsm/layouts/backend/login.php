@@ -41,7 +41,9 @@ LteAsset::register($this);
           </div>
             <footer class="main-footer" style="margin: 0;background: none;vertical-align: middle;text-align: center">
                 <div >
-                    <strong>Copyright &copy; <?= Date('Y') ?> &nbsp;&nbsp;<br/><a href="#">University of Dar es salaam (UDSM)</a>.</strong>
+                    <strong>Copyright &copy; <?= Date('Y') ?> &nbsp;&nbsp;<br/>
+                        <a href="http://www.udsm.co.tz">University of Dar es salaam (UDSM)</a>.
+                    </strong>
                     <br/>All rights reserved.   
                 </div>                       
             </footer> 

@@ -74,6 +74,9 @@ class UsersController extends Controller {
      */
     public function actionCreate() {
         $model = new Users();
+        if (\Yii::$app->params['authType'] != 'ldap') {
+            $model->scenario = 'require_user_password';
+        }
         if (Yii::$app->session->get('UNIT_ID')) {
             $model->UnitID = Yii::$app->session->get('UNIT_ID');
         }
@@ -84,7 +87,7 @@ class UsersController extends Controller {
             if ($model->Password) {
                 $model->Password = \app\components\Utilities::setHashedValue($model->Password);
             }
-
+            $model->Status = Users::ACC_STATUS_ACTIVE;
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->Id]);
             }
@@ -104,16 +107,23 @@ class UsersController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         $OldPassword = $model->Password;
+        if (empty($OldPassword) && (\Yii::$app->params['authType'] != 'ldap')) {
+            $model->scenario = 'require_user_password';
+        }
         if ($model->load(Yii::$app->request->post())) {
-            echo $model->UnitID;
-            exit;
-            if (!empty($model->Password)) {
-                if ($model->Password) {
-                    $model->Password = \app\components\Utilities::setHashedValue($model->Password);
+          
+            if (empty($model->Password) && empty($OldPassword)) {
+                if ($model->UserName) {
+                    $model->Password = \app\components\Utilities::setHashedValue($model->UserName);
                 }
+            } elseif (!empty($model->Password) && empty($OldPassword)) {
+                $model->Password = \app\components\Utilities::setHashedValue($model->Password);
+            } elseif (!empty($model->Password) && !empty($OldPassword) && $model->Password != $OldPassword) {
+                $model->Password = \app\components\Utilities::setHashedValue($model->Password);
             } else {
                 $model->Password = $OldPassword;
             }
+
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->Id]);
             }

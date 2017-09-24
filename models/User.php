@@ -53,9 +53,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username, $password) {
-        $users = [];
-        $user = Users::find()->where('UserName=:UserName AND Password=:Password', [':UserName' => $username, ':Password' => $password])->one();
+    public static function findByUsernameAndPassword($username, $password) {
+       // $users = [];
+        $user = Users::find()->where('UserName=:UserName AND Password=:Password AND Status=:Status', [':UserName' => $username, ':Password' => $password,':Status'=> Users::ACC_STATUS_ACTIVE])->one();
 
         if ($user) {
             //self::$users[$user->Id]=[];
@@ -75,6 +75,28 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
         return null;
     }
 
+     public static function findByUsername($username) {
+       // $users = [];
+        $user = Users::find()->where('UserName=:UserName AND Status=:Status', [':UserName' => $username,':Status'=> Users::ACC_STATUS_ACTIVE])->one();
+
+        if ($user) {
+            //self::$users[$user->Id]=[];
+            //$this->id= $user->Id;
+            $user_details= new User;
+            $user_details->id=$user->Id;
+            $user_details->username=$user->UserName;
+            $user_details->accessToken='dAG@as'.\app\components\Utilities::generateRandomString(35).'8Msx3';
+            $user_details->authKey=\app\components\Utilities::generateRandomString(50);
+            $user_details->password= $user->Password;
+//         
+            return $user_details;
+           //return \yii\web\User::setIdentity($user_details);
+           // return new static($user_details);
+        }
+
+        return null;
+    }
+    
     /**
      * @inheritdoc
      */
