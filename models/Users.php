@@ -37,13 +37,13 @@ class Users extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['FName', 'LName', 'UserName', 'UserType', 'Status'], 'required'],
-            [['Password'], 'required','on'=>'require_user_password'],
+            [['FName', 'LName', 'UserName', 'UserType', 'Status', 'EmailAddress'], 'required'],
+            [['Password'], 'required', 'on' => 'require_user_password'],
             [['UserType', 'UnitID'], 'integer'],
             [['FName', 'LName'], 'string', 'max' => 50],
             [['UnitID'], 'safe'],
             [['UserName'], 'string', 'max' => 20],
-            [['Password'], 'string', 'max' => 255],
+            [['Password', 'EmailAddress'], 'string', 'max' => 255],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }
@@ -56,6 +56,7 @@ class Users extends \yii\db\ActiveRecord {
             'Id' => 'ID',
             'FName' => 'First Name',
             'LName' => 'Last Name',
+            'EmailAddress' => 'Email Address',
             'UserName' => 'User Name',
             'Password' => 'Password',
             'UserType' => 'User Type',

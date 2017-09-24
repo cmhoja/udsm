@@ -27,7 +27,8 @@
         "miloschuman/yii2-highcharts-widget": "*",
         "2amigos/yii2-ckeditor-widget": "^2.1",
         "kartik-v/yii2-widget-fileinput": "@dev",
-        "yiisoft/yii2-imagine": "*"
+        "yiisoft/yii2-imagine": "*",
+        "adldap2/adldap2": "^8.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -44,6 +44,11 @@ use app\models\AcademicAdministrativeUnit;
                 'options' => ['placeholder' => 'Enter Last  Name'],
                 'columnOptions' => ['width' => '185px']
             ],
+            'EmailAddress' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Enter Email Address'],
+                'columnOptions' => ['width' => '185px']
+            ],
             'UserName' => [
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Enter User Name'],

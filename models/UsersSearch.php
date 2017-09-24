@@ -10,24 +10,22 @@ use app\models\Users;
 /**
  * UsersSearch represents the model behind the search form about `app\models\Users`.
  */
-class UsersSearch extends Users
-{
+class UsersSearch extends Users {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['Id', 'UserType', 'UnitID'], 'integer'],
-            [['FName', 'LName', 'UserName', 'Password'], 'safe'],
+            [['Id', 'UserType', 'UnitID', 'Status'], 'integer'],
+            [['FName', 'LName', 'UserName', 'Password', 'EmailAddress'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class UsersSearch extends Users
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Users::find();
 
         // add conditions that should always apply here
@@ -65,10 +62,12 @@ class UsersSearch extends Users
         ]);
 
         $query->andFilterWhere(['like', 'FName', $this->FName])
-            ->andFilterWhere(['like', 'LName', $this->LName])
-            ->andFilterWhere(['like', 'UserName', $this->UserName])
-            ->andFilterWhere(['like', 'Password', $this->Password]);
+                ->andFilterWhere(['like', 'LName', $this->LName])
+                ->andFilterWhere(['like', 'EmailAddress', $this->EmailAddress])
+                ->andFilterWhere(['like', 'UserName', $this->UserName])
+                ->andFilterWhere(['like', 'Password', $this->Password]);
 
         return $dataProvider;
     }
+
 }
