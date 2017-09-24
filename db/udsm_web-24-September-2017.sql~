@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 24, 2017 at 04:58 PM
+-- Generation Time: Sep 24, 2017 at 03:52 PM
 -- Server version: 5.5.54
 -- PHP Version: 5.4.45-4+deprecated+dontuse+deb.sury.org~precise+1
 
@@ -521,10 +521,7 @@ INSERT INTO `tbl_logins` (`UserId`, `DateCreated`, `IpAddress`, `Details`) VALUE
 (10, '2017-09-24 12:02:51', '127.0.0.1', 'User logged out the system successful using browser :- Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'),
 (1, '2017-09-24 12:03:00', '127.0.0.1', 'User logged into the system successful using browser :-Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'),
 (1, '2017-09-24 12:11:57', '127.0.0.1', 'User logged out the system successful using browser :- Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'),
-(1, '2017-09-24 12:38:58', '127.0.0.1', 'User logged into the system successful using browser :-Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'),
-(1, '2017-09-24 12:54:28', '127.0.0.1', 'User logged out the system successful using browser :- Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'),
-(1, '2017-09-24 12:54:37', '127.0.0.1', 'User logged into the system successful using browser :-Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36'),
-(1, '2017-09-24 12:54:43', '127.0.0.1', 'User logged out the system successful using browser :- Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36');
+(1, '2017-09-24 12:38:58', '127.0.0.1', 'User logged into the system successful using browser :-Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.120 Chrome/37.0.2062.120 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -943,7 +940,6 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `FName` varchar(50) NOT NULL,
   `LName` varchar(50) NOT NULL,
-  `EmailAddress` varchar(255) DEFAULT NULL,
   `UserName` varchar(20) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `UserType` int(2) NOT NULL COMMENT '1=Adminstrator, 2=Content Admin',
@@ -957,13 +953,13 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`Id`, `FName`, `LName`, `EmailAddress`, `UserName`, `Password`, `UserType`, `UnitID`, `Status`) VALUES
-(1, 'Charles', 'Mhoja', NULL, 'admin', 'a55568307a801f7df4339742f728a508f8338a7d', 1, NULL, 1),
-(6, 'Amani', 'Amani', NULL, 'amani', '43a03e2d84df4ee1491f6ec2150e8c16d540efd6', 2, 5, 1),
-(7, 'cmanager', 'cmanager', NULL, 'cmanager', '2df85b8db7b8f88c563f682e3acd8d783850b85d', 2, 5, 1),
-(8, 'tes content admin', 'test content admin', NULL, 'testadmin', '815994038155ae0ec9277fb927bfbd6f0f5116e0', 2, 5, 1),
-(9, 'UDSM', 'DOMAIN', NULL, 'tester', '3ed2092f385209216c2bbbfbe88fbe3ceb8a4d88', 1, 4, 1),
-(10, 'COICT', 'COICT', NULL, 'COICT', 'd669ed32b9b204ea8e13ed5f58e7011d6b6a6fd1', 2, 4, 1);
+INSERT INTO `tbl_user` (`Id`, `FName`, `LName`, `UserName`, `Password`, `UserType`, `UnitID`, `Status`) VALUES
+(1, 'Charles', 'Mhoja', 'admin', 'a55568307a801f7df4339742f728a508f8338a7d', 1, NULL, 1),
+(6, 'Amani', 'Amani', 'amani', '43a03e2d84df4ee1491f6ec2150e8c16d540efd6', 2, 5, 1),
+(7, 'cmanager', 'cmanager', 'cmanager', '2df85b8db7b8f88c563f682e3acd8d783850b85d', 2, 5, 1),
+(8, 'tes content admin', 'test content admin', 'testadmin', '815994038155ae0ec9277fb927bfbd6f0f5116e0', 2, 5, 1),
+(9, 'UDSM', 'DOMAIN', 'tester', '3ed2092f385209216c2bbbfbe88fbe3ceb8a4d88', 1, 4, 1),
+(10, 'COICT', 'COICT', 'COICT', 'd669ed32b9b204ea8e13ed5f58e7011d6b6a6fd1', 2, 4, 1);
 
 -- --------------------------------------------------------
 
