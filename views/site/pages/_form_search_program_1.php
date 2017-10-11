@@ -1,5 +1,4 @@
-<form class="form-inline"  method="POST" action="<?php echo \app\components\Utilities::generateUrl(html_entity_decode('study/catalogue')); ?>">
-
+<form class="form-inline"  method="POST" action="<?php echo \app\components\Utilities::generateUrl(html_entity_decode('/study/programmes')); ?>">
     <div class="input-text form-group">
         <select class="form-control" name="PTYpe" style="margin-bottom: 0%;">
             <option value=""> --- <?php echo Yii::$app->params['static_items']['select_program_type'][Yii::$app->language]; ?> ---</option>
@@ -26,7 +25,7 @@
     <div class="input-text form-group">
         <input type="text" name="ProgrameName" style="margin-bottom: 0%;" class="input-name form-control" placeholder="<?php echo Yii::$app->params['static_items']['enter_key_word'][Yii::$app->language] ?>" />
     </div>
-    <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
-           value="<?= Yii::$app->request->csrfToken ?>"/>
-    <button type="submit" class="btn btn-default"><?php echo (Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['find_programme']['sw'] : Yii::$app->params['static_items']['find_programme']['en']; ?></button>
+    <div class="input-text form-group" style="margin-top:4%; margin-bottom: 4%;">
+        <button type="submit"  name="Search" value="Search" class="btn btn-default"><?php echo (Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['find_programme']['sw'] : Yii::$app->params['static_items']['find_programme']['en']; ?></button>
+    </div>
 </form>

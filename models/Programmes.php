@@ -134,19 +134,15 @@ class Programmes extends \yii\db\ActiveRecord {
     static function getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword = NULL, $UnitID = NULL, $Type = NULL, $FieldOfStudy = NULL, $lang = NULL) {
         $condition = $where = $orderBy = NULL;
 
-        if (!empty($Keyword)) {
-            $condition = "(ProgrammeNameEn LIKE '" . $Keyword . "%' OR ProgrammeNameSw  LIKE '" . $Keyword . "%')";
-        }
-        if ($UnitID > 0) {
-            $where['UnitID'] = $UnitID;
-        }
-
         if (!empty($Type) && $Type > 0) {
             $where['ProgrammeType'] = $Type;
         }
 
         if (!empty($FieldOfStudy) && $FieldOfStudy > 0) {
             $where['FieldOfStudy'] = $FieldOfStudy;
+        }
+        if ($UnitID > 0) {
+           // $where['UnitID'] = $UnitID;
         }
 
         if (!empty($lang)) {
@@ -164,9 +160,24 @@ class Programmes extends \yii\db\ActiveRecord {
         }
 
         return self::find()
-                        ->where($condition, $where)
+                        ->where($where)
+                        ->andFilterCompare('ProgrammeNameEn', $Keyword, 'LIKE')
+                        ->andFilterCompare('ProgrammeNameSw', $Keyword, 'LIKE')
                         ->orderBy($orderBy)
                         ->all();
+    }
+
+    static function getProgrameDetailsByProgrammeUrl($ProgrammeUrl) {
+        $condition = array('ProgrammeUrl' => $ProgrammeUrl);
+        return self::find()->where($condition)->one();
+    }
+
+    static function getFieldOfStudyByValue($value) {
+        $field_ofStudy = Yii::$app->params['static_items']['field_of_study'];
+        if ($field_ofStudy && isset($field_ofStudy[$value])) {
+            return $field_ofStudy[$value][Yii::$app->language];
+        }
+        return NULL;
     }
 
 }

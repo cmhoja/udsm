@@ -10,9 +10,11 @@ return [
     'rules' => [
         ///STUDY MENUS REOUTES
         //colleges
-
         'colleges|college/<code>' => 'college/index',
-        'colleges|college/<code>/<page>' => 'college/<page>',
+//        'colleges|college/<code>/<programmes>/<item>' => 'college/programs',
+//        'colleges|college/<code>/<programs>/<item>' => 'college/programs',
+//        'colleges|college/<code>/<programmes>|<programs>' => 'college/programs',
+//        'colleges|college/<code>/<page>' => 'college/<page>',
         'colleges|college/<code>/<page>' => 'college/page',
         'colleges|college/<code>/<page>/<item>' => 'college/index',
         'colleges|college/<code>/<page>/<item>/<subitem>' => 'college/index',

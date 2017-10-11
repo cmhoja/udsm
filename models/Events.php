@@ -109,7 +109,7 @@ class Events extends \yii\db\ActiveRecord {
         }
         return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')
                         ->where($condition)
-                        ->addWhere(['<>', 'Id', $Id])
+                        ->andWhere(['<>', 'Id', $Id])
                         ->limit($limit)
                         ->orderBy('DatePosted DESC')->all();
     }

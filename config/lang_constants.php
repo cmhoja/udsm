@@ -14,6 +14,7 @@ return [
     'view_all_announcement' => ['en' => 'View All Announcement', 'sw' => 'Matangazo Zaidi'],
     'read_more' => ['en' => 'Read More', 'sw' => 'Soma Zaidi'],
     'view_all' => ['en' => 'View All', 'sw' => 'Angalia Zaidi'],
+    'all' => ['en' => 'All', 'sw' => 'Zote'],
     'More' => ['en' => 'More', 'sw' => 'Zaidi'],
     'more_videos' => ['en' => 'More Videos', 'sw' => 'Video nyingine'],
     'video_now_playing' => ['en' => 'Now Playing', 'sw' => 'Inayocheza'],
@@ -32,6 +33,7 @@ return [
     'other_pages' => ['en' => 'Other Pages', 'sw' => 'Kurasa Nyingine'],
     'study' => ['en' => 'Study', 'sw' => 'Soma'],
     'programme' => ['en' => 'Programme', 'sw' => 'Kozi'],
+    'programmes' => ['en' => 'Programmes', 'sw' => 'Kozi MbaliMbali'],
     'programme_details' => ['en' => 'Programme Details', 'sw' => 'Maelezo kuhusu Kozi'],
     'find_programme' => ['en' => 'Find Programme', 'sw' => 'Tafuta Kozi'],
     'search_keyword' => ['en' => 'Search Keyword', 'sw' => 'Weka neno'],
@@ -86,7 +88,7 @@ return [
     'select_field_of_study' => ['en' => 'Field of Study', 'sw' => 'Aina ya Somo'],
     'course_finder' => ['en' => 'Course Finder', 'sw' => 'Tafuta Kozi'],
     'programme_catalogue' => ['en' => 'Programme Catalogue', 'sw' => 'Orodha ya Kozi Zinazofundishwa'],
-    'no_record' => ['en' => 'No Records or information found', 'sw' => 'Hatuna taarifa yeyote'],
+    'no_record' => ['en' => 'No Records or information found', 'sw' => 'Hakuna Taarifa yeyote'],
     'duration' => ['en' => 'Duration', 'sw' => 'Muda'],
     'requirements' => ['en' => 'Requirements', 'sw' => 'Mahitaji'],
     'field_of_study' => ['en' => 'Field of Study', 'sw' => 'Aina ya masomo'],
@@ -102,5 +104,10 @@ return [
     'other_researcher' => ['en' => 'Other Researcher(s)', 'sw' => 'Watafiti Washirika'],
     'duration_start' => ['en' => 'Start', 'sw' => 'Kuanza'],
     'duration_end' => ['en' => 'End', 'sw' => 'Mwisho'],
-    'funding' => ['en' => 'Funding', 'sw' => 'Ufadhili']
+    'funding' => ['en' => 'Funding', 'sw' => 'Ufadhili'],
+    'programe_name' => ['en' => 'Programe Name', 'sw' => 'Jina la Kozi'],
+    'programe_type' => ['en' => 'Programe Type', 'sw' => 'Aina ya Kozi'],
+    'programe_college_unit' => ['en' => 'College/Unit', 'sw' => 'Kitivo/Idara'],
+    'programe_duration' => ['en' => 'Duration', 'sw' => 'Muda'],
+    'programe_field_of_study' => ['en' => 'Field of Study', 'sw' => 'Aina ya Masomo']
 ];

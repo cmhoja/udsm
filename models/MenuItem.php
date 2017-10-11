@@ -196,7 +196,7 @@ class MenuItem extends \yii\db\ActiveRecord {
         }
         $condition['MenuType'] = $MenuType;
         $condition['MenuPlacementAreaRegion'] = $MenuPlacementAreaRegion;
-
+        
         return self::find($filter)
                         ->innerJoin('tbl_menu', 'tbl_menu_item.MenuID=tbl_menu.Id')
                         ->select('MenuID,menuClasses,ItemNameEn,ItemNameSw,LinkUrl,ParentItemID,ListOrder')

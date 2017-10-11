@@ -1,4 +1,4 @@
-<form class="form-inline"  method="POST" action="<?php echo \app\components\Utilities::generateUrl(html_entity_decode('study/catalogue')); ?>">
+<form class="form-inline" method="POST">
 
     <div class="input-text form-group">
         <select class="form-control" name="PTYpe" style="margin-bottom: 0%;">

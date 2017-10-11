@@ -1,4 +1,4 @@
-<form role="form" name="contactform" id="contactform" method="POST" action="<?php echo \app\components\Utilities::generateUrl('/study/programmes'); ?>">
+<form role="form" name="contactform"  method="POST" action="<?php echo \app\components\Utilities::generateUrl(html_entity_decode('study/catalogue')); ?>">
 
     <div class="input-text form-group">
         <select class="form-control" name="PTYpe" style="margin-bottom: 0%;">
@@ -11,12 +11,11 @@
     <div class="input-text form-group">
         <select class="form-control" name="FieldStudy" style="margin-bottom: 0%;">
             <option value=""> --- <?php echo Yii::$app->params['static_items']['select_field_of_study'][Yii::$app->language]; ?> ---</option>
-<?php
-$FieldOfStudy = Yii::$app->params['field_of_study'];
-if (is_array($FieldOfStudy)) {
-
-    foreach ($FieldOfStudy as $key => $field) {
-        ?>
+            <?php
+            $FieldOfStudy = Yii::$app->params['field_of_study'];
+            if (is_array($FieldOfStudy)) {
+                foreach ($FieldOfStudy as $key => $field) {
+                    ?>
                     <option value="<?php echo $key; ?>"><?php echo $field[Yii::$app->language]; ?></option>
                     <?php
                 }
@@ -27,9 +26,7 @@ if (is_array($FieldOfStudy)) {
     <div class="input-text form-group">
         <input type="text" name="ProgrameName" style="margin-bottom: 0%;" class="input-name form-control" placeholder="<?php echo Yii::$app->params['static_items']['enter_key_word'][Yii::$app->language] ?>" />
     </div>
-
-    <div class="course-search" style="margin-bottom: 4%;">
-        <input type="submit" name='Search' value="<?php echo Yii::$app->params['static_items']['search'][Yii::$app->language]; ?>">
-        <!--<button form="contactform" class="btn btn-success btn-block" type="submit"><i class="fa fa-search"></i>  <?php //echo Yii::$app->params['static_items']['search'][Yii::$app->language];  ?></button>-->
-    </div>
+    <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
+           value="<?= Yii::$app->request->csrfToken ?>"/>
+    <button type="submit" class="btn btn-success"><?php echo (Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['find_programme']['sw'] : Yii::$app->params['static_items']['find_programme']['en']; ?></button>
 </form>

@@ -23,7 +23,7 @@ class StudyController extends Controller {
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'programmes'],
+                        'actions' => ['index', 'programmes', 'programme'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -155,12 +155,16 @@ class StudyController extends Controller {
         if (isset($url[$count - 2]) && $url[$count - 2] == 'catalogue') {
             $Keyword = $url[$count - 1];
         }
-
+        if (Yii::$app->request->post()) {
+            $Keyword = Yii::$app->request->post('ProgrameName');
+            $FieldOfStudy = Yii::$app->request->post('FieldStudy');
+            $programmeType = Yii::$app->request->post('PTYpe');
+        }
         $language = Yii::$app->language;
         $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
 
         $content = array('page_content' => $page_content);
-        return $this->render('//site/pages/programmes_catalogue', $content);
+        return $this->render('//site/pages/programmes', $content);
     }
 
     public function actionProgramme() {

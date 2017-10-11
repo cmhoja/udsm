@@ -157,5 +157,63 @@ class CentresController extends Controller {
 
         return $this->render('//site/college/index', $content);
     }
+    
+    public function actionPrograms() {
+//getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                if ($Academic_unit_details) {
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    if (Yii::$app->request->post()) {
+                        $Keyword = Yii::$app->request->post('ProgrameName');
+                        $UnitID = $Academic_unit_details->Id;
+                        $FieldOfStudy = Yii::$app->request->post('FieldStudy');
+                        $programmeType = Yii::$app->request->post('PTYpe');
+
+                        $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                        $content['page_content'] = $page_content;
+                    } else {
+                        $programmeType = $Keyword = $UnitID = $FieldOfStudy = NULL;
+                        $UnitID = $Academic_unit_details->Id;
+                        $url_section = explode('/', $url);
+                        $Keyword = NULL;
+                        // var_dump($url_section);
+                        if (count($url_section) == 5 && isset($url_section[4]) && isset($url_section[3]) && ($url_section[3] == 'programs' OR $url_section[3] == 'programmes')) {
+                            $Keyword = $url_section[4];
+                        }
+
+                        if (strlen($Keyword) > 1) {
+                            $page_content = \app\models\Programmes::getProgrameDetailsByProgrammeUrl($Keyword);
+                            $content['page_content'] = $page_content;
+                            return $this->render('//site/college/programme_details', $content);
+                        } else {
+                            $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                            $content['page_content'] = $page_content;
+                        }
+                    }
+
+                    ////////////////
+                } else {
+                    $content['no_details'] = 'The requested page or section is not found';
+                }
+            } else {
+                $content['no_details'] = 'The requested page or section is not found';
+            }
+        }
+
+        return $this->render('//site/college/programmes', $content);
+    }
+
 
 }

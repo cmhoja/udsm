@@ -13,6 +13,7 @@ use yii\bootstrap\Modal;
 <!-- saved from url=(0052)http://zozothemes.com/html/mist/light/header10.html# -->
 <html lang="en">
     <head>
+        <?= Html::csrfMetaTags() ?>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <title><?php echo Yii::$app->name[Yii::$app->language] . '-' . $this->title; ?></title>
