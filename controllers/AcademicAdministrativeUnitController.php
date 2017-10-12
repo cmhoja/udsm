@@ -12,13 +12,12 @@ use yii\filters\VerbFilter;
 /**
  * AcademicAdministrativeUnitController implements the CRUD actions for AcademicAdministrativeUnit model.
  */
-class AcademicAdministrativeUnitController extends Controller
-{
+class AcademicAdministrativeUnitController extends Controller {
+
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -28,8 +27,8 @@ class AcademicAdministrativeUnitController extends Controller
             ],
         ];
     }
-    
-     public function init() {
+
+    public function init() {
         $this->layout = 'backend/main';
         parent::init();
     }
@@ -38,14 +37,13 @@ class AcademicAdministrativeUnitController extends Controller
      * Lists all AcademicAdministrativeUnit models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new AcademicAdministrativeUnitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -54,10 +52,9 @@ class AcademicAdministrativeUnitController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -66,15 +63,19 @@ class AcademicAdministrativeUnitController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new AcademicAdministrativeUnit();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if (is_null($model->ParentUnitId) OR empty($model->ParentUnitId)) {
+                $model->ParentUnitId = 0;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->Id]);
+            }
         } else {
             return $this->render('create', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -85,15 +86,14 @@ class AcademicAdministrativeUnitController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->Id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -104,8 +104,7 @@ class AcademicAdministrativeUnitController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -118,12 +117,12 @@ class AcademicAdministrativeUnitController extends Controller
      * @return AcademicAdministrativeUnit the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = AcademicAdministrativeUnit::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
