@@ -38,7 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
                 }
             ],
-            // 'ShowOnPage',
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getStatusName();
+                }
+            ),
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

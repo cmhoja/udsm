@@ -79,9 +79,10 @@ return [
         'leadership' => 'about/leadership',
         //////
         ///BACKEND ROUTES
+        'backend/templates' => 'backend/templates',
+        'backend/<category>' => 'backend/<category>',
         'backend/logout' => 'backend/logout',
         'backend|login' => 'backend/login',
-        'backend/<category>' => 'backend/<category>',
         'users/<category>' => 'users/<category>',
         'habari/<category>' => 'habari/<category>',
         'matukio/<category>' => 'matukio/<category>',

@@ -126,8 +126,19 @@ $session = Yii::$app->session;
                                 <li><a href="<?php echo Url::to(['/academic-administrative-unit/index']) ?>">
                                         <i class="fa fa-circle-o"></i>Academic/Administrative Units</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo Url::to(['/backend/templates', 'opt' => 'main']) ?>">
+                                        <i class="fa fa-circle-o"></i>Main Website Regions</a>
+                                </li>
                             <?php } ?>
-
+                            <li>
+                                <a href="<?php echo Url::to(['/backend/templates', 'opt' => 'units']) ?>">
+                                    <i class="fa fa-circle-o"></i>Units Template Regions</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo Url::to(['/backend/templates', 'opt' => 'page']) ?>">
+                                    <i class="fa fa-circle-o"></i>Custom Page Regions</a>
+                            </li>
                         </ul>
                     </li>
 

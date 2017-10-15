@@ -171,7 +171,7 @@ class CustomBlocksController extends Controller {
      * @return mixed
      */
     public function actionDelete($id) {
-        $model = $this->findModel($id)->delete();
+        $model = $this->findModel($id);
         if ($model && $model->Status != CustomBlocks::STATUS_PUBLISHED) {
             $this->findModel($id)->delete();
         }

@@ -27,7 +27,7 @@ class BackendController extends Controller {
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['logout', 'login'],
+                        'actions' => ['logout', 'login','templates'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -69,6 +69,15 @@ class BackendController extends Controller {
      */
     public function actionIndex() {
         return $this->redirect(['backend/login']);
+    }
+
+    public function actionTemplates($opt) {
+        $opt=NULL;
+        if (Yii::$app->request->get('opt')) {
+            $opt = Yii::$app->request->get('opt');
+        }
+     
+        return $this->render('//backend/templates', array('opt' => $opt));
     }
 
     /**
