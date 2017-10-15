@@ -65,6 +65,7 @@ class CustomBlocksSearch extends CustomBlocks
             'BlockPlacementAreaRegion' => $this->BlockPlacementAreaRegion,
             'Status' => $this->Status,
         ]);
+        $query->orderBy('Id DESC');
 
         $query->andFilterWhere(['like', 'BlockTitleEn', $this->BlockTitleEn])
             ->andFilterWhere(['like', 'BlockTitleSw', $this->BlockTitleSw])

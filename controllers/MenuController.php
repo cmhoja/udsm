@@ -27,12 +27,15 @@ class MenuController extends Controller {
             ],
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => ['index', 'create', 'update', 'view'],
+                'only' => ['index', 'create', 'update', 'view', 'delete', 'addItem', 'editItem', 'deleteItem', 'publish', 'unPublish'],
                 'rules' => [
-                    // allow authenticated users
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                       // 'verbs' => ['post'],
+                       // 'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && Yii::$app->session->has('USER_TYPE_ADMINISTRATOR'))?TRUE:FALSE;
+                        },
                     ],
                 ]
             ],

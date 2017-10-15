@@ -95,7 +95,7 @@ class SocialMediaAccounts extends \yii\db\ActiveRecord {
         return NULL;
     }
 
-    function getAccTypeList() {
+   static function getAccTypeList() {
         return array(
             self::ACC_TYPE_FACEBOOK => 'FaceBook A/C',
             self::ACC_TYPE_TWITTER => 'Twitter A/C',

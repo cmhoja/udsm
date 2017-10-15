@@ -29,6 +29,18 @@ class UsersController extends Controller {
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view', 'delete', 'publish', 'unPublish'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && Yii::$app->session->has('USER_TYPE_ADMINISTRATOR')) ? TRUE : FALSE;
+                        },
+                    ],
+                ]
+            ],
         ];
     }
 
@@ -111,7 +123,7 @@ class UsersController extends Controller {
             $model->scenario = 'require_user_password';
         }
         if ($model->load(Yii::$app->request->post())) {
-          
+
             if (empty($model->Password) && empty($OldPassword)) {
                 if ($model->UserName) {
                     $model->Password = \app\components\Utilities::setHashedValue($model->UserName);

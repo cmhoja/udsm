@@ -22,8 +22,9 @@ use Yii;
  * @property integer $Status
  */
 class CustomBlocks extends \yii\db\ActiveRecord {
-public $Upload;
-    
+
+    public $Upload;
+
     const STATUS_SAVED = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
@@ -32,8 +33,8 @@ public $Upload;
     const BLOCK_TYPE_CUSTOM_PAGE = 2;
 
     ///holders for plavement regions based  on block types
-    public $BlockPlacementAreaRegion2;
-    public $BlockPlacementAreaRegion1;
+//    public $BlockPlacementAreaRegion2;
+//    public $BlockPlacementAreaRegion1;
 
     /**
      * @inheritdoc
@@ -48,10 +49,11 @@ public $Upload;
     public function rules() {
         return [
             [['BlockType', 'BlockName', 'BlockDetailsEn', 'BlockDetailsSw', 'BlockPlacementAreaRegion'], 'required'],
-            [['BlockUnitID', 'BlockType', 'BlockPlacementAreaRegion', 'BlockPlacementAreaRegion1', 'BlockPlacementAreaRegion2', 'Status'], 'integer'],
+            [['BlockUnitID', 'BlockType', 'Status'], 'integer'],
+            [['BlockPlacementAreaRegion'], 'string', 'max' => 10],
             [['BlockDetailsSw'], 'string'],
             [['Upload'], 'file', 'maxFiles' => 1, 'extensions' => 'png, jpg,jpeg', 'mimeTypes' => 'image/jpeg, image/png',],
-            [['BlockPlacementAreaRegion2', 'BlockPlacementAreaRegion1', 'BlockIconCSSClass'], 'safe'],
+            [['BlockIconCSSClass'], 'safe'],
             [['BlockIconCSSClass', 'BlockTitleEn', 'BlockTitleSw'], 'string', 'max' => 100],
             [['BlockIconPicture', 'BlockIconVideo', 'LinkToPage', 'ShowOnPage'], 'string', 'max' => 255],
         ];
@@ -75,11 +77,9 @@ public $Upload;
             'BlockIconVideo' => 'Block Icon(Embeded) Video',
             'LinkToPage' => 'Link To Page',
             'BlockPlacementAreaRegion' => 'Placement Region',
-            'BlockPlacementAreaRegion1' => 'Block Placement Area Region',
-            'BlockPlacementAreaRegion2' => 'Block Placement Area Region',
             'ShowOnPage' => 'Show On Page',
             'Status' => 'Status',
-            'Upload'=>'Block Icon Picture'
+            'Upload' => 'Block Icon Picture'
         ];
     }
 
@@ -119,12 +119,6 @@ public $Upload;
         if (isset($regions[$this->BlockPlacementAreaRegion])) {
             return $regions[$this->BlockPlacementAreaRegion];
         }
-//        else {
-//            $regions = \app\components\SiteRegions::getCustomPageTemplateRegions();
-//            if (isset($regions[$this->BlockPlacementAreaRegion])) {
-//                return $regions[$this->BlockPlacementAreaRegion];
-//            }
-//        }
         return NULL;
     }
 

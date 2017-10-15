@@ -24,7 +24,12 @@ echo $this->render('menu');
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'UnitNameEn',
-           // 'UnitNameSw',
+            [
+                'attribute' => 'UnitAbreviationCode',
+                'value' => function($model) {
+                    return $model->UnitAbreviationCode?strtoupper($model->UnitAbreviationCode):$model->UnitAbreviationCode;
+                }
+            ],
             [
                 'attribute' => 'UnitType',
                 'value' => function($model) {

@@ -84,9 +84,9 @@ class Menu extends \yii\db\ActiveRecord {
 
     static function getMenuTypes() {
         return array(
-            self::MENU_TYPE_MAIN_MENU => 'Site/Section/Unit Main Menu',
-            self::MENU_TYPE_SIDE_MENU => 'Page/Side menu',
-            self::MENU_TYPE_OTHER_MENU => 'Other Menu(s)',
+            self::MENU_TYPE_MAIN_MENU => 'Website Main Menu',
+            self::MENU_TYPE_SIDE_MENU => 'Page Side Menu',
+            self::MENU_TYPE_OTHER_MENU => 'Other Menu',
         );
     }
 

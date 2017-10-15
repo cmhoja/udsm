@@ -41,7 +41,7 @@ use app\models\AcademicAdministrativeUnit;
             ],
             'LName' => [
                 'type' => Form::INPUT_TEXT,
-                'options' => ['placeholder' => 'Enter Last  Name'],
+                'options' => ['placeholder' => 'Enter Last  Name(s)'],
                 'columnOptions' => ['width' => '185px']
             ],
             'EmailAddress' => [
@@ -56,7 +56,7 @@ use app\models\AcademicAdministrativeUnit;
             ],
             'Password' => [
                 'type' => Form::INPUT_PASSWORD,
-                'options' => ['placeholder' => 'Enter User Name'],
+                'options' => ['placeholder' => 'Enter Password or Default password will be set'],
                 'columnOptions' => ['width' => '185px'],
                 'visible' => (isset(Yii::$app->params['authType']) && Yii::$app->params['authType'] != 'ldap') ? TRUE : FALSE
             ],

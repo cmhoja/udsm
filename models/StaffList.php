@@ -13,6 +13,9 @@ use Yii;
  * @property string $Education
  * @property string $Position
  * @property string $Summary
+ * @property string $EducationSw
+ * @property string $PositionSw
+ * @property string $SummarySw
  * @property integer $UnitID
  *
  * @property TblAcademicAdministrativeUnit $unit
@@ -35,11 +38,11 @@ class StaffList extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['FName', 'LName', 'Education'], 'required'],
+            [['FName', 'LName', 'Education','EducationSw'], 'required'],
             [['UnitID'], 'integer'],
             [['FName', 'LName'], 'string', 'max' => 45],
-            [['Education', 'Summary'], 'string'],
-            [['Position'], 'string', 'max' => 100],
+            [['Education','EducationSw', 'Summary','SummarySw'], 'string'],
+            [['Position','PositionSw'], 'string', 'max' => 100],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }
@@ -52,9 +55,12 @@ class StaffList extends \yii\db\ActiveRecord {
             'Id' => 'ID',
             'FName' => 'First Name',
             'LName' => 'Last Names',
-            'Education' => 'Education History',
-            'Position' => 'Current Job Position(s)',
-            'Summary' => 'Current Summarised CV',
+            'Education' => 'Education History (English)',
+            'EducationSw' => 'Education History(Swahili)',
+            'Position' => 'Current Job Position(s) (English)',
+            'PositionSw' => 'Current Job Position(s) (Swahili)',
+            'Summary' => 'Current Summarised CV (English)',
+            'SummarySw' => 'Current Summarised CV (Swahili)',
             'UnitID' => 'Dept/Section/Unit',
         ];
     }

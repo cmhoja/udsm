@@ -10,9 +10,9 @@ use yii\grid\GridView;
 $this->params['breadcrumbs'][] = 'Manage Basic Pages';
 ?>
 <div class="basic-page-index">
-        <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-    <?= Html::a('Add Basic Page', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Basic Page', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?=
     GridView::widget([
@@ -20,15 +20,21 @@ $this->params['breadcrumbs'][] = 'Manage Basic Pages';
         //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            'PageTitleEn',
+            'PageSeoUrl:url',
+            array(
+                'attribute' => 'PageSeoUrl',
+                'label' => 'Previw Link',
+                'value' => function($model) {
+                    return \yii\helpers\Url::toRoute($model->PageSeoUrl, true);
+                }
+            ),
             array(
                 'attribute' => 'UnitID',
                 'value' => function($model) {
                     return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
                 }
-            ), 'PageTitleEn',
-            'PageSeoUrl:url',
-            'DateCreated',
-            array(
+            ), array(
                 'attribute' => 'Status',
                 'value' => function($model) {
                     return $model->getStatusName();

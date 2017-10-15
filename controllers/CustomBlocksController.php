@@ -25,6 +25,18 @@ class CustomBlocksController extends Controller {
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view', 'delete', 'publish', 'unPublish'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && Yii::$app->session->has('USER_TYPE_ADMINISTRATOR')) ? TRUE : FALSE;
+                        },
+                    ],
+                ]
+            ],
         ];
     }
 
@@ -39,6 +51,9 @@ class CustomBlocksController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new CustomBlocksSearch();
+        if (Yii::$app->session->has('UNIT_ID')) {
+            $searchModel->BlockUnitID = Yii::$app->session->get('UNIT_ID');
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
         return $this->render('index', [
@@ -74,14 +89,6 @@ class CustomBlocksController extends Controller {
                 $model->Status = CustomBlocks::STATUS_SAVED;
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = CustomBlocks::STATUS_PUBLISHED;
-            }
-            switch ($model->BlockType) {
-                case CustomBlocks::BLOCK_TYPE_HOME_PAGE:
-                    $model->BlockPlacementAreaRegion = $model->BlockPlacementAreaRegion1;
-                    break;
-                case CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE:
-                    $model->BlockPlacementAreaRegion = $model->BlockPlacementAreaRegion2;
-                    break;
             }
             $model->Upload = \yii\web\UploadedFile::getInstance($model, 'Upload');
             if ($model->validate()) {
@@ -123,18 +130,6 @@ class CustomBlocksController extends Controller {
         if ($model && $model->Status == CustomBlocks::STATUS_PUBLISHED) {
             $this->redirect(array('index'));
         }
-        switch ($model->BlockType) {
-            case CustomBlocks::BLOCK_TYPE_HOME_PAGE:
-                $model->BlockPlacementAreaRegion1 = $model->BlockPlacementAreaRegion;
-
-                break;
-
-            case CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE:
-                $model->BlockPlacementAreaRegion2 = $model->BlockPlacementAreaRegion;
-
-                break;
-        }
-
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = CustomBlocks::STATUS_SAVED;
             if (Yii::$app->request->post('save') == 'save') {
@@ -142,15 +137,7 @@ class CustomBlocksController extends Controller {
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = CustomBlocks::STATUS_PUBLISHED;
             }
-            switch ($model->BlockType) {
-                case CustomBlocks::BLOCK_TYPE_HOME_PAGE:
-                    $model->BlockPlacementAreaRegion = $model->BlockPlacementAreaRegion1;
-                    break;
 
-                case CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE:
-                    $model->BlockPlacementAreaRegion = $model->BlockPlacementAreaRegion2;
-                    break;
-            }
             $model->Upload = \yii\web\UploadedFile::getInstance($model, 'Upload');
             if ($model->validate()) {
                 if ($model->Upload) {

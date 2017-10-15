@@ -17,8 +17,8 @@ LteAsset::register($this);
         <meta charset="<?= Yii::$app->charset ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
-        <title><?php //echo =Html::encode("UDSM Website| CMS")    ?></title>
-        <!--<title><?php //= Html::encode($this->title)    ?></title>-->
+        <title><?php //echo =Html::encode("UDSM Website| CMS")                 ?></title>
+        <!--<title><?php //= Html::encode($this->title)                 ?></title>-->
         <?php $this->head() ?>
     </head>
     <!--    <body class="skin-blue sidebar-mini">-->
@@ -33,7 +33,7 @@ LteAsset::register($this);
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>UDSM</b> CMS</span>-->
                     <span class="logo-lg"> 
-                        <img style="height: 55px;position: relative; float: none;padding: 1%;"src="<?php //echo Yii::getAlias('@web') . '/themes/udsm/layouts/backend/images/logo-udsm.png';    ?>" />
+                        <img style="height: 55px;position: relative; float: none;padding: 1%;"src="<?php //echo Yii::getAlias('@web') . '/themes/udsm/layouts/backend/images/logo-udsm.png';                 ?>" />
                     </span>
                     <!-- logo for regular state and mobile devices -->
                  <!--<span class="logo-lg"><b>UDSM</b> CMS</span>-->
@@ -44,23 +44,25 @@ LteAsset::register($this);
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>
                     </a>
-
-                    <div class="navbar-custom-menu" style="width: 80%;">
-                        <div style="float: left;width: 70%;margin: 0.2%;margin-top: 1%;">
-                            <p style="text-orientation: inherit;text-transform: uppercase;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight: 300;position: relative; float: left; color: white; font-size: 17px;display: block; padding: 1%; text-align: center;vertical-align: middle">
+                    <div class="navbar-custom-menu" style="width: 80%;margin-bottom: 0;">
+                        <div style="float: left;width: 55%;margin: 0.2%;margin-top: 0.5%;">
+                            <p style="text-orientation: inherit;text-transform: uppercase;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight: 300;position: relative; float: left; color: white; font-size: 17px;display: block; padding: 0.2%;line-height: 18px; text-align: center;vertical-align: middle">
                                 <b>Website Content Management System (CMS)</b>
+                                <?php if (Yii::$app->session->has('UNIT_NAME')) { ?><br/>
+                                    <span style="font-size: 10px; text-transform: uppercase">
+                                        ---- &nbsp; &nbsp; <?php echo Yii::$app->session->get('UNIT_NAME'); ?>  &nbsp; &nbsp; ----
+                                    </span>
+                                <?php } ?>
                             </p>
                         </div>
-                        <ul class="nav navbar-nav" style="float: right;">
-                            <?php
-                            //if (Yii::$app->user->isGuest) {
-                            if (Yii::$app->user->isGuest && !Yii::$app->session->has('UID')) {
-                                echo '<li><a href="' . Url::to(['/backend/login']) . '">Login</a></li>';
-                            } else {
-                                //Yii::$app->user->identity->username 
-                                echo '<li><a href="' . Url::to(['/backend/logout']) . '">Logout (Loged in as: ' . Yii::$app->session->get('U_NAME') . ')</a></li>';
-                            }
-                            ?>
+                        <ul class="nav navbar-nav" style="float: right;font-size: 11px;">
+                            <?php if (Yii::$app->user->isGuest && !Yii::$app->session->has('UID')) { ?>
+                                <li><a href="<?php echo Url::to(['/backend/login']); ?>">Login</a></li>
+                            <?php } else { ?>
+                                <li>
+                                    <a href="<?php echo Url::to(['/backend/logout']); ?>">(Logged in as: <?php echo Yii::$app->session->get('U_NAME'); ?>) >> Logout</a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </nav>

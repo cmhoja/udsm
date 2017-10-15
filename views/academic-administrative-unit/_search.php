@@ -11,7 +11,7 @@ use app\models\AcademicAdministrativeUnit;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="search" style="width: 90%">
+<div class="search" style="width: 97%">
     <?php
     $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'action' => ['index'],
                 'method' => 'get',]);
@@ -27,19 +27,27 @@ use app\models\AcademicAdministrativeUnit;
                 'options' => ['placeholder' => 'Enter Unit Name in English'],
                 'columnOptions' => ['width' => '185px']
             ],
-            'UnitNameSw' => [
-                'type' => Form::INPUT_TEXT,
-                'options' => ['placeholder' => 'Enter Unit Name in Swahili'],
-                'columnOptions' => ['width' => '185px']
+            'ParentUnitId' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => \yii\helpers\ArrayHelper::map(AcademicAdministrativeUnit::getParentUnitsList(), 'Id', 'UnitNameEn'),
+                'options' => ['prompt' => '-- select --','style'=>'width:185px;border:1px solid red;'],
+                'columnOptions' => ['width' => '85px', 'height' => '10px']
             ],
             'UnitType' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
-                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement'=> AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
-                'columnOptions' => ['width' => '185px', 'height' => '10px']
+                'items' => AcademicAdministrativeUnit::getUnitTypes(), 
+                'options' => ['prompt' => '-- Select --','style'=>'width:185px;border:1px solid red;float:left'],
+                'columnOptions' => ['width' => '105px', 'height' => '10px']
             ],
+//            'TypeContentManagement' => [
+//                'type' => Form::INPUT_DROPDOWN_LIST,
+//                'items' => AcademicAdministrativeUnit::getContentMangementTypes(), 
+//                'options' => ['prompt' => '-- Select --'],
+//                'columnOptions' => ['width' => '105px', 'height' => '10px']
+//            ],
         ]
     ]);
-    echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+    echo Html::submitButton('Search', ['class' => 'btn-primary']);
     ActiveForm::end()
     ?>
 

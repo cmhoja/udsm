@@ -30,7 +30,12 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Enter Unit Name in Swahili'],
                 'columnOptions' => ['width' => '185px']
-            ], 'ParentUnitId' => [
+            ],  'UnitAbreviationCode' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Enter Abbreviation Code'],
+                'columnOptions' => ['width' => '185px']
+            ], 
+            'ParentUnitId' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
                 'items' => ArrayHelper::map(AcademicAdministrativeUnit::getParentUnitsList(), 'Id', 'UnitNameEn'),
                 'options' => ['prompt' => '-- Please Choose Parent Unit (if any) --'],

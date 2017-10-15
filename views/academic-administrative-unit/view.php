@@ -38,6 +38,12 @@ $this->params['breadcrumbs'][] = 'Details';
                 }
             ],
             [
+                'attribute' => 'UnitAbreviationCode',
+                'value' => function($model) {
+                    return $model->UnitAbreviationCode ? strtoupper($model->UnitAbreviationCode) : $model->UnitAbreviationCode;
+                }
+            ],
+            [
                 'attribute' => 'ParentUnitId',
                 'label' => 'Member Of',
                 'value' => function($model) {

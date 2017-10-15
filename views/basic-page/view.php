@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = 'Page Details';
                     return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
                 }
             ),
-           ///'PageId',
+            ///'PageId',
             'PageTitleEn',
             'PageTitleSw',
             'DescriptionEn:ntext',
@@ -45,6 +45,13 @@ $this->params['breadcrumbs'][] = 'Page Details';
             'Attachment',
             'EmbededVideo',
             'PageSeoUrl:url',
+            array(
+                'attribute' => 'PageSeoUrl',
+                'label' => 'Page Preview link',
+                'value' => function($model) {
+                    return \yii\helpers\Url::toRoute($model->PageSeoUrl, true);
+                }
+            ),
             'DateCreated',
             array(
                 'attribute' => 'Status',

@@ -52,7 +52,8 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
         return [
             [['UnitNameEn', 'UnitType', 'UnitNameSw', 'TypeContentManagement'], 'required'],
             [['UnitType'], 'integer'],
-            [['ParentUnitId', 'UnitAbreviationCode', 'Logo'], 'safe'],
+            ['UnitAbreviationCode', 'required', 'on' => 'require_unit_code'],
+            [['ParentUnitId', 'Logo','UnitAbreviationCode'], 'safe'],
             [['UnitNameEn', 'UnitNameSw'], 'string', 'max' => 255],
         ];
     }

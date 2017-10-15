@@ -43,7 +43,8 @@ class Documents extends \yii\db\ActiveRecord {
             [['DocumentType', 'DocumentNameEn', 'DocumentNameSw', 'Attachment', 'Status'], 'required'],
             [['DocumentType', 'UnitID', 'Status'], 'integer'],
             [['DatePublished'], 'safe'],
-            [['DocumentNameEn', 'DocumentNameSw', 'Attachment'], 'string', 'max' => 255],
+            [['Attachment'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => false], // 'extensions' => 'zip, pdf, .docx, .doc, ppt, odt, .xlsx, .xls'],
+            [['DocumentNameEn', 'DocumentNameSw'], 'string', 'max' => 255],
         ];
     }
 
@@ -81,29 +82,28 @@ class Documents extends \yii\db\ActiveRecord {
     }
 
     static function getDocumentTypes($lang = NULL) {
-        if (isset($lang)) {
-            switch ($lang) {
-                case 'sw':
-                    return array(
-                        self::DOC_TYPE_ANNUAL_REPORT => 'Ripoti Ya Mwaka',
-                        self::DOC_TYPE_PUBLICATION_BOOKS => 'Vitabu/Machapisho',
-                        // self::DOC_TYPE_PUBLICATION_JOURNALS => 'Journal',
-                        self::DOC_TYPE_POLICY_GUIDELINE => ' Sera/Mwongozo',
-                        self::DOC_TYPE_ALMANAC_PROSPECTUS => 'Takwimu/Prospectus',
-                    );
+        // if (isset($lang)) {
+        switch ($lang) {
+            case 'sw':
+                return array(
+                    self::DOC_TYPE_ANNUAL_REPORT => 'Ripoti Ya Mwaka',
+                    self::DOC_TYPE_PUBLICATION_BOOKS => 'Vitabu/Machapisho',
+                    // self::DOC_TYPE_PUBLICATION_JOURNALS => 'Journal',
+                    self::DOC_TYPE_POLICY_GUIDELINE => ' Sera/Mwongozo',
+                    self::DOC_TYPE_ALMANAC_PROSPECTUS => 'Takwimu/Prospectus',
+                );
 
-                    break;
+                break;
 
-                default:
-                    return array(
-                        self::DOC_TYPE_ANNUAL_REPORT => 'Annual Report',
-                        self::DOC_TYPE_PUBLICATION_BOOKS => 'Books',
-                        // self::DOC_TYPE_PUBLICATION_JOURNALS => 'Journals',
-                        self::DOC_TYPE_POLICY_GUIDELINE => ' Policy/Guideline',
-                        self::DOC_TYPE_ALMANAC_PROSPECTUS => 'Almanac/Prospectus',
-                    );
-                    break;
-            }
+            default:
+                return array(
+                    self::DOC_TYPE_ANNUAL_REPORT => 'Annual Report',
+                    self::DOC_TYPE_PUBLICATION_BOOKS => 'Books',
+                    // self::DOC_TYPE_PUBLICATION_JOURNALS => 'Journals',
+                    self::DOC_TYPE_POLICY_GUIDELINE => ' Policy/Guideline',
+                    self::DOC_TYPE_ALMANAC_PROSPECTUS => 'Almanac/Prospectus',
+                );
+                break;
         }
     }
 
@@ -111,6 +111,31 @@ class Documents extends \yii\db\ActiveRecord {
         $items = self::getDocumentTypes($lang);
         if (isset($items[$this->DocumentType])) {
             return $items[$this->DocumentType];
+        }
+        return NULL;
+    }
+
+    static function getDocTypeByValue($value) {
+        $items = self::getDocumentTypes();
+
+        if (isset($items[$value])) {
+            return $items[$value];
+        }
+        return NULL;
+    }
+
+    function getStatusList() {
+        return array(
+            self::DOC_STATUS_SAVED => 'Saved',
+            self::DOC_STATUS_PUBLISHED => 'Published',
+            self::DOC_STATUS_UNPUBLISHED => 'Un Published'
+        );
+    }
+
+    function getStatusName() {
+        $statuses = self::getStatusList();
+        if ($statuses && isset($statuses[$this->Status])) {
+            return $statuses[$this->Status];
         }
         return NULL;
     }

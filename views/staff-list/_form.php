@@ -38,14 +38,25 @@ use app\models\AcademicAdministrativeUnit;
             'Education' => [
                 'type' => Form::INPUT_TEXT,
                 'columnOptions' => ['width' => '185px']
+            ], 'EducationSw' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
             ],
             'Position' => [
                 'type' => Form::INPUT_TEXT,
                 'columnOptions' => ['width' => '185px']
+            ], 'PositionSw' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px']
             ],
             'Summary' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'columnOptions' => ['width' => '185px']
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ], 'SummarySw' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
             ],
         ]
     ]);

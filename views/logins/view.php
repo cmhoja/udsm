@@ -4,13 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Documents */
+/* @var $model app\models\Logins */
 
-$this->title = 'Document Details';
-$this->params['breadcrumbs'][] = ['label' => 'Documents', 'url' => ['index']];
+$this->title = $model->Id;
+$this->params['breadcrumbs'][] = ['label' => 'Logins', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="documents-view">
+<div class="logins-view">
+
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-primary']) ?>
@@ -27,13 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'Id',
-            'DocumentType',
-            'DocumentNameEn',
-            'DocumentNameSw',
-            'DatePublished',
-            'Attachment',
-            'UnitID',
-            'Status',
+            'UserId',
+            'DateCreated',
+            'IpAddress',
+            'Details:ntext',
         ],
     ]) ?>
 

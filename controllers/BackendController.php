@@ -86,11 +86,12 @@ class BackendController extends Controller {
         if ($model->load(Yii::$app->request->post())) {
             $password = $model->password;
             $authType = Yii::$app->params['authType']; ///getting authentication type used
+            $loggedin = FALSE;
             switch ($authType) {
                 case 'ldap':
                     $exist = Users::find()->where('Username=:Username AND Status=:Status', array(':Username' => $model->username, ':Status' => Users::ACC_STATUS_ACTIVE))->one();
                     ///https://github.com/Adldap2/Adldap2
-                   if ($exist) {
+                    if ($exist) {
                         ///checking user details in ldap
                         $LdapSettings = \Yii::$app->params['LDap'];
                         $ldap_authenticate = \app\components\Utilities::lDapAuthenticate($LdapSettings, $model->username, $model->password);
@@ -112,11 +113,16 @@ class BackendController extends Controller {
 
                     break;
                 case 'system':
+
                     if ($model->password) {
                         $model->password = \app\components\Utilities::setHashedValue($model->password);
                     }
                     $identity = \app\models\User::findByUsernameAndPassword($model->username, $model->password);
-                    $loggedin = Yii::$app->user->login($identity);
+//                    var_dump($identity);
+//                    exit;
+                    if ($identity) {
+                        $loggedin = Yii::$app->user->login($identity);
+                    }
                     break;
 
                 default :
@@ -138,6 +144,8 @@ class BackendController extends Controller {
                     $session->set('U_NAME', $userRoles->UserName);
                     if ($userRoles->UnitID) {
                         $session->set('UNIT_ID', $userRoles->UnitID);
+                        $UnitName = \app\models\AcademicAdministrativeUnit::getUnitNameById($userRoles->UnitID);
+                        $session->set('UNIT_NAME', $UnitName);
                     } else {
                         $session->remove('UNIT_ID');
                     }

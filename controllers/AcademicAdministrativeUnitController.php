@@ -25,6 +25,20 @@ class AcademicAdministrativeUnitController extends Controller {
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view', 'delete', 'publish', 'unPublish'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        // 'verbs' => ['post'],
+                        // 'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && (Yii::$app->session->has('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->has('UNIT_ID'))) ? TRUE : FALSE;
+                        },
+                    ],
+                ]
+            ],
         ];
     }
 
@@ -39,6 +53,10 @@ class AcademicAdministrativeUnitController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new AcademicAdministrativeUnitSearch();
+        $session = Yii::$app->session;
+        if ($session['UNIT_ID']) {
+            $searchModel->ParentUnitId = $session['UNIT_ID'];
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -70,14 +88,17 @@ class AcademicAdministrativeUnitController extends Controller {
             if (is_null($model->ParentUnitId) OR empty($model->ParentUnitId)) {
                 $model->ParentUnitId = 0;
             }
+            $model->UnitAbreviationCode = strtolower($model->UnitAbreviationCode);
+            if ($model->TypeContentManagement == AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL) {
+                $model->scenario = 'require_unit_code';
+            }
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->Id]);
             }
-        } else {
-            return $this->render('create', [
-                        'model' => $model,
-            ]);
         }
+        return $this->render('create', [
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -89,13 +110,21 @@ class AcademicAdministrativeUnitController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id]);
-        } else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            if (is_null($model->ParentUnitId) OR empty($model->ParentUnitId)) {
+                $model->ParentUnitId = 0;
+            }
+            $model->UnitAbreviationCode = strtolower($model->UnitAbreviationCode);
+            if ($model->TypeContentManagement == AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL) {
+                $model->scenario = 'require_unit_code';
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->Id]);
+            }
         }
+        return $this->render('update', [
+                    'model' => $model,
+        ]);
     }
 
     /**

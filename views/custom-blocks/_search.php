@@ -11,7 +11,7 @@ use app\models\AcademicAdministrativeUnit;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="search">
+<div class="search" style="width: 99%;">
     <?php
     $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
     ?>
@@ -21,7 +21,7 @@ use app\models\AcademicAdministrativeUnit;
         'form' => $form,
         'columns' => 1,
         'attributes' => [
-            'onClick' => 'this.disabled=true;this.form.submit();',
+          //  'onClick' => 'this.disabled=true;this.form.submit();',
             'BlockUnitID' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
                 'options' => ['prompt' => '--- select --'],
@@ -46,7 +46,7 @@ use app\models\AcademicAdministrativeUnit;
             ],
         ]
     ]);
-     echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+     echo Html::submitButton('Search', ['class' => ' btn-primary']);
     ActiveForm::end();
     ?>
 </div>

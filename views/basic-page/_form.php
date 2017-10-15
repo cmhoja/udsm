@@ -46,15 +46,16 @@ use app\models\AcademicAdministrativeUnit;
                 'columnOptions' => ['width' => '185px']
             ],
             'DescriptionEn' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'options' => ['placeholder' => 'Title of the News in Swahili'],
-                'columnOptions' => ['width' => '185px']
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
             ],
             'DescriptionSw' => [
-                'type' => Form::INPUT_TEXTAREA,
-                'options' => ['placeholder' => 'Title of the News in Swahili'],
-                'columnOptions' => ['width' => '185px']
-            ], 'Attachment' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ],
+            'Attachment' => [
                 'type' => Form::INPUT_FILE,
                 'columnOptions' => ['width' => '185px']
             ],

@@ -24,6 +24,19 @@ class ContactsController extends Controller {
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ], 'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view', 'delete', 'publish', 'unPublish'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        // 'verbs' => ['post'],
+                        // 'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && Yii::$app->session->has('USER_TYPE_ADMINISTRATOR') ) ? TRUE : FALSE;
+                        },
+                    ],
+                ]
             ],
         ];
     }

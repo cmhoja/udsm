@@ -41,7 +41,7 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
             'enableSession' => true,
-            'authTimeout' => 30,
+            'authTimeout' => 300,
             'loginUrl' => ['backend/login'],
         ],
 //        'authManager' => [
@@ -77,12 +77,13 @@ $config = [
         ],
         'admin' => [
             'class' => 'mdm\admin\Module',
-//            'layout' => 'top-menu', // avaliable value 'left-menu', 'right-menu' and 'top-menu'
             'controllerMap' => [
                 'assignment' => [
-                    'class' => 'mdm\admin\controllers\AssignmentController',
-                    'userClassName' => 'app\models\User',
-                    'idField' => 'id'
+                   // 'class' => 'mdm\admin\controllers\AssignmentController',
+                  //  'userClassName' => 'app\models\User',
+                 ///  'idField' => 'id',
+//                    'userClassName' => 'app\models\Users',
+//                    'idField' => 'Id'
                 ]
             ],
             'menus' => [

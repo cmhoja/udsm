@@ -11,26 +11,35 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="documents-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Create Documents', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
-            'DocumentType',
             'DocumentNameEn',
-            'DocumentNameSw',
+            array(
+                'attribute' => 'DocumentType',
+                'value' => function($model) {
+                    return \app\models\Documents::getDocTypeByValue($model->DocumentType);
+                }
+            ),
             'DatePublished',
-            // 'Attachment',
-            // 'UnitID',
-            // 'Status',
-
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                }
+            ),
+            array(
+                'attribute' => 'Status',
+                'value' => function($model) {
+                    return $model->getStatusName();
+                }),
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

@@ -25,6 +25,18 @@ class BasicPageController extends Controller {
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view', 'delete', 'publish', 'unPublish'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && Yii::$app->session->has('USER_TYPE_ADMINISTRATOR')) ? TRUE : FALSE;
+                        },
+                    ],
+                ]
+            ],
         ];
     }
 
@@ -72,11 +84,11 @@ class BasicPageController extends Controller {
             $model->Status = BasicPage::STATUS_SAVED;
             //setting section Url
             $sectionUrl = trim($model->SectionLink);
-           if (!empty($sectionUrl)) {
+            if (!empty($sectionUrl)) {
                 $sectionUrl = trim($sectionUrl . '/');
             }
             $model->PageSeoUrl = trim($model->PageSeoUrl);
-             if ($model->PageTitleEn && empty($model->PageSeoUrl)) {
+            if ($model->PageTitleEn && empty($model->PageSeoUrl)) {
                 $model->PageSeoUrl = trim($sectionUrl . \app\components\Utilities::createUrlString($model->PageTitleEn));
             }
             if (Yii::$app->request->post('save') == 'save') {
@@ -106,12 +118,12 @@ class BasicPageController extends Controller {
         }
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = BasicPage::STATUS_SAVED;
-           $sectionUrl = trim($model->SectionLink);
+            $sectionUrl = trim($model->SectionLink);
             if (!empty($sectionUrl)) {
                 $sectionUrl = $sectionUrl . '/';
             }
             $model->PageSeoUrl = trim($model->PageSeoUrl);
-             if ($model->PageTitleEn && empty($model->PageSeoUrl)) {
+            if ($model->PageTitleEn && empty($model->PageSeoUrl)) {
                 $model->PageSeoUrl = trim($sectionUrl . \app\components\Utilities::createUrlString($model->PageTitleEn));
             }
             if (Yii::$app->request->post('save') == 'save') {

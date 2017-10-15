@@ -42,16 +42,10 @@ use app\models\AcademicAdministrativeUnit;
                 'items' => \app\models\CustomBlocks::getBlockTypes(),
                 'columnOptions' => ['width' => '185px', 'height' => '10px', 'id' => 'BlockType'],
             ],
-            'BlockPlacementAreaRegion1' => [
+            'BlockPlacementAreaRegion' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
                 'options' => ['prompt' => '--- select --'],
-                'items' => \app\components\SiteRegions::getMainHomeTemplateRegions(),
-                'columnOptions' => ['width' => '185px', 'height' => '10px'],
-            ],
-            'BlockPlacementAreaRegion2' => [
-                'type' => Form::INPUT_DROPDOWN_LIST,
-                'options' => ['prompt' => '--- select --'],
-                'items' => \app\components\SiteRegions::getCustomPageTemplateRegions(),
+                'items' => \app\components\SiteRegions::getCustomBlockPlacmentregions(),
                 'columnOptions' => ['width' => '185px', 'height' => '10px'],
             ],
             'BlockTitleEn' => [
@@ -90,7 +84,7 @@ use app\models\AcademicAdministrativeUnit;
                 'columnOptions' => ['width' => '185px']
             ], 'ShowOnPage' => [
                 'type' => Form::INPUT_TEXT,
-                'options' => ['placeholder' => 'List the Pages where the block has to be shows. For multiple pages use a comma(,) separation for each page'],
+                'options' => ['placeholder' => 'List the Pages to show this block. Put Zero(0) for Home page. For multiple pages use a comma(,) separation for each page'],
                 'columnOptions' => ['width' => '185px']
             ],
             'LinkToPage' => [

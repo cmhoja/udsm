@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\AcademicAdministrativeUnit;
+use app\models\Logins;
 
 /**
- * AcademicAdministrativeUnitSearch represents the model behind the search form about `app\models\AcademicAdministrativeUnit`.
+ * LoginsSearch represents the model behind the search form about `app\models\Logins`.
  */
-class AcademicAdministrativeUnitSearch extends AcademicAdministrativeUnit
+class LoginsSearch extends Logins
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class AcademicAdministrativeUnitSearch extends AcademicAdministrativeUnit
     public function rules()
     {
         return [
-            [['Id', 'UnitType'], 'integer'],
-            [['UnitNameEn', 'UnitNameSw'], 'safe'],
+            [['Id', 'UserId'], 'integer'],
+            [['DateCreated', 'IpAddress', 'Details'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class AcademicAdministrativeUnitSearch extends AcademicAdministrativeUnit
      */
     public function search($params)
     {
-        $query = AcademicAdministrativeUnit::find();
+        $query = Logins::find();
 
         // add conditions that should always apply here
 
@@ -60,12 +60,12 @@ class AcademicAdministrativeUnitSearch extends AcademicAdministrativeUnit
         // grid filtering conditions
         $query->andFilterWhere([
             'Id' => $this->Id,
-            'ParentUnitId' => $this->ParentUnitId,
-            'UnitType' => $this->UnitType,
+            'UserId' => $this->UserId,
+            'DateCreated' => $this->DateCreated,
         ]);
 
-        $query->andFilterWhere(['like', 'UnitNameEn', $this->UnitNameEn])
-            ->andFilterWhere(['like', 'UnitNameSw', $this->UnitNameSw]);
+        $query->andFilterWhere(['like', 'IpAddress', $this->IpAddress])
+            ->andFilterWhere(['like', 'Details', $this->Details]);
 
         return $dataProvider;
     }
