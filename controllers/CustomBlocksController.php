@@ -143,10 +143,11 @@ class CustomBlocksController extends Controller {
                 if ($model->Upload) {
                     //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
                     $fileName = trim('UDSM_BLOCK_' . $model->BlockTitleEn . '.' . $model->Upload->extension);
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
                     if ($model->BlockUnitID > 0) {
                         $fileName = trim('UNIT_BLOCK_' . $model->BlockTitleEn . '.' . $model->Upload->extension);
+                        $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_units_site'] . '/' . $fileName;
                     }
-                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
 
                     if ($model->Upload->saveAs($filePath)) {
                         $model->BlockIconPicture = $fileName;

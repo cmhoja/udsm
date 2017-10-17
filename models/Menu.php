@@ -123,11 +123,9 @@ class Menu extends \yii\db\ActiveRecord {
     static function getActiveMenuByMenuTypeRegionAndTemplateByUnitID($MenuType, $MenuPlacementAreaRegion, $UnitID = NULL, $ShowOnPage = 0) {
         $condition = array();
         $condition['Status'] = Menu::STATUS_PUBLISHED;
-        if ($ShowOnPage != 0) {
+        if ($ShowOnPage == 0) {
             $condition['ShowOnPage'] = $ShowOnPage;
-        } else {
-            $condition['ShowOnPage'] = 0;
-        }
+        } 
         if ($UnitID) {
             $condition['UnitID'] = $UnitID;
         } else {
@@ -139,6 +137,7 @@ class Menu extends \yii\db\ActiveRecord {
         return self::find()
                         ->select('Id, MenuName,MenuType,UnitID,ShowOnPage,MenuPlacementAreaRegion')
                         ->where($condition)
+                        ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
                         ->orderBy('Id ASC,MenuName ASC')
                         ->all();
     }
@@ -146,11 +145,9 @@ class Menu extends \yii\db\ActiveRecord {
     static function getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID($MenuType, $MenuPlacementAreaRegion, $UnitID = NULL, $ShowOnPage = 0) {
         $condition = array();
         $condition['Status'] = Menu::STATUS_PUBLISHED;
-        if ($ShowOnPage != 0) {
+        if ($ShowOnPage == 0) {
             $condition['ShowOnPage'] = $ShowOnPage;
-        } else {
-            $condition['ShowOnPage'] = 0;
-        }
+        } 
         if ($UnitID) {
             $condition['UnitID'] = $UnitID;
         } else {
@@ -162,6 +159,7 @@ class Menu extends \yii\db\ActiveRecord {
         return self::find()
                         ->select('Id, MenuName,DisplayNameEn,DisplayNameSw,MenuCSSClass')
                         ->where($condition)
+                        ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
                         ->orderBy('Id ASC,MenuName ASC')
                         ->all();
     }

@@ -4,15 +4,15 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
 
 <section class="page-section">
     <?php
-    echo $content_side_menus;
+//    if(isset($content_side_menus)){
+//    echo $content_side_menus;
+//    }
     ?>
     <div class="container">
 
         <div class="row">
             <div class="pull-right col-sm-12 col-md-9"> 
                 <h3 style="margin-bottom: 2%;margin-left: 1.2%"><?php echo Yii::$app->params['static_items']['programme_details'][Yii::$app->language]; ?></h3>
-
-
                 <?php if ($page_content) { ?>
                     <div class = "container">
                         <div class = "row">

@@ -12,7 +12,13 @@ return [
         //colleges
 
         'colleges|college/<code>' => 'college/index',
-        'colleges|college/<code>/<page>' => 'college/<page>',
+        'colleges|college/<code>/programmes' => 'college/programs',
+        'colleges|college/<code>/programs' => 'college/programs',
+        'colleges|college/<code>/program' => 'college/programs',
+        'colleges|college/<code>/programmes/<item>' => 'college/programs',
+        'colleges|college/<code>/programs/<item>' => 'college/programs',
+        'colleges|college/<code>/program/<item>' => 'college/programs',
+         'colleges|college/<code>/<page>/<action>' => 'college/<action>',
         'colleges|college/<code>/<page>' => 'college/page',
         'colleges|college/<code>/<page>/<item>' => 'college/index',
         'colleges|college/<code>/<page>/<item>/<subitem>' => 'college/index',

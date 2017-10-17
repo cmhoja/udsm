@@ -27,7 +27,7 @@ class BackendController extends Controller {
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['logout', 'login','templates'],
+                        'actions' => ['logout', 'login', 'templates'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -72,11 +72,11 @@ class BackendController extends Controller {
     }
 
     public function actionTemplates($opt) {
-        $opt=NULL;
+        $opt = NULL;
         if (Yii::$app->request->get('opt')) {
             $opt = Yii::$app->request->get('opt');
         }
-     
+
         return $this->render('//backend/templates', array('opt' => $opt));
     }
 
@@ -131,6 +131,10 @@ class BackendController extends Controller {
 //                    exit;
                     if ($identity) {
                         $loggedin = Yii::$app->user->login($identity);
+                    } else {
+                        $sms = 'Account doesnot exist, Please contact you administrator';
+                        Yii::$app->session->setFlash('sms', $sms);
+                        $loggedin = FALSE;
                     }
                     break;
 

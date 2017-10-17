@@ -30,6 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
     DetailView::widget([
         'model' => $model,
         'attributes' => [
+            array(
+                'attribute' => 'UnitID',
+                'value' => function($model) {
+                    return app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
+                },
+                'format' => 'html'
+            ),
             'TitleEn',
             'TitleSw',
             'DetailsEn:ntext',

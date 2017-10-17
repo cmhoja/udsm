@@ -4,7 +4,7 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
 <div class="page-header page-title-left">
     <div class="container">
         <div class="col-md-12 no-pad">
-            <h1 class="title"><?php echo Yii::$app->params['static_items']['programmes'][Yii::$app->language]; ?></h1>
+            <h1 class="title"><?php echo Yii::$app->params['static_items'][$program_type][Yii::$app->language]; ?></h1>
             <ul class="breadcrumb">
                 <li>
                     <a ><?php echo Yii::$app->params['static_items']['home'][Yii::$app->language]; ?></a>
@@ -12,7 +12,7 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
                 <li>
                     <a href="<?php echo app\components\Utilities::generateUrl('/study/') ?>"><?php echo Yii::$app->params['static_items']['study'][Yii::$app->language]; ?></a>
                 </li>
-                <li class="active"><?php echo Yii::$app->params['static_items']['programmes'][Yii::$app->language]; ?></li>
+                <li class="active"><?php echo Yii::$app->params['static_items'][$program_type][Yii::$app->language]; ?></li>
             </ul>
         </div>
 
@@ -54,23 +54,21 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
                     <?php
                 }
                 ?>
+                <table class = "table">
+                    <thead class = "programs">
+                        <tr>
+                            <th>#</th>
+                            <th><?php echo Yii::$app->params['static_items']['programe_name'][Yii::$app->language]; ?></th>
+                            <th><?php echo Yii::$app->params['static_items']['programe_type'][Yii::$app->language]; ?></th>
+                            <th><?php echo Yii::$app->params['static_items']['programe_college_unit'][Yii::$app->language]; ?></th>
+                            <th><?php echo Yii::$app->params['static_items']['programe_duration'][Yii::$app->language]; ?></th>
+                            <th><?php echo Yii::$app->params['static_items']['programe_field_of_study'][Yii::$app->language]; ?></th>
+                        </tr>
+                    </thead>
+                    <?php
+                    if (isset($page_content) && $page_content) {
+                        $count = 1;
 
-                <?php
-                if (isset($page_content) && $page_content) {
-                    $count = 1;
-                    ?>
-                    <table class = "table">
-                        <thead class = "programs">
-                            <tr>
-                                <th>#</th>
-                                <th><?php echo Yii::$app->params['static_items']['programe_name'][Yii::$app->language]; ?></th>
-                                <th><?php echo Yii::$app->params['static_items']['programe_type'][Yii::$app->language]; ?></th>
-                                <th><?php echo Yii::$app->params['static_items']['programe_college_unit'][Yii::$app->language]; ?></th>
-                                <th><?php echo Yii::$app->params['static_items']['programe_duration'][Yii::$app->language]; ?></th>
-                                <th><?php echo Yii::$app->params['static_items']['programe_field_of_study'][Yii::$app->language]; ?></th>
-                            </tr>
-                        </thead>
-                        <?php
                         foreach ($page_content as $program) {
                             $programName = (Yii::$app->language == 'sw') ? $program->ProgrammeNameSw : $program->ProgrammeNameEn;
                             ?>
@@ -86,12 +84,17 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
                             </tbody>
                             <?php
                         }
+                    } else {
                         ?>
-                    </table>
-                    <?php
-                }
-                ?>
-
+                        <tbody>
+                            <tr><td colspan="6">
+                                    <?php echo Yii::$app->params['static_items']['no_record'][Yii::$app->language]; ?>
+                                </td>
+                            </tr></tbody>
+                        <?php
+                    }
+                    ?>
+                </table>
 
             </div>
         </div>

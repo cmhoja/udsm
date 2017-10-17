@@ -111,9 +111,39 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
 
                     <?php
                     if (isset($side_blocks) && $side_blocks) {
-                        foreach ($side_blocks as $block) {
+                        foreach ($side_blocks as $custom_block) {
                             ?>
+                            <div class="text-left">
+                                <!-- Title -->
+                                <div class="section-title text-left">
+                                    <!-- Heading -->
+                                    <h2 class="title">
+                                        <?php if (isset($custom_block->BlockIconCSSClass) && $custom_block->BlockIconCSSClass): ?>
+                                            <i class="fa fa-graduation-cap"></i>
+                                        <?php endif; ?>
+                                        <?php echo (Yii::$app->language == 'sw') ? $custom_block->BlockTitleSw : $custom_block->BlockTitleEn; ?>
+                                    </h2>
 
+                                </div>
+                                <?php if (isset($custom_block->BlockIconPicture) && $custom_block->BlockIconPicture): ?>
+                                    <div style="padding: 2%;width: 95%">
+                                        <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block->BlockIconPicture; ?>">
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (!$custom_block->BlockIconPicture && $custom_block->BlockIconVideo): ?>
+                                    <div style="padding: 1%">
+                                        <?php echo $custom_block->BlockIconVideo; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <p class="text-justify">
+                                    <?php
+                                    echo substr((Yii::$app->language == 'sw') ? $custom_block->BlockDetailsSw : $custom_block->BlockDetailsEn, 0, 250);
+                                    ?>
+                                </p>
+
+                            </div>
                             <?php
                         }
                     }

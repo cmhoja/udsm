@@ -123,21 +123,19 @@ class CustomBlocks extends \yii\db\ActiveRecord {
     }
 
     static function getActiveBlocksByRegionId($RegionID, $BlockType, $ShowOnPage = 0, $BlockUnitID = NULL) {
-        if ($ShowOnPage) {
-            $ShowOnPage = 'LIKE "%' . $ShowOnPage . '%"';
-        }
         $condition = array(
             'BlockType' => $BlockType,
             'BlockPlacementAreaRegion' => $RegionID,
             'BlockUnitID' => $BlockUnitID,
-            'ShowOnPage' => $ShowOnPage,
             'Status' => CustomBlocks::STATUS_PUBLISHED
         );
-
-
+        if ($ShowOnPage == 0) {
+            $condition['ShowOnPage'] = $ShowOnPage;
+        }
         return self::find()
                         ->select('BlockName,BlockTitleEn,BlockTitleSw,BlockDetailsEn,BlockDetailsSw,BlockIconPicture,BlockIconCSSClass,LinkToPage,BlockIconVideo')
                         ->where($condition)
+                        ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
                         ->all();
     }
 

@@ -40,8 +40,8 @@ class Announcement extends \yii\db\ActiveRecord {
         return [
             [['TitleEn', 'TitleSw', 'DetailsEn', 'DetailsSw'], 'required'],
             [['DetailsEn', 'DetailsSw'], 'string'],
-            [['DatePosted'], 'safe'],
-            [['Status'], 'integer'],
+            [['DatePosted','UnitID'], 'safe'],
+            [['Status','UnitID'], 'integer'],
             [['Attachment'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => true], // 'extensions' => 'zip, pdf, .docx, .doc, ppt, odt, .xlsx, .xls'],
             [['TitleEn', 'TitleSw'], 'string', 'max' => 255],
         ];
@@ -82,10 +82,12 @@ class Announcement extends \yii\db\ActiveRecord {
     static function getLatestAnnouncementsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $Type = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
         if ($Type >= 0) {
-            $condition['AnnouncementType'] = $Type;
+            //$condition['AnnouncementType'] = $Type;
         }
         return self::find()->select('TitleEn,TitleSw,DetailsEn,DetailsSw,DatePosted,LinkUrl')->where($condition)->limit($limit)->orderBy('DatePosted DESC')->all();
-    }
+    
+        
+        }
 
     /*
      * provides other announcements other than the one shown

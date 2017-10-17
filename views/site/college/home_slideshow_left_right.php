@@ -145,7 +145,7 @@
                                     <?php
                                 }
                                 ?>
-                          
+
 
                             </div>
                             <!-- Bullet Navigator -->
@@ -199,40 +199,40 @@
                             </p>
 
                         </div>
-                    <?php } ?>           
+                    <?php }
+                } ?>           
 
 
 
-                    <?php
-                    if (isset($home_content_slideshow_right_menus) && $home_content_slideshow_right_menus) {
-                        foreach ($home_content_slideshow_right_menus as $key => $menu_group) {
+                <?php
+                if (isset($home_content_slideshow_right_menus) && $home_content_slideshow_right_menus) {
+                    foreach ($home_content_slideshow_right_menus as $key => $menu_group) {
+                        ?>
+                        <?php
+                        if ($menu_group['DisplayNameEn'] OR $menu_group['DisplayNameSw']):
+                            $menu_group_title = (Yii::$app->language == 'sw') ? $menu_group['DisplayNameSw'] : $menu_group['DisplayNameEn'];
                             ?>
-                            <?php
-                            if ($menu_group['DisplayNameEn'] OR $menu_group['DisplayNameSw']):
-                                $menu_group_title = (Yii::$app->language == 'sw') ? $menu_group['DisplayNameSw'] : $menu_group['DisplayNameEn'];
-                                ?>
-                                <div class="section-title text-left">
-                                    <!-- Heading -->
-                                    <h2 class="title"><?php echo $menu_group_title; ?></h2>
-                                </div>
-                            <?php endif; ?>
-                            <div class="course-additions">
-                                <?php
-                                if ($menu_group['MenuItems'] && $menu_group['MenuItems']) {
-                                    foreach ($menu_group['MenuItems'] as $menus) {
-                                        ?>
-                                        <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
+                            <div class="section-title text-left">
+                                <!-- Heading -->
+                                <h2 class="title"><?php echo $menu_group_title; ?></h2>
                             </div>
-                        <?php }
-                    } ?>
-
-                    <?php
+                            <?php endif; ?>
+                        <div class="course-additions">
+                            <?php
+                            if ($menu_group['MenuItems'] && $menu_group['MenuItems']) {
+                                foreach ($menu_group['MenuItems'] as $menus) {
+                                    ?>
+                                    <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                        </div>
+                    <?php }
                 }
                 ?>
+
+                <?php ?>
 
 
             </div>

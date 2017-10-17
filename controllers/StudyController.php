@@ -94,6 +94,8 @@ class StudyController extends Controller {
     public function actionProgrammes() {
         $url = \app\components\Utilities::getPageUrl();
         $url = explode('/', $url);
+        $content = array();
+        $content['program_type'] = 'programme';
         if (Yii::$app->request->post('Search')) {
             $Keyword = Yii::$app->request->post('ProgrameName');
             $UnitID = Yii::$app->request->post('UnitId');
@@ -111,30 +113,37 @@ class StudyController extends Controller {
                 switch ($programType) {
                     case 'undergraduate':
                         $programmeType = \app\models\Programmes::PROGRAME_TYPE_UNDERGRADUATE;
+                        $content['program_type'] = 'undergraduate_program';
                         break;
 
                     case 'undergraduate-program':
                         $programmeType = \app\models\Programmes::PROGRAME_TYPE_UNDERGRADUATE;
+                        $content['program_type'] = 'undergraduate_program';
                         break;
 
                     case 'postgraduate':
                         $programmeType = \app\models\Programmes::PROGRAME_TYPE_POSTUNDERGRADUATE;
+                        $content['program_type'] = 'postgraduate_program';
                         break;
 
                     case 'postgraduate-program':
                         $programmeType = \app\models\Programmes::PROGRAME_TYPE_POSTUNDERGRADUATE;
+                        $content['program_type'] = 'postgraduate_program';
                         break;
 
                     case 'non-degree':
                         $programmeType = \app\models\Programmes::PROGRAME_TYPE_NON_DEGREE;
+                        $content['program_type'] = 'nondegree_program';
                         break;
 
                     case 'non-degree-program':
                         $programmeType = \app\models\Programmes::PROGRAME_TYPE_NON_DEGREE;
+                        $content['program_type'] = 'nondegree_program';
                         break;
 
                     default:
                         $programmeType = NULL;
+                        $content['program_type'] = 'programme';
                         break;
                 }
             }
@@ -142,7 +151,7 @@ class StudyController extends Controller {
         $language = Yii::$app->language;
         $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
 
-        $content = array('page_content' => $page_content);
+        $content['page_content'] = $page_content;
         return $this->render('//site/pages/programmes', $content);
     }
 
@@ -163,7 +172,7 @@ class StudyController extends Controller {
         $language = Yii::$app->language;
         $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
 
-        $content = array('page_content' => $page_content);
+        $content = array('page_content' => $page_content,'program_type'=>'programme');
         return $this->render('//site/pages/programmes', $content);
     }
 

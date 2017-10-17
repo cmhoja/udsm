@@ -183,11 +183,8 @@ class MenuItem extends \yii\db\ActiveRecord {
         $filter = NULL;
         $condition['tbl_menu.Status'] = Menu::STATUS_PUBLISHED;
         $condition['tbl_menu_item.Status'] = self::STATUS_ENABLED;
-  
-        if ($ShowOnPage) {
-            $filter = '(tbl_menu.ShowOnPage LIKE "%' . $ShowOnPage . '%")';
-        } else {
-            $filter = array('tbl_menu.ShowOnPage' => 0);
+        if ($ShowOnPage == 0) {
+            $condition['tbl_menu.ShowOnPage'] = 0;
         }
         if ($UnitID) {
             $condition['UnitID'] = $UnitID;
@@ -196,11 +193,12 @@ class MenuItem extends \yii\db\ActiveRecord {
         }
         $condition['MenuType'] = $MenuType;
         $condition['MenuPlacementAreaRegion'] = $MenuPlacementAreaRegion;
-        
-        return self::find($filter)
+
+        return self::find()
                         ->innerJoin('tbl_menu', 'tbl_menu_item.MenuID=tbl_menu.Id')
                         ->select('MenuID,menuClasses,ItemNameEn,ItemNameSw,LinkUrl,ParentItemID,ListOrder')
                         ->where($condition)
+                        ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
                         ->orderBy('MenuID ASC,ParentItemID ASC,ListOrder ASC')
                         ->all();
     }
@@ -293,7 +291,7 @@ class MenuItem extends \yii\db\ActiveRecord {
         if ($Id && $Id > 0) {
             $condition = array('MenuID' => $Id);
             if (!empty($Status)) {
-                $condition['Status'] = self::STATUS_ENABLED;
+                $condition['Status'] = $Status;
             }
             return self::find()->select('Id,menuClasses,ItemNameEn,ItemNameSw,LinkUrl')->where($condition)->orderBy('ParentItemID ASC, ListOrder ASC')->all();
         }
