@@ -77,7 +77,7 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
 
                         <?php
                     } elseif (isset($single_page_content)) {
-                        echo 'SINGLE PAGE CONTENT';
+                        echo '';
                     } else {
                         echo Yii::$app->params['static_items']['no_record'][Yii::$app->language];
                     }

@@ -223,7 +223,7 @@ class InstitutesController extends Controller {
         if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institues' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
-            var_dump($url);
+//            var_dump($url);
             if (!empty($unit_abbreviation)) {
                 $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
                 $content['unit_details'] = $Academic_unit_details;

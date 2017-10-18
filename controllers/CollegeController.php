@@ -130,7 +130,7 @@ class CollegeController extends Controller {
                     //////contents for the home page news( or content middle left) and propotion area ( or content middle right)
                     $content['home_content_middle_left_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, $Academic_unit_details->Id, 4);
                     $content['home_content_middle_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_MIDDLE__RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                   ////contents for events area of the home page
+                    ////contents for events area of the home page
                     $content['home_content_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, $Academic_unit_details->Id, 6);
 
                     ////getting contend to the content bottom area
@@ -295,7 +295,6 @@ class CollegeController extends Controller {
         if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'college' OR $url_sections[1] == 'colleges' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
-            var_dump($url);
             if (!empty($unit_abbreviation)) {
                 $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
                 $content['unit_details'] = $Academic_unit_details;
@@ -326,6 +325,102 @@ class CollegeController extends Controller {
 
     public function actionForbidden() {
         return $this->render('forbidden');
+    }
+
+    public function actionNews() {
+        //getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'college' OR $url_sections[1] == 'colleges' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                if ($Academic_unit_details) {
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    ///getting the lates 20 news to display
+                    $page_content = \app\models\News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, $Academic_unit_details->Id, 20);
+                    $content['page_content'] = $page_content;
+
+                    ////////////////
+                } else {
+                    $content['no_details'] = 'The requested page or section is not found';
+                }
+            } else {
+                $content['no_details'] = 'The requested page or section is not found';
+            }
+        }
+        return $this->render('//site/college/news_list', $content);
+    }
+
+    public function actionAnnouncements() {
+        //getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'college' OR $url_sections[1] == 'colleges' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                if ($Academic_unit_details) {
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    ///getting the lates 20 news to display
+                    $page_content = \app\models\News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, $Academic_unit_details->Id, 20);
+                    $content['page_content'] = $page_content;
+
+                    ////////////////
+                } else {
+                    $content['no_details'] = 'The requested page or section is not found';
+                }
+            } else {
+                $content['no_details'] = 'The requested page or section is not found';
+            }
+        }
+        return $this->render('//site/college/announcement_list', $content);
+    }
+
+    public function actionEvents() {
+        //getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'college' OR $url_sections[1] == 'colleges' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                if ($Academic_unit_details) {
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    ///getting the lates 20 news to display
+                    $page_content = \app\models\Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, $Academic_unit_details->Id, 20);
+                    $content['page_content'] = $page_content;
+
+                    ////////////////
+                } else {
+                    $content['no_details'] = 'The requested page or section is not found';
+                }
+            } else {
+                $content['no_details'] = 'The requested page or section is not found';
+            }
+        }
+        return $this->render('//site/college/events_list', $content);
     }
 
 }

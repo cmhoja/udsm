@@ -6,7 +6,7 @@ return [
     'announcement' => ['en' => 'Announcements', 'sw' => 'Matangazo'],
     'staff_announcement' => ['en' => 'Staff Announcements', 'sw' => 'Matangazo ya Watumishi'],
     'student_announcement' => ['en' => 'Studen Announcements', 'sw' => 'Matangazo ya Wanafunzi'],
-    'news' => ['en' => 'News', 'sw' => 'Habari'],
+    'news' => ['en' => 'News', 'sw' => 'Habari Mbali Mbali'],
     'staff_news' => ['en' => 'Staff News', 'sw' => 'Habari kwa Watumishi'],
     'stundent_news' => ['en' => 'Student News', 'sw' => 'Habari kwa Wanafunzi'],
     'recently_events' => ['en' => 'Recently Events', 'sw' => 'Matukio ya Karibuni'],
