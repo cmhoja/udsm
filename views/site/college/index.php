@@ -15,7 +15,7 @@ if (isset($no_details) && $no_details) {
 
     <!--HOME CONTENET MIDDLE AREA LEFT & RIGHT-->
     <?php
-    echo $this->render('home_content_middle_left_right', array('home_content_middle_left_news' => $home_content_middle_left_news, '$home_content_middle_right_blocks' => $home_content_middle_right_blocks));
+    echo $this->render('home_content_middle_left_right', array('home_content_middle_left_news' => $home_content_middle_left_news, 'home_content_middle_right_blocks' => $home_content_middle_right_blocks));
     ?>
 
     <!--HOME CONTENT EVENTS AREA-->

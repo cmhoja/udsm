@@ -106,7 +106,7 @@ class News extends \yii\db\ActiveRecord {
 
     static function getLatestNewsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $NewsType = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
-        if ($NewsType >= 0) {
+        if (!empty($NewsType) &&  $NewsType >= 0) {
             $condition['NewsType'] = $NewsType;
         }
         return self::find()

@@ -13,7 +13,7 @@
                         <?php foreach ($home_content_middle_left_news as $news) { ?>
                             <li>
                                 <div class="post-thumb">
-                                    <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $news->Photo; ?>" alt="" title="" width="84" height="84">
+                                    <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?>" alt="" title="" width="84" height="84">
                                 </div>
                                 <div class="post-details">
                                     <div class="description">
@@ -38,7 +38,7 @@
 
             <div class="col-md-4">
                 <?php
-                if (isset($home_content_middle_right_blocks) && $home_content_middle_right_blocks) {
+                if (isset($home_content_middle_right_blocks)) {
                     foreach ($home_content_middle_right_blocks as $block) {
                         ?>
                         <div class="section-title text-left">

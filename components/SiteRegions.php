@@ -21,15 +21,15 @@ class SiteRegions {
     //These regions are for the home page only of the main websites
     //header regions
     //Areas/REgions for Main Home page Template
-    const MAIN_TEMPLATE_HEADER_TOP_LEFT ='MT_HTL'; // 1;
-    const MAIN_TEMPLATE_HEADER_TOP_RIGHT ='MT_HTR';// 2;
+    const MAIN_TEMPLATE_HEADER_TOP_LEFT = 'MT_HTL'; // 1;
+    const MAIN_TEMPLATE_HEADER_TOP_RIGHT = 'MT_HTR'; // 2;
     const MAIN_TEMPLATE_HEADER_LOGO = 'MT_HLG'; //3;
-    const MAIN_TEMPLATE_HEADER_MAIN_MENU ='MT_HMN'; // 4;
+    const MAIN_TEMPLATE_HEADER_MAIN_MENU = 'MT_HMN'; // 4;
     /////home page slide show
     const MAIN_TEMPLATE_HOMEPAGE_SLIDESSHOW_LEFT = 'MT_HSL'; //5;
     const MAIN_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT = 'MT_HSR'; //6;
     ///content area available in all pages
-    const MAIN_TEMPLATE_CONTENT_TOP_LEFT = 'MT_CTL';//7;
+    const MAIN_TEMPLATE_CONTENT_TOP_LEFT = 'MT_CTL'; //7;
     const MAIN_TEMPLATE_CONTENT_TOP_CENTRE = 'MT_CTC'; //8;
     const MAIN_TEMPLATE_CONTENT_TOP_RIGHT = 'MT_CTR'; //9;
     const MAIN_TEMPLATE_CONTENT_HOMEPAGE_NEWS_AREA = 'MT_CHNA'; // 10;
@@ -49,7 +49,7 @@ class SiteRegions {
     /////
     ///COLLEGE PAGES BLOCK & MENU REGIONS FOR COLLEGES TEMPLATE
     const COLLEGE_TEMPLATE_HEADER_MAIN_MENU = 'CT_HMM'; //22;
-    const COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_LEFT ='CT_HSL'; // 23;
+    const COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_LEFT = 'CT_HSL'; // 23;
     const COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT = 'CT_HSR'; //24;
     const COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_LEFT = 'CT_HCTL'; //25;
     const COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_MIDDLE = 'CT_HCTM'; //26;
@@ -62,24 +62,23 @@ class SiteRegions {
     const COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3 = 'CT_HCBC3'; //33;
     const COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN1 = 'CT_FBC1'; // 34;
     const COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN2 = 'CT_FBC2'; //  35;
-    const COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN3 ='CT_FBC3'; // 36;
+    const COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN3 = 'CT_FBC3'; // 36;
     const COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN4 = 'CT_FBC4'; //37;
     ///AREA/REGIONS For Custom Page Block Placements
     const CUSTOM_PAGE_CONTENT_TOP_COLUMN1 = 'CP_CTC1'; // 38;
     const CUSTOM_PAGE_CONTENT_TOP_COLUMN2 = 'CP_CTC2'; // 39;
-    const CUSTOM_PAGE_CONTENT_TOP_COLUMN3 ='CP_CTC3'; //  40;
+    const CUSTOM_PAGE_CONTENT_TOP_COLUMN3 = 'CP_CTC3'; //  40;
     const CUSTOM_PAGE_CONTENT_TOP_LEFT = 'CP_CTL'; // 41;
     const CUSTOM_PAGE_CONTENT_TOP_RIGHT = 'CP_CTR'; // 42;
     const CUSTOM_PAGE_CONTENT_MIDDLE = 'CP_CM'; // 43;
-    const CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1 ='CP_CBC1'; //  44;
-    const CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN2 ='CP_CBC2'; //  45;
+    const CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1 = 'CP_CBC1'; //  44;
+    const CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN2 = 'CP_CBC2'; //  45;
     const CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN3 = 'CP_CBC3'; // 46;
     const CUSTOM_PAGE_CONTENT_BOTTOM_LEFT = 'CP_CBL'; // 47;
     const CUSTOM_PAGE_CONTENT_BOTTOM_RIGHT = 'CP_CBR'; // 48;
     const CUSTOM_PAGE_CONTENT_SIDE_MENU = 'CP_CSM'; // 49;
 
     //put your code here
-
 
     static function getAllPlacementRegions() {
         return array(
@@ -239,11 +238,14 @@ class SiteRegions {
             self::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN3 => 'College Template - Footer Column3 Region',
             self::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN4 => 'College Template - Footer Column4 Region',
         );
+        $regions3 = array(
+            self::CUSTOM_PAGE_CONTENT_SIDE_MENU => 'Custom Page Side Menu Region',
+        );
 
         if (\Yii::$app->session->has('UNIT_ID') && \Yii::$app->session->has('UNIT_ID') > 0) {
-            return $regions2;
+            return array_merge($regions2, $regions3);;
         } else {
-            return array_merge($regions1, $regions2);
+            return array_merge($regions1, $regions2,$regions3);
         }
     }
 
@@ -269,7 +271,6 @@ class SiteRegions {
         $CustomPageRegion = self::getCustomPageTemplateRegions();
         $CustomBlockRegions = array();
         return array_merge($HomePageRegions, $CustomPageRegion);
-       
     }
 
 }

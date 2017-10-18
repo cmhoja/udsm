@@ -195,12 +195,22 @@
                             <p class="text-justify">
                                 <?php
                                 echo substr((Yii::$app->language == 'sw') ? $custom_block->BlockDetailsSw : $custom_block->BlockDetailsEn, 0, 250);
+
+                                if ($custom_block->LinkToPage) {
+                                    ?>
+                                &nbsp; &nbsp; &nbsp;  &nbsp; <a href="<?php echo app\components\Utilities::generateUrl($custom_block->LinkToPage) ?>" class="promotions">
+                                    <?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language].'  &nbsp;>>'; ?>
+                                    </a>
+                                    <?php
+                                }
                                 ?>
                             </p>
 
                         </div>
-                    <?php }
-                } ?>           
+                    <?php
+                    }
+                }
+                ?>           
 
 
 
@@ -216,7 +226,7 @@
                                 <!-- Heading -->
                                 <h2 class="title"><?php echo $menu_group_title; ?></h2>
                             </div>
-                            <?php endif; ?>
+                        <?php endif; ?>
                         <div class="course-additions">
                             <?php
                             if ($menu_group['MenuItems'] && $menu_group['MenuItems']) {
@@ -228,7 +238,8 @@
                                 }
                                 ?>
                         </div>
-                    <?php }
+                        <?php
+                    }
                 }
                 ?>
 

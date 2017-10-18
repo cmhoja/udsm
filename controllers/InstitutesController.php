@@ -67,7 +67,6 @@ class InstitutesController extends Controller {
 
     public function init() {
         $this->layout = 'college/main';
-        parent::init();
         ///setting unit details
         Yii::$app->view->params['unit_name'] = Yii::$app->view->params['unit_id'] = NULL;
         Yii::$app->view->params['unit_logo'] = NULL;
@@ -87,6 +86,7 @@ class InstitutesController extends Controller {
                 Yii::$app->view->params['unit_abbreviation_code'] = $Academic_unit_details->UnitAbreviationCode;
             }
         }
+        parent::init();
     }
 
     /**
@@ -98,54 +98,47 @@ class InstitutesController extends Controller {
 //getting user current langauage;
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
-// echo $url;
+
         $url_sections = explode('/', $url);
-//var_dump($url_sections);
+//
         if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
 ////getting the landing page por a given college 
+
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
                 $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
                 $content['unit_details'] = $Academic_unit_details;
                 if ($Academic_unit_details) {
-
-                    Yii::$app->view->params['unit_name'] = $Academic_unit_details->UnitNameEn;
-                    if (Yii::$app->language == 'sw') {
-                        Yii::$app->view->params['unit_name'] = $Academic_unit_details->UnitNameSw;
-                    }
-                    Yii::$app->view->params['unit_id'] = $Academic_unit_details->Id;
-                    Yii::$app->view->params['unit_logo'] = $Academic_unit_details->Logo;
-                    Yii::$app->view->params['unit_abbreviation_code'] = $Academic_unit_details->UnitAbreviationCode;
-
                     $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID($Academic_unit_details->Id, 5);
-//$content['home_content_slideshow_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
+                    //$content['home_content_slideshow_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
                     $content['home_content_slideshow_right_menus'] = array();
                     $home_content_slideshow_right_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
                     if ($home_content_slideshow_right_menus) {
                         foreach ($home_content_slideshow_right_menus as $menu_group) {
+                            $menu_items = MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED);
                             $content['home_content_slideshow_right_menus'][$menu_group->Id] = array('MenuCSSClass' => $menu_group->MenuCSSClass, 'DisplayNameEn' => $menu_group->DisplayNameEn, 'DisplayNameSw' => $menu_group->DisplayNameSw,
-                                'MenuItems' => MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED));
+                                'MenuItems' => $menu_items);
                         }
                     }
                     $content['home_content_slideshow_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-//getting data for the home page top column 1,2 & 3
+                    //getting data for the home page top column 1,2 & 3
                     $content['home_content_top_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
                     $content['home_content_top_column2_announcements'] = Announcement::getLatestAnnouncementsByStatusAndUnit(Announcement::STATUS_PUBLISHED, $Academic_unit_details->Id, 5);
                     $content['home_content_top_column3_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, $Academic_unit_details->Id, 0);
                     $content['home_content_top_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
 
-//////contents for the home page news( or content middle left) and propotion area ( or content middle right)
+                    //////contents for the home page news( or content middle left) and propotion area ( or content middle right)
                     $content['home_content_middle_left_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, $Academic_unit_details->Id, 4);
                     $content['home_content_middle_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_MIDDLE__RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-////contents for events area of the home page
+                    ////contents for events area of the home page
                     $content['home_content_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, $Academic_unit_details->Id, 6);
 
-////getting contend to the content bottom area
+                    ////getting contend to the content bottom area
                     $content['home_content_bottom_column1'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
                     $content['home_content_bottom_column2'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
                     $content['home_content_bottom_column3'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-//getting contents for promotion are i.e MAIN_TEMPLATE_FOOTER_TOP_AREA
-//var_dump($content['home_content_top_column3_menus']);
+                    //getting contents for promotion are i.e MAIN_TEMPLATE_FOOTER_TOP_AREA
+                    //var_dump($content['home_content_top_column3_menus']);
                 } else {
                     $content['no_details'] = 'The requested page or section is not found';
                 }
@@ -157,8 +150,50 @@ class InstitutesController extends Controller {
         return $this->render('//site/college/index', $content);
     }
 
-    
-     public function actionPrograms() {
+    public function actionPage() {
+//getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                $content['unit_details'] = $Academic_unit_details;
+                if ($Academic_unit_details) {
+                    $content['page_content'] = \app\models\BasicPage::getActivePageAllDetailsByUrl($url, $Academic_unit_details->Id);
+                    if ($content['page_content']) {
+                        $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                        $content['side_menus_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+
+//getting data for the page top column 1,2 & 3
+//                    $content['page_content_top_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN1, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+//                    $content['page_content_top_column2_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN2, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+//                    $content['page_content_top_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN3, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                        //contents for bottom middle area of the page
+                        $content['page_content_middle_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                        ////getting content for the content bottom area
+                        $content['page_content_bottom_column1'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                        $content['page_content_bottom_column2'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                        $content['page_content_bottom_column3'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                        ////getting content for the content bottom left/right area
+                        $content['page_content_bottom_left'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                        $content['page_content_bottom_right'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_RIGHT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    }
+                } else {
+                    $content['no_details'] = 'The requested page or section is not found';
+                }
+            } else {
+                $content['no_details'] = 'The requested page or section is not found';
+            }
+        }
+
+        return $this->render('//site/college/basic_page', $content);
+    }
+
+    public function actionPrograms() {
 //getting user current langauage;
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
@@ -220,7 +255,7 @@ class InstitutesController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institues' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             var_dump($url);
@@ -256,6 +291,4 @@ class InstitutesController extends Controller {
         return $this->render('forbidden');
     }
 
-    
-    
 }

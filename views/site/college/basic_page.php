@@ -58,30 +58,23 @@
 
                         <?php
                         if (isset($side_menus) && $side_menus) {
-                            foreach ($side_menus as $key => $menu_group) {
-                                ?>
+                            ?>
+
+                            <div class="section-title text-left">
+                                <!-- Heading -->
+                                <h2 class="title"><?php echo Yii::$app->params['static_items']['other_pages'][Yii::$app->language]; ?></h2>
+                            </div>
+                            <div class="course-additions">
                                 <?php
-                                if ($menu_group['DisplayNameEn'] OR $menu_group['DisplayNameSw']):
-                                    $menu_group_title = (Yii::$app->language == 'sw') ? $menu_group['DisplayNameSw'] : $menu_group['DisplayNameEn'];
+                                foreach ($side_menus as $menus) {
                                     ?>
-                                    <div class="section-title text-left">
-                                        <!-- Heading -->
-                                        <h2 class="title"><?php echo $menu_group_title; ?></h2>
-                                    </div>
-                                <?php endif; ?>
-                                <div class="course-additions">
-                                    <?php
-                                    if ($menu_group['MenuItems'] && $menu_group['MenuItems']) {
-                                        foreach ($menu_group['MenuItems'] as $menus) {
-                                            ?>
-                                            <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
-                                </div>
+                                    <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
+                                        <?php
+                                    }
+//                                   
+                                    ?>
+                            </div>
                             <?php
-                            }
                         }
                         ?>
 
@@ -90,7 +83,7 @@
                     ?>
                 </div>
             </div>
-<?php endif; ?>
+        <?php endif; ?>
     </div>
 </section>
 
