@@ -377,7 +377,7 @@ class CollegeController extends Controller {
                     $language = Yii::$app->language;
                     $content['unit_details'] = $Academic_unit_details;
                     ///getting the lates 20 news to display
-                    $page_content = \app\models\News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, $Academic_unit_details->Id, 20);
+                    $page_content = \app\models\Announcement::getLatestAnnouncementsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, $Academic_unit_details->Id, 20);
                     $content['page_content'] = $page_content;
 
                     ////////////////
