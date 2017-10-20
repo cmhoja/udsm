@@ -31,10 +31,10 @@ class MenuController extends Controller {
                 'rules' => [
                     [
                         'allow' => true,
-                       // 'verbs' => ['post'],
-                       // 'roles' => ['@'],
+                        // 'verbs' => ['post'],
+                        // 'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && Yii::$app->session->has('USER_TYPE_ADMINISTRATOR'))?TRUE:FALSE;
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && Yii::$app->session->has('USER_TYPE_ADMINISTRATOR')) ? TRUE : FALSE;
                         },
                     ],
                 ]
@@ -176,12 +176,36 @@ class MenuController extends Controller {
         if ($menu_item_model->load(Yii::$app->request->post())) {
             if (!$menu_item_model->ParentItemID) {
                 $menu_item_model->ParentItemID = 0;
-            } else {
-                $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
-                if ($parentUrl) {
-                    $menu_item_model->LinkUrl = $parentUrl . '/' . $menu_item_model->LinkUrl;
-                }
             }
+            switch ($menu_item_model->UrlType) {
+                case \app\models\MenuItem::URL_TYPE_EXTERNAL:
+                    $menu_item_model->LinkUrl = trim($menu_item_model->LinkUrl);
+                    break;
+
+                default: ///for  all and intetnal links
+                    //check if parent ID exists & has college
+                    ///check for existance of Unit or
+                    $college_abbreviation = NULL;
+                    if ($model->UnitID) {
+                        $unit_data = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+
+                        if (isset($unit_data['type']) && isset($unit_data['abv'])) {
+                            $college_abbreviation = $unit_data['type'] . '/' . $unit_data['abv'];
+                        }
+                    }
+                    if ($menu_item_model->ParentItemID) {
+                        $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                        if ($parentUrl) {
+                            $menu_item_model->LinkUrl = $parentUrl . '/' . strtolower($menu_item_model->LinkUrl);
+                        } else {
+                            $menu_item_model->LinkUrl = $college_abbreviation . '/' . strtolower($menu_item_model->LinkUrl);
+                        }
+                    } else {
+                        $menu_item_model->LinkUrl = $college_abbreviation . '/' . strtolower($menu_item_model->LinkUrl);
+                    }
+                    break;
+            }
+
             $menu_item_model->Status = \app\models\MenuItem::STATUS_ENABLED;
             if ($menu_item_model->save()) {
                 return $this->redirect(['view', 'id' => $id]);
@@ -194,15 +218,41 @@ class MenuController extends Controller {
 
     public function actionEditItem($id) {
         $menu_item_model = \app\models\MenuItem::findOne($id);
+        $old_url = $menu_item_model->LinkUrl;
         if ($menu_item_model) {
             $model = Menu::findOne($menu_item_model->MenuID);
             if ($menu_item_model->load(Yii::$app->request->post())) {
                 if (!$menu_item_model->ParentItemID) {
                     $menu_item_model->ParentItemID = 0;
-                } else {
-                    $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
-                    if ($parentUrl) {
-                        $menu_item_model->LinkUrl = $parentUrl . '/' . $menu_item_model->LinkUrl;
+                }
+                if ($menu_item_model->LinkUrl != $old_url) {
+                    switch ($menu_item_model->UrlType) {
+                        case \app\models\MenuItem::URL_TYPE_EXTERNAL:
+                            $menu_item_model->LinkUrl = trim($menu_item_model->LinkUrl);
+                            break;
+
+                        default: ///for  all and intetnal links
+                            //check if parent ID exists & has college
+                            ///check for existance of Unit or
+                            $college_abbreviation = NULL;
+                            if ($model->UnitID) {
+                                $unit_data = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+
+                                if (isset($unit_data['type']) && isset($unit_data['abv'])) {
+                                    $college_abbreviation = $unit_data['type'] . '/' . $unit_data['abv'];
+                                }
+                            }
+                            if ($menu_item_model->ParentItemID) {
+                                $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                                if ($parentUrl) {
+                                    $menu_item_model->LinkUrl = $parentUrl . '/' . strtolower($menu_item_model->LinkUrl);
+                                } else {
+                                    $menu_item_model->LinkUrl = $college_abbreviation . '/' . strtolower($menu_item_model->LinkUrl);
+                                }
+                            } else {
+                                $menu_item_model->LinkUrl = $college_abbreviation . '/' . strtolower($menu_item_model->LinkUrl);
+                            }
+                            break;
                     }
                 }
                 $menu_item_model->Status = \app\models\MenuItem::STATUS_ENABLED;

@@ -1,0 +1,11 @@
+<?php
+
+return [
+    1 => ['en' => 'Information Technology', 'sw' => 'TEHAMA'],
+    2 => ['en' => 'Education', 'sw' => 'Elimu'],
+    3 => ['en' => 'Business Education', 'sw' => 'Elimu ya Biashara'],
+    4 => ['en' => 'Engineering', 'sw' => 'Uhandisi'],
+    5 => ['en' => 'Finance', 'sw' => 'Mambo ya Fedha'],
+    6 => ['en' => 'Manufacturing Industry', 'sw' => 'Viwanda']
+];
+

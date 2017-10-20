@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'MenuName',
+            'DisplayNameEn',
             [
                 'attribute' => 'MenuType',
                 'value' => function($model) {
@@ -37,7 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->MenuPlacementAreaRegion;
                 }
             ],
-            'Description',
             [
                 'attribute' => 'UnitID',
                 'value' => function($model) {

@@ -78,7 +78,7 @@ LteAsset::register($this);
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper" style="height: auto !important;">
                 <!-- Main content -->
-                <section class="content" style="height: auto !important;min-height:900px !important">
+                <section class="content" style="height: auto !important;min-height:930px !important">
                     <?=
                     Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

@@ -14,7 +14,7 @@
                                 <!-- Heading -->
                                 <h2 class="title">
                                     <?php if (isset($custom_block1->BlockIconCSSClass) && $custom_block1->BlockIconCSSClass): ?>
-                                        <i class="fa fa-graduation-cap"></i>
+                                        <i class="fa <?php echo $custom_block1->BlockIconCSSClass; ?>"></i>
                                     <?php endif; ?>
                                     <?php echo (Yii::$app->language == 'sw') ? $custom_block1->BlockTitleSw : $custom_block1->BlockTitleEn; ?>
                                 </h2>
@@ -107,7 +107,47 @@
                     </div>
                 <?php endif; ?>
 
+                <?php
+                if (isset($home_content_top_column3_blocks) && $home_content_top_column3_blocks) {
+                    foreach ($home_content_top_column3_blocks as $custom_block3) {
+                        ?>
 
+                        <div class="text-left">
+                            <!-- Title -->
+                            <div class="section-title text-left">
+                                <!-- Heading -->
+                                <h2 class="title">
+                                    <?php if (isset($custom_block3->BlockIconCSSClass) && $custom_block3->BlockIconCSSClass): ?>
+                                        <i class="fa <?php echo $custom_block3->BlockIconCSSClass; ?>"></i>
+                                    <?php endif; ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $custom_block3->BlockTitleSw : $custom_block3->BlockTitleEn; ?>
+                                </h2>
+
+                            </div>
+                            <?php if (isset($custom_block3->BlockIconPicture) && $custom_block3->BlockIconPicture): ?>
+                                <div style="padding: 2%;width: 95%">
+                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block3->BlockIconPicture; ?>">
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if (!$custom_block3->BlockIconPicture && $custom_block3->BlockIconVideo): ?>
+                                <div style="padding: 1%">
+                                    <?php echo $custom_block3->BlockIconVideo; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <p>
+                                <?php
+                                echo substr((Yii::$app->language == 'sw') ? $custom_block3->BlockDetailsSw : $custom_block3->BlockDetailsEn, 0, 250);
+                                ?>
+                            </p>
+
+                        </div>
+
+                        <?php
+                    }
+                }
+                ?>
             </div>
 
 

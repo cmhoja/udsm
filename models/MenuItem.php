@@ -25,6 +25,9 @@ class MenuItem extends \yii\db\ActiveRecord {
 
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
+    ////target Url Types
+    const URL_TYPE_INTERNAL = 0;
+    const URL_TYPE_EXTERNAL = 1;
 
     /**
      * @inheritdoc
@@ -38,8 +41,8 @@ class MenuItem extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['MenuID', 'ItemNameEn', 'LinkUrl', 'ListOrder'], 'required'],
-            [['MenuID', 'ParentItemID', 'ListOrder', 'SectionID'], 'integer'],
+            [['MenuID', 'ItemNameEn', 'LinkUrl', 'ListOrder', 'UrlType'], 'required'],
+            [['MenuID', 'ParentItemID', 'ListOrder', 'SectionID', 'UrlType'], 'integer'],
             [['menuClasses', 'UnitID'], 'safe'],
             [['ItemNameEn', 'ItemNameSw'], 'string', 'max' => 50],
             [['LinkUrl'], 'string', 'max' => 200],
@@ -58,7 +61,8 @@ class MenuItem extends \yii\db\ActiveRecord {
             'menuClasses' => 'Menu Classes',
             'ItemNameEn' => 'Item Name En',
             'ItemNameSw' => 'Item Name Sw',
-            'LinkUrl' => 'Link Url',
+            'LinkUrl' => 'Link Url (Target Url)',
+            'UrlType' => 'Target Url Type',
             'ParentItemID' => 'Parent Item ID',
             'ListOrder' => 'List Order',
             'SectionID' => 'Section ID',
@@ -265,7 +269,7 @@ class MenuItem extends \yii\db\ActiveRecord {
         }
         $condition['tbl_menu.Status'] = Menu::STATUS_PUBLISHED;
         $condition['tbl_menu_item.Status'] = self::STATUS_ENABLED;
-        $condition['tbl_menu.ShowOnPage'] = 0;
+        //$condition['tbl_menu.ShowOnPage'] = 0;
         $condition['tbl_menu.MenuType'] = Menu::MENU_TYPE_MAIN_MENU;
         $condition['ParentItemID'] = 0;
         //$condition['tbl_menu.MenuPlacementAreaRegion'] = \app\components\SiteRegions::MAIN_TEMPLATE_HEADER_MAIN_MENU;
@@ -274,6 +278,24 @@ class MenuItem extends \yii\db\ActiveRecord {
                         ->select('UnitID,tbl_menu_item.Id AS Id, MenuID,menuClasses,ItemNameEn,ItemNameSw,LinkUrl,ParentItemID,ListOrder')
                         ->where($condition)
                         ->orderBy('MenuID ASC,ParentItemID ASC,ListOrder ASC')
+                        ->all();
+    }
+
+    static function getActiveMainMenuSectionsByUnitID($UnitID = NULL) {
+        $condition = array();
+       if (!empty($UnitID) && $UnitID > 0) {
+            $condition['UnitID'] = $UnitID;
+        }
+        $condition['tbl_menu.Status'] = Menu::STATUS_PUBLISHED;
+        $condition['tbl_menu_item.Status'] = self::STATUS_ENABLED;
+        $condition['tbl_menu.MenuType'] = Menu::MENU_TYPE_MAIN_MENU;
+        ///$condition['ParentItemID'] = 0;
+        //$condition['tbl_menu.MenuPlacementAreaRegion'] = \app\components\SiteRegions::MAIN_TEMPLATE_HEADER_MAIN_MENU;
+        return self::find()
+                        ->innerJoin('tbl_menu', 'tbl_menu_item.MenuID=tbl_menu.Id')
+                        ->select('UnitID,tbl_menu_item.Id AS Id, MenuID,menuClasses,ItemNameEn,ItemNameSw,LinkUrl,ParentItemID,ListOrder')
+                        ->where($condition)
+                        ->orderBy('UnitID ASC, MenuID ASC,ParentItemID ASC')
                         ->all();
     }
 
@@ -294,6 +316,21 @@ class MenuItem extends \yii\db\ActiveRecord {
                 $condition['Status'] = $Status;
             }
             return self::find()->select('Id,menuClasses,ItemNameEn,ItemNameSw,LinkUrl')->where($condition)->orderBy('ParentItemID ASC, ListOrder ASC')->all();
+        }
+        return NULL;
+    }
+
+    static function getTargetUrlTypes() {
+        return [
+            self::URL_TYPE_INTERNAL => 'Internal Url/Within CMS',
+            self::URL_TYPE_EXTERNAL => 'Internal Url/External Website'
+        ];
+    }
+
+    static function getTargetUrlTypeNameByValue($value) {
+        $urlTypes = self::getTargetUrlTypes();
+        if ($value && isset($urlTypes[$value])) {
+            return $urlTypes[$value];
         }
         return NULL;
     }

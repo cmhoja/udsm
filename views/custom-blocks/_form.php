@@ -84,7 +84,7 @@ use app\models\AcademicAdministrativeUnit;
                 'columnOptions' => ['width' => '185px']
             ], 'ShowOnPage' => [
                 'type' => Form::INPUT_TEXT,
-                'options' => ['placeholder' => 'List the Pages to show this block. Put Zero(0) for Home page. For multiple pages use a comma(,) separation for each page'],
+                'options' => ['placeholder' => 'List the Pages to show this block. Put Zero(0) for Home page, (*) for all pages and for multiple pages use a comma(,) separation list'],
                 'columnOptions' => ['width' => '185px']
             ],
             'LinkToPage' => [

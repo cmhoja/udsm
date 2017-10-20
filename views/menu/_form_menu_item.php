@@ -35,8 +35,14 @@ use app\models\AcademicAdministrativeUnit;
             'menuClasses' => [
                 'type' => Form::INPUT_TEXT,
                 'columnOptions' => ['width' => '185px', 'height' => '10px']
-            ],'LinkUrl' => [
+            ], 'LinkUrl' => [
                 'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '185px', 'height' => '10px', 'placeholder' => 'Enter Destination Url for this Item when clicked']
+            ],
+            'UrlType' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => app\models\MenuItem::getTargetUrlTypes(),
+                'options' => ['prompt' => '-- Please Choose Parent --'],
                 'columnOptions' => ['width' => '185px', 'height' => '10px']
             ],
             'ParentItemID' => [

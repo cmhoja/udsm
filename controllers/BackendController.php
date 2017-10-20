@@ -208,19 +208,21 @@ class BackendController extends Controller {
         } else {
             $UserId = Yii::$app->session->get('UID');
         }
-        $loginsModel->UserId = $UserId;
-        $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
-        $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
-        $loginsModel->save();
-        $session = Yii::$app->session;
-        $session->destroy();
-        //$session->remove('UNIT_ID');
-        if ($session->isActive) {
-            // destroys all user data registered to a session.
+        if ($UserId) {
+            $loginsModel->UserId = $UserId;
+            $loginsModel->IpAddress = Yii::$app->getRequest()->getUserIP();
+            $loginsModel->Details = 'User logged out the system successful using browser :- ' . Yii::$app->getRequest()->getUserAgent();
+            $loginsModel->save();
+            $session = Yii::$app->session;
             $session->destroy();
-            /// close a session
-            $session->close();
-            Yii::$app->user->logout();
+            //$session->remove('UNIT_ID');
+            if ($session->isActive) {
+                // destroys all user data registered to a session.
+                $session->destroy();
+                /// close a session
+                $session->close();
+                Yii::$app->user->logout();
+            }
         }
         return $this->redirect(['backend/login']);
     }

@@ -123,9 +123,9 @@ class Menu extends \yii\db\ActiveRecord {
     static function getActiveMenuByMenuTypeRegionAndTemplateByUnitID($MenuType, $MenuPlacementAreaRegion, $UnitID = NULL, $ShowOnPage = 0) {
         $condition = array();
         $condition['Status'] = Menu::STATUS_PUBLISHED;
-        if ($ShowOnPage == 0) {
-            $condition['ShowOnPage'] = $ShowOnPage;
-        } 
+        if (empty($ShowOnPage) OR is_null($ShowOnPage) OR $ShowOnPage == '*') {
+            $ShowOnPage = NULL;
+        }
         if ($UnitID) {
             $condition['UnitID'] = $UnitID;
         } else {
@@ -145,9 +145,9 @@ class Menu extends \yii\db\ActiveRecord {
     static function getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID($MenuType, $MenuPlacementAreaRegion, $UnitID = NULL, $ShowOnPage = 0) {
         $condition = array();
         $condition['Status'] = Menu::STATUS_PUBLISHED;
-        if ($ShowOnPage == 0) {
-            $condition['ShowOnPage'] = $ShowOnPage;
-        } 
+        if (empty($ShowOnPage) OR is_null($ShowOnPage) OR $ShowOnPage == '*') {
+            $ShowOnPage = NULL;
+        }
         if ($UnitID) {
             $condition['UnitID'] = $UnitID;
         } else {

@@ -37,7 +37,7 @@ class BasicPage extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['PageTitleEn', 'PageTitleSw', 'DescriptionEn', 'DescriptionSw', 'PageSeoUrl', 'Status'], 'required'],
+            [['PageTitleEn', 'PageTitleSw', 'DescriptionEn', 'DescriptionSw', 'Status'], 'required'],
             [['DescriptionEn', 'DescriptionSw'], 'string'],
             [['DateCreated', 'SectionLink'], 'safe'],
             [['Status', 'UnitID'], 'integer'],
@@ -64,7 +64,7 @@ class BasicPage extends \yii\db\ActiveRecord {
             'DateCreated' => 'Date Created',
             'Status' => 'Status',
             'UnitID' => 'Unit ID',
-            'SectionLink' => 'Page Section'
+            'SectionLink' => 'Page Menu Section'
         ];
     }
 
@@ -91,8 +91,8 @@ class BasicPage extends \yii\db\ActiveRecord {
                         ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
                         ->one();
     }
-    
-     static function getActivePageAllDetailsByUrl($url, $UnitID = NULL) {
+
+    static function getActivePageAllDetailsByUrl($url, $UnitID = NULL) {
 
         return self::find()
                         ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
@@ -101,14 +101,16 @@ class BasicPage extends \yii\db\ActiveRecord {
 
     static function getSectionList($UnitID) {
         $section_list = array();
-        $sections = MenuItem::getActiveMainMenuParentSectionsByUnitID($UnitID);
+        $sections = MenuItem::getActiveMainMenuSectionsByUnitID($UnitID);
         if ($sections) {
             foreach ($sections as $section) {
                 $sectionName = NULL;
                 if ($section->UnitID) {
                     $sectionName = AcademicAdministrativeUnit::getUnitNameById($section->UnitID) . ' - ';
+                } else {
+                    $sectionName = 'Main Website - ';
                 }
-                $section_list[$section->LinkUrl] = $sectionName . $section->ItemNameEn;
+                $section_list[$section->LinkUrl] = $sectionName . $section->ItemNameEn .' Menu';
             }
         }
 

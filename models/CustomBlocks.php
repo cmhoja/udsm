@@ -67,9 +67,9 @@ class CustomBlocks extends \yii\db\ActiveRecord {
             'Id' => 'ID',
             'BlockUnitID' => 'Block Unit ID',
             'BlockType' => 'Block Type',
-            'BlockName' => 'Block Administrative Name',
-            'BlockTitleEn' => 'Block Display Heading En',
-            'BlockTitleSw' => 'Block Display Heading Sw',
+            'BlockName' => 'Administrative Name',
+            'BlockTitleEn' => 'Display Name En',
+            'BlockTitleSw' => 'Display name Sw',
             'BlockDetailsEn' => 'Block Content En',
             'BlockDetailsSw' => 'Block Content Sw',
             'BlockIconPicture' => 'Block Icon Picture',
@@ -77,7 +77,7 @@ class CustomBlocks extends \yii\db\ActiveRecord {
             'BlockIconVideo' => 'Block Icon(Embeded) Video',
             'LinkToPage' => 'Link To Page',
             'BlockPlacementAreaRegion' => 'Placement Region',
-            'ShowOnPage' => 'Show On Page',
+            'ShowOnPage' => 'Show Only On?',
             'Status' => 'Status',
             'Upload' => 'Block Icon Picture'
         ];
@@ -129,8 +129,8 @@ class CustomBlocks extends \yii\db\ActiveRecord {
             'BlockUnitID' => $BlockUnitID,
             'Status' => CustomBlocks::STATUS_PUBLISHED
         );
-        if ($ShowOnPage == 0) {
-            $condition['ShowOnPage'] = $ShowOnPage;
+        if (empty($ShowOnPage) OR is_null($ShowOnPage) OR $ShowOnPage == '*') {
+            $ShowOnPage = NULL;
         }
         return self::find()
                         ->select('BlockName,BlockTitleEn,BlockTitleSw,BlockDetailsEn,BlockDetailsSw,BlockIconPicture,BlockIconCSSClass,LinkToPage,BlockIconVideo')

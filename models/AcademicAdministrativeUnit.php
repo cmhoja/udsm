@@ -53,7 +53,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             [['UnitNameEn', 'UnitType', 'UnitNameSw', 'TypeContentManagement'], 'required'],
             [['UnitType'], 'integer'],
             ['UnitAbreviationCode', 'required', 'on' => 'require_unit_code'],
-            [['ParentUnitId', 'Logo','UnitAbreviationCode'], 'safe'],
+            [['ParentUnitId', 'Logo', 'UnitAbreviationCode'], 'safe'],
             [['UnitNameEn', 'UnitNameSw'], 'string', 'max' => 255],
         ];
     }
@@ -137,13 +137,13 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
 
     static function getUnitTypes() {
         return array(
-            self::UNIT_TYPE_ADMINISTRATIVE => 'Administrative',
-            self::UNIT_TYPE_CONSTINTUENT_COLLEGE => 'Constituent College',
-            self::UNIT_TYPE_COLLEGE => 'College',
-            self::UNIT_TYPE_SCHOOL => 'School',
-            self::UNIT_TYPE_INSTITUTE => 'Institute',
-            self::UNIT_TYPE_CENTRE => 'Centre',
-            self::UNIT_TYPE_DEPARTMENT => 'Department',
+            self::UNIT_TYPE_ADMINISTRATIVE => 'Administratives',
+            self::UNIT_TYPE_CONSTINTUENT_COLLEGE => 'Constituent Colleges',
+            self::UNIT_TYPE_COLLEGE => 'Colleges',
+            self::UNIT_TYPE_SCHOOL => 'Schools',
+            self::UNIT_TYPE_INSTITUTE => 'Institutes',
+            self::UNIT_TYPE_CENTRE => 'Centres',
+            self::UNIT_TYPE_DEPARTMENT => 'Departments',
         );
     }
 
@@ -235,6 +235,16 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
                 $data[$parent->Id] = strtoupper($parent->UnitNameEn);
             }
             return $data;
+        }
+        return NULL;
+    }
+
+    static function getUnitAbbreviationAndTypeByID($Id) {
+        if ($Id) {
+            $unit = self::find()->where(['Id' => $Id])->one();
+            if ($unit && $unit->UnitAbreviationCode) {
+                return array('abv' => strtolower($unit->UnitAbreviationCode), 'type' => strtolower($unit->getUnitTypeName()));
+            }
         }
         return NULL;
     }

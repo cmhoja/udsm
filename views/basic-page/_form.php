@@ -61,14 +61,14 @@ use app\models\AcademicAdministrativeUnit;
             ],
             'EmbededVideo' => [
                 'type' => Form::INPUT_TEXT,
-                'options' => ['placeholder' => 'Enter Url to link this slide show to page'],
+                'options' => ['placeholder' => 'Enter Video Embedding codes here to embed a video from youtube'],
                 'columnOptions' => ['width' => '185px']
             ],
-            'PageSeoUrl' => [
-                'type' => Form::INPUT_TEXT,
-                'options' => ['placeholder' => 'Url/Link to access this page'],
-                'columnOptions' => ['width' => '185px']
-            ],
+//            'PageSeoUrl' => [
+//                'type' => Form::INPUT_TEXT,
+//                'options' => ['placeholder' => 'Url/Link to access this page'],
+//                'columnOptions' => ['width' => '185px']
+//            ],
         ]
     ]);
     echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);

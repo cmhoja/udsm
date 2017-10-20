@@ -174,7 +174,7 @@
                                 <!-- Heading -->
                                 <h2 class="title">
                                     <?php if (isset($custom_block->BlockIconCSSClass) && $custom_block->BlockIconCSSClass): ?>
-                                        <i class="fa fa-graduation-cap"></i>
+                                        <i class="fa <?php echo $custom_block->BlockIconCSSClass; ?>"></i>
                                     <?php endif; ?>
                                     <?php echo (Yii::$app->language == 'sw') ? $custom_block->BlockTitleSw : $custom_block->BlockTitleEn; ?>
                                 </h2>
@@ -198,8 +198,8 @@
 
                                 if ($custom_block->LinkToPage) {
                                     ?>
-                                &nbsp; &nbsp; &nbsp;  &nbsp; <a href="<?php echo app\components\Utilities::generateUrl($custom_block->LinkToPage) ?>" class="promotions">
-                                    <?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language].'  &nbsp;>>'; ?>
+                                    &nbsp; &nbsp; &nbsp;  &nbsp; <a href="<?php echo app\components\Utilities::generateUrl($custom_block->LinkToPage) ?>" class="promotions">
+                                        <?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language] . '  &nbsp;>>'; ?>
                                     </a>
                                     <?php
                                 }
@@ -207,7 +207,7 @@
                             </p>
 
                         </div>
-                    <?php
+                        <?php
                     }
                 }
                 ?>           

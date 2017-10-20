@@ -23,20 +23,21 @@ $this->params['breadcrumbs'][] = $this->title;
         // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'BlockName',
+            'BlockName',            
+            'BlockTitleEn',
+             array(
+                'attribute' => 'BlockType',
+                'value' => function($model) {
+                    return $model->getBlockTypeName();
+                }
+            ),
             array(
                 'attribute' => 'BlockUnitID',
                 'value' => function($model) {
                     return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->BlockUnitID);
                 }
             ),
-            array(
-                'attribute' => 'BlockType',
-                'value' => function($model) {
-                    return $model->getBlockTypeName();
-                }
-            ),
-            'BlockTitleEn',
+           
              array(
                 'attribute' => 'BlockPlacementAreaRegion',
                 'value' => function($model) {

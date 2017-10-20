@@ -58,26 +58,29 @@
                         <div class="row">
                             <div class="col-sm-12 ">
                                 <!-- Top Contact -->
-                                <div class="top-contact link-hover-black">
-                                    <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                        <img class="site_logo" style="width: 20%;margin: 2%;" alt="Site Logo" src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/logo.png" />
+                                <div  class="col-sm-2"style="z-index: 100;padding: 0.5%;margin-left: 0;margin-top: 0.5%;position: relative;float: left;display: block">
+                                    <a style=""class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
+                                        <img class="site_logo" style="width: 60px;" alt="Site Logo" src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/logo.png" />
                                     </a>
-                                    <?php if (isset($this->params['unit_logo']) && $this->params['unit_logo']) { ?>
-                                        <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                            <img class="site-right" style="width: 20%;margin: 2%;" alt="Site Logo" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $this->params['unit_logo']; ?>" />
-                                        </a>
-                                    <?php } ?>
-
                                 </div>
-                                <div class="top-banner">
+                                <div class="col-sm-8" style="position: relative;float: left;">
                                     <div class="description-main" style="font-size: 19px;">
                                         <?php echo strtoupper($this->params['unit_name']); ?>
                                         <?php if ($this->params['unit_abbreviation_code']): ?>                                        
-                                        <br/>(<?php echo strtoupper($this->params['unit_abbreviation_code']); ?>)
+                                            <br/>(<?php echo strtoupper($this->params['unit_abbreviation_code']); ?>)
                                         <?php endif; ?>
                                     </div>
-                                    <div class="top-description" style="font-size: 15px;font-weight: bold"> <?php echo strtoupper(Yii::$app->name[Yii::$app->language]); ?> </div>
+                                    <div class="top-description" style="font-size: 15px;font-weight: bold;clear: both"> 
+                                        <?php echo strtoupper(Yii::$app->name[Yii::$app->language]); ?> 
+                                    </div>
                                 </div>
+                                <?php if (isset($this->params['unit_logo']) && $this->params['unit_logo']) { ?>
+                                    <div class="col-sm-2" style="z-index: 100;padding: 0.5%;margin-left: 0;margin-top: 0.5%;position: relative;float: left;display: block">
+                                        <a style=""class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
+                                            <img class="site_logo" style="width: 60px;" alt="Unit Logo" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $this->params['unit_logo']; ?>" />
+                                        </a>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

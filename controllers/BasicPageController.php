@@ -83,13 +83,22 @@ class BasicPageController extends Controller {
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = BasicPage::STATUS_SAVED;
             //setting section Url
-            $sectionUrl = trim($model->SectionLink);
-            if (!empty($sectionUrl)) {
-                $sectionUrl = trim($sectionUrl . '/');
-            }
-            $model->PageSeoUrl = trim($model->PageSeoUrl);
-            if ($model->PageTitleEn && empty($model->PageSeoUrl)) {
-                $model->PageSeoUrl = trim($sectionUrl . \app\components\Utilities::createUrlString($model->PageTitleEn));
+            $unit_code = $parent_url = NULL;
+            //checking ig using code exists
+            $model->SectionLink = trim($model->SectionLink);
+            if ($model->SectionLink) {
+                $model->SectionLink = trim($model->SectionLink . '/');
+                $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString($model->PageTitleEn));
+            } else if ($model->UnitID) {
+                $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                if ($unit_code['abv'] && $unit_code['type']) {
+                    $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                    $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                }
+            } else {
+                if ($model->PageTitleEn) {
+                    $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                }
             }
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = BasicPage::STATUS_SAVED;
@@ -118,13 +127,23 @@ class BasicPageController extends Controller {
         }
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = BasicPage::STATUS_SAVED;
-            $sectionUrl = trim($model->SectionLink);
-            if (!empty($sectionUrl)) {
-                $sectionUrl = $sectionUrl . '/';
-            }
-            $model->PageSeoUrl = trim($model->PageSeoUrl);
-            if ($model->PageTitleEn && empty($model->PageSeoUrl)) {
-                $model->PageSeoUrl = trim($sectionUrl . \app\components\Utilities::createUrlString($model->PageTitleEn));
+            //setting section Url
+            $unit_code = $parent_url = NULL;
+            //checking ig using code exists
+            $model->SectionLink = trim($model->SectionLink);
+            if ($model->SectionLink) {
+                $model->SectionLink = trim($model->SectionLink . '/');
+                $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString($model->PageTitleEn));
+            } else if ($model->UnitID) {
+                $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                if ($unit_code['abv'] && $unit_code['type']) {
+                    $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                    $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                }
+            } else {
+                if ($model->PageTitleEn) {
+                    $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                }
             }
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = BasicPage::STATUS_SAVED;
