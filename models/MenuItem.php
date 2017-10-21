@@ -44,8 +44,8 @@ class MenuItem extends \yii\db\ActiveRecord {
             [['MenuID', 'ItemNameEn', 'LinkUrl', 'ListOrder', 'UrlType'], 'required'],
             [['MenuID', 'ParentItemID', 'ListOrder', 'SectionID', 'UrlType'], 'integer'],
             [['menuClasses', 'UnitID'], 'safe'],
-            [['ItemNameEn', 'ItemNameSw'], 'string', 'max' => 50],
-            [['LinkUrl'], 'string', 'max' => 200],
+            [['ItemNameEn', 'ItemNameSw'], 'string', 'max' => 250],
+            [['LinkUrl'], 'string', 'max' => 250],
             [['menu'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['MenuID' => 'Id']],
             [['SectionID'], 'exist', 'skipOnError' => true, 'targetClass' => Sections::className(), 'targetAttribute' => ['SectionID' => 'Id']],
         ];
@@ -323,7 +323,7 @@ class MenuItem extends \yii\db\ActiveRecord {
     static function getTargetUrlTypes() {
         return [
             self::URL_TYPE_INTERNAL => 'Internal Url/Within CMS',
-            self::URL_TYPE_EXTERNAL => 'Internal Url/External Website'
+            self::URL_TYPE_EXTERNAL => 'External Url/External Website'
         ];
     }
 

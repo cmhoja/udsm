@@ -143,7 +143,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             self::UNIT_TYPE_SCHOOL => 'Schools',
             self::UNIT_TYPE_INSTITUTE => 'Institutes',
             self::UNIT_TYPE_CENTRE => 'Centres',
-            self::UNIT_TYPE_DEPARTMENT => 'Departments',
+           // self::UNIT_TYPE_DEPARTMENT => 'Departments',
         );
     }
 

@@ -22,13 +22,13 @@ $this->params['breadcrumbs'][] = 'Manage Basic Pages';
             ['class' => 'yii\grid\SerialColumn'],
             'PageTitleEn',
             'PageSeoUrl:url',
-            array(
-                'attribute' => 'PageSeoUrl',
-                'label' => 'Previw Link',
-                'value' => function($model) {
-                    return \yii\helpers\Url::toRoute($model->PageSeoUrl, true);
-                }
-            ),
+//            array(
+//                'attribute' => 'PageSeoUrl',
+//                'label' => 'Previw Link',
+//                'value' => function($model) {
+//                    return \yii\helpers\Url::toRoute($model->PageSeoUrl, true);
+//                }
+//            ),
             array(
                 'attribute' => 'UnitID',
                 'value' => function($model) {
