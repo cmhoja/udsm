@@ -1,39 +1,46 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use app\models\AcademicAdministrativeUnit;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UsersSearch */
+/* @var $model app\models\AcademicAdministrativeUnit */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="users-search">
+<div class="search" style="width: 99%;">
+    <?php
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]);
+    ?>
+    <?php
+    echo Form::widget([
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
+            'FName' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '155px']
+            ], 'UserName' => [
+                'type' => Form::INPUT_TEXT,
+                'columnOptions' => ['width' => '155px']
+            ],
+            'UnitID' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'options' => ['prompt' => '--- select --'],
+                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement' => AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+                'columnOptions' => ['width' => '155px', 'height' => '10px'],
+                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
+            ],
+        ]
+    ]);
+    echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+    ActiveForm::end();
+    ?>
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
-
-    <?= $form->field($model, 'Id') ?>
-
-    <?= $form->field($model, 'FName') ?>
-
-    <?= $form->field($model, 'LName') ?>
-
-    <?= $form->field($model, 'UserName') ?>
-
-    <?= $form->field($model, 'Password') ?>
-
-    <?php // echo $form->field($model, 'UserType') ?>
-
-    <?php // echo $form->field($model, 'UnitID') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
 
 </div>
+

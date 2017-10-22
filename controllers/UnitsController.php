@@ -21,7 +21,7 @@ use app\models\News;
 use app\models\Announcement;
 use app\models\SlideShows;
 
-class SchoolsController extends Controller {
+class UnitsController extends Controller {
 
     public $param;
 
@@ -35,7 +35,7 @@ class SchoolsController extends Controller {
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'programs'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -73,7 +73,7 @@ class SchoolsController extends Controller {
         Yii::$app->view->params['unit_abbreviation_code'] = NULL;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             $unit_abbreviation = trim($url_sections[2]);
             $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
             if ($Academic_unit_details) {
@@ -101,7 +101,7 @@ class SchoolsController extends Controller {
 
         $url_sections = explode('/', $url);
 //
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
 ////getting the landing page por a given college 
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -219,7 +219,7 @@ class SchoolsController extends Controller {
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
 
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'unitd' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -261,7 +261,7 @@ class SchoolsController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
 
@@ -298,7 +298,7 @@ class SchoolsController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -355,7 +355,7 @@ class SchoolsController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -395,7 +395,7 @@ class SchoolsController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -427,7 +427,7 @@ class SchoolsController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -459,7 +459,7 @@ class SchoolsController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'school' OR $url_sections[1] == 'schools' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {

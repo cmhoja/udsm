@@ -92,6 +92,11 @@ use app\models\AcademicAdministrativeUnit;
                 'options' => ['placeholder' => 'Enter url of the page or website that this block point when clicked'],
                 'columnOptions' => ['width' => '185px']
             ],
+            'ListOrder' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => app\components\Utilities::generateNumbers(30), 'options' => ['prompt' => '-- Select --'],
+                'columnOptions' => ['width' => '185px', 'height' => '10px']
+            ],
         ]
     ]);
     echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);

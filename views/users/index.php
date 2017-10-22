@@ -11,6 +11,9 @@ $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-index">
+
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>

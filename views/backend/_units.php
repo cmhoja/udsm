@@ -68,14 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2
                 </div>
                 <div style="position: relative; float: left;margin-left: 1.5%;width: 49%;height: 100px;border: 1px solid black;padding: 4%">
-                    COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3
+                    COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3 
                 </div>
             </div>
         </div>
 
 
         <div style="position: relative;float: left;width: 99.3%;margin: 0.3%;margin-bottom: 0.8%;margin-top: 0.8%;border: 1px solid black">
-            <div style="position: relative; float: right;width: 50%;;border: 1px solid black;">
+            <div style="position: relative; float: left;width: 50%;;border: 1px solid black;">
                 <div style="position: relative; float: left;width: 49%;margin: 0.4%;height: 100px;padding: 3%;border: 1px solid black;">
                     COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN1 
                 </div>
@@ -87,8 +87,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div style="position: relative; float: left;width: 49%;margin: 0.4%;height: 100px;padding: 3%;border: 1px solid black;">
                     COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN3
                 </div>
-                <div style="position: relative; float: left;width: 49%;margin: 0.4%;height: 100px;border: 1px solid black;padding: 4%">
-                    COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN4
+                <div style="position: relative; float: left;background: rosybrown;width: 49%;margin: 0.4%;height: 100px;border: 1px solid black;padding: 4%">
+                    COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN4 (FIXED FOR CONTACTS & SOCIAL NETWORK A/C SLIDES)
                 </div>
             </div>
         </div>

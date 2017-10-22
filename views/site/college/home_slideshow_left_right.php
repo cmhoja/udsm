@@ -187,7 +187,7 @@
                             <?php endif; ?>
 
                             <?php if (!$custom_block->BlockIconPicture && $custom_block->BlockIconVideo): ?>
-                                <div style="padding: 1%">
+                                <div style="padding: 1%;">
                                     <?php echo $custom_block->BlockIconVideo; ?>
                                 </div>
                             <?php endif; ?>

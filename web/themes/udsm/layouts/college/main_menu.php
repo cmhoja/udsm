@@ -28,7 +28,7 @@ It has all the view logic to show dynamic menus from the Cms as managed by the C
                         if ($submenus_level1 && count($submenus_level1)) {
                             ?>
                             <li class="mega-menu">
-                                <a href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($menu_item->LinkUrl)); ?>">
+                                <a target="<?php echo $menu_item->UrlType == app\models\MenuItem::URL_TYPE_EXTERNAL ? '_blank' : ''; ?>" href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($menu_item->LinkUrl)); ?>">
                                     <?php echo html_entity_decode((Yii::$app->language == 'sw') ? $menu_item->ItemNameSw : $menu_item->ItemNameEn); ?><span class="sub-arrow"></span>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -41,7 +41,7 @@ It has all the view logic to show dynamic menus from the Cms as managed by the C
                                                 if ($submenus_level2) {
                                                     ?>
                                                     <div class="col-md-15 col-sm-3">
-                                                        <a href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($submenus_level1->LinkUrl)); ?>">
+                                                        <a  target="<?php echo $submenus_level1->UrlType == app\models\MenuItem::URL_TYPE_EXTERNAL ? '_blank' : ''; ?>" href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($submenus_level1->LinkUrl)); ?>">
                                                             <h6 class="title"> <?php echo html_entity_decode((Yii::$app->language == 'sw') ? $submenus_level1->ItemNameSw : $submenus_level1->ItemNameEn); ?></h6>
                                                         </a>
                                                         <div class="page-links">
@@ -49,7 +49,7 @@ It has all the view logic to show dynamic menus from the Cms as managed by the C
                                                             foreach ($submenus_level2 as $submenu_level2) {
                                                                 ?>
                                                                 <div>
-                                                                    <a href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($submenu_level2->LinkUrl)); ?>">
+                                                                    <a  target="<?php echo $submenu_level2->UrlType == app\models\MenuItem::URL_TYPE_EXTERNAL ? '_blank' : ''; ?>" href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($submenu_level2->LinkUrl)); ?>">
                                                                         <?php echo html_entity_decode((Yii::$app->language == 'sw') ? $submenu_level2->ItemNameSw : $submenu_level2->ItemNameEn); ?>
                                                                     </a>
                                                                 </div>
@@ -61,7 +61,7 @@ It has all the view logic to show dynamic menus from the Cms as managed by the C
                                                 } else {
                                                     ?>
                                                     <div class="col-sm-3">
-                                                        <a href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($submenus_level1->LinkUrl)); ?>">
+                                                        <a target="<?php echo $submenus_level1->UrlType == app\models\MenuItem::URL_TYPE_EXTERNAL ? '_blank' : ''; ?>" href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($submenus_level1->LinkUrl)); ?>">
                                                             <h6 class="title"> <?php echo html_entity_decode((Yii::$app->language == 'sw') ? $submenus_level1->ItemNameSw : $submenus_level1->ItemNameEn); ?></h6>
                                                         </a>
                                                     </div>
@@ -77,7 +77,7 @@ It has all the view logic to show dynamic menus from the Cms as managed by the C
                         } else {
                             ?>
                             <li>
-                                <a href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($menu_item->LinkUrl)); ?>">
+                                <a target="<?php echo $menu_item->UrlType == app\models\MenuItem::URL_TYPE_EXTERNAL ? '_blank' : ''; ?>" href="<?php echo \app\components\Utilities::generateUrl(html_entity_decode($menu_item->LinkUrl)); ?>">
                                     <?php echo html_entity_decode((Yii::$app->language == 'sw') ? $menu_item->ItemNameSw : $menu_item->ItemNameEn); ?><span class="sub-arrow"></span>
                                 </a>
                             </li>

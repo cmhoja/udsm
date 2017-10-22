@@ -94,16 +94,16 @@ class CentresController extends Controller {
      *
      * @return string
      */
-    public function actionIndex() {
+     public function actionIndex() {
 //getting user current langauage;
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
-// echo $url;
+
         $url_sections = explode('/', $url);
+//
         if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
 ////getting the landing page por a given college 
             $unit_abbreviation = trim($url_sections[2]);
-
             if (!empty($unit_abbreviation)) {
                 $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
                 $content['unit_details'] = $Academic_unit_details;
@@ -121,21 +121,85 @@ class CentresController extends Controller {
                     }
                     $content['home_content_slideshow_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
                     //getting data for the home page top column 1,2 & 3
-                    $content['home_content_top_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_top_column2_announcements'] = Announcement::getLatestAnnouncementsByStatusAndUnit(Announcement::STATUS_PUBLISHED, $Academic_unit_details->Id, 5);
-                    $content['home_content_top_column3_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, $Academic_unit_details->Id, 0);
-                    $content['home_content_top_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    $content['home_content_top_left_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    $content['home_content_top_left_menus'] = array();
+                    $home_content_top_left_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_LEFT, $Academic_unit_details->Id, 0);
+                    if ($home_content_top_left_menus) {
+                        foreach ($home_content_top_left_menus as $menu_group) {
+                            $menu_items = MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED);
+                            $content['home_content_top_left_menus'][$menu_group->Id] = array('MenuCSSClass' => $menu_group->MenuCSSClass, 'DisplayNameEn' => $menu_group->DisplayNameEn, 'DisplayNameSw' => $menu_group->DisplayNameSw,
+                                'MenuItems' => $menu_items);
+                        }
+                    }
+                    ///fixed block for announcements
+                    $content['home_content_top_middle_announcements'] = Announcement::getLatestAnnouncementsByStatusAndUnit(Announcement::STATUS_PUBLISHED, $Academic_unit_details->Id, 5);
+                    ///content top column 3
+                    $content['home_content_top_right_menus'] = array();
+                    $home_content_top_right_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, $Academic_unit_details->Id, 0);
+                    if ($home_content_top_right_menus) {
+                        foreach ($home_content_top_right_menus as $menu_group) {
+                            $menu_items = MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED);
+                            $content['home_content_top_right_menus'][$menu_group->Id] = array('MenuCSSClass' => $menu_group->MenuCSSClass, 'DisplayNameEn' => $menu_group->DisplayNameEn, 'DisplayNameSw' => $menu_group->DisplayNameSw,
+                                'MenuItems' => $menu_items);
+                        }
+                    }
+                    $content['home_content_top_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
 
                     //////contents for the home page news( or content middle left) and propotion area ( or content middle right)
+                    ///fixed news block
                     $content['home_content_middle_left_news'] = News::getLatestNewsByStatusAndUnit(News::NEWS_STATUS_PUBLISHED, $Academic_unit_details->Id, 4);
+                    //news area right column block and menus
                     $content['home_content_middle_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_MIDDLE__RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    $content['home_content_middle_right_menus'] = array();
+                    $home_content_middle_right_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_MIDDLE__RIGHT, $Academic_unit_details->Id, 0);
+                    if ($home_content_middle_right_menus) {
+                        foreach ($home_content_middle_right_menus as $menu_group) {
+                            $menu_items = MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED);
+                            $content['home_content_middle_right_menus'][$menu_group->Id] = array('MenuCSSClass' => $menu_group->MenuCSSClass, 'DisplayNameEn' => $menu_group->DisplayNameEn, 'DisplayNameSw' => $menu_group->DisplayNameSw,
+                                'MenuItems' => $menu_items);
+                        }
+                    }
                     ////contents for events area of the home page
+                    //fixed block for events only
                     $content['home_content_events'] = Events::getLatestEventsByStatusAndUnit(Events::EVENT_STATUS_PUBLISHED, $Academic_unit_details->Id, 6);
 
-                    ////getting contend to the content bottom area
-                    $content['home_content_bottom_column1'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_bottom_column2'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_bottom_column3'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    ////getting content for the content bottom area
+                    ///bottom column 1
+                    $content['home_content_bottom_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    //$content['home_content_bottom_column1_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN1, $Academic_unit_details->Id, 0);
+                    $content['home_content_bottom_column1_menus'] = array();
+                    $home_content_bottom_column1_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN1, $Academic_unit_details->Id, 0);
+                    if ($home_content_bottom_column1_menus) {
+                        foreach ($home_content_bottom_column1_menus as $menu_group) {
+                            $menu_items = MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED);
+                            $content['home_content_bottom_column1_menus'][$menu_group->Id] = array('MenuCSSClass' => $menu_group->MenuCSSClass, 'DisplayNameEn' => $menu_group->DisplayNameEn, 'DisplayNameSw' => $menu_group->DisplayNameSw,
+                                'MenuItems' => $menu_items);
+                        }
+                    }
+                    //bottom column 2
+                    $content['home_content_bottom_column2_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    //$content['home_content_bottom_column2_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2, $Academic_unit_details->Id, 0);
+                    $content['home_content_bottom_column2_menus'] = array();
+                    $home_content_bottom_column2_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2, $Academic_unit_details->Id, 0);
+                    if ($home_content_bottom_column2_menus) {
+                        foreach ($home_content_bottom_column2_menus as $menu_group) {
+                            $menu_items = MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED);
+                            $content['home_content_bottom_column2_menus'][$menu_group->Id] = array('MenuCSSClass' => $menu_group->MenuCSSClass, 'DisplayNameEn' => $menu_group->DisplayNameEn, 'DisplayNameSw' => $menu_group->DisplayNameSw,
+                                'MenuItems' => $menu_items);
+                        }
+                    }
+                    //bottom column 3
+                    $content['home_content_bottom_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    //$content['home_content_bottom_column3_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3, $Academic_unit_details->Id, 0);
+                    $content['home_content_bottom_column3_menus'] = array();
+                    $home_content_bottom_column3_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3, $Academic_unit_details->Id, 0);
+                    if ($home_content_bottom_column3_menus) {
+                        foreach ($home_content_bottom_column3_menus as $menu_group) {
+                            $menu_items = MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, MenuItem::STATUS_ENABLED);
+                            $content['home_content_bottom_column3_menus'][$menu_group->Id] = array('MenuCSSClass' => $menu_group->MenuCSSClass, 'DisplayNameEn' => $menu_group->DisplayNameEn, 'DisplayNameSw' => $menu_group->DisplayNameSw,
+                                'MenuItems' => $menu_items);
+                        }
+                    }
                     //getting contents for promotion are i.e MAIN_TEMPLATE_FOOTER_TOP_AREA
                     //var_dump($content['home_content_top_column3_menus']);
                 } else {

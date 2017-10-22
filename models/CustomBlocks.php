@@ -48,7 +48,7 @@ class CustomBlocks extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['BlockType', 'BlockName', 'BlockDetailsEn', 'BlockDetailsSw', 'BlockPlacementAreaRegion'], 'required'],
+            [['BlockType', 'BlockName', 'BlockDetailsEn', 'BlockDetailsSw', 'BlockPlacementAreaRegion', 'ListOrder'], 'required'],
             [['BlockUnitID', 'BlockType', 'Status'], 'integer'],
             [['BlockPlacementAreaRegion'], 'string', 'max' => 10],
             [['BlockDetailsSw'], 'string'],
@@ -79,7 +79,8 @@ class CustomBlocks extends \yii\db\ActiveRecord {
             'BlockPlacementAreaRegion' => 'Placement Region',
             'ShowOnPage' => 'Show Only On?',
             'Status' => 'Status',
-            'Upload' => 'Block Icon Picture'
+            'Upload' => 'Block Icon Picture',
+            'ListOrder' => 'List Order'
         ];
     }
 
@@ -136,6 +137,7 @@ class CustomBlocks extends \yii\db\ActiveRecord {
                         ->select('BlockName,BlockTitleEn,BlockTitleSw,BlockDetailsEn,BlockDetailsSw,BlockIconPicture,BlockIconCSSClass,LinkToPage,BlockIconVideo')
                         ->where($condition)
                         ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
+                        ->orderBy('ListOrder DESC')
                         ->all();
     }
 

@@ -78,6 +78,7 @@ $this->params['breadcrumbs'][] = 'Details';
                 }
             ),
             'ShowOnPage',
+            'ListOrder',
             array(
                 'attribute' => 'Status',
                 'value' => function($model) {

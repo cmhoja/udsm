@@ -64,7 +64,7 @@
                             ?>
                             <div class="widget-title">
                                 <!-- Title -->
-                                <h3 class="title">Quick Links</h3>
+                                <h3 class="title"><?php echo Yii::$app->params['static_items']['quick_links'][Yii::$app->language]; ?></h3>
                                 <!--<h3 class="title"><?php //echo (Yii::$app->language == 'sw') ? $menu->ItemNameSw : $menu->ItemNameEn                        ?></h3>-->
                             </div>
                             <nav>

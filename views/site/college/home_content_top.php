@@ -1,11 +1,11 @@
 <section id="who-we-are" class="page-section no-pad light-bg border-tb">
     <div class="container who-we-are">
         <div class="row">
-
+            <!--TOP LEFT-->
             <div class="col-md-4">
                 <?php
-                if (isset($home_content_top_column1_blocks) && $home_content_top_column1_blocks) {
-                    foreach ($home_content_top_column1_blocks as $custom_block1) {
+                if (isset($home_content_top_left_blocks) && $home_content_top_left_blocks) {
+                    foreach ($home_content_top_left_blocks as $custom_block1) {
                         ?>
 
                         <div class="text-left">
@@ -44,16 +44,48 @@
                     }
                 }
                 ?>
+
+                <!--MENU ITEMS-->
+                <?php
+                if (isset($home_content_top_left_menus) && $home_content_top_left_menus) {
+                    foreach ($home_content_top_left_menus as $key => $menu_group) {
+                        ?>
+                        <?php
+                        if ($menu_group['DisplayNameEn'] OR $menu_group['DisplayNameSw']):
+                            $menu_group_title = (Yii::$app->language == 'sw') ? $menu_group['DisplayNameSw'] : $menu_group['DisplayNameEn'];
+                            ?>
+                            <div class="section-title text-left">
+                                <!-- Heading -->
+                                <h2 class="title"><?php echo $menu_group_title; ?></h2>
+                            </div>
+                        <?php endif; ?>
+                        <div class="course-additions">
+                            <?php
+                            if ($menu_group['MenuItems'] && $menu_group['MenuItems']) {
+                                foreach ($menu_group['MenuItems'] as $menus) {
+                                    ?>
+                                    <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+
             </div>
 
+            <!--ANNOUNCEMENT-->
             <div class="col-md-4 announcements">
                 <div class="section-title text-left">
                     <!-- Heading -->
                     <h2 class="title"><?php echo Yii::$app->params['static_items']['announcement'][Yii::$app->language]; ?></h2>
                 </div>
                 <?php
-                if (isset($home_content_top_column2_announcements) && $home_content_top_column2_announcements) {
-                    foreach ($home_content_top_column2_announcements as $announcement) {
+                if (isset($home_content_top_middle_announcements) && $home_content_top_middle_announcements) {
+                    foreach ($home_content_top_middle_announcements as $announcement) {
                         ?>
                         <li>
                             <a href="<?php echo app\components\Utilities::generateUrl('/college/' . $this->params['unit_abbreviation_code'] . '/announcements/' . $announcement->LinkUrl) ?>"><?php echo (Yii::$app->language == 'sw') ? $announcement->TitleSw : $announcement->TitleEn; ?></a>
@@ -75,41 +107,49 @@
                 ?>
             </div>
 
+            <!--TOP RIGHT-->
+
             <div class="col-md-4">
-                <?php if (isset($home_content_top_column3_menus) && $home_content_top_column3_menus): ?>
-                    <div class="text-left">
-                        <!-- Title -->
-                        <div class="section-title text-left">
-                            <!-- Heading -->
-                            <h2 class="title"><?php echo Yii::$app->params['static_items']['quick_links'][Yii::$app->language]; ?></h2>
-                        </div>
-
-                    </div>
-                    <div id="sidebar quicklinks">
-                        <div class="widget home-links">
-
-                            <div id="MainMenu">
-                                <div class="list-group ">
-                                    <?php
-                                    if (isset($home_content_top_column3_menus) && $home_content_top_column3_menus) {
-                                        foreach ($home_content_top_column3_menus as $menu_item) {
-                                            ?>
-                                            <a href = "<?php echo app\components\Utilities::generateUrl($menu_item->LinkUrl) ?>" class = "list-group-item main-item"><?php echo (Yii::$app->language == 'sw') ? $menu_item->ItemNameSw : $menu_item->ItemNameEn; ?></a>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
-
-                                </div>
+                <?php if (isset($home_content_top_right_menus) && $home_content_top_right_menus): ?>
+                    <?php
+                    foreach ($home_content_top_right_menus as $key => $menu_group) {
+                        ?>
+                        <?php
+                        if ($menu_group['DisplayNameEn'] OR $menu_group['DisplayNameSw']):
+                            $menu_group_title = (Yii::$app->language == 'sw') ? $menu_group['DisplayNameSw'] : $menu_group['DisplayNameEn'];
+                            ?>
+                            <div class="section-title text-left">
+                                <!-- Heading -->
+                                <h2 class="title"><?php echo $menu_group_title; ?></h2>
                             </div>
-                            <!-- page-list -->
+                        <?php endif; ?>
+                        <div id="sidebar quicklinks">
+                            <div class="widget home-links">
+
+                                <div id="MainMenu">
+                                    <div class="list-group ">
+                                        <?php
+                                        if ($menu_group['MenuItems'] && $menu_group['MenuItems']) {
+                                            foreach ($menu_group['MenuItems'] as $menu_item) {
+                                                ?>
+                                                <a href = "<?php echo app\components\Utilities::generateUrl($menu_item->LinkUrl) ?>" class = "list-group-item main-item"><?php echo (Yii::$app->language == 'sw') ? $menu_item->ItemNameSw : $menu_item->ItemNameEn; ?></a>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <!-- page-list -->
+                            </div>
                         </div>
-                    </div>
-                <?php endif; ?>
+                        <?php
+                    }
+                endif;
+                ?>
 
                 <?php
-                if (isset($home_content_top_column3_blocks) && $home_content_top_column3_blocks) {
-                    foreach ($home_content_top_column3_blocks as $custom_block3) {
+                if (isset($home_content_top_right_blocks) && $home_content_top_right_blocks) {
+                    foreach ($home_content_top_right_blocks as $custom_block3) {
                         ?>
 
                         <div class="text-left">

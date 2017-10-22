@@ -24,31 +24,39 @@ $UnitID = $this->params['unit_id'];
                         }
                     }
                     ?>
-
                     <!--Getting Menus if any-->
                     <?php
-                    $menus = \app\models\MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(\app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN1, $UnitID, 0);
-                    if ($menus) {
-                        ?>
-                        <div class="widget-title">
-                            <!-- Title -->
-                            <h3 class="title"><?php //echo (Yii::$app->language == 'sw') ? $menu->ItemNameSw : $menu->ItemNameEn                                                                                   ?></h3>
-                        </div>
-                        <nav>
-                            <ul>
-                                <?php
-                                foreach ($menus as $menuitem) {
-                                    ?>
-                                    <li>
-                                        <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
+                    $footer_column1_menus = app\models\Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN1, $UnitID, '*');
+                    if ($footer_column1_menus) {
+                        foreach ($footer_column1_menus as $menu_group) {
+                            $menus = app\models\MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, app\models\MenuItem::STATUS_ENABLED);
+                            //////////////
+                            ?>
+                            <div class="widget-title">
+                                <!-- Title -->
+                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $menu_group->DisplayNameSw : $menu_group->DisplayNameEn ?></h3>
+                            </div>
+                            <?php
+                            // $menus = \app\models\MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(\app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN1, $UnitID, '*');
+                            if ($menus) {
+                                ?> 
+                                <nav>
+                                    <ul>
+                                        <?php
+                                        foreach ($menus as $menuitem) {
+                                            ?>
+                                            <li>
+                                                <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
+                                            </li>
+                                            <?php
+                                        }
+                                        ?>
 
-                            </ul>
-                        </nav>
-                        <?php
+                                    </ul>
+                                </nav>
+                                <?php
+                            }
+                        }
                     }
                     ?>
 
@@ -75,28 +83,37 @@ $UnitID = $this->params['unit_id'];
 
                     <!--Getting Menus if any-->
                     <?php
-                    $menus = \app\models\MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(\app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN2, $UnitID, 0);
-                    if ($menus) {
-                        ?>
-                        <div class="widget-title">
-                            <!-- Title -->
-                            <h3 class="title"><?php //echo (Yii::$app->language == 'sw') ? $menu->ItemNameSw : $menu->ItemNameEn                                                                                   ?></h3>
-                        </div>
-                        <nav>
-                            <ul>
-                                <?php
-                                foreach ($menus as $menuitem) {
-                                    ?>
-                                    <li>
-                                        <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
+                    $footer_column2_menus = app\models\Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN2, $UnitID, '*');
+                    if ($footer_column2_menus) {
+                        foreach ($footer_column2_menus as $menu_group) {
+                            $menus = app\models\MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, app\models\MenuItem::STATUS_ENABLED);
+                            //////////////
+                            ?>
+                            <div class="widget-title">
+                                <!-- Title -->
+                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $menu_group->DisplayNameSw : $menu_group->DisplayNameEn ?></h3>
+                            </div>
+                            <?php
+                            // $menus = \app\models\MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(\app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN1, $UnitID, '*');
+                            if ($menus) {
+                                ?> 
+                                <nav>
+                                    <ul>
+                                        <?php
+                                        foreach ($menus as $menuitem) {
+                                            ?>
+                                            <li>
+                                                <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
+                                            </li>
+                                            <?php
+                                        }
+                                        ?>
 
-                            </ul>
-                        </nav>
-                        <?php
+                                    </ul>
+                                </nav>
+                                <?php
+                            }
+                        }
                     }
                     ?>
                 </div>
@@ -120,28 +137,36 @@ $UnitID = $this->params['unit_id'];
 
                     <!--Getting Menus if any-->
                     <?php
-                    $menus = \app\models\MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(\app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN3, $UnitID, 0);
-                    if ($menus) {
-                        ?>
-                        <div class="widget-title">
-                            <!-- Title -->
-                            <h3 class="title"><?php //echo (Yii::$app->language == 'sw') ? $menu->ItemNameSw : $menu->ItemNameEn;  ?></h3>
-                        </div>
-                        <nav>
-                            <ul>
-                                <?php
-                                foreach ($menus as $menuitem) {
-                                    ?>
-                                    <li>
-                                        <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
+                    $footer_column3_menus = app\models\Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(app\models\Menu::MENU_TYPE_OTHER_MENU, app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN3, $UnitID, '*');
+                    if ($footer_column3_menus) {
+                        foreach ($footer_column3_menus as $menu_group) {
+                            $menus = app\models\MenuItem::getMenuItemsByMenuGroupIDAndStatus($menu_group->Id, app\models\MenuItem::STATUS_ENABLED);
+                            //////////////
+                            ?>
+                            <div class="widget-title">
+                                <!-- Title -->
+                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $menu_group->DisplayNameSw : $menu_group->DisplayNameEn ?></h3>
+                            </div>
+                            <?php
+                            if ($menus) {
+                                ?> 
+                                <nav>
+                                    <ul>
+                                        <?php
+                                        foreach ($menus as $menuitem) {
+                                            ?>
+                                            <li>
+                                                <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
+                                            </li>
+                                            <?php
+                                        }
+                                        ?>
 
-                            </ul>
-                        </nav>
-                        <?php
+                                    </ul>
+                                </nav>
+                                <?php
+                            }
+                        }
                     }
                     ?>
                 </div>

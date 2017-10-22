@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         <div style="position: relative;float: left;width: 99.3%;margin: 0.3%;margin-bottom: 0.8%;margin-top: 0.8%;border: 1px solid black">
-            <div style="position: relative; float: right;width: 50%;;border: 1px solid black;">
+            <div style="position: relative; float: left;width: 50%;;border: 1px solid black;">
                 <div style="position: relative; float: left;width: 49%;margin: 0.4%;height: 100px;padding: 3%;border: 1px solid black;">
                     MAIN_TEMPLATE_CONTENT_BOTTOM_COLUMN1 
                 </div>
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         <div style="position: relative;float: left;width: 99.3%;margin: 0.3%;margin-bottom: 0.8%;margin-top: 0.8%;border: 1px solid black">
-            <div style="position: relative; float: right;width: 50%;;border: 1px solid black;">
+            <div style="position: relative; float: left;width: 50%;;border: 1px solid black;">
                 <div style="position: relative; float: left;width: 49%;margin: 0.4%;height: 100px;padding: 3%;border: 1px solid black;">
                     MAIN_TEMPLATE_FOOTER_BOTTOM_COLUMN1 
                 </div>
