@@ -92,6 +92,13 @@ class BasicPage extends \yii\db\ActiveRecord {
                         ->one();
     }
 
+    static function getActivePageAllDetailsByPageSEOUrl($url) {
+
+        return self::find()
+                        ->where(['PageSeoUrl' => $url, 'Status' => self::STATUS_PUBLISHED])
+                        ->one();
+    }
+
     static function getActivePageAllDetailsByUrl($url, $UnitID = NULL) {
 
         return self::find()
@@ -110,7 +117,7 @@ class BasicPage extends \yii\db\ActiveRecord {
                 } else {
                     $sectionName = 'Main Website - ';
                 }
-                $section_list[$section->LinkUrl] = $sectionName . $section->ItemNameEn .' Menu';
+                $section_list[$section->Id] = $sectionName . $section->ItemNameEn . ' Menu';
             }
         }
 

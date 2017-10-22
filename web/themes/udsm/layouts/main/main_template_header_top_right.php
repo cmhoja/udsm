@@ -21,7 +21,8 @@ if ($top_right_menus) {
     <?php
 ///getting supported langauge
     $supportedLanguages = Yii::$app->params['supportedLanguages'];
-    if (is_array($supportedLanguages)) {
+    $language_switch = Yii::$app->params['enable_language_change'];
+    if (is_array($supportedLanguages) && ($language_switch OR Yii::$app->session->has('USER_TYPE_CONTENT_MANAGER') OR Yii::$app->session->has('USER_TYPE_ADMINISTRATOR')  )) {
         foreach ($supportedLanguages as $key => $language) {
             $key = \yii\helpers\Html::encode($key);
             switch ($key) {
@@ -47,7 +48,7 @@ if ($top_right_menus) {
                 <?php
             } else {
                 ?>
-    <a  style="font-size: 0.75em" class ="active" href = "<?php echo \app\components\Utilities::setLanguageLink($key); ?>">
+                <a  style="font-size: 0.75em" class ="active" href = "<?php echo \app\components\Utilities::setLanguageLink($key); ?>">
                     <img src="<?php echo $this->theme->baseUrl . $flag; ?>">
                     <?php echo \yii\helpers\Html::encode($language); ?>
                 </a>

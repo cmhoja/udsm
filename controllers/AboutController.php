@@ -13,7 +13,6 @@ use app\models\CustomBlocks;
 
 class AboutController extends Controller {
 
-    
     /**
      * @inheritdoc
      */
@@ -60,12 +59,13 @@ class AboutController extends Controller {
      * @return string
      */
     public function actionIndex() {
-//getting user current langauage;
+        //getting user current langauage;
         $page_side_menus = $page_content = $custom_blocks = NULL;
         $lang = Yii::$app->language;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
-        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
-
+        //$page_content = \app\models\BasicPage::getActivePageAllDetailsByPageSEOUrl($url);
+        $page_content = \app\components\Utilities::getPageContentByUrl($url);
+        //echo $url;
         if ($page_content) {
             $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
             $custom_page_block_regions = SiteRegions::getCustomPageTemplateRegions();
@@ -101,6 +101,7 @@ class AboutController extends Controller {
         $lang = Yii::$app->language;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $page_content = \app\models\Documents::getActiveDocumentsByTypeAndUnit(\app\models\Documents::DOC_TYPE_ANNUAL_REPORT);
+        $page_side_menus = NULL;
         if ($page_content) {
             $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
         }

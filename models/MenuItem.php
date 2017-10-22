@@ -146,6 +146,7 @@ class MenuItem extends \yii\db\ActiveRecord {
                 case '<front/>':
                     return $basePath;
                     break;
+
                 case '':
                     return $basePath;
 
@@ -155,6 +156,14 @@ class MenuItem extends \yii\db\ActiveRecord {
                     return $basePath . '/' . $menu->LinkUrl;
                     break;
             }
+        }
+        return NULL;
+    }
+
+    static function getLinkUrlByItemId($Id) {
+        $menu = self::find()->where(array('Id' => $Id))->one();
+        if ($menu) {
+            return $menu->LinkUrl;
         }
         return NULL;
     }
@@ -283,7 +292,7 @@ class MenuItem extends \yii\db\ActiveRecord {
 
     static function getActiveMainMenuSectionsByUnitID($UnitID = NULL) {
         $condition = array();
-       if (!empty($UnitID) && $UnitID > 0) {
+        if (!empty($UnitID) && $UnitID > 0) {
             $condition['UnitID'] = $UnitID;
         }
         $condition['tbl_menu.Status'] = Menu::STATUS_PUBLISHED;

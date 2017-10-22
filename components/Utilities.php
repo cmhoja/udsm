@@ -232,6 +232,23 @@ class Utilities {
         return array('sms' => $sms, 'status' => FALSE);
     }
 
+    static function getPageContentByUrl($url) {
+        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+        if (!$page_content) {
+            $page_content = \app\models\BasicPage::getActivePageAllDetailsByPageSEOUrl(substr($url, 1));
+        }
+        if (!$page_content) {
+            $page_content = \app\models\BasicPage::getActivePageAllDetailsByPageSEOUrl(substr($url, 0, (strlen($url) - 1)));
+        }
+        if (!$page_content) {
+            $page_content = \app\models\BasicPage::getActivePageAllDetailsByPageSEOUrl(trim($url . '/'));
+        }
+        if (!$page_content) {
+            $page_content = \app\models\BasicPage::getActivePageAllDetailsByPageSEOUrl(trim(substr($url, 1) . '/'));
+        }
+        return $page_content;
+    }
+
     //end of class
 }
 

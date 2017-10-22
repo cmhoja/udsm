@@ -10,13 +10,12 @@ use app\models\BasicPage;
 /**
  * BasicPageSearch represents the model behind the search form about `app\models\BasicPage`.
  */
-class BasicPageSearch extends BasicPage
-{
+class BasicPageSearch extends BasicPage {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['PageId', 'Status', 'UnitID'], 'integer'],
             [['PageTitleEn', 'PageTitleSw', 'DescriptionEn', 'DescriptionSw', 'Attachment', 'EmbededVideo', 'PageSeoUrl', 'DateCreated'], 'safe'],
@@ -26,8 +25,7 @@ class BasicPageSearch extends BasicPage
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class BasicPageSearch extends BasicPage
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = BasicPage::find();
 
         // add conditions that should always apply here
@@ -59,20 +56,22 @@ class BasicPageSearch extends BasicPage
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'PageId' => $this->PageId,
-            'DateCreated' => $this->DateCreated,
+            //'PageId' => $this->PageId,
+            'PageTitleEn' => $this->PageTitleEn,
             'Status' => $this->Status,
-            'UnitID' => $this->UnitID,
+            'PageSeoUrl' => $this->PageSeoUrl,
+             'UnitId'=>$this->UnitID
         ]);
-
+        $query->orderBy(['PageId' => SORT_DESC]);
         $query->andFilterWhere(['like', 'PageTitleEn', $this->PageTitleEn])
-            ->andFilterWhere(['like', 'PageTitleSw', $this->PageTitleSw])
-            ->andFilterWhere(['like', 'DescriptionEn', $this->DescriptionEn])
-            ->andFilterWhere(['like', 'DescriptionSw', $this->DescriptionSw])
-            ->andFilterWhere(['like', 'Attachment', $this->Attachment])
-            ->andFilterWhere(['like', 'EmbededVideo', $this->EmbededVideo])
-            ->andFilterWhere(['like', 'PageSeoUrl', $this->PageSeoUrl]);
+                ->andFilterWhere(['like', 'PageTitleSw', $this->PageTitleSw])
+                ->andFilterWhere(['like', 'DescriptionEn', $this->DescriptionEn])
+                ->andFilterWhere(['like', 'DescriptionSw', $this->DescriptionSw])
+                ->andFilterWhere(['like', 'Attachment', $this->Attachment])
+                ->andFilterWhere(['like', 'EmbededVideo', $this->EmbededVideo])
+                ->andFilterWhere(['like', 'PageSeoUrl', $this->PageSeoUrl]);
 
         return $dataProvider;
     }
+
 }

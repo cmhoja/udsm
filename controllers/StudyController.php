@@ -63,8 +63,7 @@ class StudyController extends Controller {
         $page_side_menus = $page_content = $custom_blocks = NULL;
         $lang = Yii::$app->language;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
-
-        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+        $page_content = \app\components\Utilities::getPageContentByUrl($url);
 
         if ($page_content) {
             $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
@@ -172,7 +171,7 @@ class StudyController extends Controller {
         $language = Yii::$app->language;
         $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
 
-        $content = array('page_content' => $page_content,'program_type'=>'programme');
+        $content = array('page_content' => $page_content, 'program_type' => 'programme');
         return $this->render('//site/pages/programmes', $content);
     }
 

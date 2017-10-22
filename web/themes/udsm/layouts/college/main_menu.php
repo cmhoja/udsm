@@ -109,7 +109,8 @@ It has all the view logic to show dynamic menus from the Cms as managed by the C
                 <li class="top-parent " style="position: relative;float: right;text-align: left">
                     <?php
                     $language = Yii::$app->params['supportedLanguages'];
-                    if ($language && is_array($language)) {
+                    $language_switch = Yii::$app->params['enable_language_change'];
+                    if ($language && is_array($language) && ($language_switch OR Yii::$app->session->has('USER_TYPE_CONTENT_MANAGER') OR Yii::$app->session->has('USER_TYPE_ADMINISTRATOR')  )) {
                         foreach ($language as $key => $label) {
                             $lang_key = \yii\helpers\Html::encode($key);
                             switch ($lang_key) {

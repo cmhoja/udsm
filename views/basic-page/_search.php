@@ -27,6 +27,11 @@ use app\models\AcademicAdministrativeUnit;
                 'options' => ['placeholder' => 'Title of the Page'],
                 'columnOptions' => ['width' => '185px']
             ],
+            'PageSeoUrl' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Page SEO Url'],
+                'columnOptions' => ['width' => '185px']
+            ],
         ]
     ]);
     echo Html::submitButton('Search', ['class' => 'btn btn-primary']);

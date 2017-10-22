@@ -142,8 +142,8 @@ class SiteController extends Controller {
         $lang = Yii::$app->language;
         //$url = htmlspecialchars($url);   //OLD
         $url = html_entity_decode(htmlspecialchars(\app\components\Utilities::getPageUrl()));
-
-        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+//        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+        $page_content = \app\components\Utilities::getPageContentByUrl($url);
         if ($page_content) {
             $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
             $custom_page_block_regions = SiteRegions::getCustomPageTemplateRegions();
