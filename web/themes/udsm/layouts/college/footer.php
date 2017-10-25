@@ -253,8 +253,8 @@ $UnitID = $this->params['unit_id'];
                 <!-- Copyrights -->
                 <div class="col-xs-10 col-sm-6 col-md-6"><i class="fa fa-copyright"></i>
                     <?php echo Date('Y', time()); ?> 
-                    <a href="<?php echo Yii::$app->homeUrl; ?>">
-                        <?php echo Yii::$app->name[Yii::$app->language] . '&nbsp;-&nbsp;' . Yii::$app->session->get('UNIT_COLLEGE_NAME'); ?>
+                    <a href="#">
+                        <?php echo Yii::$app->name[Yii::$app->language] . '&nbsp;-&nbsp;' . $this->params['unit_name']; ?>
                     </a>
                     <br>
                     <!-- Terms Link -->

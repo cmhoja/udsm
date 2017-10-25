@@ -182,7 +182,7 @@ class ProgrammesController extends Controller {
         $model = Programmes::findOne($id);
         if ($model->Status == Programmes::PROGRAME_STATUS_PUBLISHED) {
             $model->Status = Programmes::PROGRAME_STATUS_UNPUBLISHED;
-            $model->save();
+            $model->update();
         }
         return $this->redirect(['view', 'id' => $model->Id]);
     }

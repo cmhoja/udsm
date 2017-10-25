@@ -44,7 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'DetailsSw:ntext',
             'Principal',
             'OtherResearcher',
-            'Funding',
+            'FundingEn',
+            'FundingSw',
             'StartYear',
             'EndYear',
             array(
