@@ -101,7 +101,7 @@ class BasicPageController extends Controller {
                     if ($model->UnitID) {
                         $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
                         if ($unit_code['abv'] && $unit_code['type']) {
-                            $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                            $unit_code = trim('/'.$unit_code['type'] . '/' . $unit_code['abv'] . '/');
                             $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString($model->PageTitleEn));
                         }
                     } else {

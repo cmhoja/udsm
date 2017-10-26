@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\BasicPage */
 
-$this->params['breadcrumbs'][] = ['label' => 'Manage Basic Pages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Manage Custom Pages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Page Details';
 ?>
 <div class="basic-page-view">

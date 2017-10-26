@@ -7,12 +7,12 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\BasicPageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->params['breadcrumbs'][] = 'Manage Basic Pages';
+$this->params['breadcrumbs'][] = 'Manage Custom Pages';
 ?>
 <div class="basic-page-index">
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-        <?= Html::a('Add Basic Page', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Custom Page', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?=
     GridView::widget([

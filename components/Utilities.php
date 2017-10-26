@@ -110,7 +110,7 @@ class Utilities {
         $string = strtolower($string);
         $string = preg_replace('/\s+/', '-', $string);
         $string = str_replace("'", '', $string);
-        $string = str_replace("&", '', $string);
+        $string = str_replace("&", 'and', $string);
         return $string;
     }
 
