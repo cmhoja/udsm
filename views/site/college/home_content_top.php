@@ -88,7 +88,7 @@
                     foreach ($home_content_top_middle_announcements as $announcement) {
                         ?>
                         <li>
-                            <a href="<?php echo app\components\Utilities::generateUrl('/college/' . $this->params['unit_abbreviation_code'] . '/announcements/' . $announcement->LinkUrl) ?>"><?php echo (Yii::$app->language == 'sw') ? $announcement->TitleSw : $announcement->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($announcement->LinkUrl) ?>"><?php echo (Yii::$app->language == 'sw') ? $announcement->TitleSw : $announcement->TitleEn; ?></a>
                             <div class="post-meta">
                                 <span class="time">
                                     <i class="fa fa-calendar"></i> <?php echo Date('D, d.m.Y', strtotime($announcement->DatePosted)); ?></span>
@@ -101,7 +101,7 @@
                     }
                     ?>
                     <div class="col-md-12 events no-pad">
-                        <a href="<?php echo app\components\Utilities::generateUrl('/college/' . $this->params['unit_abbreviation_code'] . '/announcements') ?>"><?php Echo Yii::$app->params['static_items']['view_all_announcement'][Yii::$app->language]; ?></a>
+                        <a href="<?php echo app\components\Utilities::generateUrl(trim('/colleges/' . $this->params['unit_abbreviation_code'] . '/announcements'));  ?>"><?php Echo Yii::$app->params['static_items']['view_all_announcement'][Yii::$app->language]; ?></a>
                     </div>
                 <?php }
                 ?>

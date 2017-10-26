@@ -72,7 +72,8 @@ class ConnectController extends Controller {
             return $this->render('//site/pages/announcement', $content);
         } elseif (count($url_sections) > 2 && isset($url_sections[count($url_sections) - 2]) && $url_sections[count($url_sections) - 2] == 'announcements') {
             ///get single news details
-            $page_content = \app\models\Announcement::find()->where(array('LinkUrl' => trim($url_sections[count($url_sections) - 1])))->one();
+            //$page_content = \app\models\Announcement::find()->where(array('LinkUrl' => trim($url_sections[count($url_sections) - 1])))->one();
+            $page_content = \app\models\Announcement::find()->where(array('LinkUrl' => trim($url)))->one();
             $page_content2 = NULL;
             if ($page_content && $page_content->Id) {
                 $page_content2 = \app\models\Announcement::getLatestOtherAnnouncementsByIDStatusAndUnit($page_content->Id, \app\models\Announcement::STATUS_PUBLISHED, NULL, 8, \app\models\Announcement::ANNOUNCEMENT_TYPE_GENERIC_ANNOUNCEMENT);
@@ -130,7 +131,9 @@ class ConnectController extends Controller {
             return $this->render('//site/pages/news', $content);
         } elseif (count($url_sections) > 2 && isset($url_sections[count($url_sections) - 2]) && $url_sections[count($url_sections) - 2] == 'news') {
             ///get single news details
-            $page_content = \app\models\News::find()->where(array('LinkUrl' => trim($url_sections[count($url_sections) - 1])))->one();
+            //$page_content = \app\models\News::find()->where(array('LinkUrl' => trim($url_sections[count($url_sections) - 1])))->one();
+            $page_content = \app\models\News::find()->where(array('LinkUrl' => trim($url)))->one();
+
             $page_content2 = NULL;
             if ($page_content && $page_content->Id) {
                 $page_content2 = \app\models\News::getLatestOtherNewsByIDStatusAndUnit($page_content->Id, \app\models\News::NEWS_STATUS_PUBLISHED, NULL, 8, \app\models\News::NEWS_TYPE_GENERIC_NEWS);
@@ -150,6 +153,7 @@ class ConnectController extends Controller {
 
         $page_side_menus = $page_content = NULL;
         $url = \app\components\Utilities::getPageUrl();
+
         $url_sections = explode('/', $url);
         //var_dump($url_sections);
         if (isset($url_sections[count($url_sections) - 1]) && $url_sections[count($url_sections) - 1] == 'events') {
@@ -161,7 +165,8 @@ class ConnectController extends Controller {
             return $this->render('//site/pages/events', $content);
         } elseif (count($url_sections) > 2 && isset($url_sections[count($url_sections) - 2]) && $url_sections[count($url_sections) - 2] == 'events') {
             ///get single news details
-            $page_content = \app\models\Events::find()->where(array('EventUrl' => trim($url_sections[count($url_sections) - 1])))->one();
+            // $page_content = \app\models\Events::find()->where(array('EventUrl' => trim($url_sections[count($url_sections) - 1])))->one();
+            $page_content = \app\models\Events::find()->where(array('EventUrl' => trim($url)))->one();
             $page_content2 = NULL;
             if ($page_content) {
                 $page_content2 = \app\models\Events::getLatestOtherEventsByStatusAndUnit($page_content->Id, \app\models\Events::EVENT_STATUS_PUBLISHED, NULL, 8);

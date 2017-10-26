@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = 'News Details';
             ),
             'DateCreated',
             'DatePosted',
+            'LinkUrl',
             array(
                 'attribute' => 'Status',
                 'value' => function($model) {

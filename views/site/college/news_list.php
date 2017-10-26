@@ -19,7 +19,7 @@ $this->title = Yii::$app->params['static_items']['news'][Yii::$app->language];
                             $newsTitle = (Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn;
                             ?>
                             <div class="row">
-                                <?php if ($news->Photo): ?>
+                                <?php if (!empty($news->Photo)): ?>
                                     <div class="col-sm-4 col-md-2">
                                         <div class="pull-left">
                                             <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?> " alt="" title="">
@@ -29,7 +29,7 @@ $this->title = Yii::$app->params['static_items']['news'][Yii::$app->language];
                                 <?php endif; ?>
                                 <div class="col-sm-8 col-md-10">
                                     <h2 class="post-title">
-                                        <a href="<?php echo app\components\Utilities::createUrlString('news/' . $news->LinkUrl); ?>"><?php echo $newsTitle; ?></a>
+                                        <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>"><?php echo $newsTitle; ?></a>
                                     </h2>
                                     <div class="post-meta">
 
@@ -39,7 +39,7 @@ $this->title = Yii::$app->params['static_items']['news'][Yii::$app->language];
 
                                     <div class="post-content"><p><?php echo substr((Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn, 0, 250); ?></p></div>
 
-                                    <a href="<?php echo app\components\Utilities::createUrlString('news/' . $news->LinkUrl); ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
 
                                 </div>
 

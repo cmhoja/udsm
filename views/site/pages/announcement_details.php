@@ -46,7 +46,7 @@ if (isset($announcements) && $announcements) {
                     if (isset($latest_announcements) && $latest_announcements) {
                         foreach ($latest_announcements as $latest_announcements) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl('/announcements/' . $latest_announcements->LinkUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_announcements->TitleSw : $latest_announcements->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($latest_announcements->LinkUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_announcements->TitleSw : $latest_announcements->TitleEn; ?></a>
                             <hr>
                             <?php
                         }

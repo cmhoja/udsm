@@ -167,6 +167,7 @@ class StudyController extends Controller {
             $Keyword = Yii::$app->request->post('ProgrameName');
             $FieldOfStudy = Yii::$app->request->post('FieldStudy');
             $programmeType = Yii::$app->request->post('PTYpe');
+            $UnitID = Yii::$app->request->post('UnitId');
         }
         $language = Yii::$app->language;
         $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);

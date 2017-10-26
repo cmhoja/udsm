@@ -27,20 +27,20 @@ class HabariController extends Controller {
                     'delete' => ['POST'],
                 ],
             ],
-             'access' => [
+            'access' => [
                 'class' => \yii\filters\AccessControl::className(),
                 'only' => ['index', 'create', 'update', 'view', 'delete', 'publish', 'unPublish'],
                 'rules' => [
                     [
                         'allow' => true,
-                       // 'verbs' => ['post'],
-                       // 'roles' => ['@'],
+                        // 'verbs' => ['post'],
+                        // 'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && (Yii::$app->session->has('USER_TYPE_ADMINISTRATOR') OR Yii::$app->session->has('USER_TYPE_CONTENT_MANAGER')))?TRUE:FALSE;
+                            return ((!Yii::$app->user->isGuest OR Yii::$app->session->has('UID')) && (Yii::$app->session->has('USER_TYPE_ADMINISTRATOR') OR Yii::$app->session->has('USER_TYPE_CONTENT_MANAGER'))) ? TRUE : FALSE;
                         },
                     ],
                 ]
-            ], 
+            ],
         ];
     }
 
@@ -101,10 +101,39 @@ class HabariController extends Controller {
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
             if ($model->TitleEn) {
-                $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
+                $seoUrl = trim('/news/' . $model->TitleEn);
+                if ($model->UnitID) {
+                    $unit_details = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                    $unit_type = NULL;
+                    if ($unit_details && isset($unit_details['abv']) && isset($unit_details['type'])) {
+                        switch (strtolower($unit_details['type'])) {
+                            case 'administratives':
+                                $unit_type = 'units';
+                                break;
+                            case 'constituent colleges':
+
+                                $unit_type = 'colleges';
+
+                                break;
+                            default :
+                                $unit_type = strtolower($unit_details['type']);
+                                break;
+                        }
+                        $seoUrl = trim('/'.trim($unit_type) . '/' . trim($unit_details['abv']) . $seoUrl);
+                    }
+                }
+                $model->LinkUrl = \app\components\Utilities::createUrlString($seoUrl);
             }
             $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
             $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+            $model->Status = News::NEWS_STATUS_SAVED;
+            if (Yii::$app->request->post('save') == 'save') {
+                $model->Status = News::NEWS_STATUS_SAVED;
+                $model->DatePosted = NULL;
+            } elseif (Yii::$app->request->post('publish') == 'publish') {
+                $model->Status = News::NEWS_STATUS_PUBLISHED;
+                $model->DatePosted = Date('Y-m-d H:i:s', time());
+            }
             if ($model->validate()) {
                 //uploading the news photo
                 if ($model->Photo) {
@@ -165,12 +194,40 @@ class HabariController extends Controller {
             $model->TitleEn = strtolower($model->TitleEn);
             $model->TitleSw = strtolower($model->TitleSw);
             if ($model->TitleEn) {
-                $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
+                $seoUrl = trim('/news/' . $model->TitleEn);
+                if ($model->UnitID) {
+                    $unit_details = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                    $unit_type = NULL;
+                    if ($unit_details && isset($unit_details['abv']) && isset($unit_details['type'])) {
+                        switch (strtolower($unit_details['type'])) {
+                            case 'administratives':
+                                $unit_type = 'units';
+                                break;
+                            case 'constituent colleges':
+
+                                $unit_type = 'colleges';
+
+                                break;
+                            default :
+                                $unit_type = strtolower($unit_details['type']);
+                                break;
+                        }
+                        $seoUrl = trim('/'.trim($unit_type) . '/' . trim($unit_details['abv']) . $seoUrl);
+                    }
+                }
+                $model->LinkUrl = \app\components\Utilities::createUrlString($seoUrl);
             }
             $model->Photo = $Photo;
             $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
             $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
-
+            $model->Status = News::NEWS_STATUS_SAVED;
+            if (Yii::$app->request->post('save') == 'save') {
+                $model->Status = News::NEWS_STATUS_SAVED;
+                $model->DatePosted = NULL;
+            } elseif (Yii::$app->request->post('publish') == 'publish') {
+                $model->Status = News::NEWS_STATUS_PUBLISHED;
+                $model->DatePosted = Date('Y-m-d H:i:s', time());
+            }
             if ($model->validate()) {
                 //uploading the news photo
                 if ($model->Photo) {

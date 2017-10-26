@@ -16,18 +16,18 @@
                                 <?php if ($news->Photo) {
                                     ?>
                                     <div class="client-image">
-                                        <a href="<?php echo yii\helpers\Url::toRoute('news/' . $news->LinkUrl); ?>">
+                                        <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>">
                                             <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?>"  alt="" />
                                         </a>
                                     </div>
-                                    <a href="<?php echo yii\helpers\Url::toRoute('news/' . $news->LinkUrl); ?>"><h4><?php echo substr((Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn, 0, 60); ?></h4></a>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>"><h4><?php echo substr((Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn, 0, 60); ?></h4></a>
                                     <p><?php //echo substr((Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn, 0, 125) . ' ...';   ?></p>
                                 <?php } else {
                                     ?>
                                     <div class="client-image">
                                     </div>
-                                    <a href="<?php echo yii\helpers\Url::toRoute('news/' . $news->LinkUrl); ?>"><h4><?php echo substr((Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn, 0, 60); ?></h4></a>
-                                    <a href="<?php echo yii\helpers\Url::toRoute('news/' . $news->LinkUrl); ?>">
+                                    <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>"><h4><?php echo substr((Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn, 0, 60); ?></h4></a>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>">
                                         <p style="color: black"><?php echo substr((Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn, 0, 300) . ' ...'; ?></p>
                                     </a>
                                 <?php }

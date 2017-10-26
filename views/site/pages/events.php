@@ -32,7 +32,7 @@ if (isset($events) && $events) {
                 <div class="row">
                     <div class="col-sm-8 col-md-10">
                         <h2 class="post-title">
-                            <a href="<?php echo app\components\Utilities::generateUrl('/events/' . $events->EventUrl) ?>"><?php echo (Yii::$app->language == 'sw') ? $events->EventTitleSw : $events->EventTitleEn ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($events->EventUrl) ?>"><?php echo (Yii::$app->language == 'sw') ? $events->EventTitleSw : $events->EventTitleEn ?></a>
                         </h2>
                         <div class="post-meta">
                             <span class="time">
@@ -43,7 +43,7 @@ if (isset($events) && $events) {
 
                         <div class="post-content"><?php echo substr((Yii::$app->language == 'sw' ? $events->DescriptionSw : $events->DescriptionEn), 0, 200); ?></div>
 
-                        <a href="<?php echo app\components\Utilities::generateUrl('/events/' . $events->EventUrl) ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language] ?></a>
+                        <a href="<?php echo app\components\Utilities::generateUrl($events->EventUrl) ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language] ?></a>
 
                     </div>
                 </div>

@@ -22,7 +22,7 @@ $this->title = Yii::$app->params['static_items']['announcement'][Yii::$app->lang
                                
                                 <div class="col-sm-8 col-md-10">
                                     <h2 class="post-title">
-                                        <a href="<?php echo app\components\Utilities::createUrlString('announcements/' . $announcement->LinkUrl); ?>"><?php echo $announcementTitle; ?></a>
+                                        <a href="<?php echo app\components\Utilities::generateUrl($announcement->LinkUrl); ?>"><?php echo $announcementTitle; ?></a>
                                     </h2>
                                     <div class="post-meta">
 
@@ -32,7 +32,7 @@ $this->title = Yii::$app->params['static_items']['announcement'][Yii::$app->lang
 
                                     <div class="post-content"><p><?php echo substr((Yii::$app->language == 'sw') ? $announcement->DetailsSw : $announcement->DetailsEn, 0, 250); ?></p></div>
 
-                                    <a href="<?php echo app\components\Utilities::createUrlString('announcements/' . $announcement->LinkUrl); ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($announcement->LinkUrl); ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
 
                                 </div>
 

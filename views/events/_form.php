@@ -58,12 +58,13 @@ use dosamigos\ckeditor\CKEditor;
             'StartDate' => [
                 'type' => Form::INPUT_WIDGET,
                 'widgetClass' => yii\jui\DatePicker::className(),
-                'columnOptions' => ['dateFormat' => 'Y-m-d']
-            ], 'EndDate' => [
+                'columnOptions' => ['dateFormat' => 'yyyy-MM-dd', 'todayHighlight' => true]
+            ],
+            'EndDate' => [
                 'type' => Form::INPUT_WIDGET,
                 'widgetClass' => yii\jui\DatePicker::className(),
                 'pluginOptions' => [
-                    'format' => 'Y-m-d',
+                    'format' => 'yyyy-MM-dd',
                     'todayHighlight' => true
                 ]
             ],

@@ -60,16 +60,14 @@ class BasicPageSearch extends BasicPage {
             'PageTitleEn' => $this->PageTitleEn,
             'Status' => $this->Status,
             'PageSeoUrl' => $this->PageSeoUrl,
-             'UnitId'=>$this->UnitID
+            'UnitID' => $this->UnitID
         ]);
         $query->orderBy(['PageId' => SORT_DESC]);
-        $query->andFilterWhere(['like', 'PageTitleEn', $this->PageTitleEn])
-                ->andFilterWhere(['like', 'PageTitleSw', $this->PageTitleSw])
+        $query->andFilterWhere(['like', 'PageTitleSw', $this->PageTitleSw])
                 ->andFilterWhere(['like', 'DescriptionEn', $this->DescriptionEn])
                 ->andFilterWhere(['like', 'DescriptionSw', $this->DescriptionSw])
                 ->andFilterWhere(['like', 'Attachment', $this->Attachment])
-                ->andFilterWhere(['like', 'EmbededVideo', $this->EmbededVideo])
-                ->andFilterWhere(['like', 'PageSeoUrl', $this->PageSeoUrl]);
+                ->andFilterWhere(['like', 'EmbededVideo', $this->EmbededVideo]);
 
         return $dataProvider;
     }

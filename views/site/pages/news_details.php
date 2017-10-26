@@ -61,7 +61,7 @@ if (isset($news) && $news) {
                     if (isset($latest_news) && $latest_news) {
                         foreach ($latest_news as $latest_news) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl('news/' . $latest_news->LinkUrl) ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_news->TitleSw : $latest_news->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($latest_news->LinkUrl) ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_news->TitleSw : $latest_news->TitleEn; ?></a>
                             <hr>
                             <?php
                         }

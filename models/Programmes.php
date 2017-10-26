@@ -142,7 +142,7 @@ class Programmes extends \yii\db\ActiveRecord {
             $where['FieldOfStudy'] = $FieldOfStudy;
         }
         if ($UnitID > 0) {
-           // $where['UnitID'] = $UnitID;
+            $where['UnitID'] = $UnitID;
         }
 
         if (!empty($lang)) {

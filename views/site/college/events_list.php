@@ -21,7 +21,7 @@ $this->title = Yii::$app->params['static_items']['events'][Yii::$app->language];
                             <div class="row">
                                 <div class="">
                                     <h2 class="post-title">
-                                        <a href="<?php echo app\components\Utilities::createUrlString('events/' . $events->EventUrl); ?>"><?php echo $eventsTitle; ?></a>
+                                        <a href="<?php echo app\components\Utilities::generateUrl($events->EventUrl); ?>"><?php echo $eventsTitle; ?></a>
                                     </h2>
                                     <div class="post-meta">
 
@@ -31,7 +31,7 @@ $this->title = Yii::$app->params['static_items']['events'][Yii::$app->language];
 
                                     <div class="post-content"><p><?php echo substr((Yii::$app->language == 'sw') ? $events->DescriptionSw : $events->DescriptionEn, 0, 250); ?></p></div>
 
-                                    <a href="<?php echo app\components\Utilities::createUrlString('events/' . $events->EventUrl); ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($events->EventUrl); ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
 
                                 </div>
 

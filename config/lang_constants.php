@@ -102,6 +102,7 @@ return [
     'name' => ['en' => 'Name', 'sw' => 'Jina'],
     'type' => ['en' => 'Type', 'sw' => 'Aina'],
     'date' => ['en' => 'Date', 'sw' => 'Tarehe'],
+    'event_date' => ['en' => 'Event Date', 'sw' => 'Tarehe'],
     'option' => ['en' => 'Option', 'sw' => 'Chaguo'],
     'principal_researcher' => ['en' => 'Principal Researcher', 'sw' => 'Mtafiti Mkuu'],
     'other_researcher' => ['en' => 'Other Researcher(s)', 'sw' => 'Watafiti Washirika'],
@@ -112,5 +113,6 @@ return [
     'programe_type' => ['en' => 'Programe Type', 'sw' => 'Aina ya Kozi'],
     'programe_college_unit' => ['en' => 'College/Unit', 'sw' => 'Kitivo/Idara'],
     'programe_duration' => ['en' => 'Duration', 'sw' => 'Muda'],
-    'programe_field_of_study' => ['en' => 'Field of Study', 'sw' => 'Aina ya Masomo']
+    'programe_field_of_study' => ['en' => 'Field of Study', 'sw' => 'Aina ya Masomo'],
+    'attachment' => ['en' => 'Attachment', 'sw' => 'Kiambata']
 ];

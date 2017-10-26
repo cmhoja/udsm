@@ -35,7 +35,7 @@
                                     <p>
                                         <?php echo substr((Yii::$app->language == 'sw') ? $event->DescriptionSw : $event->DescriptionEn, 0, 150); ?>
                                     </p>
-                                    <a href="<?php echo app\components\Utilities::generateUrl('/college/' . $this->params['unit_abbreviation_code'] . '/events/' . $event->EventUrl); ?>"> <?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($event->EventUrl); ?>"> <?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
                                 </div>
                             </div>
                         <?php } ?>

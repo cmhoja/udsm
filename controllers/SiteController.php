@@ -114,7 +114,29 @@ class SiteController extends Controller {
             $content['content_footer_top_area'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::MAIN_TEMPLATE_FOOTER_TOP_AREA, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, NULL);
             return $this->render('home/index', $content);
         } else {
-            $this->redirect(['site/page', 'url' => $url]);
+            // $this->redirect(['site/page', 'url' => $url]);
+            // LOADING CUSTOM PAGE DETAILS
+            //getting user current langauage;
+            $page_side_menus = $page_content = $custom_blocks = NULL;
+            $lang = Yii::$app->language;
+            //$url = htmlspecialchars($url);   //OLD
+            $url = html_entity_decode(htmlspecialchars(\app\components\Utilities::getPageUrl()));
+//        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+            $page_content = \app\components\Utilities::getPageContentByUrl($url);
+            if ($page_content) {
+                $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
+                $custom_page_block_regions = SiteRegions::getCustomPageTemplateRegions();
+                if ($custom_page_block_regions) {
+                    foreach ($custom_page_block_regions as $RegionID => $RegionName) {
+                        $CustomBlock = CustomBlocks::getActiveBlocksByRegionId($RegionID, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url);
+                        if ($CustomBlock) {
+                            $custom_blocks[$RegionId] = $CustomBlock;
+                        }
+                    }
+                }
+            }
+            $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
+            return $this->render('//site/basic_page', $content);
         }
     }
 

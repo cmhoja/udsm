@@ -51,9 +51,9 @@ class BasicPageController extends Controller {
      */
     public function actionIndex() {
         $searchModel = new BasicPageSearch();
-         $session = Yii::$app->session;
-        if ($session->has('UNIT_ID')) {
-            $searchModel->UnitID = $session->get('UNIT_ID');
+        $session = Yii::$app->session;
+        if ($session['UNIT_ID']) {
+            $searchModel->UnitID = $session['UNIT_ID'];
         }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -169,7 +169,7 @@ class BasicPageController extends Controller {
                         }
                     } else {
                         if ($model->PageTitleEn) {
-                            $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                            $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
                         }
                     }
                 }
@@ -181,7 +181,7 @@ class BasicPageController extends Controller {
                 }
             } else {
                 if ($model->PageTitleEn) {
-                    $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                    $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
                 }
             }
             if (Yii::$app->request->post('save') == 'save') {

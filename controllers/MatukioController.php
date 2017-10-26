@@ -89,10 +89,39 @@ class MatukioController extends Controller {
         }
 
         if ($model->load(Yii::$app->request->post())) {
+            var_dump(Yii::$app->request->post('Events'));
             $model->EventTitleEn = strtolower($model->EventTitleEn);
             $model->EventTitleSw = strtolower($model->EventTitleSw);
-            if ($model->EventTitleEn) {
-                $model->EventUrl = \app\components\Utilities::createUrlString($model->EventTitleEn);
+            //  $model->EventTitleSw = strtolower($model->EventTitleSw);
+            if ($model->StartDate) {
+                $model->StartDate = Date('Y-m-d', strtotime($model->StartDate));
+            }
+            if ($model->EndDate) {
+                $model->EndDate = Date('Y-m-d', strtotime($model->EndDate));
+            }
+         if ($model->EventTitleEn) {
+                $seoUrl = '/events/' . $model->EventTitleEn;
+                if ($model->UnitID) {
+                    $unit_details = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                    $unit_type = NULL;
+                    if ($unit_details && isset($unit_details['abv']) && isset($unit_details['type'])) {
+                        switch (strtolower($unit_details['type'])) {
+                            case 'administratives':
+                                $unit_type = 'units';
+                                break;
+                            case 'constituent colleges':
+
+                                $unit_type = 'colleges';
+
+                                break;
+                            default :
+                                $unit_type = strtolower($unit_details['type']);
+                                break;
+                        }
+                        $seoUrl = trim(trim('/'.$unit_type) . '/' . trim($unit_details['abv']). $seoUrl);
+                    }
+                }
+                $model->EventUrl = \app\components\Utilities::createUrlString($seoUrl);
             }
             $model->Status = Events::EVENT_STATUS_SAVED;
             if (Yii::$app->request->post('save') == 'save') {
@@ -102,10 +131,7 @@ class MatukioController extends Controller {
                 $model->Status = Events::EVENT_STATUS_PUBLISHED;
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
-            $model->StartDate = Date('', strtotime($model->StartDate));
-            if ($model->EndDate) {
-                $model->StartDate = Date('', strtotime($model->EndDate));
-            }
+
             $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
             if ($model->validate()) {
                 if ($model->Attachment) {
@@ -153,9 +179,37 @@ class MatukioController extends Controller {
         if ($model->load(Yii::$app->request->post())) {
             $model->EventTitleEn = strtolower($model->EventTitleEn);
             $model->EventTitleSw = strtolower($model->EventTitleSw);
-            if ($model->EventTitleEn) {
-                $model->EventUrl = \app\components\Utilities::createUrlString($model->EventTitleEn);
+            if ($model->StartDate) {
+                $model->StartDate = Date('Y-m-d', strtotime($model->StartDate));
             }
+            if ($model->EndDate) {
+                $model->EndDate = Date('Y-m-d', strtotime($model->EndDate));
+            }
+            if ($model->EventTitleEn) {
+                $seoUrl = '/events/' . $model->EventTitleEn;
+                if ($model->UnitID) {
+                    $unit_details = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                    $unit_type = NULL;
+                    if ($unit_details && isset($unit_details['abv']) && isset($unit_details['type'])) {
+                        switch (strtolower($unit_details['type'])) {
+                            case 'administratives':
+                                $unit_type = 'units';
+                                break;
+                            case 'constituent colleges':
+
+                                $unit_type = 'colleges';
+
+                                break;
+                            default :
+                                $unit_type = strtolower($unit_details['type']);
+                                break;
+                        }
+                        $seoUrl = trim(trim('/'.$unit_type) . '/' . trim($unit_details['abv']). $seoUrl);
+                    }
+                }
+                $model->EventUrl = \app\components\Utilities::createUrlString($seoUrl);
+            }
+
             $model->Status = Events::EVENT_STATUS_SAVED;
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = Events::EVENT_STATUS_SAVED;

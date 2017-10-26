@@ -1,6 +1,21 @@
 <form class="form-inline"  method="POST" action="<?php echo \app\components\Utilities::generateUrl(html_entity_decode('study/catalogue')); ?>">
 
     <div class="input-text form-group">
+        <select class="form-control" name="UnitId" style="margin-bottom: 0%;">
+            <option value=""> --- <?php echo Yii::$app->params['static_items']['programe_college_unit'][Yii::$app->language]; ?> ---</option>
+            <?php
+            $Units = app\models\AcademicAdministrativeUnit::getAcademicUnitsList();
+            if ($Units) {
+                foreach ($Units as $Unit) {
+                    ?>
+                    <option value="<?php echo $Unit->Id; ?>"><?php echo (Yii::$app->language == 'sw') ? $Unit->UnitNameSw : $Unit->UnitNameEn; ?></option>
+                    <?php
+                }
+            }
+            ?>
+        </select>
+    </div>
+    <div class="input-text form-group">
         <select class="form-control" name="PTYpe" style="margin-bottom: 0%;">
             <option value=""> --- <?php echo Yii::$app->params['static_items']['select_program_type'][Yii::$app->language]; ?> ---</option>
             <option value="<?php echo \app\models\Programmes::PROGRAME_TYPE_UNDERGRADUATE; ?>"><?php echo Yii::$app->params['static_items']['undergraduate'][Yii::$app->language]; ?></option>
@@ -23,6 +38,7 @@
             ?>
         </select>
     </div>
+
     <div class="input-text form-group">
         <input type="text" name="ProgrameName" style="margin-bottom: 0%;" class="input-name form-control" placeholder="<?php echo Yii::$app->params['static_items']['enter_key_word'][Yii::$app->language] ?>" />
     </div>

@@ -98,7 +98,28 @@ class AnnouncementController extends Controller {
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
             if ($model->TitleEn) {
-                $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
+                $seoUrl = trim('/announcements/' . $model->TitleEn);
+                if ($model->UnitID) {
+                    $unit_details = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                    $unit_type = NULL;
+                    if ($unit_details && isset($unit_details['abv']) && isset($unit_details['type'])) {
+                        switch (strtolower($unit_details['type'])) {
+                            case 'administratives':
+                                $unit_type = 'units';
+                                break;
+                            case 'constituent colleges':
+
+                                $unit_type = 'colleges';
+
+                                break;
+                            default :
+                                $unit_type = strtolower($unit_details['type']);
+                                break;
+                        }
+                        $seoUrl = trim('/'.trim($unit_type) . '/' . trim($unit_details['abv']) . $seoUrl);
+                    }
+                }
+                $model->LinkUrl = \app\components\Utilities::createUrlString($seoUrl);
             }
 
             //uploading the attachement related to the news
@@ -154,7 +175,28 @@ class AnnouncementController extends Controller {
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
             if ($model->TitleEn) {
-                $model->LinkUrl = \app\components\Utilities::createUrlString($model->TitleEn);
+                $seoUrl = trim('/announcements/' . $model->TitleEn);
+                if ($model->UnitID) {
+                    $unit_details = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                    $unit_type = NULL;
+                    if ($unit_details && isset($unit_details['abv']) && isset($unit_details['type'])) {
+                        switch (strtolower($unit_details['type'])) {
+                            case 'administratives':
+                                $unit_type = 'units';
+                                break;
+                            case 'constituent colleges':
+
+                                $unit_type = 'colleges';
+
+                                break;
+                            default :
+                                $unit_type = strtolower($unit_details['type']);
+                                break;
+                        }
+                        $seoUrl = trim('/'.trim($unit_type) . '/' . trim($unit_details['abv']) . $seoUrl);
+                    }
+                }
+                $model->LinkUrl = \app\components\Utilities::createUrlString($seoUrl);
             }
             //uploading the attachement related to the news
             $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');

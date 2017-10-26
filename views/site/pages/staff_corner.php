@@ -112,7 +112,7 @@ $title = Yii::$app->params['static_items']['staff_corner'][Yii::$app->language];
                     foreach ($page_content['latest_announcements'] as $announcements) {
                         ?>
                         <li>
-                            <a href="<?php echo app\components\Utilities::generateUrl('/announcement/' . $announcements->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $announcements->TitleSw : $announcements->TitleEn ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl('/announcements/' . $announcements->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $announcements->TitleSw : $announcements->TitleEn ?></a>
                             <div class="post-meta">
 
                                 <span class="time">

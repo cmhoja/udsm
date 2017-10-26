@@ -106,7 +106,7 @@ class News extends \yii\db\ActiveRecord {
 
     static function getLatestNewsByStatusAndUnit($Status, $UnitID = NULL, $limit = NULL, $NewsType = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
-        if (!empty($NewsType) &&  $NewsType >= 0) {
+        if (!empty($NewsType) && $NewsType >= 0) {
             $condition['NewsType'] = $NewsType;
         }
         return self::find()
@@ -137,6 +137,13 @@ class News extends \yii\db\ActiveRecord {
             self::NEWS_TYPE_STUDENT_NEWS => 'Student News',
             self::NEWS_TYPE_STAFF_NEWS => 'Staff News'
         );
+    }
+
+    static function getDetailsByUrl($LinkUrl) {
+        $details = self::find()
+                        ->where('LinkUrl=:LinkUrl AND Status=:Status', [':LinkUrl' => $LinkUrl, ':Status' => self::NEWS_STATUS_PUBLISHED])->one();
+
+        return $details;
     }
 
 }

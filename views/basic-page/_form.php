@@ -15,6 +15,7 @@ use app\models\AcademicAdministrativeUnit;
     <?php
     $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
     ?>
+    <?= $form->errorSummary($model); ?>
     <?php
     echo Form::widget([
         'model' => $model,

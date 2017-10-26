@@ -44,13 +44,13 @@ class Events extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['DateCreated', 'StartDate', 'EndDate', 'DatePosted'], 'safe'],
             [['EventUrl', 'EventTitleEn', 'EventTitleSw', 'DescriptionEn', 'DescriptionSw', 'StartDate'], 'required'],
             [['DescriptionEn', 'DescriptionSw'], 'string'],
             [['UnitID', 'Status'], 'integer'],
             [['Attachment'], 'file', 'maxFiles' => 1, 'extensions' => 'docx, doc, pdf,xlsx,xls,odt, jpg,jpeg',],
             [['EventTitleEn', 'EventTitleSw'], 'string', 'max' => 130],
             [['EventUrl', 'Attachment'], 'string', 'max' => 255],
+            [['DateCreated', 'StartDate', 'EndDate', 'DatePosted'], 'safe'],
         ];
     }
 
@@ -105,7 +105,7 @@ class Events extends \yii\db\ActiveRecord {
     static function getLatestOtherEventsByStatusAndUnit($Id, $Status, $UnitID = NULL, $limit = NULL, $EventType = NULL) {
         $condition = array('Status' => $Status, 'UnitID' => $UnitID);
         if ($EventType >= 0) {
-            $condition['EventType'] = $EventType;
+            // $condition['EventType'] = $EventType;
         }
         return self::find()->select('EventUrl,EventTitleEn,EventTitleSw,DescriptionEn,DescriptionSw,StartDate,DatePosted')
                         ->where($condition)
@@ -120,6 +120,13 @@ class Events extends \yii\db\ActiveRecord {
             self::EVENT_TYPE_STUDENT_EVENT => 'Student Events',
             self::EVENT_TYPE_STAFF_EVENT => 'Staff Events'
         );
+    }
+
+    static function getDetailsByUrl($EventUrl) {
+        $details = self::find()
+                        ->where('EventUrl=:EventUrl AND Status=:Status', [':EventUrl' => $EventUrl, ':Status' => self::EVENT_STATUS_PUBLISHED])->one();
+
+        return $details;
     }
 
 }

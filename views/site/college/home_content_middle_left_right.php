@@ -12,16 +12,15 @@
 
                         <?php foreach ($home_content_middle_left_news as $news) { ?>
                             <li>
-
-                                <div class="post-thumb">
-                                    <?php if ($news->Photo): ?>
+                                <?php if (!empty($news->Photo)): ?>
+                                    <div class="post-thumb">
                                         <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?>" alt="" title="" width="84" height="84">
-                                    <?php endif; ?>
-                                </div>
 
+                                    </div>
+                                <?php endif; ?>
                                 <div class="post-details">
                                     <div class="description">
-                                        <a href="<?php echo app\components\Utilities::generateUrl('/college/' . $this->params['unit_abbreviation_code'] . '/news/' . $news->LinkUrl) ?>">
+                                        <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl) ?>">
                                             <?php echo (Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn ?>
                                         </a>
                                     </div>
@@ -36,7 +35,7 @@
 
                     </ul>
                     <hr>
-                    <a href="<?php echo app\components\Utilities::generateUrl('/college/' . $this->params['unit_abbreviation_code'] . '/news') ?>"><?php echo Yii::$app->params['static_items']['view_all'][Yii::$app->language]; ?></a>
+                    <a href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $this->params['unit_abbreviation_code'] . '/news') ?>"><?php echo Yii::$app->params['static_items']['view_all'][Yii::$app->language]; ?></a>
                 <?php endif; ?>
             </div>
 

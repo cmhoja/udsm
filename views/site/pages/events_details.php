@@ -47,7 +47,7 @@ if (isset($events) && $events) {
                     if (isset($latest_events) && $latest_events) {
                         foreach ($latest_events as $latest_events) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl('/events/' . $latest_events->EventUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_events->EventTitleSw : $latest_events->EventTitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($latest_events->EventUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_events->EventTitleSw : $latest_events->EventTitleEn; ?></a>
                             <hr>
                             <?php
                         }

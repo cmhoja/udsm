@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-xs-10 pad-10">
                                 <div class="event-home">
-                                    <a href="<?php echo \app\components\Utilities::generateUrl('/events/' . $event->EventUrl); ?>"><p class="event-title"><?php echo html_entity_decode((Yii::$app->language == 'sw') ? $event->EventTitleEn : $event->EventTitleSw); ?></p></a>
+                                    <a href="<?php echo \app\components\Utilities::generateUrl($event->EventUrl); ?>"><p class="event-title"><?php echo html_entity_decode((Yii::$app->language == 'sw') ? $event->EventTitleEn : $event->EventTitleSw); ?></p></a>
                                 </div>
 
                             </div>
@@ -49,7 +49,7 @@
                         $date = explode(' ', Date('d.m.Y H:i:s', strtotime($announcement->DatePosted)));
                         ?>
                         <li>
-                            <a href="<?php echo \app\components\Utilities::generateUrl('/announcements/' . $announcement->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $announcement->TitleSw : $announcement->TitleEn; ?>....</a>
+                            <a href="<?php echo \app\components\Utilities::generateUrl($announcement->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $announcement->TitleSw : $announcement->TitleEn; ?>....</a>
                             <div class="post-meta">
                                 <span class="time">
                                     <i class="fa fa-calendar"></i> <?php echo $date[0]; ?></span>

@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html'
             ),
             'DatePosted',
+            'LinkUrl',
             array(
                 'attribute' => 'Status',
                 'value' => function($model) {

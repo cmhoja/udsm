@@ -143,7 +143,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             self::UNIT_TYPE_SCHOOL => 'Schools',
             self::UNIT_TYPE_INSTITUTE => 'Institutes',
             self::UNIT_TYPE_CENTRE => 'Centres',
-           // self::UNIT_TYPE_DEPARTMENT => 'Departments',
+                // self::UNIT_TYPE_DEPARTMENT => 'Departments',
         );
     }
 
@@ -247,6 +247,10 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             }
         }
         return NULL;
+    }
+
+    static function getAcademicUnitsList() {
+        return self::find()->where(['in', 'UnitType', [self::UNIT_TYPE_CENTRE, self::UNIT_TYPE_COLLEGE, self::UNIT_TYPE_CONSTINTUENT_COLLEGE, self::UNIT_TYPE_INSTITUTE, self::UNIT_TYPE_SCHOOL]])->all();
     }
 
 }

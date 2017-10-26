@@ -109,6 +109,8 @@ class Utilities {
         $string = trim($string);
         $string = strtolower($string);
         $string = preg_replace('/\s+/', '-', $string);
+        $string = str_replace("'", '', $string);
+        $string = str_replace("&", '', $string);
         return $string;
     }
 
