@@ -21,7 +21,7 @@ use app\models\News;
 use app\models\Announcement;
 use app\models\SlideShows;
 
-class CentresController extends Controller {
+class CollegeController extends Controller {
 
     public $param;
 
@@ -73,7 +73,7 @@ class CentresController extends Controller {
         Yii::$app->view->params['unit_abbreviation_code'] = NULL;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             $unit_abbreviation = trim($url_sections[2]);
             $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
             if ($Academic_unit_details) {
@@ -101,7 +101,7 @@ class CentresController extends Controller {
 
         $url_sections = explode('/', $url);
 
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ////getting the landing page por a given college 
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -245,7 +245,7 @@ class CentresController extends Controller {
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
 
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -288,7 +288,7 @@ class CentresController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institute' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
 
@@ -325,7 +325,7 @@ class CentresController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centres' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -382,7 +382,7 @@ class CentresController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -422,7 +422,7 @@ class CentresController extends Controller {
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -468,7 +468,7 @@ class CentresController extends Controller {
 
         $url_sections = explode('/', $url);
 
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centres' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
@@ -507,7 +507,7 @@ class CentresController extends Controller {
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $url_sections = explode('/', $url);
 
-        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'centre' OR $url_sections[1] == 'centre' )) {
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
             ///getting pgae details
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {

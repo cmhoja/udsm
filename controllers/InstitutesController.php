@@ -21,7 +21,7 @@ use app\models\News;
 use app\models\Announcement;
 use app\models\SlideShows;
 
-class CollegeController extends Controller {
+class InstitutesController extends Controller {
 
     public $param;
 
