@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'MenuPlacementAreaRegion',
                 'value' => function($model) {
-                    return $model->MenuPlacementAreaRegion;
+                    return $model->getRegionName();
                 }
             ],
             [

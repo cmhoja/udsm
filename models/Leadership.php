@@ -36,9 +36,10 @@ class Leadership extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['Photo', 'FName', 'LNames', 'PositionEn', 'PositionSw', 'ListOrder'], 'required'],
+            [['FName', 'LNames', 'PositionEn', 'PositionSw', 'ListOrder'], 'required'],
             [['SummaryEn', 'SummarySw'], 'string'],
             [['ListOrder', 'Status'], 'integer'],
+            [['Photo'], 'file', 'maxFiles' => 1, 'extensions' => 'jpg,jpeg,png',],
             [['Photo', 'LNames'], 'string', 'max' => 255],
             [['FName', 'PositionEn', 'PositionSw'], 'string', 'max' => 100],
         ];
@@ -68,7 +69,6 @@ class Leadership extends \yii\db\ActiveRecord {
                         ->where(['Status' => self::STATUS_PUBLISHED])
                         ->orderBy('ListOrder ASC')
                         ->all();
-        
     }
 
 }

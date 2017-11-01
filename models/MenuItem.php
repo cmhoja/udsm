@@ -318,6 +318,13 @@ class MenuItem extends \yii\db\ActiveRecord {
         }
     }
 
+    static function getItemDetailsById($Id) {
+        if ($Id) {
+            return self::find()->where(array('Id' => $Id))->one();
+        }
+        return NULL;
+    }
+
     static function getMenuItemsByMenuGroupIDAndStatus($Id, $Status = NULL) {
         if ($Id && $Id > 0) {
             $condition = array('MenuID' => $Id);

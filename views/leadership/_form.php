@@ -1,39 +1,74 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+/////fck editor
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Leadership */
+/* @var $model app\models\AcademicAdministrativeUnit */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="leadership-form">
+<div class="add-form">
+    <?php
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'options' => ['enctype' => 'multipart/form-data']]);
+    ?>
+    <?php
+    echo Form::widget([
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
+            'onClick' => 'this.disabled=true;this.form.submit();',
+            'FName' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Enter First Name'],
+                'columnOptions' => ['width' => '185px']
+            ],
+            'LNames' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Enter Last Names'],
+                'columnOptions' => ['width' => '185px']
+            ],
+            'PositionEn' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Enter Last Names'],
+                'columnOptions' => ['width' => '185px']
+            ],
+            'PositionSw' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Enter Last Names'],
+                'columnOptions' => ['width' => '185px']
+            ],
+            'SummaryEn' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ], 'SummarySw' => [
+                'type' => Form::INPUT_WIDGET,
+                'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
+                'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ],
+            'ListOrder' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => app\components\Utilities::generateNumbers(30), 'options' => ['prompt' => '-- Select --'],
+                'columnOptions' => ['width' => '185px', 'height' => '10px']
+            ],
+            'Photo' => [
+                'type' => Form::INPUT_FILE,
+                'columnOptions' => ['width' => '185px']
+            ],
+        ]
+    ]);
+    echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);
+    echo Html::submitButton('Save & Publish', ['value' => 'publish', 'name' => 'publish', 'class' => 'btn btn-primary']);
+    ActiveForm::end();
+    ?>
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'Photo')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'FName')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'LNames')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'PositionEn')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'PositionSw')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'SummaryEn')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'SummarySw')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'ListOrder')->textInput() ?>
-
-    <?= $form->field($model, 'Status')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
 
 </div>
+
+

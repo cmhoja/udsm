@@ -63,7 +63,7 @@ return [
     'other_events' => ['en' => 'Other Events', 'sw' => 'Matukio Mengine'],
     'other_news' => ['en' => 'Other News', 'sw' => 'Habari Nyingine'],
     'other_announcement' => ['en' => 'Other Announcements', 'sw' => 'Matangazo Mengine'],
-    'leadership_and_administration' => ['en' => 'Leadership & Administration', 'sw' => 'Uongozi & Utawala'],
+    'leadership_and_administration' => ['en' => 'Leadership & Management', 'sw' => 'Uongozi & Utawala'],
     'annual_reports' => ['en' => 'Annual Reports', 'sw' => 'Ripoti za Mwisho wa Mwaka'],
     'aboutus' => ['en' => 'About Us', 'sw' => 'KUhusu sis'],
     'research_document' => ['en' => 'Research Documents', 'sw' => 'Utafiti Mbali mbali'],

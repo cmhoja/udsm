@@ -37,7 +37,7 @@
                                         foreach ($menuitems as $menuitem) {
                                             ?>
                                             <li>
-                                                <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
+                                                <a href="<?php  echo \app\components\Utilities::generateUrl($menuitem->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
                                             </li>
                                             <?php
                                         }
@@ -75,7 +75,7 @@
                                         foreach ($menuitems as $menuitem) {
                                             ?>
                                             <li>
-                                                <a href="<?php echo $menuitem->LinkUrl; ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
+                                                <a href="<?php echo  \app\components\Utilities::generateUrl($menuitem->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
                                             </li>
                                             <?php
                                         }

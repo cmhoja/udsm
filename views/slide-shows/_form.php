@@ -51,6 +51,11 @@ use app\models\AcademicAdministrativeUnit;
             'Upload' => [
                 'type' => Form::INPUT_FILE,
             ],
+            'ListOrder' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => app\components\Utilities::generateNumbers(30), 'options' => ['prompt' => '-- Select --'],
+                'columnOptions' => ['width' => '185px', 'height' => '10px']
+            ],
             'LinkToPage' => [
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Enter Url to link this slide show to page'],
@@ -59,12 +64,7 @@ use app\models\AcademicAdministrativeUnit;
         ]
     ]);
 
-//    echo '<label class="control-label">Add Photo</label>';
-//    echo FileInput::widget([
-//        'model' => $model,
-//        'attribute' => 'Image[]',
-//        'options' => ['multiple' => false, 'accept' => 'image/*', 'resizeImages' => true]
-//    ]);
+
 
     echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);
     echo Html::submitButton('Save & Publish', ['value' => 'publish', 'name' => 'publish', 'class' => 'btn btn-primary']);

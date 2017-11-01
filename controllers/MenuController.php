@@ -198,11 +198,16 @@ class MenuController extends Controller {
                     if ($menu_item_model->LinkUrl == '#' OR $menu_item_model->LinkUrl == '/#' OR $menu_item_model->LinkUrl == '/' OR empty($menu_item_model->LinkUrl) OR is_null($menu_item_model->LinkUrl)) {
                         $menu_item_model->LinkUrl = trim($college_abbreviation . '/#');
                         if ($menu_item_model->ParentItemID) {
-                            $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                           // $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                            $parentUrl = \app\models\MenuItem::getItemDetailsById($menu_item_model->ParentItemID);
                             if ($parentUrl) {
-                                $menu_item_model->LinkUrl = $parentUrl . '/#';
-                                if ($parentUrl == '#' OR $parentUrl == '/' OR $parentUrl == '/#') {
-                                    $menu_item_model->LinkUrl = $parentUrl;
+                                $menu_item_model->LinkUrl = $parentUrl->LinkUrl . '/#';
+                               
+                                if ($parentUrl->LinkUrl == '#' OR $parentUrl->LinkUrl == '/' OR $parentUrl->LinkUrl == '/#') {
+                                    $menu_item_model->LinkUrl = $parentUrl->LinkUrl;
+                                }
+                                if ($parentUrl->UrlType == \app\models\MenuItem::URL_TYPE_EXTERNAL) {
+                                    $menu_item_model->LinkUrl = trim($college_abbreviation . '/#');
                                 }
                             }
                         }
@@ -255,16 +260,20 @@ class MenuController extends Controller {
                         if ($menu_item_model->LinkUrl == '#' OR $menu_item_model->LinkUrl == '/#' OR $menu_item_model->LinkUrl == '/' OR empty($menu_item_model->LinkUrl) OR is_null($menu_item_model->LinkUrl)) {
                             $menu_item_model->LinkUrl = trim($college_abbreviation . '/#');
                             if ($menu_item_model->ParentItemID) {
-                                $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                                //$parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                                $parentUrl = \app\models\MenuItem::getItemDetailsById($menu_item_model->ParentItemID);
                                 if ($parentUrl) {
-                                    $menu_item_model->LinkUrl = $parentUrl . '/#';
-                                    if ($parentUrl == '#' OR $parentUrl == '/' OR $parentUrl == '/#') {
-                                        $menu_item_model->LinkUrl = $parentUrl;
+                                    $menu_item_model->LinkUrl = $parentUrl->LinkUrl . '/#';
+                                    if ($parentUrl->LinkUrl == '#' OR $parentUrl->LinkUrl == '/' OR $parentUrl->LinkUrl == '/#') {
+                                        $menu_item_model->LinkUrl = $parentUrl->LinkUrl;
+                                    }
+                                    if ($parentUrl->UrlType == \app\models\MenuItem::URL_TYPE_EXTERNAL) {
+                                        $menu_item_model->LinkUrl = trim($college_abbreviation . '/#');
                                     }
                                 }
                             }
                         } else {
-                            if (strpos($college_abbreviation, $college_abbreviation, 0)) {
+                            if (strpos($college_abbreviation, $menu_item_model->LinkUrl, 0)) {
                                 $menu_item_model->LinkUrl = $menu_item_model->LinkUrl;
                             } else {
                                 $menu_item_model->LinkUrl = $college_abbreviation . '/' . $menu_item_model->LinkUrl;

@@ -39,7 +39,7 @@ class SlideShows extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['TitleEn', 'TitleSw', 'Upload'], 'required'],
+            [['TitleEn', 'TitleSw', 'Upload','ListOrder'], 'required'],
             [['UnitID', 'Status'], 'integer'],
             [['TitleEn', 'TitleSw', 'LinkToPage'], 'string', 'max' => 120],
             [['DetailsEn', 'DetailsSw'], 'string', 'max' => 400],
@@ -107,7 +107,7 @@ class SlideShows extends \yii\db\ActiveRecord {
         return self::find()
                         ->select('TitleEn,TitleSw,DetailsEn,DetailsSw,LinkToPage,Image')
                         ->where($condition)
-                        ->orderBy('DatePosted DESC')
+                        ->orderBy('ListOrder ASC, DatePosted DESC')
                         ->limit($Limit)
                         ->all();
     }

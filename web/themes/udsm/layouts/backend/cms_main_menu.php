@@ -90,6 +90,8 @@ $session = Yii::$app->session;
                     </a>
                 </li>
 
+
+
                 <!--FOR MAIN SITE ADMIN ONLY-->
                 <?php if ($session->has('USER_TYPE_ADMINISTRATOR') && !$session->has('USER_TYPE_CONTENT_MANAGER')): ?>
                     <li class="treeview">
@@ -145,6 +147,12 @@ $session = Yii::$app->session;
                 <?php endif; ?>
 
                 <?php if ($session->has('USER_TYPE_ADMINISTRATOR') && !$session->has('UNIT_ID') && !$session->has('USER_TYPE_CONTENT_MANAGER')) { ?>
+                    <li>
+                        <a href="<?php echo Url::to(['/leadership/index']) ?>">
+                            <i class="fa fa-bar-chart"></i> 
+                            <span>Leadership & Management</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="<?php echo Url::to(['/logins/index']) ?>">
                             <i class="fa fa-circle-o"></i> 
