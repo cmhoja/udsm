@@ -67,7 +67,7 @@ if (isset($news) && $news) {
                     if (isset($latest_news) && $latest_news) {
                         foreach ($latest_news as $latest_news) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($latest_news->LinkUrl) ?>"> <?php echo Date('d, M Y > ', strtotime($latest_news->DatePosted)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_news->TitleSw : $latest_news->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($latest_news->LinkUrl) ?>"> <i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y :', strtotime($latest_news->DatePosted)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_news->TitleSw : $latest_news->TitleEn; ?></a>
                             <hr>
                             <?php
                         }

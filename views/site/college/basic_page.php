@@ -9,8 +9,52 @@
                         ?>
                         <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $page_content->Photo; ?>">
                     <?php endif; ?>
-                    <p style="text-align: justify"><?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn ?></p>
+                    <p style="text-align: justify">
+                        <?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn ?>
+                    </p>
                 </div>
+                <!--CUSTOM_PAGE_CONTENT_TOP COLUMN1_3-->
+                <div class="pull-left col-sm-12 col-md-9">
+                    <?php
+                    var_dump($page_content_top_column1_blocks);
+                    var_dump($page_content_top_column2_blocks);
+                    var_dump($page_content_top_column3_blocks);
+                    ?>
+                </div>
+
+                <!--CUSTOM_PAGE_CONTENT_TOP_LEFT_RIGHT--> 
+                <div class="pull-left col-sm-12 col-md-9">
+                    <?php
+                    var_dump($page_content_top_left_blocks);
+                    var_dump($page_content_top_right_blocks);
+                    ?>
+                </div>
+
+                <!--CUSTOM_PAGE_CONTENT_MIDDLE-->
+                <div class="pull-left col-sm-12 col-md-9">
+                    <?php
+                    var_dump($page_content_middle_blocks);
+                    ?>
+                </div>
+
+                <!--CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1_3-->
+                <div class="pull-left col-sm-12 col-md-9">
+                    <?php
+                    var_dump($page_content_bottom_column1_blocks);
+                    var_dump($page_content_bottom_column2_blocks);
+                    var_dump($page_content_bottom_column3_blocks);
+                    ?>
+                </div>
+                <!--CUSTOM_PAGE_CONTENT_BOTTOM_LEFT_RIGT-->
+                <div class="pull-left col-sm-12 col-md-9">
+                    <?php
+                    var_dump($page_content_bottom_left_blocks);
+                    var_dump($page_content_bottom_right_blocks);
+                    ?>
+
+                </div>
+
+
 
 
                 <!--SIDE MENU AREA-->
@@ -52,35 +96,37 @@
                                 </p>
 
                             </div>
-                        <?php } ?>           
-
-
-
-                        <?php
-                        if (isset($side_menus) && $side_menus) {
+                            <?php
+                        }
+                    }
+                    ?>  
+                    <?php
+                    if (isset($side_menus) && $side_menus) {
+                        foreach ($side_menus as $side_menu) {
+                            $menu_items = \app\models\MenuItem::getMenuItemsByMenuGroupIDAndStatus($side_menu->Id, \app\models\MenuItem::STATUS_ENABLED);
                             ?>
-
                             <div class="section-title text-left">
-                                <!-- Heading -->
-                                <h2 class="title"><?php echo Yii::$app->params['static_items']['other_pages'][Yii::$app->language]; ?></h2>
+                                <h2 class="title"><?php echo (Yii::$app->language == 'sw') ? $side_menu->DisplayNameSw : $side_menu->DisplayNameEn; ?></h2>
                             </div>
                             <div class="course-additions">
                                 <?php
-                                foreach ($side_menus as $menus) {
+                                foreach ($menu_items as $menus) {
                                     ?>
-                                    <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
-                                        <?php
-                                    }
+                                    <li>
+                                        <i class="fa-info-circle"></i> 
+                                        <a target="<?php ($menus->UrlType == \app\models\MenuItem::URL_TYPE_EXTERNAL) ? '_blank' : ''; ?>" href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a>
+                                    </li>
+                                    <?php
+                                }
 //                                   
-                                    ?>
+                                ?>
                             </div>
                             <?php
                         }
-                        ?>
-
-                        <?php
                     }
                     ?>
+
+
                 </div>
             </div>
         <?php endif; ?>

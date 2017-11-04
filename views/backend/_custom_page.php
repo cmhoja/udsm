@@ -15,6 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <div style="border: 1px solid black;position: relative;float: left;width:74%;margin: 0.5%;padding: 0.3%;">
+            <div style="height: 50px;background: rosybrown; padding: 3%; position: relative;float: left;width: 99.3%;margin: 0.3%;margin-bottom: 0.8%;margin-top: 0.8%;border: 1px solid black">
+             CUTOME_PAGE_MAIN_CONTENT_REGION (FIXED AREA)
+            </div>
             <div style="position: relative;float: left;width: 99.3%;margin: 0.3%;margin-bottom: 0.8%;margin-top: 0.8%;border: 1px solid black">
                 <div style="position: relative;float: left;width: 33%;padding: 3%;height: 100px;margin: 0.4%;border: 1px solid black;">
                     CUSTOM_PAGE_CONTENT_TOP_COLUMN1

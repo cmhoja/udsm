@@ -1624,7 +1624,8 @@ h6 {
 }
 
 p {
-    margin: 0 0 10px
+    margin: 0 0 10px;
+    text-align: justify !important;
 }
 
 .lead {
@@ -2817,7 +2818,7 @@ pre code {
     float: left;
 }
 @media (min-width: 768px) {
-.col-sm-15 {
+    .col-sm-15 {
         width: 20%;
         float: left;
     }
@@ -3827,7 +3828,7 @@ fieldset[disabled] .btn-default:hover {
 .btn-constant, .btn-constant:hover{
     color: #fff;
     background-color: #225dcd;
-   
+
 }
 
 
@@ -5267,7 +5268,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 @media (max-width:767px) {
 
-    
+
     .navbar-nav .open .dropdown-menu {
         position: static;
         float: none;
@@ -5291,8 +5292,8 @@ textarea.input-group-sm>.input-group-btn>.btn {
     }
 
     .navbar-brand {
-    font-size: 15px;
-}
+        font-size: 15px;
+    }
 }
 
 @media (min-width:768px) {
@@ -8100,3 +8101,17 @@ button.close {
 
 
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+.row ul li{
+    margin-left: 1% !important;
+    list-style-type:inherit;
+    list-style-position: inside !important;
+    margin: 0.5% !important;
+}
+
+.row ol li{
+    list-style-type: decimal !important; 
+    margin-left: 1% !important;
+    list-style-position: inside !important;
+    margin: 0.5% !important;
+}

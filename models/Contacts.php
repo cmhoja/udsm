@@ -95,7 +95,14 @@ class Contacts extends \yii\db\ActiveRecord {
     }
 
     static function getActiveOtherUnitsContacts() {
-        return self::find()->where(['Status' => self::STATUS_PUBLISHED, 'UnitID' => '>0'])->all();
+        return self::find()
+                        ->select('UnitType,UnitNameEn AS ContactTitle ,UnitNameSw AS ContactTitleSw,UnitAbreviationCode,PhoneNo,FaxNo,EmailAddress,PoBox,StreetRegion,UnitID')
+                        ->innerJoin('tbl_academic_administrative_unit', 'tbl_academic_administrative_unit.Id=tbl_contacts.UnitID')
+                        ->where(['Status' => self::STATUS_PUBLISHED])
+                        ->andWhere('UnitID >0')
+                        ->orderBy('tbl_academic_administrative_unit.UnitType ASC')
+                        ->groupBy('UnitID')
+                        ->all();
     }
 
     static function getActiveUnitsContacts($UnitID) {

@@ -18,7 +18,7 @@ if (isset($page_content) && $page_content) {
                         <h3><?php echo (Yii::$app->language == 'sw') ? $page_content->TitleSw : $page_content->TitleEn; ?></h3>
 
                         <span class="time">
-                            <i class="fa fa-calendar"></i> <?php echo Date('D.M.Y ', strtotime($page_content->DatePosted)); ?></span>
+                            <i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y ', strtotime($page_content->DatePosted)); ?></span>
                         <span class="time">
                             <i class="fa fa-clock-o"></i> <?php echo Date('H.i', strtotime($page_content->DatePosted)); ?>
                         </span>
@@ -47,7 +47,7 @@ if (isset($page_content) && $page_content) {
                     if (isset($latest_announcements) && $latest_announcements) {
                         foreach ($latest_announcements as $latest_announcements) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($latest_announcements->LinkUrl); ?>"> <?php echo Date('d, M Y > ',strtotime($latest_announcements->DatePosted)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_announcements->TitleSw : $latest_announcements->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($latest_announcements->LinkUrl); ?>"><i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y : ',strtotime($latest_announcements->DatePosted)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_announcements->TitleSw : $latest_announcements->TitleEn; ?></a>
                             <hr>
                             <?php
                         }

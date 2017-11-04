@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = 'News Details';
 
     <p>
         <?php if ($model->Status != News::NEWS_STATUS_PUBLISHED) { ?>
-            <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-primary'])
+            <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-warning'])
             ?>
             <?=
             Html::a('Delete', ['delete', 'id' => $model->Id], [
@@ -26,8 +26,19 @@ $this->params['breadcrumbs'][] = 'News Details';
                 ],
             ]);
             ?>
+        
+            <?= Html::a('Publish', ['publish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to this?')])
+            ?>
+
+
+        <?php } ?>
+
+        <?php if ($model->Status == News::NEWS_STATUS_PUBLISHED) { ?>
+            <?= Html::a('Un Publish', ['unpublish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to Do this?')])
+            ?>
         <?php } ?>
     </p>
+
 
     <?=
     DetailView::widget([
@@ -71,18 +82,6 @@ $this->params['breadcrumbs'][] = 'News Details';
     ])
     ?>
 
-    <p>
-        <?php if ($model->Status != News::NEWS_STATUS_PUBLISHED) { ?>
-            <?= Html::a('Publish', ['publish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to this?')])
-            ?>
 
-
-        <?php } ?>
-
-        <?php if ($model->Status == News::NEWS_STATUS_PUBLISHED) { ?>
-            <?= Html::a('Un Publish', ['unpublish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to Do this?')])
-            ?>
-        <?php } ?>
-    </p>
 
 </div>

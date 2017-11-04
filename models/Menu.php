@@ -137,7 +137,9 @@ class Menu extends \yii\db\ActiveRecord {
         return self::find()
                         ->select('Id, MenuName,MenuType,UnitID,ShowOnPage,MenuPlacementAreaRegion')
                         ->where($condition)
-                        ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
+                        //->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
+                        ->andWhere('ShowOnPage LIKE :ShowOnPage')
+                        ->addParams([':ShowOnPage' => '%' . $ShowOnPage . '%'])
                         ->orderBy('Id ASC,MenuName ASC')
                         ->all();
     }
@@ -159,7 +161,9 @@ class Menu extends \yii\db\ActiveRecord {
         return self::find()
                         ->select('Id, MenuName,DisplayNameEn,DisplayNameSw,MenuCSSClass')
                         ->where($condition)
-                        ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
+                        //->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
+                        ->andWhere('ShowOnPage LIKE :ShowOnPage')
+                        ->addParams([':ShowOnPage' => '%' . $ShowOnPage . '%'])
                         ->orderBy('Id ASC,MenuName ASC')
                         ->all();
     }

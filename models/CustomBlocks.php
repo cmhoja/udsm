@@ -136,7 +136,9 @@ class CustomBlocks extends \yii\db\ActiveRecord {
         return self::find()
                         ->select('BlockName,BlockTitleEn,BlockTitleSw,BlockDetailsEn,BlockDetailsSw,BlockIconPicture,BlockIconCSSClass,LinkToPage,BlockIconVideo')
                         ->where($condition)
-                        ->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
+                        //->andFilterWhere(['like', 'ShowOnPage', $ShowOnPage])
+                        ->andWhere('ShowOnPage LIKE :ShowOnPage')
+                        ->addParams([':ShowOnPage' => '%' . $ShowOnPage . '%'])
                         ->orderBy('ListOrder DESC')
                         ->all();
     }

@@ -8101,3 +8101,21 @@ button.close {
 
 
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+.row ul li{
+    margin-left: 1% !important;
+    list-style-type:inherit;
+    list-style-position: inside !important;
+    margin: 0.5% !important;
+}
+
+.row ol li{
+    list-style-type: decimal !important; 
+    margin-left: 1% !important;
+    list-style-position: inside !important;
+    margin: 0.5% !important;
+}
+
+#footer .nav {
+    list-style: circle !important;
+}

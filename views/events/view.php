@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php if ($model->Status != Events::EVENT_STATUS_PUBLISHED) { ?>
-            <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-primary'])
+            <?= Html::a('Update', ['update', 'id' => $model->Id], ['class' => 'btn btn-warning'])
             ?>
             <?=
             Html::a('Delete', ['delete', 'id' => $model->Id], [
@@ -25,6 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post',
                 ],
             ]);
+            ?>
+      
+            <?= Html::a('Publish', ['publish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to do this?')])
+            ?>
+
+        <?php } ?>
+
+        <?php if ($model->Status == Events::EVENT_STATUS_PUBLISHED) { ?>
+            <?= Html::a('Un Publish', ['unpublish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to Do this?')])
             ?>
         <?php } ?>
     </p>
@@ -66,16 +75,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ])
     ?>
 
-    <p>
-        <?php if ($model->Status != Events::EVENT_STATUS_PUBLISHED) { ?>
-            <?= Html::a('Publish', ['publish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to do this?')])
-            ?>
-
-        <?php } ?>
-
-        <?php if ($model->Status == Events::EVENT_STATUS_PUBLISHED) { ?>
-            <?= Html::a('Un Publish', ['unpublish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to Do this?')])
-            ?>
-        <?php } ?>
-    </p>
 </div>

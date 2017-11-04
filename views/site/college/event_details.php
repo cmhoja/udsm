@@ -18,7 +18,7 @@ if (isset($page_content) && $page_content) {
                         <h3><?php echo (Yii::$app->language == 'sw') ? $page_content->EventTitleSw : $page_content->EventTitleEn; ?></h3>
 
                         <span class="time">
-                            <i class="fa fa-calendar"></i> <?php echo Date('D.M.Y ', strtotime($page_content->DatePosted)); ?></span>
+                            <i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y ', strtotime($page_content->DatePosted)); ?></span>
                         <span class="time">
                             <i class="fa fa-clock-o"></i> <?php echo Date('H.i', strtotime($page_content->DatePosted)); ?>
                         </span>
@@ -51,7 +51,7 @@ if (isset($page_content) && $page_content) {
                     if (isset($other_events) && $other_events) {
                         foreach ($other_events as $other_events) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($other_events->EventUrl); ?>"> <?php echo Date('d, M Y > ',strtotime($other_events->StartDate)); ?> <?php echo (Yii::$app->language == 'sw') ? $other_events->EventTitleSw : $other_events->EventTitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($other_events->EventUrl); ?>"> <i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y : ',strtotime($other_events->StartDate)); ?> <?php echo (Yii::$app->language == 'sw') ? $other_events->EventTitleSw : $other_events->EventTitleEn; ?></a>
                             <hr>
                             <?php
                         }

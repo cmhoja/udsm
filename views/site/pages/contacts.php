@@ -72,13 +72,15 @@
             <div class="row">
 
                 <div class="col-md-12">
-                    <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['Other_campus_institutions_etc']['sw'] : Yii::$app->params['static_items']['Other_campus_institutions_etc']['en'] ?></h3>
+                    <h3 class="title"><?php echo Yii::$app->params['static_items']['Other_campus_institutions_etc'][Yii::$app->language]; ?></h3>
                 </div>
                 <?php
                 foreach ($contacts_others as $contact) {
                     ?>
-                    <div class="col-sm-6 col-md-4 address-list">
-                        <h5 class="title"><?php echo (Yii::$app->language == 'sw') ? $contact->ContactTitleSw : $contact->ContactTitle; ?></h5>
+                    <div class="col-sm-6 col-md-4 address-list" style="height: 160px;">
+                        <h6 class="title">
+                            <strong><?php echo (Yii::$app->language == 'sw') ? $contact->ContactTitleSw : $contact->ContactTitle; ?></strong>
+                        </h6>
                         <?php if ($contact->PoBox) { ?>
                             <div><?php echo ((Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['PObox']['sw'] : Yii::$app->params['static_items']['PObox']['sw']) . ' ' . $contact->PoBox; ?></div>
                         <?php } ?>
@@ -94,7 +96,7 @@
                             <div><?php echo ((Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['PhoneNo']['sw'] : Yii::$app->params['static_items']['PhoneNo']['sw']) . ' ' . $contact->PhoneNo; ?></div>
                         <?php } ?>
                         <?php if ($contact->FaxNo) { ?>
-                            <div><?php echo ((Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['Fax']['sw'] : Yii::$app->params['static_items']['Fax']['sw']) . ' ' . $contact->Fax; ?></div>
+                            <div><?php echo ((Yii::$app->language == 'sw') ? Yii::$app->params['static_items']['Fax']['sw'] : Yii::$app->params['static_items']['Fax']['sw']) . ' ' . $contact->FaxNo; ?></div>
                         <?php } ?>
 
                     </div>
@@ -116,8 +118,8 @@
                             </div>	-->
 
             </div>
-        
-        <hr>
+
+            <hr>
         <?php } ?>
 
     </div>

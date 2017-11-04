@@ -28,7 +28,7 @@ if (isset($events) && $events) {
                         <h3><?php echo (Yii::$app->language == 'sw') ? $events->EventTitleSw : $events->EventTitleEn; ?></h3>
 
                         <span class="time">
-                            <i class="fa fa-calendar"></i> <?php echo Date('D.M.Y ', strtotime($events->StartDate)); ?></span>
+                            <i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y ', strtotime($events->StartDate)); ?></span>
                         <span class="time">
                             <i class="fa fa-clock-o"></i> <?php echo Date('H.i', strtotime($events->StartDate)); ?>
                         </span>
@@ -58,7 +58,7 @@ if (isset($events) && $events) {
                     if (isset($latest_events) && $latest_events) {
                         foreach ($latest_events as $latest_events) {
                             ?>
-                    <a href="<?php echo app\components\Utilities::generateUrl($latest_events->EventUrl); ?>"> <?php echo Date('d, M Y > ', strtotime($latest_events->StartDate)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_events->EventTitleSw : $latest_events->EventTitleEn; ?></a>
+                    <a href="<?php echo app\components\Utilities::generateUrl($latest_events->EventUrl); ?>"> <i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y : ', strtotime($latest_events->StartDate)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_events->EventTitleSw : $latest_events->EventTitleEn; ?></a>
                             <hr>
                             <?php
                         }
