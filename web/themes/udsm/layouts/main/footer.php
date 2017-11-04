@@ -6,7 +6,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3 widget bottom-xs-pad-20">
                     <!--geting blocks allocated at this region--> 
                     <?php
-                    $blocks = app\models\CustomBlocks::getActiveBlocksByRegionId(app\components\SiteRegions::MAIN_TEMPLATE_FOOTER_BOTTOM_COLUMN1, app\models\CustomBlocks::BLOCK_TYPE_HOME_PAGE,NULL);
+                    $blocks = app\models\CustomBlocks::getActiveBlocksByRegionId(app\components\SiteRegions::MAIN_TEMPLATE_FOOTER_BOTTOM_COLUMN1, app\models\CustomBlocks::BLOCK_TYPE_HOME_PAGE, NULL);
                     if ($blocks) {
                         foreach ($blocks as $block) {
                             ?>
@@ -27,7 +27,7 @@
                             ?>
                             <div class="widget-title">
                                 <!-- Title -->
-                                <h3 class="title"><?php //echo (Yii::$app->language == 'sw') ? $menu->ItemNameSw : $menu->ItemNameEn                        ?></h3>
+                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $menu->DisplayNameSw : $menu->DisplayNameEn ?></h3>
                             </div>
                             <nav>
                                 <ul>
@@ -37,7 +37,7 @@
                                         foreach ($menuitems as $menuitem) {
                                             ?>
                                             <li>
-                                                <a href="<?php  echo \app\components\Utilities::generateUrl($menuitem->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
+                                                <a target="<?php echo $menuitem->UrlType == \app\models\MenuItem::URL_TYPE_EXTERNAL ? '_blank' : ''; ?>" href="<?php echo \app\components\Utilities::generateUrl($menuitem->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
                                             </li>
                                             <?php
                                         }
@@ -64,8 +64,8 @@
                             ?>
                             <div class="widget-title">
                                 <!-- Title -->
-                                <h3 class="title"><?php echo Yii::$app->params['static_items']['quick_links'][Yii::$app->language]; ?></h3>
-                                <!--<h3 class="title"><?php //echo (Yii::$app->language == 'sw') ? $menu->ItemNameSw : $menu->ItemNameEn                        ?></h3>-->
+                                <!--<h3 class="title"><?php //echo Yii::$app->params['static_items']['quick_links'][Yii::$app->language];  ?></h3>-->
+                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $menu->DisplayNameSw : $menu->DisplayNameEn ?></h3>
                             </div>
                             <nav>
                                 <ul>
@@ -75,7 +75,7 @@
                                         foreach ($menuitems as $menuitem) {
                                             ?>
                                             <li>
-                                                <a href="<?php echo  \app\components\Utilities::generateUrl($menuitem->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
+                                                <a target="<?php echo $menuitem->UrlType == \app\models\MenuItem::URL_TYPE_EXTERNAL ? '_blank' : ''; ?>" href="<?php echo \app\components\Utilities::generateUrl($menuitem->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menuitem->ItemNameSw : $menuitem->ItemNameEn ?></a>
                                             </li>
                                             <?php
                                         }
@@ -126,7 +126,7 @@
                                     <?php echo $social_account->AccountName; ?>
                                 </a>
                             </div>
-                            
+
                             <?php
                         }
                     }

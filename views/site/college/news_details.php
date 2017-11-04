@@ -32,7 +32,7 @@ if (isset($page_content) && $page_content) {
                         ?> 
                         <div class="news-content">
                             <?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language] . ': '; ?>
-                            <a target="_blank" href= "<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Attachment); ?>">  <?php echo Yii::$app->params['static_items']['download'][Yii::$app->language]; ?></a>
+                            <a target="_blank" download href= "<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Attachment); ?>">  <?php echo Yii::$app->params['static_items']['download'][Yii::$app->language]; ?></a>
 
                         </div>
                         <?php
@@ -47,7 +47,7 @@ if (isset($page_content) && $page_content) {
                     if (isset($other_news) && $other_news) {
                         foreach ($other_news as $other_news) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($other_news->LinkUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $other_news->TitleSw : $other_news->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($other_news->LinkUrl); ?>"> <?php echo Date('d, M Y > ',strtotime($other_news->DatePosted)); ?> <?php echo (Yii::$app->language == 'sw') ? $other_news->TitleSw : $other_news->TitleEn; ?></a>
                             <hr>
                             <?php
                         }

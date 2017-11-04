@@ -23,29 +23,27 @@ $this->params['breadcrumbs'][] = $this->title;
         // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'BlockName',            
+            array(
+                'attribute' => 'BlockUnitID',
+                'value' => function($model) {
+                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->BlockUnitID);
+                }
+            ), 'BlockName',
             'BlockTitleEn',
-             array(
+            array(
                 'attribute' => 'BlockType',
                 'value' => function($model) {
                     return $model->getBlockTypeName();
                 }
             ),
             array(
-                'attribute' => 'BlockUnitID',
-                'value' => function($model) {
-                    return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->BlockUnitID);
-                }
-            ),
-           
-             array(
                 'attribute' => 'BlockPlacementAreaRegion',
                 'value' => function($model) {
                     return $model->getRegionName();
                 }
             ),
-            'ShowOnPage',
-             array(
+            //'ShowOnPage',
+            array(
                 'attribute' => 'Status',
                 'value' => function($model) {
                     return $model->getStatusName();

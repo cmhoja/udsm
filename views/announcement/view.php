@@ -39,8 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ),
             'TitleEn',
             'TitleSw',
-            'DetailsEn:ntext',
-            'DetailsSw:ntext',
+            'DetailsEn:html',
+            'DetailsSw:html',
             array(
                 'attribute' => 'Attachment',
                 'value' => function($model) {

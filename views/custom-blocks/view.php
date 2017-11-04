@@ -46,8 +46,8 @@ $this->params['breadcrumbs'][] = 'Details';
             'BlockName',
             'BlockTitleEn',
             'BlockTitleSw',
-            'BlockDetailsEn',
-            'BlockDetailsSw:ntext',
+            'BlockDetailsEn:html',
+            'BlockDetailsSw:html',
             array(
                 'attribute' => 'BlockUnitID',
                 'value' => function($model) {

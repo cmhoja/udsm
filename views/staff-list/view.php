@@ -40,7 +40,9 @@ $this->params['breadcrumbs'][] = 'Staff Details';
             ),
             'Education',
             'Position',
-            'Summary', array(
+            'Summary:html',
+            'SummarySw:html',
+            array(
                 'attribute' => 'Status',
                 'value' => function($model) {
                     return $model->getStatusName();

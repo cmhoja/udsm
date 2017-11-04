@@ -40,14 +40,16 @@ $this->params['breadcrumbs'][] = 'Page Details';
             ///'PageId',
             'PageTitleEn',
             'PageTitleSw',
-            'DescriptionEn:ntext',
-            'DescriptionSw:ntext',
+            'DescriptionEn:html',
+            'DescriptionSw:html',
             'Attachment',
             'EmbededVideo',
             'PageSeoUrl:url',
             array(
                 'attribute' => 'PageSeoUrl',
-                'label' => 'Page Preview link',
+                'label' => 'Preview link',
+                'title' => 'Click to Preview',
+                'format' => 'url',
                 'value' => function($model) {
                     return \yii\helpers\Url::toRoute($model->PageSeoUrl, true);
                 }

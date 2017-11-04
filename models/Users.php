@@ -109,6 +109,21 @@ class Users extends \yii\db\ActiveRecord {
         }
         return NULL;
     }
+    
+     function getUserName() {
+         $user=self::findOne($this->Id);
+        if ($user) {
+            return $user->UserName;
+        }
+        return NULL;
+    }
+     static function getUserNameById($Id) {
+         $user=self::findOne($Id);
+        if ($user) {
+            return $user->UserName;
+        }
+        return NULL;
+    }
 
     /**
      * Generates password hash from password and sets it to the model

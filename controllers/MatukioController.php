@@ -136,11 +136,11 @@ class MatukioController extends Controller {
             if ($model->validate()) {
                 if ($model->Attachment) {
                     //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
-                    $fileName = trim('MAIN_EVENT_' . $model->BlockTitleEn . '.' . $model->Attachment->extension);
+                    $fileName = trim('MAIN_EVENT_' . $model->EventTitleEn . '.' . $model->Attachment->extension);
                     $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
 
                     if ($model->UnitID > 0) {
-                        $fileName = trim('UNIT_EVENT_' . $model->BlockTitleEn . '.' . $model->Attachment->extension);
+                        $fileName = trim('UNIT_EVENT_' . $model->EventTitleEn . '.' . $model->Attachment->extension);
                     }
                     $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_units_site'] . '/' . $fileName;
 

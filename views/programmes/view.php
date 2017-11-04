@@ -42,15 +42,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ),
             'Duration',
-            'DescriptionEn:ntext',
-            'DescriptionSw:ntext',
+            'DescriptionEn:html',
+            'DescriptionSw:html',
             array(
                 'attribute' => 'UnitID',
                 'value' => function($model) {
                     return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
                 }
             ),
-            'EntryRequirements:ntext',
+            'EntryRequirements:html',
+            'EntryRequirementsSw:html',
             'ProgrammeUrl',
             array(
                 'attribute' => 'Status',

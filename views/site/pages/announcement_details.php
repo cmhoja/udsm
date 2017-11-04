@@ -7,7 +7,7 @@ if (isset($announcements) && $announcements) {
             <div class="col-md-12 no-pad">
                 <h1 class="title"><?php echo $title; ?> </h1>
                 <ul class = "breadcrumb">
-                   <li>
+                    <li>
                         <a href = "<?php echo yii\helpers\Url::home(); ?>"><?php echo Yii::$app->params['static_items']['home'][Yii::$app->language]; ?></a>
                     </li>
                     <li>
@@ -36,6 +36,16 @@ if (isset($announcements) && $announcements) {
 
                     <div class="news-content">
                         <p><?php echo (Yii::$app->language == 'sw') ? $announcements->DetailsSw : $announcements->DetailsEn; ?></p>                              
+                        <?php if ($announcements->Attachment): ?>
+                            <span class="time">
+                                <i class="fa fa-paperclip"></i> 
+                                <b><?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language]; ?></b>:  
+                                <a target="_blank" download="" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $announcements->Attachment) ?>" >
+                                    <?php echo $announcements->Attachment; ?> 
+                                </a>
+                            </span>
+                        <?php endif; ?>
+
                     </div>
 
                 </div>
@@ -46,7 +56,7 @@ if (isset($announcements) && $announcements) {
                     if (isset($latest_announcements) && $latest_announcements) {
                         foreach ($latest_announcements as $latest_announcements) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($latest_announcements->LinkUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_announcements->TitleSw : $latest_announcements->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($latest_announcements->LinkUrl); ?>"> <?php echo Date('d, M Y > ',strtotime($latest_announcements->DatePosted)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_announcements->TitleSw : $latest_announcements->TitleEn; ?></a>
                             <hr>
                             <?php
                         }

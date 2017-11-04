@@ -115,7 +115,7 @@ class Menu extends \yii\db\ActiveRecord {
 
     static function getActivemenuByRegionMenuTypePageType($RegionId, $MenuType, $PageType, $Unit = NULL) {
         return self::find()
-                        ->select('MenuName,Description,Id')
+                        ->select('MenuName,Description,Id,DisplayNameEn,DisplayNameSw,MenuCSSClass')
                         ->where(array('MenuType' => $MenuType, 'ShowOnPage' => $PageType, 'MenuPlacementAreaRegion' => $RegionId, 'Status' => Menu::STATUS_PUBLISHED))
                         ->all();
     }

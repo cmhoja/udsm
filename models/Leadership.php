@@ -70,5 +70,21 @@ class Leadership extends \yii\db\ActiveRecord {
                         ->orderBy('ListOrder ASC')
                         ->all();
     }
+    
+     function getStatusList() {
+        return array(
+            self::STATUS_SAVED => 'Saved',
+            self::STATUS_PUBLISHED => 'Published',
+            self::STATUS_UNPUBLISHED => 'Un Published'
+        );
+    }
+    
+     function getStatusName() {
+        $statuses = self::getStatusList();
+        if ($statuses && isset($statuses[$this->Status])) {
+            return $statuses[$this->Status];
+        }
+        return NULL;
+    }
 
 }

@@ -50,7 +50,7 @@ class News extends \yii\db\ActiveRecord {
             [['TitleEn', 'TitleSw'], 'string', 'max' => 150],
             [['NewsType'], 'safe'],
             [['Photo'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => True, 'extensions' => 'png,jpeg,jpg'],
-            [['Attachment'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => true], // 'extensions' => 'zip, pdf, .docx, .doc, ppt, odt, .xlsx, .xls'],
+            [['Attachment'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => true, 'extensions' => 'zip, pdf, .docx, .doc, ppt, odt, .xlsx, .xls'],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }

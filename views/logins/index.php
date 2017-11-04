@@ -17,10 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'UserId',
+            [
+                'attribute' => 'UserId',
+                'value' => function($model) {
+                    return \app\models\Users::getUserNameById($model->UserId);
+                }
+            ],
             'DateCreated',
             'IpAddress',
             'Details:ntext',

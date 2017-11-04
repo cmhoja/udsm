@@ -40,10 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
                 }
             ),
-            'DetailsEn:ntext',
-            'DetailsSw:ntext',
+            'DetailsEn:html',
+            'DetailsSw:html',
             'Principal',
-            'OtherResearcher',
+            'OtherResearcher:html',
             'FundingEn',
             'FundingSw',
             'StartYear',

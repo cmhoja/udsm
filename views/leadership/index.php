@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Leaderships';
+$this->title = 'UDSM Management/ Leaderships';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="leadership-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Add/Create Leader or Management Person', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add USDM Management', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?=
     GridView::widget([

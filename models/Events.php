@@ -49,7 +49,7 @@ class Events extends \yii\db\ActiveRecord {
             [['UnitID', 'Status'], 'integer'],
             [['Attachment'], 'file', 'maxFiles' => 1, 'extensions' => 'docx, doc, pdf,xlsx,xls,odt, jpg,jpeg',],
             [['EventTitleEn', 'EventTitleSw'], 'string', 'max' => 130],
-            [['EventUrl', 'Attachment'], 'string', 'max' => 255],
+            [['EventUrl'], 'string', 'max' => 255],
             [['DateCreated', 'StartDate', 'EndDate', 'DatePosted'], 'safe'],
         ];
     }

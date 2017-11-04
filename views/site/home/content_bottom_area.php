@@ -69,12 +69,7 @@
                         }
                     }
                     ?>            
-                    <!--                <a href="#" >
-                                        <img src="<?php //echo $this->theme->baseUrl;           ?>/img/ud8.jpg">
-                                    </a>
-                                    <h5><a href="#" class="promotions">Postgraduate</a></h5>
-                                    <p>Aenean sit amet nulla a massa vestibulum sagittis eleifend ut mi. Maecenas eget ex diam. Aenean sit amet venenatis lectus.</p>-->
-                </div>
+               </div>
 
                 <div class="col-md-3">
                     <?php

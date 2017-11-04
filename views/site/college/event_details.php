@@ -37,7 +37,7 @@ if (isset($page_content) && $page_content) {
                         ?> 
                         <div class="news-content">
                             <?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language] . ': '; ?>
-                            <a target="_blank" href= "<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Attachment); ?>">  <?php echo Yii::$app->params['static_items']['download'][Yii::$app->language]; ?></a>
+                            <a target="_blank" download href= "<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Attachment); ?>">  <?php echo Yii::$app->params['static_items']['download'][Yii::$app->language]; ?></a>
 
                         </div>
                         <?php
@@ -51,7 +51,7 @@ if (isset($page_content) && $page_content) {
                     if (isset($other_events) && $other_events) {
                         foreach ($other_events as $other_events) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($other_events->EventUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $other_events->EventTitleSw : $other_events->EventTitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($other_events->EventUrl); ?>"> <?php echo Date('d, M Y > ',strtotime($other_events->StartDate)); ?> <?php echo (Yii::$app->language == 'sw') ? $other_events->EventTitleSw : $other_events->EventTitleEn; ?></a>
                             <hr>
                             <?php
                         }

@@ -150,7 +150,7 @@ $session = Yii::$app->session;
                     <li>
                         <a href="<?php echo Url::to(['/leadership/index']) ?>">
                             <i class="fa fa-bar-chart"></i> 
-                            <span>Leadership & Management</span>
+                            <span>UDSM Leadership/Management</span>
                         </a>
                     </li>
                     <li>

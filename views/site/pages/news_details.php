@@ -31,25 +31,31 @@ if (isset($news) && $news) {
                             <div id="owl-demo" class="owl-carousel custom-styles" data-items="1" data-singleitem="true" data-pagination="false" data-navigation="true">
                                 <div class="item">
                                     <a href="#">
-                                        <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' .$news->Photo ?>" alt="" />
+                                        <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo ?>" alt="" />
                                     </a>
                                 </div>
-<!--                                <div class="item">
-                                    <a href="#">
-                                        <img src="img/img2.png" alt="" />
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="img/img3.jpg" alt="" />
-                                    </a>
-                                </div>-->
                             </div>
                         </div>
                     <?php } ?>
 
                     <div class="news-content">
+                        <span class="time">
+                            <i class="fa fa-calendar"></i> <?php echo Date('D, d.M.Y ', strtotime($news->DatePosted)); ?></span>
+                        <span class="time">
+                            <i class="fa fa-clock-o"></i> <?php echo Date('H.i', strtotime($news->DatePosted)); ?>
+                        </span>
                         <p><?php echo (Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn; ?></p>	
+                        <p>
+                            <?php if ($news->Attachment): ?>
+                                <span class="time">
+                                    <i class="fa fa-paperclip"></i> 
+                                    <b><?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language]; ?></b>:  
+                                    <a target="_blank" download="" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $news->Attachment) ?>" >
+                                        <?php echo $news->Attachment; ?> 
+                                    </a>
+                                </span>
+                            <?php endif; ?>
+                        </p>
                     </div>
 
                 </div>
@@ -61,7 +67,7 @@ if (isset($news) && $news) {
                     if (isset($latest_news) && $latest_news) {
                         foreach ($latest_news as $latest_news) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($latest_news->LinkUrl) ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_news->TitleSw : $latest_news->TitleEn; ?></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($latest_news->LinkUrl) ?>"> <?php echo Date('d, M Y > ', strtotime($latest_news->DatePosted)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_news->TitleSw : $latest_news->TitleEn; ?></a>
                             <hr>
                             <?php
                         }

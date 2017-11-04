@@ -34,15 +34,15 @@ $this->params['breadcrumbs'][] = 'Details';
         'attributes' => [
             'TitleEn',
             'TitleSw',
-            'DetailsEn',
-            'DetailsSw',
+            'DetailsEn:html',
+            'DetailsSw:html',
             'LinkToPage',
             array(
                 'attribute' => 'Image',
                 'attribute' => 'Image/Photo Preview:',
                 'value' => function($model) {
 
-                    return '<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . Yii::$app->params[($model->UnitID) ? 'file_upload_units_site' : 'file_upload_main_site'] . '/' . $model->Image . '">';
+                    return '<img style="width:100px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . Yii::$app->params[($model->UnitID) ? 'file_upload_units_site' : 'file_upload_main_site'] . '/' . $model->Image . '">';
                 },
                 'format' => 'html'
             ),

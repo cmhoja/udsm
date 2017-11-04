@@ -36,6 +36,17 @@ if (isset($events) && $events) {
 
                     <div class="news-content">
                         <p><?php echo (Yii::$app->language == 'sw') ? $events->DescriptionSw : $events->DescriptionEn; ?></p>                              
+                        <p>
+                            <?php if ($events->Attachment): ?>
+                                <span class="time">
+                                    <i class="fa fa-paperclip"></i> 
+                                    <b><?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language]; ?></b>:  
+                                    <a target="_blank" download="" href="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $events->Attachment) ?>" >
+                                        <?php echo $events->Attachment; ?> 
+                                    </a>
+                                </span>
+                            <?php endif; ?>
+                        </p>
                     </div>
 
                 </div>
@@ -47,7 +58,7 @@ if (isset($events) && $events) {
                     if (isset($latest_events) && $latest_events) {
                         foreach ($latest_events as $latest_events) {
                             ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($latest_events->EventUrl); ?>"> <?php echo (Yii::$app->language == 'sw') ? $latest_events->EventTitleSw : $latest_events->EventTitleEn; ?></a>
+                    <a href="<?php echo app\components\Utilities::generateUrl($latest_events->EventUrl); ?>"> <?php echo Date('d, M Y > ', strtotime($latest_events->StartDate)); ?> <?php echo (Yii::$app->language == 'sw') ? $latest_events->EventTitleSw : $latest_events->EventTitleEn; ?></a>
                             <hr>
                             <?php
                         }
