@@ -23,7 +23,7 @@
                                 ];
 
                                 var jssor_1_options = {
-                                    $AutoPlay: false,
+                                    $AutoPlay: true,
                                     $Idle: 2000,
                                     $CaptionSliderOptions: {
                                         $Class: $JssorCaptionSlideo$,
