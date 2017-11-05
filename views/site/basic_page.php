@@ -1,6 +1,5 @@
 <?php
-$page_content = $page_content;
-//$content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
+//$page_content = $page_content;
 
 if (isset($page_content) && $page_content) {
     $title = (Yii::$app->language == 'sw') ? $page_content->PageTitleSw : $page_content->PageTitleEn;
@@ -28,23 +27,82 @@ if (isset($page_content) && $page_content) {
         <div class="container">
 
             <div class="row">
-                <div class="pull-right col-sm-12 col-md-9">
-                    <h4><?php echo $title; ?></h4>
-                    <p><?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn; ?></p>
-                    <?php if ($page_content->Photo) { ?>
-                        <img src = "<?php $page_content->Photo ?>">
+                <div class="pull-right col-md-12 col-md-9">
+                    <div class="col-sm-12">
+                        <h4><?php echo $title; ?></h4>
+                        <p><?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn; ?></p>
+                        <?php if ($page_content->Photo) { ?>
+                            <img src = "<?php $page_content->Photo ?>">
 
-                    <?php } ?>
-                    <?php if ($page_content->EmbededVideo) { ?>
-                        <div class="videoWrapper">
-                            <?php echo $page_content->EmbededVideo; ?>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                        <?php if ($page_content->EmbededVideo) { ?>
+                            <div class="videoWrapper">
+                                <?php echo $page_content->EmbededVideo; ?>
+                            </div>
+                        <?php } ?>
+                    </div>
 
+                    <!--PAGE OTHER REGIONS-->
+                    <!--CUSTOM_PAGE_CONTENT_TOP COLUMN1_3-->
+                    <?php
+                    if (isset($page_content_top_column1_blocks) OR isset($page_content_top_column2_blocks)OR isset($page_content_top_column3_blocks)) {
+                        $params = [
+                            'page_content_top_column1_blocks' => $page_content_top_column1_blocks,
+                            'page_content_top_column2_blocks' => $page_content_top_column2_blocks,
+                            'page_content_top_column3_blocks' => $page_content_top_column3_blocks
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_top_column13', $params);
+                    }
+                    ?>
 
+                    <!--CUSTOM_PAGE_CONTENT_TOP_LEFT_RIGHT--> 
+                    <?php
+                    if (isset($page_content_top_left_blocks) OR isset($page_content_top_right_blocks)) {
+                        $params = [
+                            'page_content_top_left_blocks' => $page_content_top_left_blocks,
+                            'page_content_top_right_blocks' => $page_content_top_right_blocks,
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_top_left_right', $params);
+                    }
+                    ?>
+
+                    <!--CUSTOM_PAGE_CONTENT_MIDDLE-->
+                    <?php
+                    if (isset($page_content_middle_blocks)) {
+                        $params = [
+                            'page_content_middle_blocks' => $page_content_middle_blocks,
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_middle', $params);
+                    }
+                    ?>
+
+                    <!--CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1_3-->
+                    <?php
+                    if (isset($page_content_bottom_column1_blocks) OR isset($page_content_bottom_column2_blocks)OR isset($page_content_bottom_column3_blocks)) {
+                        $params = [
+                            'page_content_bottom_column1_blocks' => $page_content_bottom_column1_blocks,
+                            'page_content_bottom_column2_blocks' => $page_content_bottom_column2_blocks,
+                            'page_content_bottom_column3_blocks' => $page_content_bottom_column3_blocks
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_bottom_column13', $params);
+                    }
+                    ?>
+
+                    <!--CUSTOM_PAGE_CONTENT_BOTTOM_LEFT_RIGT-->
+                    <?php
+                    if (isset($page_content_bottom_right_blocks) OR isset($page_content_bottom_left_blocks)) {
+                        $params = [
+                            'page_content_bottom_left_blocks' => $page_content_bottom_left_blocks,
+                            'page_content_bottom_right_blocks' => $page_content_bottom_right_blocks,
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_bottom_left_right', $params);
+                    }
+                    ?>
                 </div>
 
+                <!--PAGE SIDE COLUMN FOR SIDE MENU AND SIDE BLOCK-->
                 <div id="sidebar" class="sidebar col-sm-12 col-md-3">
+                    <!--SIDE MENU-->
                     <div class="widget">
                         <div class="widget-title">
                             <h3 class="title"> <?php echo Yii::$app->params['static_items']['other_pages'][Yii::$app->language]; ?></h3>
@@ -63,6 +121,50 @@ if (isset($page_content) && $page_content) {
                             </div>
                         </div>
                         <!-- page-list -->
+                    </div>
+
+                    <!--SIDE BLOCK-->
+                    <div class="widget">
+                        <?php
+                        //SHOWING ANY OTHER BLOCK ALLOCATED HERE
+                        if (isset($side_menus_blocks) && $side_menus_blocks) {
+                            foreach ($side_menus_blocks as $custom_block) {
+                                ?>
+                                <div class="text-left">
+                                    <!-- Title -->
+                                    <div class="section-title text-left">
+                                        <!-- Heading -->
+                                        <h2 class="title">
+                                            <?php if (isset($custom_block->BlockIconCSSClass) && $custom_block->BlockIconCSSClass): ?>
+                                                <i class="fa fa-graduation-cap"></i>
+                                            <?php endif; ?>
+                                            <?php echo (Yii::$app->language == 'sw') ? $custom_block->BlockTitleSw : $custom_block->BlockTitleEn; ?>
+                                        </h2>
+
+                                    </div>
+                                    <?php if (isset($custom_block->BlockIconPicture) && $custom_block->BlockIconPicture): ?>
+                                        <div style="padding: 2%;width: 95%">
+                                            <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block->BlockIconPicture; ?>">
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!$custom_block->BlockIconPicture && $custom_block->BlockIconVideo): ?>
+                                        <div style="padding: 1%">
+                                            <?php echo $custom_block->BlockIconVideo; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <p class="text-justify">
+                                        <?php
+                                        echo substr((Yii::$app->language == 'sw') ? $custom_block->BlockDetailsSw : $custom_block->BlockDetailsEn, 0, 250);
+                                        ?>
+                                    </p>
+
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

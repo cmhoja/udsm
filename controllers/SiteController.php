@@ -123,23 +123,34 @@ class SiteController extends Controller {
             $url = html_entity_decode(htmlspecialchars(\app\components\Utilities::getPageUrl()));
 //        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
             $page_content = \app\components\Utilities::getPageContentByUrl($url);
+            $content = array('page_content' => $page_content);
             if ($page_content) {
-                $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
-                $custom_page_block_regions = SiteRegions::getCustomPageTemplateRegions();
-                if ($custom_page_block_regions) {
-                    foreach ($custom_page_block_regions as $RegionID => $RegionName) {
-                        $CustomBlock = CustomBlocks::getActiveBlocksByRegionId($RegionID, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url);
-                        if ($CustomBlock) {
-                            $custom_blocks[$RegionId] = $CustomBlock;
-                        }
-                    }
-                }
+                //side menu area
+                $content['side_menus_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
+                /////////////
+                //getting data for the page top column 1,2 & 3
+                $content['page_content_top_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN1, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                $content['page_content_top_column2_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN2, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                $content['page_content_top_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN3, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                ////getting content for the content top left/right area
+                $content['page_content_top_left_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                $content['page_content_top_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                //contents for bottom middle area of the page
+                $content['page_content_middle_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                ////getting content for the content bottom area
+                $content['page_content_bottom_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                $content['page_content_bottom_column2_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                $content['page_content_bottom_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                ////getting content for the content bottom left/right area
+                $content['page_content_bottom_left_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                $content['page_content_bottom_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_RIGHT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+                /////////
             }
-            $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
+            //$content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
             return $this->render('//site/basic_page', $content);
         }
     }
-
     /**
      * Displays contact page.
      *
@@ -166,19 +177,31 @@ class SiteController extends Controller {
         $url = html_entity_decode(htmlspecialchars(\app\components\Utilities::getPageUrl()));
 //        $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
         $page_content = \app\components\Utilities::getPageContentByUrl($url);
+        $content = array('page_content' => $page_content);
         if ($page_content) {
-            $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
-            $custom_page_block_regions = SiteRegions::getCustomPageTemplateRegions();
-            if ($custom_page_block_regions) {
-                foreach ($custom_page_block_regions as $RegionID => $RegionName) {
-                    $CustomBlock = CustomBlocks::getActiveBlocksByRegionId($RegionID, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url);
-                    if ($CustomBlock) {
-                        $custom_blocks[$RegionId] = $CustomBlock;
-                    }
-                }
-            }
+            //side menu area
+            $content['side_menus_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $page_content->UnitID, $url);
+            /////////////
+            //getting data for the page top column 1,2 & 3
+            $content['page_content_top_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN1, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            $content['page_content_top_column2_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN2, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            $content['page_content_top_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_COLUMN3, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            ////getting content for the content top left/right area
+            $content['page_content_top_left_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            $content['page_content_top_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            //contents for bottom middle area of the page
+            $content['page_content_middle_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            ////getting content for the content bottom area
+            $content['page_content_bottom_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            $content['page_content_bottom_column2_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            $content['page_content_bottom_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            ////getting content for the content bottom left/right area
+            $content['page_content_bottom_left_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            $content['page_content_bottom_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_RIGHT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $page_content->UnitID);
+            /////////
         }
-        $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
+
         return $this->render('//site/basic_page', $content);
     }
 

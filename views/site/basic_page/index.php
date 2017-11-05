@@ -4,64 +4,78 @@
         <?php if (isset($page_content) && $page_content): ?>
             <h3><?php echo (Yii::$app->language == 'sw') ? $page_content->PageTitleSw : $page_content->PageTitleEn; ?></h3>
             <div class="row">
-                <div class="pull-left col-sm-12 col-md-9">
-                    <?php if (isset($page_content->Photo)):
-                        ?>
-                        <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $page_content->Photo; ?>">
-                    <?php endif; ?>
-                    <p style="text-align: justify">
-                        <?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn ?>
-                    </p>
-                </div>
-                <!--CUSTOM_PAGE_CONTENT_TOP COLUMN1_3-->
-                <div class="pull-left col-sm-12 col-md-9" style="border:1px solid red;">
+                <div class="pull-left  col-md-9 col-md-12 course-finder">
+                    <div class=" col-sm-12">
+                        <?php if (isset($page_content->Photo)):
+                            ?>
+                            <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $page_content->Photo; ?>">
+                        <?php endif; ?>
+                        <p style="text-align: justify">
+                            <?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn ?>
+                        </p>
+                    </div>
+                    <!--CUSTOM_PAGE_CONTENT_TOP COLUMN1_3-->
                     <?php
-                    var_dump($page_content_top_column1_blocks);
-                    var_dump($page_content_top_column2_blocks);
-                    var_dump($page_content_top_column3_blocks);
-                    ?>
-                </div>
-
-                <!--CUSTOM_PAGE_CONTENT_TOP_LEFT_RIGHT--> 
-                <div class="pull-left col-sm-12 col-md-9" style="border:1px solid red;">
-                    <?php
-                    var_dump($page_content_top_left_blocks);
-                    var_dump($page_content_top_right_blocks);
-                    ?>
-                </div>
-
-                <!--CUSTOM_PAGE_CONTENT_MIDDLE-->
-                <div class="pull-left col-sm-12 col-md-9" style="border:1px solid red;">
-                    <?php
-                    var_dump($page_content_middle_blocks);
-                    ?>
-                </div>
-
-                <!--CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1_3-->
-                <div class="pull-left col-sm-12 col-md-9" style="border:1px solid red;">
-                    <?php
-                    var_dump($page_content_bottom_column1_blocks);
-                    var_dump($page_content_bottom_column2_blocks);
-                    var_dump($page_content_bottom_column3_blocks);
-                    ?>
-                </div>
-                <!--CUSTOM_PAGE_CONTENT_BOTTOM_LEFT_RIGT-->
-                <div class="pull-left col-sm-12 col-md-9" style="border:1px solid red;">
-                    <?php
-                    var_dump($page_content_bottom_left_blocks);
-                    var_dump($page_content_bottom_right_blocks);
+                    if (isset($page_content_top_column1_blocks) OR isset($page_content_top_column2_blocks)OR isset($page_content_top_column3_blocks)) {
+                        $params = [
+                            'page_content_top_column1_blocks' => $page_content_top_column1_blocks,
+                            'page_content_top_column2_blocks' => $page_content_top_column2_blocks,
+                            'page_content_top_column3_blocks' => $page_content_top_column3_blocks
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_top_column13', $params);
+                    }
                     ?>
 
+                    <!--CUSTOM_PAGE_CONTENT_TOP_LEFT_RIGHT--> 
+                    <?php
+                    if (isset($page_content_top_left_blocks) OR isset($page_content_top_right_blocks)) {
+                        $params = [
+                            'page_content_top_left_blocks' => $page_content_top_left_blocks,
+                            'page_content_top_right_blocks' => $page_content_top_right_blocks,
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_top_left_right', $params);
+                    }
+                    ?>
+
+                    <!--CUSTOM_PAGE_CONTENT_MIDDLE-->
+                    <?php
+                    if (isset($page_content_middle_blocks)) {
+                        $params = [
+                            'page_content_middle_blocks' => $page_content_middle_blocks,
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_middle', $params);
+                    }
+                    ?>
+
+                    <!--CUSTOM_PAGE_CONTENT_BOTTOM_COLUMN1_3-->
+                    <?php
+                    if (isset($page_content_bottom_column1_blocks) OR isset($page_content_bottom_column2_blocks)OR isset($page_content_bottom_column3_blocks)) {
+                        $params = [
+                            'page_content_bottom_column1_blocks' => $page_content_bottom_column1_blocks,
+                            'page_content_bottom_column2_blocks' => $page_content_bottom_column2_blocks,
+                            'page_content_bottom_column3_blocks' => $page_content_bottom_column3_blocks
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_bottom_column13', $params);
+                    }
+                    ?>
+
+                    <!--CUSTOM_PAGE_CONTENT_BOTTOM_LEFT_RIGT-->
+                    <?php
+                    if (isset($page_content_bottom_right_blocks) OR isset($page_content_bottom_left_blocks)) {
+                        $params = [
+                            'page_content_bottom_left_blocks' => $page_content_bottom_left_blocks,
+                            'page_content_bottom_right_blocks' => $page_content_bottom_right_blocks,
+                        ];
+                        echo $this->render('//site/basic_page/basic_page_content_bottom_left_right', $params);
+                    }
+                    ?>
                 </div>
-
-
-
 
                 <!--SIDE MENU AREA-->
                 <!--<div id="sidebar" class="sidebar col-sm-12 col-md-3">  OLD-->
-                <div class="col-md-3 col-md-12 course-finder" style="border:1px solid red;">
+                <div class="col-md-3 col-md-12 course-finder">
                     <?php
-                    //SOHWING ANY OTHER BLOCK ALLOCATED HERE
+                    //SHOWING ANY OTHER BLOCK ALLOCATED HERE
                     if (isset($side_menus_blocks) && $side_menus_blocks) {
                         foreach ($side_menus_blocks as $custom_block) {
                             ?>
@@ -118,7 +132,6 @@
                                     </li>
                                     <?php
                                 }
-//                                   
                                 ?>
                             </div>
                             <?php
