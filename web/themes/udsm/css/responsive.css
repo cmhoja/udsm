@@ -622,6 +622,11 @@
 		position: relative !important;
 		width: 100% !important;
 	}
+	.sticky-wrapper.is-sticky #sticker,
+	.sticky-wrapper{
+	
+	margin-bottom: 0px !important;
+}
 }
 
 /******************************************************************************
