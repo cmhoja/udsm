@@ -95,7 +95,7 @@ a.desc:after {
     max-width: 80%;
     float: left;
     position: relative;
-    border:1px solid #367fa9;
+    /*border:1px solid #367fa9;*/
     margin-bottom: 1%;
     clear: both;
 
