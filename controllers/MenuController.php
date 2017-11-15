@@ -189,33 +189,25 @@ class MenuController extends Controller {
                     if ($model->UnitID) {
                         $unit_data = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
                         if (isset($unit_data['type'])) {
-                            $college_abbreviation .= $unit_data['type'];
+                            $college_abbreviation .= trim($unit_data['type']);
                         }
                         if (isset($unit_data['abv'])) {
-                            $college_abbreviation .= '/' . $unit_data['abv'];
+                            $college_abbreviation .= trim('/' . $unit_data['abv']);
                         }
                     }
                     if ($menu_item_model->LinkUrl == '#' OR $menu_item_model->LinkUrl == '/#' OR $menu_item_model->LinkUrl == '/' OR empty($menu_item_model->LinkUrl) OR is_null($menu_item_model->LinkUrl)) {
                         $menu_item_model->LinkUrl = trim($college_abbreviation . '/#');
                         if ($menu_item_model->ParentItemID) {
-                           // $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
+                            // $parentUrl = \app\models\MenuItem::getParentUrlbyId($menu_item_model->ParentItemID);
                             $parentUrl = \app\models\MenuItem::getItemDetailsById($menu_item_model->ParentItemID);
                             if ($parentUrl) {
                                 $menu_item_model->LinkUrl = $parentUrl->LinkUrl . '/#';
-                               
+
                                 if ($parentUrl->LinkUrl == '#' OR $parentUrl->LinkUrl == '/' OR $parentUrl->LinkUrl == '/#') {
                                     $menu_item_model->LinkUrl = $parentUrl->LinkUrl;
                                 }
-                                if ($parentUrl->UrlType == \app\models\MenuItem::URL_TYPE_EXTERNAL) {
-                                    $menu_item_model->LinkUrl = trim($college_abbreviation . '/#');
-                                }
+                              
                             }
-                        }
-                    } else {
-                        if (strpos($college_abbreviation, $college_abbreviation, 0)) {
-                            $menu_item_model->LinkUrl = $menu_item_model->LinkUrl;
-                        } else {
-                            $menu_item_model->LinkUrl = $college_abbreviation . '/' . $menu_item_model->LinkUrl;
                         }
                     }
                     break;
@@ -273,11 +265,17 @@ class MenuController extends Controller {
                                 }
                             }
                         } else {
-                            if (strpos($college_abbreviation, $menu_item_model->LinkUrl, 0)) {
-                                $menu_item_model->LinkUrl = $menu_item_model->LinkUrl;
-                            } else {
-                                $menu_item_model->LinkUrl = $college_abbreviation . '/' . $menu_item_model->LinkUrl;
+                            if ($old_url != $menu_item_model->LinkUrl) {
+                                $menu_item_model->LinkUrl = trim($menu_item_model->LinkUrl);
                             }
+//                            echo $menu_item_model->LinkUrl;
+//                            exit;
+                            /*
+                              if (strpos($college_abbreviation, $menu_item_model->LinkUrl, 0)) {
+                              $menu_item_model->LinkUrl = $menu_item_model->LinkUrl;
+                              } else {
+                              $menu_item_model->LinkUrl = $college_abbreviation . '/' . $menu_item_model->LinkUrl;
+                              } */
                         }
                         break;
                 }

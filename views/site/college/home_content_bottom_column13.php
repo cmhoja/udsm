@@ -4,7 +4,7 @@
             <!--CONTENT BOTTOM COLUMN 1-->
 
             <div class="col-md-4">
-                 <!--MENU ITEMS-->
+                <!--MENU ITEMS-->
                 <?php
                 if (isset($home_content_bottom_column1_menus) && $home_content_bottom_column1_menus) {
                     foreach ($home_content_bottom_column1_menus as $key => $menu_group) {
@@ -24,10 +24,10 @@
                                 foreach ($menu_group['MenuItems'] as $menus) {
                                     ?>
                                     <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
-                                        <?php
-                                    }
+                                    <?php
                                 }
-                                ?>
+                            }
+                            ?>
                         </div>
                         <?php
                     }
@@ -41,7 +41,9 @@
                             <?php
                             if ($content_column1->BlockIconPicture) {
                                 ?> 
-                                <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>" ><img src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/bottom.jpg"></a>
+                                <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>" >
+                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $content_column1->BlockIconPicture; ?>">
+                                </a>
                                 <?php
                             }
                             ?>
@@ -66,7 +68,10 @@
                             <?php
                             if ($content_column2->BlockIconPicture) {
                                 ?> 
-                                <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>" ><img src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/bottom.jpg"></a>
+                                <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>" >
+                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $content_column2->BlockIconPicture; ?>">
+
+                                </a>
                                 <?php
                             }
                             ?>
@@ -78,7 +83,7 @@
                     }
                 }
                 ?>
-                 <!--MENU ITEMS-->
+                <!--MENU ITEMS-->
                 <?php
                 if (isset($home_content_bottom_column2_menus) && $home_content_bottom_column2_menus) {
                     foreach ($home_content_bottom_column2_menus as $key => $menu_group) {
@@ -98,10 +103,10 @@
                                 foreach ($menu_group['MenuItems'] as $menus) {
                                     ?>
                                     <li><i class="fa-info-circle"></i> <a  href="<?php echo app\components\Utilities::generateUrl($menus->LinkUrl); ?>"><?php echo (Yii::$app->language == 'sw') ? $menus->ItemNameSw : $menus->ItemNameEn; ?></a></li>
-                                        <?php
-                                    }
+                                    <?php
                                 }
-                                ?>
+                            }
+                            ?>
                         </div>
                         <?php
                     }
@@ -121,7 +126,9 @@
                             <?php
                             if ($content_column3->BlockIconPicture) {
                                 ?> 
-                                <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>" ><img src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/bottom.jpg"></a>
+                                <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>" >
+                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $content_column1->BlockIconPicture; ?>">
+                                </a>
                                 <?php
                             }
                             ?>
@@ -133,7 +140,7 @@
                     }
                 }
                 ?>
-                 <!--MENU ITEMS-->
+                <!--MENU ITEMS-->
                 <?php
                 if (isset($home_content_bottom_column3_menus) && $home_content_bottom_column3_menus) {
                     foreach ($home_content_bottom_column3_menus as $key => $menu_group) {

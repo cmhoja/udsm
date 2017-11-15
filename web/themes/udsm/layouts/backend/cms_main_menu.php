@@ -125,7 +125,7 @@ $session = Yii::$app->session;
                             </li>
                             <?php if ($session->has('USER_TYPE_ADMINISTRATOR') && !$session->has('UNIT_ID') && !$session->has('USER_TYPE_CONTENT_MANAGER')) { ?>
 
-                                <li><a href="<?php echo Url::to(['/academic-administrative-unit/index']) ?>">
+                                <li><a href="<?php echo Url::to(['/vitengo/index']) ?>">
                                         <i class="fa fa-circle-o"></i>Academic/Administrative Units</a>
                                 </li>
                                 <li>

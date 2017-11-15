@@ -182,7 +182,7 @@
                             </div>
                             <?php if (isset($custom_block->BlockIconPicture) && $custom_block->BlockIconPicture): ?>
                                 <div style="padding: 2%;width: 95%">
-                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block->BlockIconPicture; ?>">
+                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $custom_block->BlockIconPicture; ?>">
                                 </div>
                             <?php endif; ?>
 
