@@ -89,8 +89,8 @@ class HabariController extends Controller {
         if ($session['UNIT_ID']) {
             $model->UnitID = $session['UNIT_ID'];
         }
-        $model->TitleEn = strtolower($model->TitleEn);
-        $model->TitleSw = strtolower($model->TitleSw);
+        $model->TitleEn = trim($model->TitleEn);
+        $model->TitleSw = trim($model->TitleSw);
         if ($model->load(Yii::$app->request->post())) {
             $model->Status = News::NEWS_STATUS_SAVED;
             if (Yii::$app->request->post('save') == 'save') {
@@ -191,8 +191,8 @@ class HabariController extends Controller {
         $Attachment = $model->Attachment;
         $Photo = $model->Photo;
         if ($model->load(Yii::$app->request->post())) {
-            $model->TitleEn = strtolower($model->TitleEn);
-            $model->TitleSw = strtolower($model->TitleSw);
+            $model->TitleEn = trim($model->TitleEn);
+            $model->TitleSw = trim($model->TitleSw);
             if ($model->TitleEn) {
                 $seoUrl = trim('/news/' . $model->TitleEn);
                 if ($model->UnitID) {

@@ -85,7 +85,7 @@
                                     <!-- Heading -->
                                     <h2 class="title">
                                         <?php if (isset($custom_block->BlockIconCSSClass) && $custom_block->BlockIconCSSClass): ?>
-                                            <i class="fa fa-graduation-cap"></i>
+                                            <i class="fa <?php echo $custom_block->BlockIconCSSClass; ?>"></i>
                                         <?php endif; ?>
                                         <?php echo (Yii::$app->language == 'sw') ? $custom_block->BlockTitleSw : $custom_block->BlockTitleEn; ?>
                                     </h2>
@@ -93,7 +93,7 @@
                                 </div>
                                 <?php if (isset($custom_block->BlockIconPicture) && $custom_block->BlockIconPicture): ?>
                                     <div style="padding: 2%;width: 95%">
-                                        <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block->BlockIconPicture; ?>">
+                                        <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $custom_block->BlockIconPicture; ?>">
                                     </div>
                                 <?php endif; ?>
 
@@ -107,6 +107,9 @@
                                     <?php
                                     echo substr((Yii::$app->language == 'sw') ? $custom_block->BlockDetailsSw : $custom_block->BlockDetailsEn, 0, 250);
                                     ?>
+                                    <?php if ($custom_block->LinkToPage): ?>
+                                        <a href="<?php echo app\components\Utilities::generateUrl($custom_block->LinkToPage) ?>" class="btn-box"><?php echo Yii::$app->params['static_items']['read'][Yii::$app->language]; ?></a>
+                                    <?php endif; ?>
                                 </p>
 
                             </div>

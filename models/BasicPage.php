@@ -42,8 +42,7 @@ class BasicPage extends \yii\db\ActiveRecord {
             [['DateCreated', 'SectionLink'], 'safe'],
             [['Status', 'UnitID'], 'integer'],
             [['PageSeoUrl'], 'string', 'min' => 2],
-            [['PageTitleEn', 'PageTitleSw', 'Attachment'], 'string', 'max' => 200],
-            [['EmbededVideo', 'PageSeoUrl'], 'string', 'max' => 255],
+            [['PageTitleEn', 'PageTitleSw', 'Attachment', 'EmbededVideo', 'PageSeoUrl'], 'string', 'max' => 255],
             [['PageSeoUrl'], 'unique'],
         ];
     }
@@ -85,10 +84,13 @@ class BasicPage extends \yii\db\ActiveRecord {
     }
 
     static function getActivePageDetailsByUrl($url, $UnitID = NULL) {
-
+        $condition = ['PageSeoUrl' => $url, 'Status' => self::STATUS_PUBLISHED];
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        }
         return self::find()
                         ->select('PageId,PageTitleEn,PageTitleSw,DescriptionEn,DescriptionSw,Attachment,EmbededVideo,PageSeoUrl,')
-                        ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
+                        ->where($condition)
                         ->one();
     }
 
@@ -100,9 +102,12 @@ class BasicPage extends \yii\db\ActiveRecord {
     }
 
     static function getActivePageAllDetailsByUrl($url, $UnitID = NULL) {
-
+        $condition = ['PageSeoUrl' => $url, 'Status' => self::STATUS_PUBLISHED];
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        }
         return self::find()
-                        ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
+                        ->where($condition)
                         ->one();
     }
 

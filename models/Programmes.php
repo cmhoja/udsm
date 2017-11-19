@@ -51,7 +51,6 @@ class Programmes extends \yii\db\ActiveRecord {
             [['UnitID'], 'integer'],
             [['ProgrammeNameEn', 'ProgrammeNameSw', 'ProgrammeUrl'], 'string', 'max' => 100],
             [['Duration'], 'string', 'max' => 45],
-            [['ProgrammeType'], 'string', 'max' => 50],
             [['ProgrammeNameEn'], 'unique'],
             [['ProgrameName', 'PTYpe', 'FieldStudy'], 'safe'],
             [['ProgrammeUrl'], 'unique'],

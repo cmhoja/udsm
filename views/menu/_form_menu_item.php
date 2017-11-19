@@ -42,13 +42,13 @@ use app\models\AcademicAdministrativeUnit;
             'UrlType' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
                 'items' => app\models\MenuItem::getTargetUrlTypes(),
-                'options' => ['prompt' => '-- Please Choose Parent --'],
+                'options' => ['prompt' => '-- select --'],
                 'columnOptions' => ['width' => '185px', 'height' => '10px']
             ],
             'ParentItemID' => [
                 'type' => Form::INPUT_DROPDOWN_LIST,
-                'items' => ArrayHelper::map(app\models\MenuItem::find()->where(['MenuID' => $item_model->MenuID])->all(), 'Id', 'ItemNameEn'),
-                'options' => ['prompt' => '-- Please Choose Parent --'],
+                'items' => ArrayHelper::map(app\models\MenuItem::find()->where(['MenuID' => $item_model->MenuID])->orderBy('ParentItemID ASC')->all(), 'Id', 'ItemNameEn'),
+                'options' => ['prompt' => '-- select--'],
                 'columnOptions' => ['width' => '185px', 'height' => '10px']
             ],
             'ListOrder' => [

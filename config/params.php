@@ -15,7 +15,7 @@ return [
     ],
     'adminEmail' => 'admin@example.com',
     'file_upload_main_site' => '/upload/main_site',
-    'file_upload_units_site' => '/upload/units_site',
+    'file_upload_units_site' => '/upload/main_site',
     // 'language' => 'en',
     'supportedLanguages' => ['en' => 'English', 'sw' => 'Swahili'], //['en_US', 'ru_RU'],
     'static_items' => $lang_constants,

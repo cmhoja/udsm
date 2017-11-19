@@ -113,7 +113,7 @@ class BasicPageController extends Controller {
             } else if ($model->UnitID) {
                 $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
                 if ($unit_code['abv'] && $unit_code['type']) {
-                    $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                    $unit_code = trim('/' . $unit_code['type'] . '/' . $unit_code['abv'] . '/');
                     $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 }
             } else {
@@ -153,39 +153,43 @@ class BasicPageController extends Controller {
             //setting section Url
             $unit_code = $parent_url = NULL;
             //checking ig using code exists
-            if (trim($old_url) != trim($model->PageSeoUrl)) {
+
+            if ($model->SectionLink) {
+                $ID = $model->SectionLink;
+                $model->SectionLink = \app\models\MenuItem::getLinkUrlByItemId($ID);
                 if ($model->SectionLink) {
-                    $ID = $model->SectionLink;
-                    $model->SectionLink = \app\models\MenuItem::getLinkUrlByItemId($ID);
-                    if ($model->SectionLink) {
-                        $model->SectionLink = trim($model->SectionLink . '/');
-                        $model->SectionLink = trim($model->SectionLink);
-                        $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
+                    $model->SectionLink = trim($model->SectionLink . '/');
+                    $model->SectionLink = trim($model->SectionLink);
+                    $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
+                } else {
+                    if ($model->UnitID) {
+                        $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                        if ($unit_code['abv'] && $unit_code['type']) {
+                            $unit_code = trim('/' . $unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                            $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
+                        }
                     } else {
-                        if ($model->UnitID) {
-                            $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
-                            if ($unit_code['abv'] && $unit_code['type']) {
-                                $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
-                                $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
-                            }
-                        } else {
-                            if ($model->PageTitleEn) {
-                                $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
-                            }
+                        if ($model->PageTitleEn) {
+                            $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                         }
                     }
-                } else if ($model->UnitID) {
-                    $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
-                    if ($unit_code['abv'] && $unit_code['type']) {
-                        $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
-                        $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
-                    }
-                } else {
-                    if ($model->PageTitleEn) {
-                        $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
-                    }
+                }
+            } else if ($model->UnitID) {
+                $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
+                if ($unit_code['abv'] && $unit_code['type']) {
+                    $unit_code = trim('/' . $unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                    $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
+                }
+            } else {
+                if ($model->PageTitleEn) {
+                    $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 }
             }
+
+//            if (trim($old_url) != trim($model->PageSeoUrl)) {
+//                echo $old_url . '=' . $model->PageSeoUrl;
+//                exit;
+//            }
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = BasicPage::STATUS_SAVED;
             } elseif (Yii::$app->request->post('publish') == 'publish') {

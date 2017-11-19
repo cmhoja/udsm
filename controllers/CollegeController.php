@@ -205,6 +205,7 @@ class CollegeController extends Controller {
                         }
                     } else {
                         ///LOADING THE CUSTOM PAGE HERE
+                         
                         $content['page_content'] = \app\components\Utilities::getPageContentByUrl($url);
                         if ($content['page_content']) {
                             //side menu area
@@ -245,7 +246,8 @@ class CollegeController extends Controller {
 //getting user current langauage;
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
-
+       
+        
         $url_sections = explode('/', $url);
         if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'college' OR $url_sections[1] == 'colleges' )) {
             ///getting pgae details
