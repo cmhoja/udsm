@@ -13,6 +13,16 @@
                         <p style="text-align: justify">
                             <?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn ?>
                         </p>
+                        <?php
+                        if ($page_content->Attachment):
+                            ?> 
+                            <div class="news-content">
+                                <?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language] . ': '; ?>
+                                <a target="_blank" download href= "<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Attachment); ?>">  <?php echo Yii::$app->params['static_items']['download'][Yii::$app->language]; ?></a>
+                            </div>
+                            <?php
+                        endif;
+                        ?>
                     </div>
                     <!--CUSTOM_PAGE_CONTENT_TOP COLUMN1_3-->
                     <?php

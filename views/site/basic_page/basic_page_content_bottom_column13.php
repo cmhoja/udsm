@@ -42,6 +42,11 @@
                         <?php
                     }
                     ?>
+                    <?php if (!$content_column1->BlockIconPicture && $content_column1->BlockIconVideo): ?>
+                        <div style="padding: 1%;">
+                            <?php echo $content_column1->BlockIconVideo; ?>
+                        </div>
+                    <?php endif; ?>
                     <h5>
                         <?php if (isset($content_column1->BlockIconCSSClass) && $content_column1->BlockIconCSSClass): ?>
                             <i class="fa <?php echo $content_column1->BlockIconCSSClass; ?>"></i>
@@ -78,7 +83,11 @@
                         <?php
                     }
                     ?>
-
+                    <?php if (!$content_column2->BlockIconPicture && $content_column2->BlockIconVideo): ?>
+                        <div style="padding: 1%;">
+                            <?php echo $content_column2->BlockIconVideo; ?>
+                        </div>
+                    <?php endif; ?>
                     <p class="text-justify"><?php echo substr((Yii::$app->language == 'sw') ? $content_column2->BlockDetailsSw : $content_column2->BlockDetailsEn, 0, 170); ?></p>
                     <?php if ($content_column2->LinkToPage): ?>
                         <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read'][Yii::$app->language]; ?></a>

@@ -14,8 +14,8 @@ return [
         'domain' => 'udsm.ac.tz' ///domain for the purpose of constructing $username@domain
     ],
     'adminEmail' => 'admin@example.com',
-    'file_upload_main_site' => '/upload/main_site',
-    'file_upload_units_site' => '/upload/main_site',
+    'file_upload_main_site' => '/upload',
+    'file_upload_units_site' => '/upload',
     // 'language' => 'en',
     'supportedLanguages' => ['en' => 'English', 'sw' => 'Swahili'], //['en_US', 'ru_RU'],
     'static_items' => $lang_constants,

@@ -42,12 +42,21 @@
                             if ($content_column1->BlockIconPicture) {
                                 ?> 
                                 <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>" >
-                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $content_column1->BlockIconPicture; ?>">
+                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $content_column1->BlockIconPicture; ?>">
                                 </a>
                                 <?php
                             }
                             ?>
-                            <h5><a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column1->BlockTitleSw : $content_column1->BlockTitleEn; ?></a></h5>
+                            <?php if (!$content_column1->BlockIconPicture && $content_column1->BlockIconVideo): ?>
+                                <div style="padding: 1%;">
+                                    <?php echo $content_column1->BlockIconVideo; ?>
+                                </div>
+                            <?php endif; ?>
+                            <h5>
+                                <?php if (isset($content_column1->BlockIconCSSClass) && $content_column1->BlockIconCSSClass): ?>
+                                    <i class="fa <?php echo $content_column1->BlockIconCSSClass; ?>"></i>
+                                <?php endif; ?>
+                                <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column1->BlockTitleSw : $content_column1->BlockTitleEn; ?></a></h5>
                             <p><?php echo substr((Yii::$app->language == 'sw') ? $content_column1->BlockDetailsSw : $content_column1->BlockDetailsEn, 0, 170); ?></p>
                             <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
                         </div>
@@ -69,13 +78,22 @@
                             if ($content_column2->BlockIconPicture) {
                                 ?> 
                                 <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>" >
-                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $content_column2->BlockIconPicture; ?>">
+                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $content_column2->BlockIconPicture; ?>">
 
                                 </a>
                                 <?php
                             }
                             ?>
-                            <h5><a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column2->BlockTitleSw : $content_column2->BlockTitleEn; ?></a></h5>
+                            <?php if (!$content_column2->BlockIconPicture && $content_column2->BlockIconVideo): ?>
+                                <div style="padding: 1%;">
+                                    <?php echo $content_column2->BlockIconVideo; ?>
+                                </div>
+                            <?php endif; ?>
+                            <h5>
+                                <?php if (isset($content_column2->BlockIconCSSClass) && $content_column2->BlockIconCSSClass): ?>
+                                    <i class="fa <?php echo $content_column2->BlockIconCSSClass; ?>"></i>
+                                <?php endif; ?>
+                                <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column2->BlockTitleSw : $content_column2->BlockTitleEn; ?></a></h5>
                             <p class="text-justify"><?php echo substr((Yii::$app->language == 'sw') ? $content_column2->BlockDetailsSw : $content_column2->BlockDetailsEn, 0, 170); ?></p>
                             <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
                         </div>
@@ -94,7 +112,8 @@
                             ?>
                             <div class="section-title text-left">
                                 <!-- Heading -->
-                                <h2 class="title"><?php echo $menu_group_title; ?></h2>
+                                <h2 class="title">
+                                    <?php echo $menu_group_title; ?></h2>
                             </div>
                         <?php endif; ?>
                         <div class="course-additions">
@@ -127,12 +146,21 @@
                             if ($content_column3->BlockIconPicture) {
                                 ?> 
                                 <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>" >
-                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $content_column1->BlockIconPicture; ?>">
+                                    <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $content_column3->BlockIconPicture; ?>">
                                 </a>
                                 <?php
                             }
                             ?>
-                            <h5><a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column3->BlockTitleSw : $content_column3->BlockTitleEn; ?></a></h5>
+                            <?php if (!$content_column3->BlockIconPicture && $content_column3->BlockIconVideo): ?>
+                                <div style="padding: 1%;">
+                                    <?php echo $content_column3->BlockIconVideo; ?>
+                                </div>
+                            <?php endif; ?>
+                            <h5>
+                                <?php if (isset($content_column3->BlockIconCSSClass) && $content_column3->BlockIconCSSClass): ?>
+                                    <i class="fa <?php echo $content_column3->BlockIconCSSClass; ?>"></i>
+                                <?php endif; ?>
+                                <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column3->BlockTitleSw : $content_column3->BlockTitleEn; ?></a></h5>
                             <p class="text-justify"><?php echo substr((Yii::$app->language == 'sw') ? $content_column3->BlockDetailsSw : $content_column3->BlockDetailsEn, 0, 170); ?></p>
                             <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
                         </div>

@@ -111,7 +111,7 @@ class CollegeController extends Controller {
                     $unit_codes = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($Academic_unit_details->Id);
 
                     if ($unit_codes && isset($unit_codes['abv']) && isset($unit_codes['type']) && ($url == trim('/' . $unit_codes['type'] . '/' . $unit_codes['abv'] . '/') OR $url == trim('/' . $unit_codes['type'] . '/' . $unit_codes['abv']))) {
-                        $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID($Academic_unit_details->Id, 5);
+                        $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID($Academic_unit_details->Id, 10);
                         //$content['home_content_slideshow_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
                         $content['home_content_slideshow_right_menus'] = array();
                         $home_content_slideshow_right_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
