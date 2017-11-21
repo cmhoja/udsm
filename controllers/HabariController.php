@@ -146,7 +146,7 @@ class HabariController extends Controller {
                     if ($model->Photo->saveAs($filePath)) {
                         $model->Photo = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1000, 500, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 500, 500, 95);
                     }
                 }
 
@@ -240,7 +240,7 @@ class HabariController extends Controller {
                     if ($model->Photo->saveAs($filePath)) {
                         $model->Photo = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1000, 500, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 500, 500, 95);
                     }
                 }
 

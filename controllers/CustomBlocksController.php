@@ -103,7 +103,7 @@ class CustomBlocksController extends Controller {
                     if ($model->Upload->saveAs($filePath)) {
                         $model->BlockIconPicture = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 270, 270, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 480, 480, 95);
                     }
                 }
                 if ($model->save(FALSE)) {
@@ -152,7 +152,7 @@ class CustomBlocksController extends Controller {
                     if ($model->Upload->saveAs($filePath)) {
                         $model->BlockIconPicture = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 270, 270, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 480, 480, 95);
                     }
                 }
                 if ($model->save(FALSE)) {
