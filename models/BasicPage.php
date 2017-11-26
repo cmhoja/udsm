@@ -39,11 +39,12 @@ class BasicPage extends \yii\db\ActiveRecord {
         return [
             [['PageTitleEn', 'PageTitleSw', 'DescriptionEn', 'DescriptionSw', 'Status'], 'required'],
             [['DescriptionEn', 'DescriptionSw'], 'string'],
+            [['PageSeoUrl'], 'unique'],
+            [['Attachment'], 'file', 'maxFiles' => 1, 'extensions' => 'docx, doc, pdf,xlsx,xls,odt, jpg,jpeg',],
             [['DateCreated', 'SectionLink'], 'safe'],
             [['Status', 'UnitID'], 'integer'],
             [['PageSeoUrl'], 'string', 'min' => 2],
-            [['PageTitleEn', 'PageTitleSw', 'Attachment', 'EmbededVideo', 'PageSeoUrl'], 'string', 'max' => 255],
-            [['PageSeoUrl'], 'unique'],
+            [['PageTitleEn', 'PageTitleSw', 'EmbededVideo', 'PageSeoUrl'], 'string', 'max' => 255],
         ];
     }
 

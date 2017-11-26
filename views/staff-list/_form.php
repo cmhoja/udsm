@@ -28,7 +28,13 @@ use app\models\AcademicAdministrativeUnit;
                 'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement' => AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
                 'columnOptions' => ['width' => '185px', 'height' => '10px'],
                 'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
-            ], 'FName' => [
+            ],
+            'ListOrder' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'items' => app\components\Utilities::generateNumbers(99), 'options' => ['prompt' => '-- Select --'],
+                'columnOptions' => ['width' => '185px', 'height' => '10px']
+            ],
+            'FName' => [
                 'type' => Form::INPUT_TEXT,
                 'columnOptions' => ['width' => '185px']
             ], 'LName' => [

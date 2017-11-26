@@ -311,9 +311,10 @@ class MenuController extends Controller {
     function actionDeleteItem($id) {
         $model = \app\models\MenuItem::findOne($id);
         $MenuID = $model->MenuID;
-        //if ($model && $model->Status != \app\models\MenuItem::STATUS_ENABLED) {
-        $model->delete();
-        //}
+        //$model->delete();
+        if ($model) {
+           \app\models\MenuItem::findOne($id)->delete();
+        }        
         return $this->redirect(['view', 'id' => $MenuID]);
     }
 

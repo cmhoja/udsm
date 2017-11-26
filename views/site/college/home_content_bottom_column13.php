@@ -56,9 +56,10 @@
                                 <?php if (isset($content_column1->BlockIconCSSClass) && $content_column1->BlockIconCSSClass): ?>
                                     <i class="fa <?php echo $content_column1->BlockIconCSSClass; ?>"></i>
                                 <?php endif; ?>
-                                <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column1->BlockTitleSw : $content_column1->BlockTitleEn; ?></a></h5>
-                            <p><?php echo substr((Yii::$app->language == 'sw') ? $content_column1->BlockDetailsSw : $content_column1->BlockDetailsEn, 0, 170); ?></p>
-                            <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                <p><?php echo substr((Yii::$app->language == 'sw') ? $content_column1->BlockDetailsSw : $content_column1->BlockDetailsEn, 0, 170); ?></p>
+                                <?php if ($content_column1->LinkToPage): ?>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($content_column1->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                <?php endif; ?>
                         </div>
                         <?php
                     }
@@ -93,9 +94,10 @@
                                 <?php if (isset($content_column2->BlockIconCSSClass) && $content_column2->BlockIconCSSClass): ?>
                                     <i class="fa <?php echo $content_column2->BlockIconCSSClass; ?>"></i>
                                 <?php endif; ?>
-                                <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column2->BlockTitleSw : $content_column2->BlockTitleEn; ?></a></h5>
-                            <p class="text-justify"><?php echo substr((Yii::$app->language == 'sw') ? $content_column2->BlockDetailsSw : $content_column2->BlockDetailsEn, 0, 170); ?></p>
-                            <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                <p class="text-justify"><?php echo substr((Yii::$app->language == 'sw') ? $content_column2->BlockDetailsSw : $content_column2->BlockDetailsEn, 0, 170); ?></p>
+                                <?php if ($content_column2->LinkToPage): ?>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($content_column2->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                <?php endif; ?>
                         </div>
                         <?php
                     }
@@ -160,9 +162,10 @@
                                 <?php if (isset($content_column3->BlockIconCSSClass) && $content_column3->BlockIconCSSClass): ?>
                                     <i class="fa <?php echo $content_column3->BlockIconCSSClass; ?>"></i>
                                 <?php endif; ?>
-                                <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>"><?php echo (Yii::$app->language == 'sw') ? $content_column3->BlockTitleSw : $content_column3->BlockTitleEn; ?></a></h5>
-                            <p class="text-justify"><?php echo substr((Yii::$app->language == 'sw') ? $content_column3->BlockDetailsSw : $content_column3->BlockDetailsEn, 0, 170); ?></p>
-                            <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                <p class="text-justify"><?php echo substr((Yii::$app->language == 'sw') ? $content_column3->BlockDetailsSw : $content_column3->BlockDetailsEn, 0, 170); ?></p>
+                                <?php if ($content_column3->LinkToPage): ?>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($content_column3->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                <?php endif; ?>
                         </div>
                         <?php
                     }

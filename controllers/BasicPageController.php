@@ -106,7 +106,7 @@ class BasicPageController extends Controller {
                         }
                     } else {
                         if ($model->PageTitleEn) {
-                            $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
+                            $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                         }
                     }
                 }
@@ -118,7 +118,7 @@ class BasicPageController extends Controller {
                 }
             } else {
                 if ($model->PageTitleEn) {
-                    $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
+                    $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 }
             }
             if (Yii::$app->request->post('save') == 'save') {
@@ -126,8 +126,26 @@ class BasicPageController extends Controller {
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = BasicPage::STATUS_PUBLISHED;
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->PageId]);
+
+
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+            if ($model->validate()) {
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('MAIN_CUSTOM_PAGE' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->PageId]);
+                }
             }
         }
         return $this->render('create', [
@@ -186,17 +204,30 @@ class BasicPageController extends Controller {
                 }
             }
 
-//            if (trim($old_url) != trim($model->PageSeoUrl)) {
-//                echo $old_url . '=' . $model->PageSeoUrl;
-//                exit;
-//            }
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = BasicPage::STATUS_SAVED;
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = BasicPage::STATUS_PUBLISHED;
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->PageId]);
+
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+            if ($model->validate()) {
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('MAIN_CUSTOM_PAGE' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->PageId]);
+                }
             }
         }
         return $this->render('update', [

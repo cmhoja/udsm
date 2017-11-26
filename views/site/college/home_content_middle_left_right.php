@@ -62,8 +62,7 @@
                                 <?php echo $block->BlockIconVideo; ?>
                             </div>
                         <?php endif; ?>
-                        <h5 class=""><a href="<?php echo app\components\Utilities::generateUrl($block->LinkToPage) ?>" class="promotions"><?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn; ?></a></h5>
-                        <p><?php echo substr((Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn, 0, 200); ?></p>
+                        <p><?php echo substr((Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn, 0, 400); ?></p>
                         <?php if ($block->LinkToPage): ?>
                             <a href="<?php echo app\components\Utilities::generateUrl($block->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read'][Yii::$app->language]; ?></a>
                         <?php endif; ?>

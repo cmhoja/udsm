@@ -42,7 +42,13 @@ $this->params['breadcrumbs'][] = 'Page Details';
             'PageTitleSw',
             'DescriptionEn:html',
             'DescriptionSw:html',
-            'Attachment',
+            array(
+                'attribute' => 'Attachment',
+                'value' => function($model) {
+                    return ($model->Attachment) ? '<a target="_blank" href= "' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $model->Attachment) . '">Download here to Preview </a>' : '';
+                },
+                'format' => 'html'
+            ),
             'EmbededVideo',
             'PageSeoUrl:url',
             array(

@@ -205,6 +205,7 @@ class UnitsController extends Controller {
                         }
                     } else {
                         ///LOADING THE CUSTOM PAGE HERE
+                         
                         $content['page_content'] = \app\components\Utilities::getPageContentByUrl($url);
                         if ($content['page_content']) {
                             //side menu area
@@ -245,7 +246,8 @@ class UnitsController extends Controller {
 //getting user current langauage;
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
-
+       
+        
         $url_sections = explode('/', $url);
         if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'unit' OR $url_sections[1] == 'units' )) {
             ///getting pgae details
@@ -276,7 +278,7 @@ class UnitsController extends Controller {
                         $content['page_content_bottom_left_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_LEFT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
                         $content['page_content_bottom_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_BOTTOM_RIGHT, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
                     }
-//                    return $this->render('//site/basic_page/index.php', $content);
+//            return $this->render('//site/basic_page/index.php', $content);
                 } else {
                     $content['no_details'] = 'The requested page or section is not found';
                 }
@@ -284,6 +286,7 @@ class UnitsController extends Controller {
                 $content['no_details'] = 'The requested page or section is not found';
             }
         }
+
         return $this->render('//site/basic_page/index.php', $content);
     }
 

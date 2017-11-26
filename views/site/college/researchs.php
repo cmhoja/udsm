@@ -13,7 +13,7 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
 
                 <div class="col-sm-12 col-md-12" style="margin-top: 1%;margin-bottom: 1%;">
                     <?php
-                    echo $this->render('_form_search_program')
+                    echo $this->render('_form_search_research');
                     ?>
                 </div>
                 <div class="col-sm-12 col-md-12 pad-20">
@@ -26,12 +26,12 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
                             $alphabets = Yii::$app->params['alphabets'];
                             if ($alphabets) {
                                 ?>
-                                <li style="font-size: 1.7em;"><a href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/programmes'); ?>"><?php echo Yii::$app->params['static_items']['all'][Yii::$app->language]; ?></a> >> </li> 
+                                <li style="font-size: 1.7em;"><a href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/researchs'); ?>"><?php echo Yii::$app->params['static_items']['all'][Yii::$app->language]; ?></a> >> </li> 
                                 <?php
                                 foreach ($alphabets as $key => $value) {
                                     ?>
                                     <li>
-                                        <a style="font-size: 0.6em;"href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/programmes/' . html_entity_decode($value)); ?>"><?php echo $value; ?></a>
+                                        <a style="font-size: 0.6em;"href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/researchs/' . html_entity_decode($value)); ?>"><?php echo $value; ?></a>
                                     </li>
                                     <?php
                                 }
@@ -49,23 +49,23 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
                             <thead class = "programs">
                                 <tr>
                                     <th>#</th>
-                                    <th><?php echo Yii::$app->params['static_items']['programe_name'][Yii::$app->language]; ?></th>
-                                    <th><?php echo Yii::$app->params['static_items']['programe_type'][Yii::$app->language]; ?></th>
-                                    <th><?php echo Yii::$app->params['static_items']['programe_duration'][Yii::$app->language]; ?></th>
-                                    <th><?php echo Yii::$app->params['static_items']['programe_field_of_study'][Yii::$app->language]; ?></th>
+                                    <th><?php echo Yii::$app->params['static_items']['project_name'][Yii::$app->language]; ?></th>
+                                    <th><?php echo Yii::$app->params['static_items']['start_year'][Yii::$app->language]; ?></th>
+                                    <th><?php echo Yii::$app->params['static_items']['end_year'][Yii::$app->language]; ?></th>
+                                    <th><?php echo Yii::$app->params['static_items']['principal_researcher'][Yii::$app->language]; ?></th>
                                 </tr>
                             </thead>
                             <?php
                             $i = 1;
                             foreach ($page_content as $program) {
-                                $programName = (Yii::$app->language == 'sw') ? $program->ProgrammeNameSw : $program->ProgrammeNameEn;
+                                $programName = (Yii::$app->language == 'sw') ? $program->ProjectNameSw : $program->ProjectNameEn;
                                 ?>
                                 <tbody>
                                     <tr><td><?php echo $i++; ?></td>
-                                        <td><a href ="<?php echo \app\components\Utilities::generateUrl('colleges/' . $unit_details->UnitAbreviationCode . '/programmes/' . html_entity_decode($program->ProgrammeUrl)); ?>"><?php echo $programName ?></a></td>
-                                        <td><?php echo $program->getProgrammeTypeName(Yii::$app->language); ?></td>
-                                        <td><?php echo (Yii::$app->language == 'sw') ? $program->DurationSw : $program->Duration; ?></td>
-                                        <td><?php echo app\models\Programmes::getFieldOfStudyByValue($program->FieldOfStudy); ?></td>
+                                        <td><a href ="<?php echo \app\components\Utilities::generateUrl('colleges/' . $unit_details->UnitAbreviationCode . '/researchs/' . html_entity_decode($program->ProjectLinkUrl)); ?>"><?php echo $programName ?></a></td>
+                                        <td><?php echo Date('Y', strtotime($program->StartYear)); ?></td>
+                                        <td><?php echo Date('Y', strtotime($program->EndYear)); ?></td>
+                                        <td><?php echo $program->Principal; ?></td>
 
                                     </tr>
                                 </tbody>
