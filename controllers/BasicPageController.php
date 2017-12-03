@@ -127,7 +127,7 @@ class BasicPageController extends Controller {
                 $model->Status = BasicPage::STATUS_PUBLISHED;
             }
 
-
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
             $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
             if ($model->validate()) {
                 if ($model->Attachment) {
@@ -141,6 +141,17 @@ class BasicPageController extends Controller {
 
                     if ($model->Attachment->saveAs($filePath)) {
                         $model->Attachment = $fileName;
+                    }
+                }
+                ///managinf page photo
+                if ($model->Photo) {
+                    $photoName = trim('MAIN_CUSTOM_PAGE_PHOTO' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $photoName = trim('UNIT_PHOTO_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $photoName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $photoName;
                     }
                 }
                 if ($model->save(FALSE)) {
@@ -209,7 +220,7 @@ class BasicPageController extends Controller {
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = BasicPage::STATUS_PUBLISHED;
             }
-
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
             $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
             if ($model->validate()) {
                 if ($model->Attachment) {
@@ -223,6 +234,17 @@ class BasicPageController extends Controller {
 
                     if ($model->Attachment->saveAs($filePath)) {
                         $model->Attachment = $fileName;
+                    }
+                }
+                //updatig photo of the page
+                if ($model->Photo) {
+                    $photoName = trim('MAIN_CUSTOM_PAGE_PHOTO' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $photoName = trim('UNIT_PHOTO_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $photoName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $photoName;
                     }
                 }
                 if ($model->save(FALSE)) {

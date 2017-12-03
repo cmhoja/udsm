@@ -30,16 +30,30 @@ if (isset($page_content) && $page_content) {
                 <div class="pull-right col-md-12 col-md-9">
                     <div class="col-sm-12">
                         <h4><?php echo $title; ?></h4>
-                        <p><?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn; ?></p>
-                        <?php if ($page_content->Photo) { ?>
-                            <img src = "<?php $page_content->Photo ?>">
 
-                        <?php } ?>
-                        <?php if ($page_content->EmbededVideo) { ?>
+                        <?php if (isset($page_content->Photo)):
+                            ?>
+                            <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Photo; ?>">
+                        <?php endif; ?>
+
+                        <?php if (!$page_content->Photo && $page_content->EmbededVideo) { ?>
                             <div class="videoWrapper">
                                 <?php echo $page_content->EmbededVideo; ?>
                             </div>
                         <?php } ?>
+                        <p><?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn; ?></p>
+
+                        <?php
+                        if ($page_content->Attachment):
+                            ?> 
+                            <div class="news-content">
+                                <?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language] . ': '; ?>
+                                <a target="_blank" download href= "<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Attachment); ?>">  <?php echo Yii::$app->params['static_items']['download'][Yii::$app->language]; ?></a>
+                            </div>
+                            <?php
+                        endif;
+                        ?>
+
                     </div>
 
                     <!--PAGE OTHER REGIONS-->
@@ -136,7 +150,7 @@ if (isset($page_content) && $page_content) {
                                         <!-- Heading -->
                                         <h2 class="title">
                                             <?php if (isset($custom_block->BlockIconCSSClass) && $custom_block->BlockIconCSSClass): ?>
-                                                <i class="fa fa-graduation-cap"></i>
+                                                <i class="fa <?php echo $custom_block->BlockIconCSSClass; ?>"></i>
                                             <?php endif; ?>
                                             <?php echo (Yii::$app->language == 'sw') ? $custom_block->BlockTitleSw : $custom_block->BlockTitleEn; ?>
                                         </h2>

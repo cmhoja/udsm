@@ -55,6 +55,9 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_WIDGET,
                 'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
                 'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ],'Photo' => [
+                'type' => Form::INPUT_FILE,
+                'columnOptions' => ['width' => '185px']
             ],
             'Attachment' => [
                 'type' => Form::INPUT_FILE,

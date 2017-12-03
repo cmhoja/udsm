@@ -11,7 +11,11 @@
                         foreach ($blocks as $block) {
                             ?>
                             <div class="widget-title">
-                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn ?></h3>
+                                <h3 class="title">
+                                    <?php if ($block->BlockIconCSSClass) { ?>
+                                        <i class="<?php echo $block->BlockIconCSSClass; ?>" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn ?></h3>
                             </div>
                             <p style="text-align: justify"><?php echo (Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn; ?></p>
                             <?php
@@ -27,7 +31,12 @@
                             ?>
                             <div class="widget-title">
                                 <!-- Title -->
-                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $menu->DisplayNameSw : $menu->DisplayNameEn ?></h3>
+                                <h3 class="title">
+                                    <?php if ($menu->MenuCSSClass) { ?>
+                                        <i class="<?php echo $menu->MenuCSSClass; ?>" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $menu->DisplayNameSw : $menu->DisplayNameEn ?>
+                                </h3>
                             </div>
                             <nav>
                                 <ul>
@@ -64,8 +73,12 @@
                             ?>
                             <div class="widget-title">
                                 <!-- Title -->
-                                <!--<h3 class="title"><?php //echo Yii::$app->params['static_items']['quick_links'][Yii::$app->language];  ?></h3>-->
-                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $menu->DisplayNameSw : $menu->DisplayNameEn ?></h3>
+                                <h3 class="title">
+                                    <?php if ($menu->MenuCSSClass) { ?>
+                                        <i class="<?php echo $menu->MenuCSSClass; ?>" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $menu->DisplayNameSw : $menu->DisplayNameEn ?>
+                                </h3>
                             </div>
                             <nav>
                                 <ul>
@@ -96,7 +109,12 @@
                         foreach ($blocks2 as $block2) {
                             ?>
                             <div class="widget-title">
-                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $block2->BlockTitleSw : $block2->BlockTitleEn ?></h3>
+                                <h3 class="title">
+                                    <?php if ($block2->BlockIconCSSClass) { ?>
+                                        <i class="<?php echo $block2->BlockIconCSSClass; ?>" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $block2->BlockTitleSw : $block2->BlockTitleEn ?>
+                                </h3>
                             </div>
                             <p style="text-align: justify"><?php echo (Yii::$app->language == 'sw') ? $block2->BlockDetailsSw : $block2->BlockDetailsEn; ?></p>
                             <?php
@@ -115,7 +133,10 @@
                         ?>
                         <div class = "widget-title">
                             <!--Title -->
-                            <h3 class = "title"><?php echo Yii::$app->params['static_items']['social_media'][Yii::$app->language]; ?></h3>
+                            <h3 class = "title">
+                                <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
+
+                                <?php echo Yii::$app->params['static_items']['social_media'][Yii::$app->language]; ?></h3>
                         </div>
                         <?php
                         foreach ($social_accounts as $social_account) {
@@ -142,7 +163,11 @@
                         foreach ($blocks3 as $block3) {
                             ?>
                             <div class="widget-title">
-                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $block3->BlockTitleSw : $block3->BlockTitleEn ?></h3>
+                                <h3 class="title">
+                                    <?php if ($block3->BlockIconCSSClass) { ?>
+                                        <i class="<?php echo $block3->BlockIconCSSClass; ?>" aria-hidden="true"></i>
+                                    <?php } ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $block3->BlockTitleSw : $block3->BlockTitleEn ?></h3>
                             </div>
                             <p style="text-align: justify"><?php echo (Yii::$app->language == 'sw') ? $block3->BlockDetailsSw : $block3->BlockDetailsEn; ?></p>
                             <?php
