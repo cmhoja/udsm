@@ -43,6 +43,14 @@ $this->params['breadcrumbs'][] = 'Page Details';
             'DescriptionEn:html',
             'DescriptionSw:html',
             array(
+                'attribute' => 'Photo',
+                'attribute' => 'Page Photo:',
+                'value' => function($model) {
+                    return ($model->Photo) ? '<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . Yii::$app->params['file_upload_main_site'] . '/' . $model->Photo . '">' : 'Not set';
+                },
+                'format' => 'html'
+            ),
+            array(
                 'attribute' => 'Attachment',
                 'value' => function($model) {
                     return ($model->Attachment) ? '<a target="_blank" href= "' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $model->Attachment) . '">Download here to Preview </a>' : '';

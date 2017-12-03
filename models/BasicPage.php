@@ -92,7 +92,7 @@ class BasicPage extends \yii\db\ActiveRecord {
             $condition['UnitID'] = $UnitID;
         }
         return self::find()
-                        ->select('PageId,PageTitleEn,PageTitleSw,DescriptionEn,DescriptionSw,Attachment,EmbededVideo,PageSeoUrl,')
+                        ->select('PageId,PageTitleEn,PageTitleSw,DescriptionEn,DescriptionSw,Attachment,Photo,EmbededVideo,PageSeoUrl,')
                         ->where($condition)
                         ->one();
     }

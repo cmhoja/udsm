@@ -1,39 +1,43 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use app\models\AcademicAdministrativeUnit;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\StaffListSearch */
+/* @var $model app\models\SlideShowsSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="staff-list-search">
-
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
-
-    <?= $form->field($model, 'Id') ?>
-
-    <?= $form->field($model, 'FName') ?>
-
-    <?= $form->field($model, 'LName') ?>
-
-    <?= $form->field($model, 'Education') ?>
-
-    <?= $form->field($model, 'Position') ?>
-
-    <?php // echo $form->field($model, 'Summary') ?>
-
-    <?php // echo $form->field($model, 'UnitID') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
+<div class="search">
+    <?php
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'method' => 'GET']);
+    ?><?php
+    echo Form::widget([
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
+            'UnitID' => [
+                'type' => Form::INPUT_DROPDOWN_LIST,
+                'options' => ['prompt' => '--- select --'],
+                'items' => AcademicAdministrativeUnit::getUnitesInHirrach(['TypeContentManagement' => AcademicAdministrativeUnit::CONTENTMANAGEMENT_INTERNAL]),
+                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+                'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
+            ], 'FName' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Title of the Nes in English'],
+                'columnOptions' => ['width' => '185px']
+            ], 'LName' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Title of the Nes in English'],
+                'columnOptions' => ['width' => '185px']
+            ],
+        ]
+    ]);
+    echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+    ActiveForm::end();
+    ?>
 </div>

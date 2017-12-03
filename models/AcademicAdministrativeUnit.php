@@ -253,5 +253,9 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
     static function getAcademicUnitsList() {
         return self::find()->where(['in', 'UnitType', [self::UNIT_TYPE_CENTRE, self::UNIT_TYPE_COLLEGE, self::UNIT_TYPE_CONSTINTUENT_COLLEGE, self::UNIT_TYPE_INSTITUTE, self::UNIT_TYPE_SCHOOL]])->all();
     }
+    
+     static function getInternalAcademicUnitsList() {
+        return self::find()->where(['TypeContentManagement'=> self::CONTENTMANAGEMENT_INTERNAL])->andWhere(['in', 'UnitType', [self::UNIT_TYPE_CENTRE, self::UNIT_TYPE_COLLEGE, self::UNIT_TYPE_CONSTINTUENT_COLLEGE, self::UNIT_TYPE_INSTITUTE, self::UNIT_TYPE_SCHOOL]])->orderBy('UnitNameEn ASC')->all();
+    }
 
 }

@@ -11,6 +11,8 @@ $this->title = 'Staff Lists';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="staff-list-index">
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
     <p>
         <?= Html::a('Add Staff', ['create'], ['class' => 'btn btn-success']) ?>
     </p>

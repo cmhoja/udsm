@@ -4,7 +4,7 @@
         <select class="form-control" name="UnitId" style="margin-bottom: 0%;">
             <option value=""> --- <?php echo Yii::$app->params['static_items']['programe_college_unit'][Yii::$app->language]; ?> ---</option>
             <?php
-            $Units = app\models\AcademicAdministrativeUnit::getAcademicUnitsList();
+            $Units = app\models\AcademicAdministrativeUnit::getInternalAcademicUnitsList();
             if ($Units) {
                 foreach ($Units as $Unit) {
                     ?>

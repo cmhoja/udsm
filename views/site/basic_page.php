@@ -31,9 +31,10 @@ if (isset($page_content) && $page_content) {
                     <div class="col-sm-12">
                         <h4><?php echo $title; ?></h4>
 
-                        <?php if (isset($page_content->Photo)):
+                        <?php
+                        if (isset($page_content->Photo)):
                             ?>
-                            <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Photo; ?>">
+                        <img style="max-height:70%; width: 99%; " src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Photo; ?>">
                         <?php endif; ?>
 
                         <?php if (!$page_content->Photo && $page_content->EmbededVideo) { ?>
