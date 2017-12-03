@@ -119,5 +119,6 @@ return [
     'programe_college_unit' => ['en' => 'College/Unit', 'sw' => 'Kitivo/Idara'],
     'programe_duration' => ['en' => 'Duration', 'sw' => 'Muda'],
     'programe_field_of_study' => ['en' => 'Field of Study', 'sw' => 'Aina ya Masomo'],
-    'attachment' => ['en' => 'Attachment', 'sw' => 'Kiambata']
+    'attachment' => ['en' => 'Attachment', 'sw' => 'Kiambata'],
+    'staff_list' => ['en' => 'Staff List', 'sw' => 'Orodha Watumishi'],
 ];

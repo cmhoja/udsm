@@ -21,8 +21,9 @@ return [
         'colleges/<code>/events/<item>' => 'college/events',
         'colleges/<code>/events' => 'college/events',
         'colleges/<code>/announcements' => 'college/announcements',
-        'colleges/<code>/announcements/<item>' => 'college/announcements',        
+        'colleges/<code>/announcements/<item>' => 'college/announcements',
         'colleges/<code>/researchs/<item>' => 'college/researchs',
+        'colleges/<code>/staff' => 'college/staff',
         //'colleges/<code>/<page>/<action>' => 'colleges/<action>',
         //'colleges/<code>/<page>' => 'colleges/page',
 //        'colleges|college/<code>/<page>/<item>' => 'college/index',
@@ -43,6 +44,7 @@ return [
         'schools/<code>/announcements' => 'schools/announcements',
         'schools/<code>/announcements/<item>' => 'schools/announcements',
         'schools|school/<code>' => 'schools/index',
+        'schools|school/staff' => 'schools/staff',
         //INSTITUTES PAGES
         'institutes/<code>/programmes' => 'institutes/programs',
         'institutes/<code>/programs' => 'institutes/programs',
@@ -57,6 +59,7 @@ return [
         'institutes/<code>/announcements' => 'institutes/announcements',
         'institutes/<code>/announcements/<item>' => 'institutes/announcements',
         'institutes|institute/<code>' => 'institutes/index',
+        'institutes|institute/staff' => 'institutes/staff',
         //CENTRES PAGES
         'centres/<code>/programmes' => 'centres/programs',
         'centres/<code>/programs' => 'centres/programs',
@@ -71,6 +74,7 @@ return [
         'centres/<code>/announcements' => 'centres/announcements',
         'centres/<code>/announcements/<item>' => 'centres/announcements',
         'centres|centre/<code>' => 'centres/index',
+        'centres|centre/staff' => 'centres/staff',
         //UNITS PAGES
         'directorates/<code>/programmes' => 'directorates/programs',
         'directorates/<code>/programs' => 'directorates/programs',
@@ -84,6 +88,7 @@ return [
         'directorates/<code>/events' => 'directorates/events',
         'directorates/<code>/announcements' => 'directorates/announcements',
         'directorates/<code>/announcements/<item>' => 'directorates/announcements',
+        'directorates/<code>/staff' => 'directorates/staff',
         //////
         ///MAIN SITE
         'background|introduction' => 'about/index',

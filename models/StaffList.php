@@ -38,11 +38,12 @@ class StaffList extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['FName', 'LName', 'Education','EducationSw'], 'required'],
+            [['FName', 'LName', 'Education', 'EducationSw'], 'required'],
             [['UnitID'], 'integer'],
+            [['Photo'], 'file', 'maxFiles' => 1, 'extensions' => 'png,jpg,jpeg'],
             [['FName', 'LName'], 'string', 'max' => 45],
-            [['Education','EducationSw', 'Summary','SummarySw'], 'string'],
-            [['Position','PositionSw'], 'string', 'max' => 100],
+            [['Education', 'EducationSw', 'Summary', 'SummarySw'], 'string'],
+            [['Position', 'PositionSw'], 'string', 'max' => 100],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],
         ];
     }
@@ -86,6 +87,17 @@ class StaffList extends \yii\db\ActiveRecord {
             self::STATUS_PUBLISHED => 'Published',
             self::STATUS_UNPUBLISHED => 'Un Published'
         );
+    }
+
+    static function getActiveStaffByUnit($UnitID = NULL, $Status = NULL) {
+        $condition = array();
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        }
+        if (!empty($Status) OR ! is_null($Status)) {
+            $condition['Status'] = $Status;
+        }
+        return self::find()->where($condition)->orderBy('UnitID ASC, ListOrder ASC, FName ASC')->all();
     }
 
 }

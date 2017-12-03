@@ -94,14 +94,24 @@ class StaffListController extends Controller {
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = StaffList::STATUS_PUBLISHED;
             }
-
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id]);
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            if ($model->validate()) {
+                if ($model->Photo) {
+                    $photoName = trim('STAFF_PHOTO' . $model->FName . '_' . $model->LName . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $photoName = trim('UNIT_STAFF_PHOTO_' . $model->FName . '_' . $model->LName . '.' . $model->Photo->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $photoName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $photoName;
+                    }
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
-        return $this->render('create', [
-                    'model' => $model,
-        ]);
+        return $this->render('update', ['model' => $model]);
     }
 
     /**
@@ -124,8 +134,21 @@ class StaffListController extends Controller {
             if (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = StaffList::STATUS_PUBLISHED;
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->Id]);
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            if ($model->validate()) {
+                if ($model->Photo) {
+                    $photoName = trim('STAFF_PHOTO' . $model->FName . '_' . $model->LName . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $photoName = trim('UNIT_STAFF_PHOTO_' . $model->FName . '_' . $model->LName . '.' . $model->Photo->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $photoName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $photoName;
+                    }
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                }
             }
         }
         return $this->render('update', ['model' => $model]);

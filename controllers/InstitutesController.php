@@ -554,4 +554,33 @@ class InstitutesController extends Controller {
         return $this->render('//site/college/events_list', $content);
     }
 
+    
+    public function actionStaff() {
+        //getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                if ($Academic_unit_details) {
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    $page_content = \app\models\StaffList::getActiveStaffByUnit($Academic_unit_details->Id, \app\models\StaffList::STATUS_PUBLISHED);
+                    $content['page_content'] = $page_content;
+                    if ($page_content) {
+                        $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
+                    }
+                }
+            }
+        }
+        return $this->render('//site/college/leadership', $content);
+    }
+    
 }

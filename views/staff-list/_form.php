@@ -41,6 +41,10 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_TEXT,
                 'columnOptions' => ['width' => '185px']
             ],
+            'Photo' => [
+                'type' => Form::INPUT_FILE,
+                'columnOptions' => ['width' => '185px']
+            ],
             'Education' => [
                 'type' => Form::INPUT_TEXT,
                 'columnOptions' => ['width' => '185px']
