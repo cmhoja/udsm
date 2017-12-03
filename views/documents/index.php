@@ -10,6 +10,7 @@ $this->title = 'Documents';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="documents-index">
+    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Documents', ['create'], ['class' => 'btn btn-success']) ?>

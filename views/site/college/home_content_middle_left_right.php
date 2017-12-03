@@ -11,18 +11,20 @@
                     <ul class="latest-posts">
 
                         <?php foreach ($home_content_middle_left_news as $news) { ?>
-                            <li>
+                            <li style="text-decoration: none; list-style: none !important; margin-bottom: 1.6% !important;">
                                 <?php if (!empty($news->Photo)): ?>
                                     <div class="post-thumb">
-                                        <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?>" alt="" title="" width="100" height="100">
-
+                                        <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?>" alt="" title="" width="90" height="60">
                                     </div>
                                 <?php endif; ?>
                                 <div class="post-details">
-                                    <div class="description">
+                                    <div class="description" >
                                         <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl) ?>">
                                             <?php echo (Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn ?>
                                         </a>
+                                        <p style="margin: 0;"> 
+                                            <?php echo substr(strip_tags((Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn),0,100).' ..' ?>
+                                        </p>
                                     </div>
                                     <div class="meta">
                                         <!-- Meta Date -->

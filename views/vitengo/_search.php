@@ -14,7 +14,7 @@ use app\models\AcademicAdministrativeUnit;
 <div class="search" style="width: 97%">
     <?php
     $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL, 'action' => ['index'],
-                'method' => 'get',]);
+                'method' => 'GET',]);
     ?>
     <?php
     echo Form::widget([

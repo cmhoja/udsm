@@ -215,6 +215,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             foreach ($ParentUnits as $parent) {
                 $data[$parent->Id] = strtoupper($parent->UnitNameEn);
                 $condition2['ParentUnitId'] = $parent->Id;
+                
                 $ChildUnits = AcademicAdministrativeUnit::findAll($condition2);
                 foreach ($ChildUnits as $ChildUnit) {
                     $data[$ChildUnit->Id] = '----' . $ChildUnit->UnitNameEn;

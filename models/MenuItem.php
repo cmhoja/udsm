@@ -123,7 +123,7 @@ class MenuItem extends \yii\db\ActiveRecord {
                 $ret .= '<span>' . yii\helpers\Html::a('Delete', ['delete-item', 'id' => $menu->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?')]) . ' ';
                 $ret .= yii\helpers\Html::a('Edit', ['edit-item', 'id' => $menu->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to Edit this item?')]) . '</span></p>';
 
-                $submenus = self::find()->where(array('ParentItemID' => $menu->Id))->all();
+                $submenus = self::find()->where(array('ParentItemID' => $menu->Id))->orderBy('ListOrder ASC, ItemNameEn ASC')->all();
 //submenu level1
                 if ($submenus) {
                     $ret .= self::recurseMenu($submenus);

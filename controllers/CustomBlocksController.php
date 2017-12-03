@@ -54,7 +54,7 @@ class CustomBlocksController extends Controller {
         if (Yii::$app->session->has('UNIT_ID')) {
             $searchModel->BlockUnitID = Yii::$app->session->get('UNIT_ID');
         }
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         return $this->render('index', [
                     'searchModel' => $searchModel,

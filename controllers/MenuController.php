@@ -75,7 +75,7 @@ class MenuController extends Controller {
         $menu_items = NULL;
         if ($model) {
             ///getting the parent menus
-            $menu_items = \app\models\MenuItem::find()->where(array('MenuID' => $model->Id, 'ParentItemID' => 0))->orderBy('ListOrder ASC')->all();
+            $menu_items = \app\models\MenuItem::find()->where(array('MenuID' => $model->Id, 'ParentItemID' => 0))->orderBy('ListOrder ASC, ItemNameEn ASC')->all();
         }
         return $this->render('view', [
                     'model' => $model, 'menu_items' => $menu_items
@@ -206,7 +206,6 @@ class MenuController extends Controller {
                                 if ($parentUrl->LinkUrl == '#' OR $parentUrl->LinkUrl == '/' OR $parentUrl->LinkUrl == '/#') {
                                     $menu_item_model->LinkUrl = $parentUrl->LinkUrl;
                                 }
-                              
                             }
                         }
                     }
@@ -313,8 +312,8 @@ class MenuController extends Controller {
         $MenuID = $model->MenuID;
         //$model->delete();
         if ($model) {
-           \app\models\MenuItem::findOne($id)->delete();
-        }        
+            \app\models\MenuItem::findOne($id)->delete();
+        }
         return $this->redirect(['view', 'id' => $MenuID]);
     }
 
