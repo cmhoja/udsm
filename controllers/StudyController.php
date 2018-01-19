@@ -184,7 +184,8 @@ class StudyController extends Controller {
             }
         }
         $language = Yii::$app->language;
-        $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+        //$page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+        $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
 
         $content['page_content'] = $page_content;
         return $this->render('//site/pages/programmes', $content);
@@ -206,7 +207,8 @@ class StudyController extends Controller {
             $UnitID = Yii::$app->request->post('UnitId');
         }
         $language = Yii::$app->language;
-        $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+        //  $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+        $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
 
         $content = array('page_content' => $page_content, 'program_type' => 'programme');
         return $this->render('//site/pages/programmes', $content);

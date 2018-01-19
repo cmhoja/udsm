@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\base\Model;
 
 /**
  * This is the model class for table "tbl_programmes".
@@ -166,13 +167,64 @@ class Programmes extends \yii\db\ActiveRecord {
                         ->all();
     }
 
+    static function getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword = NULL, $UnitID = NULL, $Type = NULL, $FieldOfStudy = NULL, $lang = NULL) {
+        $condition = $where = $orderBy = NULL;
+
+        if (!empty($Type) && $Type > 0) {
+            $where['ProgrammeType'] = $Type;
+        }
+
+        if (!empty($FieldOfStudy) && $FieldOfStudy > 0) {
+            $where['FieldOfStudy'] = $FieldOfStudy;
+        }
+        if ($UnitID > 0) {
+            $where['UnitID'] = $UnitID;
+        }
+
+        if (!empty($lang)) {
+            switch ($lang) {
+                case 'sw':
+                    $orderBy = 'ProgrammeNameSw ASC';
+
+                    break;
+
+                default:
+                    $orderBy = 'ProgrammeNameEn ASC';
+
+                    break;
+            }
+        }
+
+        $query = self::find()
+                ->where($where)
+                ->andFilterCompare('ProgrammeNameEn', $Keyword, 'LIKE')
+                ->andFilterCompare('ProgrammeNameSw', $Keyword, 'LIKE')
+                ->orderBy($orderBy);
+
+        return new \yii\data\ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 25,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+//                    'UnitID' => SORT_ASC,
+//                    'ProgrammeType' => SORT_ASC,
+//                    'FieldOfStudy' => SORT_ASC,
+//                    'ProgrammeNameEn' => SORT_ASC,
+//                    'ProgrammeNameSw' => SORT_ASC,
+                ],
+            ],
+        ]);
+    }
+
     static function getProgrameDetailsByProgrammeUrl($ProgrammeUrl) {
         $condition = array('ProgrammeUrl' => $ProgrammeUrl);
         return self::find()->where($condition)->one();
     }
 
     static function getFieldOfStudyByValue($value) {
-        $field_ofStudy = Yii::$app->params['static_items']['field_of_study'];
+        $field_ofStudy = Yii::$app->params['field_of_study'];
         if ($field_ofStudy && isset($field_ofStudy[$value])) {
             return $field_ofStudy[$value][Yii::$app->language];
         }
