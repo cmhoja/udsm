@@ -34,6 +34,8 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
     const UNIT_TYPE_INSTITUTE = 4;
     const UNIT_TYPE_CENTRE = 5;
     const UNIT_TYPE_DEPARTMENT = 6;
+    const UNIT_TYPE_DIRECTORATE = 7;
+    const UNIT_TYPE_OFFICE = 8;
     //content management type
     const CONTENTMANAGEMENT_INTERNAL = 1;
     const CONTENTMANAGEMENT_EXTERNAL = 2;
@@ -143,7 +145,9 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             self::UNIT_TYPE_SCHOOL => 'Schools',
             self::UNIT_TYPE_INSTITUTE => 'Institutes',
             self::UNIT_TYPE_CENTRE => 'Centres',
-                // self::UNIT_TYPE_DEPARTMENT => 'Departments',
+            // self::UNIT_TYPE_DEPARTMENT => 'Departments',
+            self::UNIT_TYPE_DIRECTORATE => 'Directorates',
+            self::UNIT_TYPE_OFFICE => 'Offices'
         );
     }
 
