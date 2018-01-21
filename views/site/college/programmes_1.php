@@ -45,51 +45,39 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
                     if (isset($page_content) && $page_content) {
                         $count = 0;
                         ?>
-                        <!--DATA-->
+                        <table class = "table">
+                            <thead class = "programs">
+                                <tr>
+                                    <th>#</th>
+                                    <th><?php echo Yii::$app->params['static_items']['programe_name'][Yii::$app->language]; ?></th>
+                                    <th><?php echo Yii::$app->params['static_items']['programe_type'][Yii::$app->language]; ?></th>
+                                    <th><?php echo Yii::$app->params['static_items']['programe_duration'][Yii::$app->language]; ?></th>
+                                    <th><?php echo Yii::$app->params['static_items']['programe_field_of_study'][Yii::$app->language]; ?></th>
+                                </tr>
+                            </thead>
+                            <?php
+                            $i = 1;
+                            foreach ($page_content as $program) {
+                                $programName = (Yii::$app->language == 'sw') ? $program->ProgrammeNameSw : $program->ProgrammeNameEn;
+                                ?>
+                                <tbody>
+                                    <tr><td><?php echo $i++; ?></td>
+                                        <td><a href ="<?php echo \app\components\Utilities::generateUrl('colleges/' . $unit_details->UnitAbreviationCode . '/programmes/' . html_entity_decode($program->ProgrammeUrl)); ?>"><?php echo $programName ?></a></td>
+                                        <td><?php echo $program->getProgrammeTypeName(Yii::$app->language); ?></td>
+                                        <td><?php echo (Yii::$app->language == 'sw') ? $program->DurationSw : $program->Duration; ?></td>
+                                        <td><?php echo app\models\Programmes::getFieldOfStudyByValue($program->FieldOfStudy); ?></td>
+
+                                    </tr>
+                                </tbody>
+                                <?php
+                            }
+                            ?>
+                        </table>
+
+
                         <?php
-                        echo \yii\grid\GridView::widget([
-                            'dataProvider' => $page_content,
-                            //'filterModel' => $searchModel,
-                            'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
-                                [
-                                    'attribute' => Yii::$app->language == 'sw' ? 'ProgrammeNameSw' : 'ProgrammeNameEn',
-                                    'label' => Yii::$app->params['static_items']['programe_name'][Yii::$app->language],
-                                    'value' => function ($model) {
-                                        return \yii\bootstrap\Html::a(Yii::$app->language == 'sw' ? $model->ProgrammeNameSw : $model->ProgrammeNameEn, \app\components\Utilities::generateUrl('colleges/' . \app\models\AcademicAdministrativeUnit::getUnitAbbreviationByID($model->UnitID) . '/programmes/' . html_entity_decode($model->ProgrammeUrl)));
-                                    },
-                                    'format' => 'html',
-                                //'class' => ActionColumn::className(),
-                                ],
-                                [
-                                    'attribute' => 'FieldOfStudy',
-                                    'label' => Yii::$app->params['static_items']['programe_field_of_study'][Yii::$app->language],
-                                    'value' => function ($model) {
-                                        return app\models\Programmes::getFieldOfStudyByValue($model->FieldOfStudy);
-                                    },
-                                ],
-                                [
-                                    'attribute' => 'ProgrammeType',
-                                    'label' => Yii::$app->params['static_items']['programe_type'][Yii::$app->language],
-                                    'value' => function($model) {
-                                        return $model->getProgrammeTypeName(Yii::$app->language);
-                                    }
-                                ],
-                                [
-                                    'attribute' => 'UnitID',
-                                    'label' => Yii::$app->params['static_items']['programe_college_unit'][Yii::$app->language],
-                                    'value' => function ($model) {
-                                        return \app\models\AcademicAdministrativeUnit::getUnitNameById($model->UnitID);
-                                    },
-                                ],
-                                [
-                                    'attribute' => Yii::$app->language == 'sw' ? 'DurationSw' : 'Duration',
-                                    'label' => Yii::$app->params['static_items']['programe_duration'][Yii::$app->language],
-                                ]
-                            ],
-                        ]);
-                        ?>
-                        <?php
+                    } elseif (isset($single_page_content)) {
+                        echo '';
                     } else {
                         echo Yii::$app->params['static_items']['no_record'][Yii::$app->language];
                     }

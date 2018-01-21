@@ -347,7 +347,8 @@ class InstitutesController extends Controller {
                         $FieldOfStudy = Yii::$app->request->post('FieldStudy');
                         $programmeType = Yii::$app->request->post('PTYpe');
 
-                        $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                        //$page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                        $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
                         $content['page_content'] = $page_content;
                     } else {
                         $programmeType = $Keyword = $UnitID = $FieldOfStudy = NULL;
@@ -364,7 +365,8 @@ class InstitutesController extends Controller {
                             $content['page_content'] = $page_content;
                             return $this->render('//site/college/programme_details', $content);
                         } else {
-                            $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                            //$page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                            $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
                             $content['page_content'] = $page_content;
                         }
                     }
@@ -554,7 +556,6 @@ class InstitutesController extends Controller {
         return $this->render('//site/college/events_list', $content);
     }
 
-    
     public function actionStaff() {
         //getting user current langauage;
         $content = array();
@@ -582,5 +583,5 @@ class InstitutesController extends Controller {
         }
         return $this->render('//site/college/leadership', $content);
     }
-    
+
 }
