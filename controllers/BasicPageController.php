@@ -96,29 +96,29 @@ class BasicPageController extends Controller {
                 if ($model->SectionLink) {
                     $model->SectionLink = trim($model->SectionLink . '/');
                     $model->SectionLink = trim($model->SectionLink);
-                    $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                    $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 } else {
                     if ($model->UnitID) {
                         $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
                         if ($unit_code['abv'] && $unit_code['type']) {
-                            $unit_code = trim('/'.$unit_code['type'] . '/' . $unit_code['abv'] . '/');
-                            $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                            $unit_code = trim('/' . $unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                            $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                         }
                     } else {
                         if ($model->PageTitleEn) {
-                            $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                            $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                         }
                     }
                 }
             } else if ($model->UnitID) {
                 $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
                 if ($unit_code['abv'] && $unit_code['type']) {
-                    $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
-                    $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                    $unit_code = trim('/' . $unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                    $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 }
             } else {
                 if ($model->PageTitleEn) {
-                    $model->PageSeoUrl = trim('/site/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                    $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 }
             }
             if (Yii::$app->request->post('save') == 'save') {
@@ -126,8 +126,37 @@ class BasicPageController extends Controller {
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = BasicPage::STATUS_PUBLISHED;
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->PageId]);
+
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+            if ($model->validate()) {
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('MAIN_CUSTOM_PAGE' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
+                }
+                ///managinf page photo
+                if ($model->Photo) {
+                    $photoName = trim('MAIN_CUSTOM_PAGE_PHOTO' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $photoName = trim('UNIT_PHOTO_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $photoName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $photoName;
+                    }
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->PageId]);
+                }
             }
         }
         return $this->render('create', [
@@ -143,6 +172,7 @@ class BasicPageController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $old_url = $model->PageSeoUrl;
         if ($model && $model->Status == BasicPage::STATUS_PUBLISHED) {
             $this->redirect(array('index'));
         }
@@ -159,38 +189,67 @@ class BasicPageController extends Controller {
                 if ($model->SectionLink) {
                     $model->SectionLink = trim($model->SectionLink . '/');
                     $model->SectionLink = trim($model->SectionLink);
-                    $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                    $model->PageSeoUrl = trim($model->SectionLink . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 } else {
                     if ($model->UnitID) {
                         $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
                         if ($unit_code['abv'] && $unit_code['type']) {
-                            $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
-                            $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                            $unit_code = trim('/' . $unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                            $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                         }
                     } else {
                         if ($model->PageTitleEn) {
-                            $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                            $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                         }
                     }
                 }
             } else if ($model->UnitID) {
                 $unit_code = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($model->UnitID);
                 if ($unit_code['abv'] && $unit_code['type']) {
-                    $unit_code = trim($unit_code['type'] . '/' . $unit_code['abv'] . '/');
-                    $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                    $unit_code = trim('/' . $unit_code['type'] . '/' . $unit_code['abv'] . '/');
+                    $model->PageSeoUrl = trim($unit_code . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 }
             } else {
                 if ($model->PageTitleEn) {
-                    $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString($model->PageTitleEn));
+                    $model->PageSeoUrl = trim('/' . \app\components\Utilities::createUrlString(strip_tags($model->PageTitleEn)));
                 }
             }
+
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = BasicPage::STATUS_SAVED;
             } elseif (Yii::$app->request->post('publish') == 'publish') {
                 $model->Status = BasicPage::STATUS_PUBLISHED;
             }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->PageId]);
+            $model->Photo = \yii\web\UploadedFile::getInstance($model, 'Photo');
+            $model->Attachment = \yii\web\UploadedFile::getInstance($model, 'Attachment');
+            if ($model->validate()) {
+                if ($model->Attachment) {
+                    //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
+                    $fileName = trim('MAIN_CUSTOM_PAGE' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+
+                    if ($model->UnitID > 0) {
+                        $fileName = trim('UNIT_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Attachment->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $fileName;
+
+                    if ($model->Attachment->saveAs($filePath)) {
+                        $model->Attachment = $fileName;
+                    }
+                }
+                //updatig photo of the page
+                if ($model->Photo) {
+                    $photoName = trim('MAIN_CUSTOM_PAGE_PHOTO' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    if ($model->UnitID > 0) {
+                        $photoName = trim('UNIT_PHOTO_' . $model->UnitID . '_CUSTOM_PAGE_' . $model->PageTitleEn . '.' . $model->Photo->extension);
+                    }
+                    $filePath = Yii::$app->basePath . Yii::$app->params['file_upload_main_site'] . '/' . $photoName;
+                    if ($model->Photo->saveAs($filePath)) {
+                        $model->Photo = $photoName;
+                    }
+                }
+                if ($model->save(FALSE)) {
+                    return $this->redirect(['view', 'id' => $model->PageId]);
+                }
             }
         }
         return $this->render('update', [

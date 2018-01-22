@@ -236,7 +236,9 @@ class Utilities {
     }
 
     static function getPageContentByUrl($url) {
+        $url = trim($url);
         $page_content = \app\models\BasicPage::getActivePageDetailsByUrl($url);
+
         if (!$page_content) {
             $page_content = \app\models\BasicPage::getActivePageAllDetailsByPageSEOUrl(substr($url, 1));
         }

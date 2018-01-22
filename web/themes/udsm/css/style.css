@@ -6514,7 +6514,6 @@ p.event-title {
 }
 
 .slider-caption {
-
 position: relative;
 padding: 2%;
     left: 0;
@@ -6523,8 +6522,8 @@ padding: 2%;
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0,0,0,.3);
     font-size: 20px;
-    line-height: 18px
-
+    line-height: 18px;
+     text-transform: none !important;
 }
 
 .apply {

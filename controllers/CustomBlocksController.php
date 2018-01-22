@@ -54,7 +54,7 @@ class CustomBlocksController extends Controller {
         if (Yii::$app->session->has('UNIT_ID')) {
             $searchModel->BlockUnitID = Yii::$app->session->get('UNIT_ID');
         }
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
@@ -103,7 +103,7 @@ class CustomBlocksController extends Controller {
                     if ($model->Upload->saveAs($filePath)) {
                         $model->BlockIconPicture = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 270, 270, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 480, 480, 95);
                     }
                 }
                 if ($model->save(FALSE)) {
@@ -152,7 +152,7 @@ class CustomBlocksController extends Controller {
                     if ($model->Upload->saveAs($filePath)) {
                         $model->BlockIconPicture = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 270, 270, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 480, 480, 95);
                     }
                 }
                 if ($model->save(FALSE)) {

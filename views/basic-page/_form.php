@@ -30,12 +30,12 @@ use app\models\AcademicAdministrativeUnit;
                 'columnOptions' => ['width' => '185px', 'height' => '10px'],
                 'visible' => (Yii::$app->session->get('USER_TYPE_ADMINISTRATOR') && !Yii::$app->session->get('UNIT_ID')) ? TRUE : FALSE
             ],
-            'SectionLink' => [
-                'type' => Form::INPUT_DROPDOWN_LIST,
-                'options' => ['prompt' => '--- select --'],
-                'items' => \app\models\BasicPage::getSectionList(Yii::$app->session->get('UNIT_ID')),
-                'columnOptions' => ['width' => '185px', 'height' => '10px'],
-            ],
+//            'SectionLink' => [
+//                'type' => Form::INPUT_DROPDOWN_LIST,
+//                'options' => ['prompt' => '--- select --'],
+//                'items' => \app\models\BasicPage::getSectionList(Yii::$app->session->get('UNIT_ID')),
+//                'columnOptions' => ['width' => '185px', 'height' => '10px'],
+//            ],
             'PageTitleEn' => [
                 'type' => Form::INPUT_TEXT,
                 'options' => ['placeholder' => 'Title of the News in English'],
@@ -55,6 +55,9 @@ use app\models\AcademicAdministrativeUnit;
                 'type' => Form::INPUT_WIDGET,
                 'widgetClass' => \dosamigos\ckeditor\CKEditor::className(),
                 'columnOptions' => ['rows' => 6, 'preset' => 'basic']
+            ],'Photo' => [
+                'type' => Form::INPUT_FILE,
+                'columnOptions' => ['width' => '185px']
             ],
             'Attachment' => [
                 'type' => Form::INPUT_FILE,
@@ -65,11 +68,12 @@ use app\models\AcademicAdministrativeUnit;
                 'options' => ['placeholder' => 'Enter Video Embedding codes here to embed a video from youtube'],
                 'columnOptions' => ['width' => '185px']
             ],
-//            'PageSeoUrl' => [
-//                'type' => Form::INPUT_TEXT,
-//                'options' => ['placeholder' => 'Url/Link to access this page'],
-//                'columnOptions' => ['width' => '185px']
-//            ],
+            'PageSeoUrl' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Url/Link to access this page','readonly'=>true],
+                'columnOptions' => ['width' => '185px'],
+                'visible' => (!$model->isNewRecord)
+            ],
         ]
     ]);
     echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);

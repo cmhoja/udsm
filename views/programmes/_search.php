@@ -13,7 +13,7 @@ use app\models\AcademicAdministrativeUnit;
 
 <div class="search">
     <?php
-    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]);
+    $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL,'method'=>'GET']);
     ?>
     <?php
     echo Form::widget([

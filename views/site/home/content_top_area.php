@@ -81,27 +81,32 @@
                             $IconClass = yii\helpers\Html::decode($block->BlockIconCSSClass);
                             ?>
                             <div class="text-left">
-                                <h3 class="title"><i class="fa fa-pencil-square-o"></i> <?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn; ?></h3>
+                                <h3 class="title">
+                                    <?php if (!empty($IconClass)) { ?>
+                                        <i class="<?php echo $IconClass; ?>" aria-hidden="true" ></i>
+                                    <?php } ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn; ?>
+                                </h3>
                             </div>
                         <?php } ?>
                         <div class="royal-bg">
-                            <?php if (!empty($IconClass) && empty($block->BlockIconPicture) && empty($block->BlockIconVideo)) { ?>
-                                <i class="<?php echo $IconClass; ?>"></i>
-                                <?php
-                            } else if (!empty($block->BlockIconPicture) && !empty($block->BlockIconVideo) && !empty($block->BlockIconCSSClass)) {
+                            <?php
+                            if (!empty($block->BlockIconPicture)) {
                                 ?>
-                                <img class="<?php echo $IconClass; ?>" src="<?php echo $this->theme->baseUrl . '/' . Yii::$app()->params['file_upload_main_site'] . '/' . $block->BlockIconPicture; ?>">
+                                <img class="" src="<?php echo $this->theme->baseUrl . '/' . Yii::$app()->params['file_upload_main_site'] . '/' . $block->BlockIconPicture; ?>">
                                 <?php
-                            } elseif (!empty($block->BlockIconVideo)) {
+                            } elseif (empty($block->BlockIconVideo) && !empty($block->BlockIconVideo)) {
                                 ?>
-                                <div class="<?php echo $IconClass; ?>">
+                                <div class="">
                                     <?php echo $block->BlockIconVideo ?>
                                 </div>
                                 <?php
                             }
                             ?>                            
-                            <p><?php echo substr(((Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn), 0, 300) . ' ...'; ?></p>
-                            <a class="btn btn-success btn-block" href="<?php echo \app\components\Utilities::generateUrl($block->LinkToPage); ?>" role="button"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language] ?></a>
+                            <p><?php echo substr(((Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn), 0, 500); ?></p>
+                            <?php if ($block->LinkToPage): ?>
+                                <a class="btn btn-small btn-success" href="<?php echo \app\components\Utilities::generateUrl($block->LinkToPage); ?>" role="button"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language] ?></a>
+                            <?php endif; ?>
                         </div>
                         <?php
                     }

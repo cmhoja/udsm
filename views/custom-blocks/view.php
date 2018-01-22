@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = 'Details';
                 'attribute' => 'BlockIconPicture',
                 'attribute' => 'Icon Picture Preview:',
                 'value' => function($model) {
-                    return ($model->BlockIconPicture) ? '<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' . ($model->BlockUnitID) ? Yii::$app->params['file_upload_units_site'] : Yii::$app->params['file_upload_main_site'] . '/' . $model->BlockIconPicture . '">' : 'Not set';
+                    return ($model->BlockIconPicture) ? '<img style="width:200px" class="" src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/../' .Yii::$app->params['file_upload_main_site'] . '/' . $model->BlockIconPicture . '">' : 'Not set';
                 },
                 'format' => 'html'
             ),

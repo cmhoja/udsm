@@ -13,12 +13,31 @@ $UnitID = $this->params['unit_id'];
                     $blocks = app\models\CustomBlocks::getActiveBlocksByRegionId(app\components\SiteRegions::COLLEGE_TEMPLATE_FOOTER_BOTTOM_COLUMN1, app\models\CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $UnitID);
 
                     if ($blocks) {
-
                         foreach ($blocks as $block) {
+                            $IconClass = $block->BlockIconCSSClass;
                             ?>
                             <div class="widget-title">
-                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn ?></h3>
+                                <h3 class="title">
+                                    <?php if (!empty($IconClass) && empty($block->BlockIconPicture) && empty($block->BlockIconVideo)) { ?>
+                                        <i class="<?php echo $IconClass; ?>"></i>
+                                    <?php } ?>
+                                    <?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn ?></h3>
                             </div>
+                            <?php
+                            if (!empty($block->BlockIconPicture)) {
+                                ?>
+                                <a href="<?php echo \app\components\Utilities::generateUrl($block->LinkToPage); ?>" >
+                                    <img class="<?php echo $IconClass; ?>" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $block->BlockIconPicture; ?>">
+                                </a>
+                                <?php
+                            } elseif (!empty($block->BlockIconVideo)) {
+                                ?>
+                                <div class="<?php echo $IconClass; ?>">
+                                    <?php echo $block->BlockIconVideo ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <p style="text-align: justify"><?php echo (Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn; ?></p>
                             <?php
                         }
@@ -75,6 +94,21 @@ $UnitID = $this->params['unit_id'];
                             <div class="widget-title">
                                 <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn ?></h3>
                             </div>
+                            <?php
+                            if (!empty($block->BlockIconPicture)) {
+                                ?>
+                                <a href="<?php echo \app\components\Utilities::generateUrl($block->LinkToPage); ?>" >
+                                    <img class="<?php echo $IconClass; ?>" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $block->BlockIconPicture; ?>">
+                                </a>
+                                <?php
+                            } elseif (!empty($block->BlockIconVideo)) {
+                                ?>
+                                <div class="<?php echo $IconClass; ?>">
+                                    <?php echo $block->BlockIconVideo ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <p style="text-align: justify"><?php echo (Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn; ?></p>
                             <?php
                         }
@@ -127,8 +161,28 @@ $UnitID = $this->params['unit_id'];
                         foreach ($blocks as $block) {
                             ?>
                             <div class="widget-title">
-                                <h3 class="title"><?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn ?></h3>
+                                <h3 class="title">
+                                    <?php
+                                    if ($block->BlockIconCSSClass) {
+                                        ?><i class="<?php echo $block->BlockIconCSSClass; ?>"></i><?php
+                                    }
+                                    ?>       
+                                    <?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn ?></h3>
                             </div>
+                            <?php if (!empty($block->BlockIconPicture)) {
+                                ?>
+                                <a href="<?php echo \app\components\Utilities::generateUrl($block->LinkToPage); ?>" >
+                                    <img class="<?php echo $block->BlockIconCSSClass; ?>" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $block->BlockIconPicture; ?>">
+                                </a>
+                                <?php
+                            } elseif (!empty($block->BlockIconVideo)) {
+                                ?>
+                                <div class="<?php echo $IconClass; ?>">
+                                    <?php echo $block->BlockIconVideo ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <p style="text-align: justify"><?php echo (Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn; ?></p>
                             <?php
                         }

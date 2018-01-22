@@ -35,7 +35,7 @@ class CollegeController extends Controller {
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'programs'],
+                        'actions' => ['index', 'programs', 'researchs', 'contacts', 'page', 'news', 'announcements', 'events'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -111,7 +111,7 @@ class CollegeController extends Controller {
                     $unit_codes = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($Academic_unit_details->Id);
 
                     if ($unit_codes && isset($unit_codes['abv']) && isset($unit_codes['type']) && ($url == trim('/' . $unit_codes['type'] . '/' . $unit_codes['abv'] . '/') OR $url == trim('/' . $unit_codes['type'] . '/' . $unit_codes['abv']))) {
-                        $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID($Academic_unit_details->Id, 5);
+                        $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID($Academic_unit_details->Id, 10);
                         //$content['home_content_slideshow_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
                         $content['home_content_slideshow_right_menus'] = array();
                         $home_content_slideshow_right_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
@@ -205,6 +205,7 @@ class CollegeController extends Controller {
                         }
                     } else {
                         ///LOADING THE CUSTOM PAGE HERE
+
                         $content['page_content'] = \app\components\Utilities::getPageContentByUrl($url);
                         if ($content['page_content']) {
                             //side menu area
@@ -245,6 +246,7 @@ class CollegeController extends Controller {
 //getting user current langauage;
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+
 
         $url_sections = explode('/', $url);
         if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'college' OR $url_sections[1] == 'colleges' )) {
@@ -301,28 +303,14 @@ class CollegeController extends Controller {
                 $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
                 $content['unit_details'] = $Academic_unit_details;
                 if ($Academic_unit_details) {
-                    $content['page_details'] = \app\models\BasicPage::getActivePageDetailsByUrl($url, $Academic_unit_details->Id);
-
-                    $content['home_content_slideshow_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    //getting data for the home page top column 1,2 & 3
-                    $content['home_content_top_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_top_column3_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, $Academic_unit_details->Id, 0);
-                    $content['home_content_top_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_middle_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_MIDDLE__RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-
-                    ////getting contend to the content bottom area
-                    $content['home_content_bottom_column1'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_bottom_column2'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_bottom_column3'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    $contacts_main = \app\models\Contacts::getActiveUnitsContacts($Academic_unit_details->Id);
+                    $content['contacts_main'] = $contacts_main;
                 } else {
                     $content['no_details'] = 'The requested page or section is not found';
                 }
-            } else {
-                $content['no_details'] = 'The requested page or section is not found';
             }
         }
-
-        return $this->render('//site/college/basic_page', $content);
+        return $this->render('//site/college/contacts', $content);
     }
 
     public function actionPrograms() {
@@ -348,7 +336,9 @@ class CollegeController extends Controller {
                         $FieldOfStudy = Yii::$app->request->post('FieldStudy');
                         $programmeType = Yii::$app->request->post('PTYpe');
 
-                        $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                        //$page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                        $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+
                         $content['page_content'] = $page_content;
                     } else {
                         $programmeType = $Keyword = $UnitID = $FieldOfStudy = NULL;
@@ -365,7 +355,9 @@ class CollegeController extends Controller {
                             $content['page_content'] = $page_content;
                             return $this->render('//site/college/programme_details', $content);
                         } else {
-                            $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                            //$page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                            $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+
                             $content['page_content'] = $page_content;
                         }
                     }
@@ -382,7 +374,7 @@ class CollegeController extends Controller {
         return $this->render('//site/college/programmes', $content);
     }
 
-    public function actionResearch() {
+    public function actionResearchs() {
 //getting user current langauage;
         $content = array();
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
@@ -392,21 +384,38 @@ class CollegeController extends Controller {
             $unit_abbreviation = trim($url_sections[2]);
             if (!empty($unit_abbreviation)) {
                 $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
-                $content['unit_details'] = $Academic_unit_details;
                 if ($Academic_unit_details) {
-                    $content['page_details'] = \app\models\BasicPage::getActivePageDetailsByUrl($url, $Academic_unit_details->Id);
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    if (Yii::$app->request->post()) {
+                        $Keyword = Yii::$app->request->post('ResearchProjects');
+                        $UnitID = $Academic_unit_details->Id;
+                        $page_content = \app\models\ResearchProjects::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $language);
+                        $content['page_content'] = $page_content;
+                    } else {
+                        $Keyword = $UnitID = NULL;
+                        $UnitID = $Academic_unit_details->Id;
+                        $url_section = explode('/', $url);
+                        $Keyword = NULL;
+                        if (count($url_section) == 5 && isset($url_section[4]) && isset($url_section[3]) && ($url_section[3] == 'programs' OR $url_section[3] == 'programmes')) {
+                            $Keyword = $url_section[4];
+                        }
 
-                    $content['home_content_slideshow_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    //getting data for the home page top column 1,2 & 3
-                    $content['home_content_top_column1_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_LEFT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_top_column3_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, $Academic_unit_details->Id, 0);
-                    $content['home_content_top_column3_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_TOP_RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_middle_right_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_MIDDLE__RIGHT, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                        if (strlen($Keyword) > 1) {
+                            $page_content = \app\models\ResearchProjects::getProgrameDetailsByProgrammeUrl($Keyword);
+                            $content['page_content'] = $page_content;
+                            return $this->render('//site/college/research_details', $content);
+                        } else {
+                            $page_content = \app\models\ResearchProjects::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $language);
+                            $content['page_content'] = $page_content;
+                        }
+                    }
 
-                    ////getting contend to the content bottom area
-                    $content['home_content_bottom_column1'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN1, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_bottom_column2'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN2, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
-                    $content['home_content_bottom_column3'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_CONTENT_BOTTOM_COLUMN3, CustomBlocks::BLOCK_TYPE_HOME_PAGE, 0, $Academic_unit_details->Id);
+                    ////////////////
                 } else {
                     $content['no_details'] = 'The requested page or section is not found';
                 }
@@ -415,7 +424,7 @@ class CollegeController extends Controller {
             }
         }
 
-        return $this->render('//site/college/basic_page', $content);
+        return $this->render('//site/college/researchs', $content);
     }
 
     public function actionForbidden() {
@@ -553,6 +562,34 @@ class CollegeController extends Controller {
             }
         }
         return $this->render('//site/college/events_list', $content);
+    }
+
+    public function actionStaff() {
+        //getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'college' OR $url_sections[1] == 'colleges' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                if ($Academic_unit_details) {
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    $page_content = \app\models\StaffList::getActiveStaffByUnit($Academic_unit_details->Id, \app\models\StaffList::STATUS_PUBLISHED);
+                    $content['page_content'] = $page_content;
+                    if ($page_content) {
+                        $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
+                    }
+                }
+            }
+        }
+        return $this->render('//site/college/leadership', $content);
     }
 
 }

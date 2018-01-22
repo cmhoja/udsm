@@ -34,6 +34,8 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
     const UNIT_TYPE_INSTITUTE = 4;
     const UNIT_TYPE_CENTRE = 5;
     const UNIT_TYPE_DEPARTMENT = 6;
+    const UNIT_TYPE_DIRECTORATE = 7;
+    const UNIT_TYPE_OFFICE = 8;
     //content management type
     const CONTENTMANAGEMENT_INTERNAL = 1;
     const CONTENTMANAGEMENT_EXTERNAL = 2;
@@ -143,7 +145,9 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             self::UNIT_TYPE_SCHOOL => 'Schools',
             self::UNIT_TYPE_INSTITUTE => 'Institutes',
             self::UNIT_TYPE_CENTRE => 'Centres',
-                // self::UNIT_TYPE_DEPARTMENT => 'Departments',
+            // self::UNIT_TYPE_DEPARTMENT => 'Departments',
+            self::UNIT_TYPE_DIRECTORATE => 'Directorates',
+            self::UNIT_TYPE_OFFICE => 'Offices'
         );
     }
 
@@ -215,6 +219,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
             foreach ($ParentUnits as $parent) {
                 $data[$parent->Id] = strtoupper($parent->UnitNameEn);
                 $condition2['ParentUnitId'] = $parent->Id;
+
                 $ChildUnits = AcademicAdministrativeUnit::findAll($condition2);
                 foreach ($ChildUnits as $ChildUnit) {
                     $data[$ChildUnit->Id] = '----' . $ChildUnit->UnitNameEn;
@@ -241,7 +246,7 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
 
     static function getUnitAbbreviationAndTypeByID($Id) {
         if ($Id) {
-            $unit = self::find()->where(['Id' => $Id])->one();
+            $unit = self::find()->where('Id=:id', [':id' => $Id])->one();
             if ($unit && $unit->UnitAbreviationCode) {
                 return array('abv' => strtolower($unit->UnitAbreviationCode), 'type' => strtolower($unit->getUnitTypeName()));
             }
@@ -249,8 +254,22 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
         return NULL;
     }
 
+    static function getUnitAbbreviationByID($Id) {
+        if ($Id) {
+            $unit = self::find()->where('Id=:id', [':id' => $Id])->one();
+            if ($unit && $unit->UnitAbreviationCode) {
+                return strtolower($unit->UnitAbreviationCode);
+            }
+        }
+        return NULL;
+    }
+
     static function getAcademicUnitsList() {
         return self::find()->where(['in', 'UnitType', [self::UNIT_TYPE_CENTRE, self::UNIT_TYPE_COLLEGE, self::UNIT_TYPE_CONSTINTUENT_COLLEGE, self::UNIT_TYPE_INSTITUTE, self::UNIT_TYPE_SCHOOL]])->all();
+    }
+
+    static function getInternalAcademicUnitsList() {
+        return self::find()->where(['TypeContentManagement' => self::CONTENTMANAGEMENT_INTERNAL])->andWhere(['in', 'UnitType', [self::UNIT_TYPE_CENTRE, self::UNIT_TYPE_COLLEGE, self::UNIT_TYPE_CONSTINTUENT_COLLEGE, self::UNIT_TYPE_INSTITUTE, self::UNIT_TYPE_SCHOOL]])->orderBy('UnitNameEn ASC')->all();
     }
 
 }

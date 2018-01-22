@@ -135,7 +135,7 @@
                                         <?php if ($slideshow->LinkToPage): ?>
                                             <a href="<?php app\components\Utilities::generateUrl($slideshow->LinkToPage); ?>">
                                             <?php endif; ?>
-                                            <img data-u="image" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $slideshow->Image; ?>" />
+                                            <img data-u="image" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $slideshow->Image; ?>" />
                                             <div data-u="caption" class="slider-caption"><?php echo (Yii::$app->language == 'sw') ? $slideshow->TitleSw : $slideshow->TitleEn; ?></div>
 
                                             <?php if ($slideshow->LinkToPage): ?>
@@ -182,7 +182,7 @@
                             </div>
                             <?php if (isset($custom_block->BlockIconPicture) && $custom_block->BlockIconPicture): ?>
                                 <div style="padding: 2%;width: 95%">
-                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block->BlockIconPicture; ?>">
+                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $custom_block->BlockIconPicture; ?>">
                                 </div>
                             <?php endif; ?>
 

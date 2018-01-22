@@ -11,18 +11,20 @@
                     <ul class="latest-posts">
 
                         <?php foreach ($home_content_middle_left_news as $news) { ?>
-                            <li>
+                            <li style="text-decoration: none; list-style: none !important; margin-bottom: 1.6% !important;">
                                 <?php if (!empty($news->Photo)): ?>
                                     <div class="post-thumb">
-                                        <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?>" alt="" title="" width="84" height="84">
-
+                                        <img class="img-rounded" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?>" alt="" title="" width="90" height="60">
                                     </div>
                                 <?php endif; ?>
                                 <div class="post-details">
-                                    <div class="description">
+                                    <div class="description" >
                                         <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl) ?>">
                                             <?php echo (Yii::$app->language == 'sw') ? $news->TitleSw : $news->TitleEn ?>
                                         </a>
+                                        <p style="margin: 0;"> 
+                                            <?php echo substr(strip_tags((Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn),0,100).' ..' ?>
+                                        </p>
                                     </div>
                                     <div class="meta">
                                         <!-- Meta Date -->
@@ -46,21 +48,26 @@
                         ?>
                         <div class="section-title text-left">
                             <!-- Heading -->
-                            <h2 class="title"><?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn; ?></h2>
+                            <h2 class="title">
+                                <?php if (isset($block->BlockIconCSSClass) && $block->BlockIconCSSClass): ?>
+                                    <i class="fa <?php echo $block->BlockIconCSSClass; ?>"></i>
+                                <?php endif; ?>
+                                <?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn; ?>
+                            </h2>
                         </div>
                         <?php if (isset($block->BlockIconPicture) && $block->BlockIconPicture): ?>
-                            <a href="<?php echo app\components\Utilities::generateUrl($block->LinkToPage) ?>"><img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $block->BlockIconPicture; ?>"></a>
+                            <a href="<?php echo app\components\Utilities::generateUrl($block->LinkToPage) ?>"><img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $block->BlockIconPicture; ?>"></a>
                         <?php endif; ?>
 
-                        <?php if (!$block->BlockIconVideo && $block->BlockIconVideo): ?>
+                        <?php if (!$block->BlockIconPicture && $block->BlockIconVideo): ?>
                             <div style="padding: 1%">
                                 <?php echo $block->BlockIconVideo; ?>
                             </div>
                         <?php endif; ?>
-
-                        <h5 class=""><a href="<?php echo app\components\Utilities::generateUrl($block->LinkToPage) ?>" class="promotions"><?php echo (Yii::$app->language == 'sw') ? $block->BlockTitleSw : $block->BlockTitleEn; ?></a></h5>
-                        <p><?php echo substr((Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn, 0, 200); ?></p>
-
+                        <p><?php echo substr((Yii::$app->language == 'sw') ? $block->BlockDetailsSw : $block->BlockDetailsEn, 0, 400); ?></p>
+                        <?php if ($block->LinkToPage): ?>
+                            <a href="<?php echo app\components\Utilities::generateUrl($block->LinkToPage) ?>" class="btn-transparent"><?php echo Yii::$app->params['static_items']['read'][Yii::$app->language]; ?></a>
+                        <?php endif; ?>
                         <?php
                     }
                 }

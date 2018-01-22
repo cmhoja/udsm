@@ -27,6 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ])
             ?>
         <?php } ?>
+        <?php if ($model->Status != app\models\Programmes::PROGRAME_STATUS_PUBLISHED) { ?>
+            <?= Html::a('Publish', ['publish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to publish this item?')])
+            ?>
+
+        <?php } ?>
+
+        <?php if ($model->Status == app\models\ResearchProjects::PROJECT_STATUS_PUBLISHED) { ?>
+            <?= Html::a('Un Publish', ['unpublish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to publish this item?')])
+            ?>
+        <?php } ?>
     </p>
 
     <?=
@@ -64,15 +74,3 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 </div>
-<p>
-    <?php if ($model->Status != app\models\Programmes::PROGRAME_STATUS_PUBLISHED) { ?>
-        <?= Html::a('Publish', ['publish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to publish this item?')])
-        ?>
-
-    <?php } ?>
-
-    <?php if ($model->Status == app\models\ResearchProjects::PROJECT_STATUS_PUBLISHED) { ?>
-        <?= Html::a('Un Publish', ['unpublish', 'id' => $model->Id], ['class' => 'btn btn-primary', 'data-confirm' => Yii::t('yii', 'Are you sure you want to publish this item?')])
-        ?>
-    <?php } ?>
-</p>

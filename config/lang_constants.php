@@ -98,6 +98,11 @@ return [
     'programme_type' => ['en' => 'Programme Type', 'sw' => 'Aina ya Kozi'],
     'research' => ['en' => 'Research', 'sw' => 'Tafiti'],
     'research_projects' => ['en' => 'Research Projects', 'sw' => 'Tafiti Mbalimbali'],
+    'research_details' => ['en' => 'Research Details', 'sw' => 'Maelezo Ya Tafiti'],
+    'project_name' => ['en' => 'Project Name', 'sw' => 'Jina'],
+    'start_year' => ['en' => 'Start Year', 'sw' => 'Mwaka Ilipoanza'],
+    'end_year' => ['en' => 'End year', 'sw' => 'Mwaka wa Kumaliza'],
+    'principal_researcher' => ['en' => 'Principal Researcher', 'sw' => 'Mtafiti Mkuu'],
     'download' => ['en' => 'Download', 'sw' => 'Pakua'],
     'name' => ['en' => 'Name', 'sw' => 'Jina'],
     'type' => ['en' => 'Type', 'sw' => 'Aina'],
@@ -114,5 +119,6 @@ return [
     'programe_college_unit' => ['en' => 'College/Unit', 'sw' => 'Kitivo/Idara'],
     'programe_duration' => ['en' => 'Duration', 'sw' => 'Muda'],
     'programe_field_of_study' => ['en' => 'Field of Study', 'sw' => 'Aina ya Masomo'],
-    'attachment' => ['en' => 'Attachment', 'sw' => 'Kiambata']
+    'attachment' => ['en' => 'Attachment', 'sw' => 'Kiambata'],
+    'staff_list' => ['en' => 'Staff List', 'sw' => 'Orodha Watumishi'],
 ];

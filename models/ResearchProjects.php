@@ -119,4 +119,34 @@ class ResearchProjects extends \yii\db\ActiveRecord {
         return self::find()->where('PageLinkUrl=:PageLinkUrl', $condition)->one();
     }
 
+    static function getProjectByKeyWordUnitTypeFieldsOfStudy($Keyword = NULL, $UnitID = NULL, $lang = NULL) {
+        $condition = $where = $orderBy = NULL;
+        if (!empty($lang)) {
+            switch ($lang) {
+                case 'sw':
+                    $orderBy = 'ProjectNameSw ASC';
+                    break;
+
+                default:
+                    $orderBy = 'ProjectNameEn ASC';
+                    break;
+            }
+        }
+        if ($UnitID > 0) {
+            $where['UnitID'] = $UnitID;
+        }
+
+        return self::find()
+                        ->where($where)
+                        ->andFilterCompare('ProjectNameEn', $Keyword, 'LIKE')
+                        ->andFilterCompare('ProjectNameSw', $Keyword, 'LIKE')
+                        ->orderBy($orderBy)
+                        ->all();
+    }
+
+    static function getProgrameDetailsByProgrammeUrl($ProjectLinkUrl) {
+        $condition = array('ProjectLinkUrl' => $ProjectLinkUrl);
+        return self::find()->where($condition)->one();
+    }
+
 }

@@ -22,7 +22,7 @@ $this->title = Yii::$app->params['static_items']['news'][Yii::$app->language];
                                 <?php if (!empty($news->Photo)): ?>
                                     <div class="col-sm-4 col-md-2">
                                         <div class="pull-left">
-                                            <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?> " alt="" title="">
+                                            <img width="140" height="120" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $news->Photo; ?> " alt="" title="">
                                         </div>
 
                                     </div>
@@ -39,7 +39,7 @@ $this->title = Yii::$app->params['static_items']['news'][Yii::$app->language];
 
                                     <div class="post-content"><p><?php echo substr((Yii::$app->language == 'sw') ? $news->DetailsSw : $news->DetailsEn, 0, 250); ?></p></div>
 
-                                    <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>" class="btn btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
+                                    <a href="<?php echo app\components\Utilities::generateUrl($news->LinkUrl); ?>" class="btn btm-small btn-default"><?php echo Yii::$app->params['static_items']['read_more'][Yii::$app->language]; ?></a>
 
                                 </div>
 

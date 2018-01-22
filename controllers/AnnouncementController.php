@@ -87,8 +87,8 @@ class AnnouncementController extends Controller {
             $model->UnitID = Yii::$app->session->get('UNIT_ID');
         }
         if ($model->load(Yii::$app->request->post())) {
-            $model->TitleEn = strtolower($model->TitleEn);
-            $model->TitleSw = strtolower($model->TitleSw);
+            $model->TitleEn = trim($model->TitleEn);
+            $model->TitleSw = trim($model->TitleSw);
             $model->Status = Announcement::STATUS_SAVED;
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = Announcement::STATUS_SAVED;
@@ -164,8 +164,8 @@ class AnnouncementController extends Controller {
             $model->UnitID = Yii::$app->session->get('UNIT_ID');
         }
         if ($model->load(Yii::$app->request->post())) {
-            $model->TitleEn = strtolower($model->TitleEn);
-            $model->TitleSw = strtolower($model->TitleSw);
+            $model->TitleEn = trim($model->TitleEn);
+            $model->TitleSw = trim($model->TitleSw);
             $model->Status = Announcement::STATUS_SAVED;
             if (Yii::$app->request->post('save') == 'save') {
                 $model->Status = Announcement::STATUS_SAVED;

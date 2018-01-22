@@ -55,7 +55,8 @@ class CustomBlocks extends \yii\db\ActiveRecord {
             [['Upload'], 'file', 'maxFiles' => 1, 'extensions' => 'png, jpg,jpeg', 'mimeTypes' => 'image/jpeg, image/png',],
             [['BlockIconCSSClass'], 'safe'],
             [['BlockIconCSSClass', 'BlockTitleEn', 'BlockTitleSw'], 'string', 'max' => 100],
-            [['BlockIconPicture', 'BlockIconVideo', 'LinkToPage', 'ShowOnPage'], 'string', 'max' => 255],
+            [['BlockIconPicture', 'LinkToPage'], 'string', 'max' => 255],
+            [['ShowOnPage','BlockIconVideo'], 'safe'],
         ];
     }
 

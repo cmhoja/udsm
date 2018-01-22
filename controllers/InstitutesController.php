@@ -111,7 +111,7 @@ class InstitutesController extends Controller {
                     $unit_codes = \app\models\AcademicAdministrativeUnit::getUnitAbbreviationAndTypeByID($Academic_unit_details->Id);
 
                     if ($unit_codes && isset($unit_codes['abv']) && isset($unit_codes['type']) && ($url == trim('/' . $unit_codes['type'] . '/' . $unit_codes['abv'] . '/') OR $url == trim('/' . $unit_codes['type'] . '/' . $unit_codes['abv']))) {
-                        $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID($Academic_unit_details->Id, 5);
+                        $content['home_content_slideshow'] = SlideShows::getActiveLastestSlideShowsByUnitID($Academic_unit_details->Id, 10);
                         //$content['home_content_slideshow_right_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
                         $content['home_content_slideshow_right_menus'] = array();
                         $home_content_slideshow_right_menus = Menu::getActiveMenuGroupDetailsByMenuTypeRegionAndUnitID(Menu::MENU_TYPE_OTHER_MENU, SiteRegions::COLLEGE_TEMPLATE_HOMEPAGE_SLIDESSHOW_RIGHT, $Academic_unit_details->Id, 0);
@@ -347,7 +347,8 @@ class InstitutesController extends Controller {
                         $FieldOfStudy = Yii::$app->request->post('FieldStudy');
                         $programmeType = Yii::$app->request->post('PTYpe');
 
-                        $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                        //$page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                        $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
                         $content['page_content'] = $page_content;
                     } else {
                         $programmeType = $Keyword = $UnitID = $FieldOfStudy = NULL;
@@ -364,7 +365,8 @@ class InstitutesController extends Controller {
                             $content['page_content'] = $page_content;
                             return $this->render('//site/college/programme_details', $content);
                         } else {
-                            $page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                            //$page_content = \app\models\Programmes::getProgrammesByKeyWordUnitTypeFieldsOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
+                            $page_content = \app\models\Programmes::getProgrammesByKeywordUnitTypeFieldOfStudy($Keyword, $UnitID, $programmeType, $FieldOfStudy, $language);
                             $content['page_content'] = $page_content;
                         }
                     }
@@ -552,6 +554,34 @@ class InstitutesController extends Controller {
             }
         }
         return $this->render('//site/college/events_list', $content);
+    }
+
+    public function actionStaff() {
+        //getting user current langauage;
+        $content = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_sections = explode('/', $url);
+        if (isset($url_sections[1]) && isset($url_sections[2]) && ($url_sections[1] == 'institute' OR $url_sections[1] == 'institutes' )) {
+            ///getting pgae details
+            $unit_abbreviation = trim($url_sections[2]);
+            if (!empty($unit_abbreviation)) {
+                $Academic_unit_details = \app\models\AcademicAdministrativeUnit::find()->where(array('UnitAbreviationCode' => $unit_abbreviation, 'ParentUnitId' => 0))->one();
+                if ($Academic_unit_details) {
+                    ////getting sie menu if any
+                    $content['side_menus'] = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, $Academic_unit_details->Id, $url);
+                    //var_dump($content['side_menus']);
+                    $content['side_blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, $Academic_unit_details->Id);
+                    $language = Yii::$app->language;
+                    $content['unit_details'] = $Academic_unit_details;
+                    $page_content = \app\models\StaffList::getActiveStaffByUnit($Academic_unit_details->Id, \app\models\StaffList::STATUS_PUBLISHED);
+                    $content['page_content'] = $page_content;
+                    if ($page_content) {
+                        $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
+                    }
+                }
+            }
+        }
+        return $this->render('//site/college/leadership', $content);
     }
 
 }

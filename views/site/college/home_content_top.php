@@ -22,7 +22,7 @@
                             </div>
                             <?php if (isset($custom_block1->BlockIconPicture) && $custom_block1->BlockIconPicture): ?>
                                 <div style="padding: 2%;width: 95%">
-                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block1->BlockIconPicture; ?>">
+                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $custom_block1->BlockIconPicture; ?>">
                                 </div>
                             <?php endif; ?>
 
@@ -166,7 +166,7 @@
                             </div>
                             <?php if (isset($custom_block3->BlockIconPicture) && $custom_block3->BlockIconPicture): ?>
                                 <div style="padding: 2%;width: 95%">
-                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block3->BlockIconPicture; ?>">
+                                    <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $custom_block3->BlockIconPicture; ?>">
                                 </div>
                             <?php endif; ?>
 

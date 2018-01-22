@@ -41,7 +41,7 @@ class SlideShows extends \yii\db\ActiveRecord {
         return [
             [['TitleEn', 'TitleSw', 'Upload','ListOrder'], 'required'],
             [['UnitID', 'Status'], 'integer'],
-            [['TitleEn', 'TitleSw', 'LinkToPage'], 'string', 'max' => 120],
+            [['TitleEn', 'TitleSw', 'LinkToPage'], 'string', 'max' => 200],
             [['DetailsEn', 'DetailsSw'], 'string', 'max' => 400],
             [['Upload'], 'file', 'maxFiles' => 1, 'skipOnEmpty' => false, 'extensions' => 'png, jpg,jpeg', 'mimeTypes' => 'image/jpeg, image/png',],
             [['UnitID'], 'exist', 'skipOnError' => true, 'targetClass' => AcademicAdministrativeUnit::className(), 'targetAttribute' => ['UnitID' => 'Id']],

@@ -39,12 +39,13 @@ class BasicPage extends \yii\db\ActiveRecord {
         return [
             [['PageTitleEn', 'PageTitleSw', 'DescriptionEn', 'DescriptionSw', 'Status'], 'required'],
             [['DescriptionEn', 'DescriptionSw'], 'string'],
+            [['PageSeoUrl'], 'unique'],
+            [['Attachment'], 'file', 'maxFiles' => 1, 'extensions' => 'docx, doc, pdf,xlsx,xls,odt, jpg,jpeg',],
+            [['Photo'], 'file', 'maxFiles' => 1, 'extensions' => 'png,jpg,jpeg'],
             [['DateCreated', 'SectionLink'], 'safe'],
             [['Status', 'UnitID'], 'integer'],
             [['PageSeoUrl'], 'string', 'min' => 2],
-            [['PageTitleEn', 'PageTitleSw', 'Attachment'], 'string', 'max' => 200],
-            [['EmbededVideo', 'PageSeoUrl'], 'string', 'max' => 255],
-            [['PageSeoUrl'], 'unique'],
+            [['PageTitleEn', 'PageTitleSw', 'EmbededVideo', 'PageSeoUrl'], 'string', 'max' => 255],
         ];
     }
 
@@ -58,7 +59,8 @@ class BasicPage extends \yii\db\ActiveRecord {
             'PageTitleSw' => 'Page Title Sw',
             'DescriptionEn' => 'Description En',
             'DescriptionSw' => 'Description Sw',
-            'Attachment' => 'Page Doument/Attachment',
+            'Attachment' => 'Page Document/Attachment',
+'Photo' => 'Page Photo/Picture',
             'EmbededVideo' => 'Page Video(Embeded Video)',
             'PageSeoUrl' => 'Page Seo Url',
             'DateCreated' => 'Date Created',
@@ -85,10 +87,13 @@ class BasicPage extends \yii\db\ActiveRecord {
     }
 
     static function getActivePageDetailsByUrl($url, $UnitID = NULL) {
-
+        $condition = ['PageSeoUrl' => $url, 'Status' => self::STATUS_PUBLISHED];
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        }
         return self::find()
-                        ->select('PageId,PageTitleEn,PageTitleSw,DescriptionEn,DescriptionSw,Attachment,EmbededVideo,PageSeoUrl,')
-                        ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
+                        ->select('PageId,PageTitleEn,PageTitleSw,DescriptionEn,DescriptionSw,Attachment,Photo,EmbededVideo,PageSeoUrl,')
+                        ->where($condition)
                         ->one();
     }
 
@@ -100,9 +105,12 @@ class BasicPage extends \yii\db\ActiveRecord {
     }
 
     static function getActivePageAllDetailsByUrl($url, $UnitID = NULL) {
-
+        $condition = ['PageSeoUrl' => $url, 'Status' => self::STATUS_PUBLISHED];
+        if ($UnitID) {
+            $condition['UnitID'] = $UnitID;
+        }
         return self::find()
-                        ->where(['PageSeoUrl' => $url, 'UnitID' => $UnitID, 'Status' => self::STATUS_PUBLISHED])
+                        ->where($condition)
                         ->one();
     }
 

@@ -89,9 +89,8 @@ class MatukioController extends Controller {
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            var_dump(Yii::$app->request->post('Events'));
-            $model->EventTitleEn = strtolower($model->EventTitleEn);
-            $model->EventTitleSw = strtolower($model->EventTitleSw);
+            $model->EventTitleEn = trim($model->EventTitleEn);
+            $model->EventTitleSw = trim($model->EventTitleSw);
             //  $model->EventTitleSw = strtolower($model->EventTitleSw);
             if ($model->StartDate) {
                 $model->StartDate = Date('Y-m-d', strtotime($model->StartDate));
@@ -177,8 +176,8 @@ class MatukioController extends Controller {
         }
         $Attachment = $model->Attachment;
         if ($model->load(Yii::$app->request->post())) {
-            $model->EventTitleEn = strtolower($model->EventTitleEn);
-            $model->EventTitleSw = strtolower($model->EventTitleSw);
+            $model->EventTitleEn = trim($model->EventTitleEn);
+            $model->EventTitleSw = trim($model->EventTitleSw);
             if ($model->StartDate) {
                 $model->StartDate = Date('Y-m-d', strtotime($model->StartDate));
             }

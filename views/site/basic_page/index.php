@@ -8,11 +8,28 @@
                     <div class=" col-sm-12">
                         <?php if (isset($page_content->Photo)):
                             ?>
-                            <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $page_content->Photo; ?>">
+                            <img style="max-height:70%; width: 99%;" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Photo; ?>">
                         <?php endif; ?>
+
+                        <?php if (!$page_content->Photo && $page_content->EmbededVideo) { ?>
+                            <div class="videoWrapper">
+                                <?php echo $page_content->EmbededVideo; ?>
+                            </div>
+                        <?php } ?>
+
                         <p style="text-align: justify">
                             <?php echo (Yii::$app->language == 'sw') ? $page_content->DescriptionSw : $page_content->DescriptionEn ?>
                         </p>
+                        <?php
+                        if ($page_content->Attachment):
+                            ?> 
+                            <div class="news-content">
+                                <?php echo Yii::$app->params['static_items']['attachment'][Yii::$app->language] . ': '; ?>
+                                <a target="_blank" download href= "<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/../' . (Yii::$app->params['file_upload_main_site'] . '/' . $page_content->Attachment); ?>">  <?php echo Yii::$app->params['static_items']['download'][Yii::$app->language]; ?></a>
+                            </div>
+                            <?php
+                        endif;
+                        ?>
                     </div>
                     <!--CUSTOM_PAGE_CONTENT_TOP COLUMN1_3-->
                     <?php
@@ -85,7 +102,7 @@
                                     <!-- Heading -->
                                     <h2 class="title">
                                         <?php if (isset($custom_block->BlockIconCSSClass) && $custom_block->BlockIconCSSClass): ?>
-                                            <i class="fa fa-graduation-cap"></i>
+                                            <i class="fa <?php echo $custom_block->BlockIconCSSClass; ?>"></i>
                                         <?php endif; ?>
                                         <?php echo (Yii::$app->language == 'sw') ? $custom_block->BlockTitleSw : $custom_block->BlockTitleEn; ?>
                                     </h2>
@@ -93,7 +110,7 @@
                                 </div>
                                 <?php if (isset($custom_block->BlockIconPicture) && $custom_block->BlockIconPicture): ?>
                                     <div style="padding: 2%;width: 95%">
-                                        <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_units_site'] . '/' . $custom_block->BlockIconPicture; ?>">
+                                        <img class="thumbnails" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $custom_block->BlockIconPicture; ?>">
                                     </div>
                                 <?php endif; ?>
 
@@ -107,6 +124,9 @@
                                     <?php
                                     echo substr((Yii::$app->language == 'sw') ? $custom_block->BlockDetailsSw : $custom_block->BlockDetailsEn, 0, 250);
                                     ?>
+                                    <?php if ($custom_block->LinkToPage): ?>
+                                        <a href="<?php echo app\components\Utilities::generateUrl($custom_block->LinkToPage) ?>" class="btn-box"><?php echo Yii::$app->params['static_items']['read'][Yii::$app->language]; ?></a>
+                                    <?php endif; ?>
                                 </p>
 
                             </div>
