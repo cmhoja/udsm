@@ -1378,6 +1378,11 @@ textarea.form-control.height-82{
 	color: #fff;
 	padding: 5px 20px;
 	margin-bottom: 20px;
+	border-radius: 4px,
+}
+
+.welcome-note {
+	border-radius: 4px;
 }
 
 /*.royal-bg a {
@@ -1540,8 +1545,27 @@ i,
 .sticky-wrapper.is-sticky #sticker,
 .sticky-wrapper{
 	z-index:9999;
-	
+	margin-bottom: -8px;
 }
+
+.site_logo {
+	float: left;
+}
+
+.nkrumah-logo {
+	float: right;
+	margin-left: 12px;
+
+}
+
+.logo-text  {
+	
+	margin-top: 15px;
+	text-align: right;
+	padding-right: 5px;
+}
+
+
 .navbar{
 	margin-bottom:0;
 }
@@ -5821,15 +5845,6 @@ ul.tags li{
 .widget{	
 	font-size: 13px;
 }
-
-.widget.home-links a {
-	background-color: #f7f7f7 !important;
-	color: #225dcd;
-}
-
-.widget.home-links a:hover {
-	color: #000;
-}
 #footer .footer-widget {
   background: #f2f2f2;
   line-height: 21px;
@@ -5996,10 +6011,6 @@ ul.tags li{
 	height:700px;
 }
 
-.btm-margin {
-	margin-bottom: 5px
-
-}
 /* 4 Side Padding */
 .pad-5{
 	padding:0px 5px;
@@ -6402,36 +6413,37 @@ ul.tags li{
 }
 
 .course-finder {
+	background-color: #225dcd;
+	color: #fff !important;
+	border-radius: 4px;
 	
-
 
 }
 
 .course-finder .form-control {
-	
+	background: #fff !important;
 }
 
 .course-additions {
-	
+	padding-bottom: 32px;
 	
 }
 
 .course-additions li {
 	padding-bottom: 4.8px;
-	
+	display: inline-block;
 	padding-right: 8px;
 }
 
 .course-additions a{
-	
-	font-size: 14px;
+	color: #fff !important;
+	font-size: 16px;
 }
 
 .course-list li {
-	
+	display: inline-block;
 	font-size: 36px;
 	padding-right: 10px;
-	display: inline-block;
 }
 
 .course-list .no-course {
@@ -6482,7 +6494,7 @@ color: #000;
 	border-radius: 50%;
 	padding: 1px 0px;
 	line-height: 1.5em;
-	border: 2px solid #cccccc;
+	border: 1px solid #225dcd;
 	width: 60px;
 	height: 60px;
 }
@@ -6530,13 +6542,33 @@ p.event-title {
 position: relative;
 padding: 2%;
     left: 0;
-    top:540px;
-    background: #225dcd;
+    top:490px;
+    background: rgba(51, 51, 51, 0.80);
     color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.3);
-    font-size: 20px;
-    line-height: 18px
+  
+   
+    line-height: 18px;
 
+}
+
+.cap-main-title {
+	font-size: 26px;
+}
+
+.cap-sub-title {
+	font-size: 18px;
+}
+
+.cap-link {
+	color: #fff;
+    border: 2px solid #fff;
+    background: transparent;
+    border-radius: 4px;
+    float: right;
+    padding: 10px 15px;
+   
+    right: 0;
+    top: 40px;
 }
 
 .apply {
@@ -6545,79 +6577,18 @@ padding: 2%;
 
 }
 
-
-.calenderitem {
-    cursor: pointer;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 5px;
-    padding-top: 5px;
-
-}
-.calenderitem > div {
-    text-decoration: none;
-    color: #fff;
-    width: 70%;
-    display: inline-block;
-    vertical-align: top;
+.programs {
+	background-color: #225dcd;
+	color: #fff;
+	border: none;
 }
 
-.calenderitem .date.color2 > div {
-    background-color: #ee1608 !important;
-}
-
-    
-.calenderitem .date {
-    width: 55px !important;
-    transition: all 0.4s;
-    background: rgba(255, 165, 0, 0.77);
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    height: 40px;
-    padding-top: 0px !important;
-    padding-bottom: 10px !important;
+.nkurumah {
+    background-image: url(../img/nkurumah.png);
     background-repeat: no-repeat;
-    text-align: left;
-    background-size: 240% !important;
-    vertical-align: middle;
-    margin-right: 20px;
-    padding: 0px;
-    display: inline-block;
-    line-height: 20px;
-    color: white;
-    overflow: hidden;
+    background-position: right top;
 }
 
-.calenderitem .location {
-	color: #333;
-	font-size: 15px;
-
-
-}
-
-.calenderitem a {
-	font-size: 17px;
-}
-
-.site-right {
-	
-	position: relative;
-	left:328%;
-}
-
-.btn-transparent {
-
-    background: transparent;
-    border: 3px solid #225dcd;
-    border-radius: 0px;
-    padding: 10px 20px;
-    color: #225dcd;
-}
-
-.margin-btm {
-	margin-bottom: 10px;
-}
 
 
 
