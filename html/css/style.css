@@ -6589,6 +6589,23 @@ padding: 2%;
     background-position: right top;
 }
 
+.main-header {
+	background-color: #225dcd;
+}
+
+.uni-heading {
+	margin-top: 40px;
+}
+.uni-heading span{
+	color: #fff;
+	font-size: 25px;
+	text-align: center;
+	
+}
+
+.site_logo {
+	max-width: 90%;
+}
 
 
 
