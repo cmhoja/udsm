@@ -151,6 +151,7 @@ class SiteController extends Controller {
             return $this->render('//site/basic_page', $content);
         }
     }
+
     /**
      * Displays contact page.
      *
@@ -273,6 +274,99 @@ class SiteController extends Controller {
             Yii::$app->session->set('lang', Yii::$app->language);
         }
         $this->redirect(Utilities::generateUrl($url));
+    }
+
+    public function actionDirectory() {
+        $keyword = NULL;
+        $data = array();
+        $url = html_entity_decode(\app\components\Utilities::getPageUrl());
+        $url_keyword = explode('/', $url);
+        if (count($url_keyword) == 3 && isset($url_keyword[1]) && $url_keyword[1] == 'directory') {
+            $keyword = html_entity_decode($url_keyword[2]);
+        }
+        if ($keyword) {
+            //getting pages
+            $pages = \app\models\BasicPage::find()
+                    ->select('PageTitleEn,PageTitleSw,PageSeoUrl')
+                    ->where('UnitID IS NULL AND Status=:status', [':status' => \app\models\BasicPage::STATUS_PUBLISHED])
+                    ->where('PageTitleEn LIKE "' . strtolower($keyword) . '%" OR  PageTitleEn LIKE "' . strtoupper($keyword) . '%"')
+                    ->orWhere('PageTitleSw LIKE "' . strtolower($keyword) . '%" OR  PageTitleSw LIKE "' . strtoupper($keyword) . '%"')
+                    ->all();
+            foreach ($pages as $page) {
+                array_push($data, array(
+                    'nameEn' => $page->PageTitleEn, 'nameSw' => $page->PageTitleSw, 'url' => $page->PageSeoUrl
+                ));
+            }
+
+            //getting announcements
+            $announcements = Announcement::find()
+                    ->select('TitleEn,TitleSw,LinkUrl')
+                    ->where('UnitID IS NULL AND Status=:status', [':status' => Announcement::STATUS_PUBLISHED])
+                    ->where('TitleEn LIKE "' . strtolower($keyword) . '%" OR  TitleEn LIKE "' . strtoupper($keyword) . '%"')
+                    ->orWhere('TitleSw LIKE "' . strtolower($keyword) . '%" OR  TitleSw LIKE "' . strtoupper($keyword) . '%"')
+                    ->all();
+
+            foreach ($announcements as $announcement) {
+                array_push($data, array(
+                    'nameEn' => $announcement->TitleEn, 'nameSw' => $announcement->TitleSw, 'url' => $announcement->LinkUrl
+                ));
+            }
+            ///getting blocks
+            $blocks = CustomBlocks::find()
+                    ->select('BlockTitleEn,BlockTitleSw,LinkToPage')
+                    ->where('BlockUnitID IS NULL AND Status=:status', [':status' => Announcement::STATUS_PUBLISHED])
+                    ->where('BlockTitleEn LIKE "' . strtolower($keyword) . '%" OR  BlockTitleEn LIKE "' . strtoupper($keyword) . '%"')
+                    ->orWhere('BlockTitleSw LIKE "' . strtolower($keyword) . '%" OR  BlockTitleSw LIKE "' . strtoupper($keyword) . '%"')
+                    ->all();
+            foreach ($blocks as $block) {
+                array_push($data, array(
+                    'nameEn' => $block->BlockTitleEn, 'nameSw' => $block->BlockTitleSw, 'url' => $block->LinkToPage
+                ));
+            }
+            ///getting events
+            $events = Events::find()
+                    ->select('EventTitleEn,EventTitleSw,EventUrl')
+                    ->where('UnitID IS NULL AND Status=:status', [':status' => Announcement::STATUS_PUBLISHED])
+                    ->where('EventTitleEn LIKE "' . strtolower($keyword) . '%" OR  EventTitleEn LIKE "' . strtoupper($keyword) . '%"')
+                    ->orWhere('EventTitleSw LIKE "' . strtolower($keyword) . '%" OR  EventTitleSw LIKE "' . strtoupper($keyword) . '%"')
+                    ->all();
+
+            foreach ($events as $event) {
+                array_push($data, array(
+                    'nameEn' => $event->EventTitleEn, 'nameSw' => $event->EventTitleSw, 'url' => $event->EventUrl
+                ));
+            }
+            ///getting Programs
+            $programs = \app\models\Programmes::find()
+                    ->select('ProgrammeNameEn,ProgrammeNameSw,ProgrammeUrl')
+                    ->where('UnitID IS NULL AND Status=:status', [':status' => Announcement::STATUS_PUBLISHED])
+                    ->where('ProgrammeNameEn LIKE "' . strtolower($keyword) . '%" OR  ProgrammeNameEn LIKE "' . strtoupper($keyword) . '%"')
+                    ->orWhere('ProgrammeNameSw LIKE "' . strtolower($keyword) . '%" OR  ProgrammeNameSw LIKE "' . strtoupper($keyword) . '%"')
+                    ->all();
+            foreach ($programs as $program) {
+                array_push($data, array(
+                    'nameEn' => $program->ProgrammeNameEn, 'nameSw' => $program->ProgrammeNameSw, 'url' => $program->ProgrammeUrl
+                ));
+            }
+            ///getting research
+            $researchs = \app\models\ResearchProjects::find()
+                    ->select('ProjectNameEn,ProjectNameSw,ProjectLinkUrl')
+                    ->where('UnitID IS NULL AND Status=:status', [':status' => Announcement::STATUS_PUBLISHED])
+                    ->where('ProjectNameEn LIKE "' . strtolower($keyword) . '%" OR  ProjectNameEn LIKE "' . strtoupper($keyword) . '%"')
+                    ->orWhere('ProjectNameSw LIKE "' . strtolower($keyword) . '%" OR  ProjectNameSw LIKE "' . strtoupper($keyword) . '%"')
+                    ->all();
+            foreach ($researchs as $research) {
+                array_push($data, array(
+                    'nameEn' => $research->ProjectNameEn, 'nameSw' => $research->ProjectNameSw, 'url' => $research->ProjectLinkUrl
+                ));
+            }
+        }
+        $contents['page_content'] = $data;
+        $contents['blocks'] = CustomBlocks::getActiveBlocksByRegionId(SiteRegions::CUSTOM_PAGE_CONTENT_MIDDLE, CustomBlocks::BLOCK_TYPE_CUSTOM_PAGE, $url, NULL);
+
+        return $this->render('//site/pages/directory', [
+                    'content' => $contents
+        ]);
     }
 
 }
