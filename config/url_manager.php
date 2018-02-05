@@ -9,7 +9,7 @@ return [
     'enableStrictParsing' => FALSE,
     'rules' => [
         ///STUDY MENUS REOUTES
-        //COLLEGES PAGES
+        //COLLEGES PAGES ROUTES
         'colleges/<code>/programmes' => 'college/programs',
         'colleges/<code>/programs' => 'college/programs',
         'colleges/<code>/program' => 'college/programs',
@@ -24,13 +24,8 @@ return [
         'colleges/<code>/announcements/<item>' => 'college/announcements',
         'colleges/<code>/researchs/<item>' => 'college/researchs',
         'colleges/<code>/staff' => 'college/staff',
-        //'colleges/<code>/<page>/<action>' => 'colleges/<action>',
-        //'colleges/<code>/<page>' => 'colleges/page',
-//        'colleges|college/<code>/<page>/<item>' => 'college/index',
-//        'colleges|college/<code>/<page>/<item>/<subitem>' => 'college/index',
-//        'colleges|college/<code>/<page>/<item>/<subitem>/<subitem2>' => 'college/index',
         'colleges|college/<code>' => 'college/index',
-        //SCHOOLS PAGES
+        //SCHOOLS PAGES ROUTES
         'schools/<code>/programmes' => 'schools/programs',
         'schools/<code>/programs' => 'schools/programs',
         'schools/<code>/program' => 'schools/programs',
@@ -45,7 +40,7 @@ return [
         'schools/<code>/announcements/<item>' => 'schools/announcements',
         'schools|school/<code>' => 'schools/index',
         'schools|school/staff' => 'schools/staff',
-        //INSTITUTES PAGES
+        //INSTITUTES PAGES ROUTES
         'institutes/<code>/programmes' => 'institutes/programs',
         'institutes/<code>/programs' => 'institutes/programs',
         'institutes/<code>/program' => 'institutes/programs',
@@ -60,7 +55,7 @@ return [
         'institutes/<code>/announcements/<item>' => 'institutes/announcements',
         'institutes|institute/<code>' => 'institutes/index',
         'institutes|institute/staff' => 'institutes/staff',
-        //CENTRES PAGES
+        //CENTRES PAGES ROUTES
         'centres/<code>/programmes' => 'centres/programs',
         'centres/<code>/programs' => 'centres/programs',
         'centres/<code>/program' => 'centres/programs',
@@ -75,22 +70,41 @@ return [
         'centres/<code>/announcements/<item>' => 'centres/announcements',
         'centres|centre/<code>' => 'centres/index',
         'centres|centre/staff' => 'centres/staff',
-        //UNITS PAGES
-        'directorates/<code>/programmes' => 'directorates/programs',
-        'directorates/<code>/programs' => 'directorates/programs',
-        'directorates/<code>/program' => 'directorates/programs',
-        'directorates/<code>/programmes/<item>' => 'directorates/programs',
-        'directorates/<code>/programs/<item>' => 'directorates/programs',
-        'directorates/<code>/program/<item>' => 'directorates/programs',
-        'directorates/<code>/news/<item>' => 'directorates/news',
-        'directorates/<code>/news' => 'directorates/news',
-        'directorates/<code>/events/<item>' => 'directorates/events',
-        'directorates/<code>/events' => 'directorates/events',
-        'directorates/<code>/announcements' => 'directorates/announcements',
-        'directorates/<code>/announcements/<item>' => 'directorates/announcements',
-        'directorates/<code>/staff' => 'directorates/staff',
+        'centres|centre/staff' => 'centres/staff',
+        //DIRECTORATES PAGES ROUTES
+        'directorate/<code>/programmes' => 'directorate/programs',
+        'directorate/<code>/programs' => 'directorate/programs',
+        'directorate/<code>/program' => 'directorate/programs',
+        'directorate/<code>/programmes/<item>' => 'directorate/programs',
+        'directorate/<code>/programs/<item>' => 'directorate/programs',
+        'directorate/<code>/program/<item>' => 'directorate/programs',
+        'directorate/<code>/news/<item>' => 'directorate/news',
+        'directorate/<code>/news' => 'directorate/news',
+        'directorate/<code>/events/<item>' => 'directorate/events',
+        'directorate/<code>/events' => 'directorate/events',
+        'directorate/<code>/announcements' => 'directorate/announcements',
+        'directorate/<code>/announcements/<item>' => 'directorate/announcements',
+        'directorate/<code>/researchs/<item>' => 'directorate/researchs',
+        'directorate/<code>/staff' => 'directorate/staff',
+        'directorate/<code>' => 'directorate/index',
+        //OFFICES PAGES ROUTES
+        'office/<code>/programmes' => 'office/programs',
+        'office/<code>/programs' => 'office/programs',
+        'office/<code>/program' => 'office/programs',
+        'office/<code>/programmes/<item>' => 'office/programs',
+        'office/<code>/programs/<item>' => 'office/programs',
+        'office/<code>/program/<item>' => 'office/programs',
+        'office/<code>/news/<item>' => 'office/news',
+        'office/<code>/news' => 'office/news',
+        'office/<code>/events/<item>' => 'office/events',
+        'office/<code>/events' => 'office/events',
+        'office/<code>/announcements' => 'office/announcements',
+        'office/<code>/announcements/<item>' => 'office/announcements',
+        'office/<code>/researchs/<item>' => 'office/researchs',
+        'office/<code>/staff' => 'office/staff',
+        'office/<code>' => 'office/index',
         //////
-        ///MAIN SITE
+        ///MAIN SITE ROUTES
         'background|introduction' => 'about/index',
         'about|about-us|aboutus' => 'about/index',
         'about-us/leadership' => 'about/leadership',
@@ -153,6 +167,8 @@ return [
         'contacts/<category>' => 'contacts/<category>',
         'menu/<category>' => 'menu/<category>',
         'custom-blocks/<category>' => 'custom-blocks/<category>',
+        'directory/<code>' => 'site/directory',
+        'directory' => 'site/directory',
         ///default route
         'language|site/language|site/language/' => '/site/language',
         '<front>' => 'site/index',

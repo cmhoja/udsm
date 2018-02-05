@@ -139,15 +139,15 @@ class AcademicAdministrativeUnit extends \yii\db\ActiveRecord {
 
     static function getUnitTypes() {
         return array(
-            self::UNIT_TYPE_ADMINISTRATIVE => 'Administratives',
-            self::UNIT_TYPE_CONSTINTUENT_COLLEGE => 'Constituent Colleges',
-            self::UNIT_TYPE_COLLEGE => 'Colleges',
-            self::UNIT_TYPE_SCHOOL => 'Schools',
-            self::UNIT_TYPE_INSTITUTE => 'Institutes',
-            self::UNIT_TYPE_CENTRE => 'Centres',
+            self::UNIT_TYPE_ADMINISTRATIVE => 'Administrative',
+            self::UNIT_TYPE_CONSTINTUENT_COLLEGE => 'Constituent College',
+            self::UNIT_TYPE_COLLEGE => 'College',
+            self::UNIT_TYPE_SCHOOL => 'School',
+            self::UNIT_TYPE_INSTITUTE => 'Institute',
+            self::UNIT_TYPE_CENTRE => 'Centre',
             // self::UNIT_TYPE_DEPARTMENT => 'Departments',
-            self::UNIT_TYPE_DIRECTORATE => 'Directorates',
-            self::UNIT_TYPE_OFFICE => 'Offices'
+            self::UNIT_TYPE_DIRECTORATE => 'Directorate',
+            self::UNIT_TYPE_OFFICE => 'Office'
         );
     }
 

@@ -75,6 +75,7 @@ return [
     'student_corner' => ['en' => 'Student Corner', 'sw' => 'kwa wanafunzi'],
     'staff_corner' => ['en' => 'Student Corner', 'sw' => 'kwa Wafanyakazi'],
     'staff_directory' => ['en' => 'Staff Directory', 'sw' => 'Staff Directory'],
+    'udsm_az_directory' => ['en' => 'UDSM A-Z Directory', 'sw' => 'Orodha ya Taarifa UDSM A-Z'],
     'postal_address' => ['en' => 'Postal Address', 'sw' => 'Sanduku la Posta'],
     'call_us' => ['en' => 'Call Us', 'sw' => 'Tupigie'],
     'department' => ['en' => 'Departments', 'sw' => 'Idara na Vitengo'],
