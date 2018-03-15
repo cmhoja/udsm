@@ -282,11 +282,14 @@ li.mega-menu{
 }
 /* Top Social Icons */
 .top-social-icon{
-	float: left;
+	float: right;
 }
 
 .top-social-icon a {
 	border-right: 1px solid #ffffff;
+	color: #fff !important;
+	padding-right: 5px;
+	padding-left: 5px;
 }
 
 .top-social-icon a:last-child {

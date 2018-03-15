@@ -264,6 +264,11 @@ th {
     }
     thead {
         display: table-header-group
+
+    }
+    .programs {
+         background: #225dcd;
+        color: #fff;
     }
     img,
     tr {
@@ -5067,7 +5072,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 .navbar {
     position: relative;
-    min-height: 50px;
+    /*min-height: 50px;*/
     margin-bottom: 20px;
     border: 1px solid transparent
 }
@@ -5249,6 +5254,13 @@ textarea.input-group-sm>.input-group-btn>.btn {
     margin-top: 4px
 }
 
+.navbar-nav>li>a {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    
+}
+
+
 @media (min-width:768px) {
     .navbar-toggle {
         display: none
@@ -5260,7 +5272,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 }
 
 .navbar-nav>li>a {
-    padding-top: 10px;
+    padding-top: 0px;
     padding-bottom: 10px;
     line-height: 20px
 }
@@ -6586,9 +6598,13 @@ button.list-group-item-danger.active:hover {
     line-height: 1.3
 }
 
+#quicklinks {
+  background: #f7f7f7 !important;  
+}
+
 .panel {
     margin-bottom: 20px;
-    background-color: #fff;
+    
     border: 1px solid transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
