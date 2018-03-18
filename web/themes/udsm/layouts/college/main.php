@@ -60,7 +60,7 @@
                                 <!-- Top Contact -->
                                 <div  class="col-sm-2"style="z-index: 100;padding: 0.5%;margin-left: 0;margin-top: 0.5%;position: relative;float: left;display: block">
                                     <a style=""class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                        <img class="site_logo" style="width: 60px;" alt="Site Logo" src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/logo.png" />
+                                        <img class="site_logo" style="width: 80px;" alt="Site Logo" src="<?php echo $this->theme->baseUrl; ?>/layouts/college/img/logo_ud.png" />
                                     </a>
                                 </div>
                                 <div class="col-sm-8" style="position: relative;float: left;">

@@ -26,40 +26,41 @@ use yii\bootstrap\Modal;
         <link rel="shortcut icon" href="">
         <!-- Font -->
         <link rel="stylesheet" href="<?php echo $this->theme->baseUrl; ?>/css">
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/css(1)" rel="stylesheet" type="text/css">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/css(1)" rel="stylesheet" type="text/css">
         <!-- Font Awesome Icons -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <!-- Bootstrap core CSS -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/hover-dropdown-menu.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/hover-dropdown-menu.css" rel="stylesheet">
         <!-- Icomoon Icons -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/icons.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/icons.css" rel="stylesheet">
 
         <!-- Animations -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/animate.min.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/animate.min.css" rel="stylesheet">
         <!-- Owl Carousel Slider -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/owl.carousel.css" rel="stylesheet">
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/owl.theme.css" rel="stylesheet">
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/owl.transitions.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/owl.carousel.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/owl.theme.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/owl.transitions.css" rel="stylesheet">
         <!-- PrettyPhoto Popup -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/prettyPhoto.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/prettyPhoto.css" rel="stylesheet">
         <!-- Custom Style -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/style.css" rel="stylesheet">
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/responsive.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/style.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/responsive.css" rel="stylesheet">
 
         <!-- Flexslider -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/flexslider.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/flexslider.css" rel="stylesheet">
         <!-- Color Scheme -->
-        <link href="<?php echo $this->theme->baseUrl; ?>/css/color.css" rel="stylesheet">
+        <link href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/color.css" rel="stylesheet">
 
         <!-- Icons -->
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/icons/css/icons.min.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/icons/css/icons.min.css" />
 
         <!-- Main Stylesheet -->
         <!-- Perfect Scrollbar -->
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/perfect-scrollbar.css" />
-        <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/util.js"></script>
-        <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/js/stats.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/perfect-scrollbar.css" />
+        <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/common.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/util.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/stats.js"></script>
 
         <?php $this->head(); ?>
     </head>
@@ -68,71 +69,14 @@ use yii\bootstrap\Modal;
         <?php $this->beginBody(); ?>
 
         <div id="page">
-            <div id="top-bar" class="top-bar-section top-bar-bg-color">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <!-- Top Contact -->
-                            <div class="top-contact link-hover-black">
-                                <?php
-//loading social network accounts for main site
-                                echo $this->render('main/main_template_header_top_left'); //loading the main template header top left
-                                ?>
-                            </div>
-
-                            <!-- Top Social Icon -->
-                            <div class="top-social-icon link-hover-black">
-                                <?php
-                                echo $this->render('main/main_template_header_top_right'); //loading the main template header top left
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Top Bar -->
-            <!-- Sticky Navbar -->
-            <div id="sticker-sticky-wrapper" class="sticky-wrapper" style="height: 79px;">
-                <header id="sticker" class="sticky-navigation center-menu-header">
-                    <!-- Sticky Menu -->
-                    <div class="sticky-menu relative">
-                        <!-- navbar -->
-                        <div class="navbar navbar-default navbar-bg-light" role="navigation">
-                            <div class="container">
-                                <div class="row">
-
-                                    <div class="col-md-12">
-                                        <div class="navbar-header">
-                                            <!-- Button For Responsive toggle -->
-                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                                <span class="sr-only">Toggle navigation</span> 
-                                                <span class="icon-bar"></span> 
-                                                <span class="icon-bar"></span> 
-                                                <span class="icon-bar"></span></button> 
-                                            <!-- Logo -->
-                                            <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl; ?>">
-                                                <img style="vertical-align: middle;"class="site_logo" alt="UDSM Official Logo" src="<?php echo \yii\helpers\HtmlPurifier::process($this->theme->baseUrl.'/img/logo.png');?>">
-                                                <span style="vertical-align: middle"><?php echo Yii::$app->name[Yii::$app->language]; ?></span>
-                                            </a>
-                                        </div>
-                                        <!-- Navbar Collapse -->
-                                        <?php
-                                        echo $this->render('main/main_menu'); //loading the main menu from the main template
-                                        ?>
-                                        <!-- /.navbar-collapse -->
-                                    </div>
-                                    <!-- /.col-md-12 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.container -->
-                        </div>
-                        <!-- navbar -->
-                    </div>
-                    <!-- Sticky Menu -->
-                </header>
-            </div>
-
+            <!--NEW--> 
+            <div>            </div>
+            <!--END NEW-->
+            <!--HEADER SECTION NEW ADDED-->
+            <?php
+            echo $this->render('main/main_header'); //loading the main template header top left
+            ?>
+            <!--END HEADER SECTION NEW ADDED-->
 
             <!--DYNAMIC CONTENT AREA-->
             <?php echo $content; ?>
@@ -147,54 +91,54 @@ use yii\bootstrap\Modal;
             <!--</div>-->
             <!-- page -->
             <!-- Scripts -->
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.min.js"></script> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/bootstrap.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/bootstrap.min.js"></script> 
             <!-- Menu jQuery plugin -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/hover-dropdown-menu.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/hover-dropdown-menu.js"></script> 
             <!-- Menu jQuery Bootstrap Addon --> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.hover-dropdown-menu-addon.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.hover-dropdown-menu-addon.js"></script> 
             <!-- Scroll Top Menu -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.easing.1.3.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.easing.1.3.js"></script> 
             <!-- Sticky Menu --> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.sticky.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.sticky.js"></script> 
             <!-- Bootstrap Validation -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/bootstrapValidator.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/bootstrapValidator.min.js"></script> 
             <!-- Revolution Slider -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.themepunch.tools.min.js"></script> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.themepunch.revolution.min.js"></script> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/revolution-custom.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.themepunch.tools.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.themepunch.revolution.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/revolution-custom.js"></script> 
             <!-- Portfolio Filter -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.mixitup.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.mixitup.min.js"></script> 
             <!-- Animations -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.appear.js"></script> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/effect.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.appear.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/effect.js"></script> 
             <!-- Owl Carousel Slider -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/owl.carousel.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/owl.carousel.min.js"></script> 
             <!-- Pretty Photo Popup -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.prettyPhoto.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.prettyPhoto.js"></script> 
             <!-- Parallax BG -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.parallax-1.1.3.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.parallax-1.1.3.js"></script> 
             <!-- Fun Factor / Counter -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.countTo.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.countTo.js"></script> 
             <!-- Twitter Feed -->
 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/carousel.js"></script> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/scripts.js"></script> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/tweetie.min.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/carousel.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/scripts.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/tweetie.min.js"></script> 
             <!-- Background Video -->
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.mb.YTPlayer.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.mb.YTPlayer.js"></script> 
             <!-- FlexSlider -->
-            <script defer src="<?php echo $this->theme->baseUrl; ?>/js/jquery.flexslider.js"></script>
+            <script defer src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.flexslider.js"></script>
 
             <script type="text/javascript">
                 $(function () {
@@ -211,18 +155,18 @@ use yii\bootstrap\Modal;
             </script>
 
             <!-- Syntax Highlighter -->
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/shCore.js"></script>
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/shBrushXml.js"></script>
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/shBrushJScript.js"></script>
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/shCore.js"></script>
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/shBrushXml.js"></script>
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/shBrushJScript.js"></script>
             <!-- Custom Js Code -->
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/jquery.mousewheel.js"></script>
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/perfect-scrollbar.js"></script>
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jquery.mousewheel.js"></script>
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/perfect-scrollbar.js"></script>
 
             <!-- CSS & JS SCRIPTS FOR YOUTUBE VIDEOPLAYER FOR HOME PAGE ONLY THIS IS AVAILABLE AT HOME PAGE ONLY-->
             <!-- JS Main For youtube player Javascript on home page-->           
             <?php if (isset($this->params['videos'])): ?>
-                <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/css/youtube-video-player.min.css" />
-                <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/youtube-video-player.jquery.min.js"></script>
+                <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->theme->baseUrl; ?>/layouts/main/css/youtube-video-player.min.css" />
+                <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/youtube-video-player.jquery.min.js"></script>
                 <?php
                 $videos_list = NULL;
                 if ($this->params['videos']) {
@@ -296,9 +240,9 @@ use yii\bootstrap\Modal;
                 </script>
             <?php endif; ?>
             <!--END YOU TUBE PLAYER CSS--> 
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/custom.js"></script> 
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/custom.js"></script> 
             <!-- Scripts -->
-            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/js/js"></script>
+            <script type="text/javascript" src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/js"></script>
 
             <?php $this->endBody(); ?>
 

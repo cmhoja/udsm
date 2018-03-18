@@ -4,7 +4,7 @@
             <div class="col-md-8 col-md-12 no-pad">
                 <?php if (isset($slideshows) && $slideshows): ?>
                     <section class="slider">
-                        <script src="<?php echo $this->theme->baseUrl; ?>/js/jssor.slider-22.1.5.min.js" type="text/javascript" data-library="jssor.slider" data-version="22.1.5"></script>
+                        <script src="<?php echo $this->theme->baseUrl; ?>/layouts/main/js/jssor.slider-22.1.5.min.js" type="text/javascript" data-library="jssor.slider" data-version="22.1.5"></script>
                         <script type="text/javascript">
                             jssor_1_slider_init = function () {
 
@@ -24,7 +24,7 @@
 
                                 var jssor_1_options = {
                                     $AutoPlay: true,
-                                    $Idle: 6000,
+                                    $Idle: 2000,
                                     $CaptionSliderOptions: {
                                         $Class: $JssorCaptionSlideo$,
                                         $Transitions: jssor_1_SlideoTransitions,
@@ -106,7 +106,7 @@
                                 width: 55px;
                                 height: 55px;
                                 cursor: pointer;
-                                background: url('<?php echo $this->theme->baseUrl; ?>/img/a15.png') no-repeat;
+                                background: url('<?php echo $this->theme->baseUrl; ?>/layouts/main/img/a15.png') no-repeat;
                                 overflow: hidden;
                             }
                             .jssora02l { background-position: -3px -33px; }
@@ -118,20 +118,27 @@
                             .jssora02l.jssora02lds { background-position: -3px -33px; opacity: .3; pointer-events: none; }
                             .jssora02r.jssora02rds { background-position: -63px -33px; opacity: .3; pointer-events: none; }
                         </style>
-                        <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1200px;height:600px;overflow:hidden;visibility:hidden;">
+                        <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1200px;height:590px;overflow:hidden;visibility:hidden;">
                             <!-- Loading Screen -->
                             <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
                                 <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
 
                             </div>
 
-                            <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1200px;height:600px;overflow:hidden;">
+                            <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1200px;height:585px;overflow:hidden;">
                                 <?php
                                 foreach ($slideshows as $slideshow) {
                                     ?>
                                     <div data-p="112.50">
                                         <img data-u="image" src="<?php echo Yii::$app->getUrlManager()->getBaseUrl() . '/..' . Yii::$app->params['file_upload_main_site'] . '/' . $slideshow->Image; ?>" />
-                                        <div data-u="caption" class="slider-caption"><?php echo substr(((Yii::$app->language == 'sw') ? $slideshow->TitleSw : $slideshow->TitleEn),0,120); ?></div>
+                                        <div data-u="caption" class="slider-caption">
+                                            <h3 class="cap-main-title">
+                                                <?php echo substr(((Yii::$app->language == 'sw') ? $slideshow->TitleSw : $slideshow->TitleEn),0,95); ?>
+                                            </h3>
+                                            <p class="cap-sub-title"> 
+                                                <?php echo substr(((Yii::$app->language == 'sw') ? $slideshow->DetailsSw : $slideshow->DetailsEn), 0, 18); ?>
+                                            </p>
+                                        </div>
                                     </div>
                                     <?php
                                 }

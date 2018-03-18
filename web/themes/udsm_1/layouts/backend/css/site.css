@@ -1,0 +1,245 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+.search {
+    width:auto;
+    min-width: 60%;
+    max-width: 80%;
+    float: left;
+    position: relative;
+    /*border:1px solid #367fa9;*/
+    margin-bottom: 1%;
+    clear: both;
+
+}
+.search form{
+    width:99%;
+    clear: both
+}
+.search form, .search form div{
+    position: relative;
+    float: left;
+}
+.search form div.form-group{
+    position: relative;
+    float: left;
+    margin: 1%;
+}
+.search form div.form-group button{
+    margin-top: 35%;
+}
+
+.table-bordered {
+    border: 1px solid #367fa9;
+}
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+    border: 1px solid #367fa9;
+}
+div.summary{
+    position: relative;
+    clear: both;
+    float: right;
+    margin-right: 1%;
+}
+div.form-add{
+    max-width: 70%;
+}
+
+h1{
+    font-size: 23px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    width:70%;
+}
+label.control-label{
+    font-weight:bold;
+}
+
+textarea.form-control{
+    height: 150px;
+}
+select.form-control{
+    width:auto;
+    min-width: 150px;
+    max-width: 250px;
+}
+form button{
+    margin-right: 3%;
+}
+
+div.news-view table.detail-grid-view tbody tr th{
+    /*width: auto;*/
+    width: 20% !important;
+}
+
+p{
+    clear: both;
+    float: left;
+    width: auto;
+}
+button[type='submit']{
+    position: relative;
+    clear: right;
+}
+
+ul#menu_tree{
+    position: relative !important;
+    float: left !important;
+    clear: both !important;
+    text-decoration: none;
+    list-style: none;
+    width: auto;
+    min-width:60%;
+    max-width: 98%;
+    text-align: left;
+    margin-top: 1%;
+}
+ul#menu_tree li{
+    position: relative !important;
+    float: left !important;
+    clear: both !important;
+    color: red !important;
+    text-decoration: none;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 2%;
+    text-align: left;
+}
+ul#menu_tree li p{
+    position: relative !important;
+    float: left !important;
+    width: 100%;
+    margin: 0;
+    clear: both;
+}
+ul#menu_tree li p a{
+    position: relative !important;
+    float: left !important;
+    width: 80%;
+    margin: 0;
+    margin-right: 1%;
+}
+ul#menu_tree li p span {
+    position: relative !important;
+    float: left !important;
+    width: 17%;
+    margin: 0;
+    margin-left: 1%;
+}
+ul#menu_tree li p span a{
+    position: relative !important;
+    float: left !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+ul#menu_tree li  ul#menu_tree{
+    position: relative !important;
+    float: left !important;
+    width: 100%;
+    margin: 0;
+}
+ul#menu_tree li  ul#menu_tree li{
+    margin-bottom: 0.5%;
+}
+
+ul#menu_tree li p ul li p{
+    position: relative !important;
+    float: left !important;
+    width: 100%;
+}
+
+p{
+    text-align: justify !important;
+}
+div{
+    text-align: justify !important;
+}

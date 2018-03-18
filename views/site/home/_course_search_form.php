@@ -1,4 +1,4 @@
-<form role="form" name="contactform"  method="POST" action="<?php echo \app\components\Utilities::generateUrl(html_entity_decode('study/catalogue')); ?>">
+<form style="margin: 1%;margin-bottom: 3%!important;" role="form" name="contactform"  method="POST" action="<?php echo \app\components\Utilities::generateUrl(html_entity_decode('study/catalogue')); ?>">
 
     <div class="input-text form-group">
         <select class="form-control" name="PTYpe" style="margin-bottom: 0%;">
