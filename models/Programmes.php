@@ -99,9 +99,9 @@ class Programmes extends \yii\db\ActiveRecord {
 
             default :
                 return array(
-                    self::PROGRAME_TYPE_UNDERGRADUATE => 'Undergraduate Program',
-                    self::PROGRAME_TYPE_POSTUNDERGRADUATE => 'Post Graduate Program',
-                    self::PROGRAME_TYPE_NON_DEGREE => 'Non degree Program'
+                    self::PROGRAME_TYPE_UNDERGRADUATE => 'Undergraduate Programme',
+                    self::PROGRAME_TYPE_POSTUNDERGRADUATE => 'Post Graduate Programme',
+                    self::PROGRAME_TYPE_NON_DEGREE => 'Non degree Programme'
                 );
                 break;
         }

@@ -148,7 +148,7 @@ class LeadershipController extends Controller {
      * @return mixed
      */
     public function actionDelete($id) {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id)->delete();
         if ($model && $model->Status != Leadership::STATUS_PUBLISHED) {
             $this->findModel($id)->delete();
         }

@@ -61,6 +61,12 @@ use dosamigos\ckeditor\CKEditor;
                 'type' => Form::INPUT_FILE,
                 'columnOptions' => ['width' => '185px']
             ],
+            'LinkToPage' => [
+                'type' => Form::INPUT_TEXT,
+                'options' => ['placeholder' => 'Enter Website link or page with more details or Office page for this person '],
+                'columnOptions' => ['width' => '185px']
+            ]
+            
         ]
     ]);
     echo Html::submitButton('Save', ['value' => 'save', 'name' => 'save', 'class' => 'btn btn-primary']);

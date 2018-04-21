@@ -26,12 +26,12 @@ $this->title = Yii::$app->params['static_items']['programme'][Yii::$app->languag
                             $alphabets = Yii::$app->params['alphabets'];
                             if ($alphabets) {
                                 ?>
-                                <li style="font-size: 1.7em;"><a href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/programmes'); ?>"><?php echo Yii::$app->params['static_items']['all'][Yii::$app->language]; ?></a> >> </li> 
+                                <li style="font-size: 1.6em;"><a href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/programmes'); ?>"><?php echo Yii::$app->params['static_items']['all'][Yii::$app->language]; ?></a> >> </li> 
                                 <?php
                                 foreach ($alphabets as $key => $value) {
                                     ?>
                                     <li>
-                                        <a style="font-size: 0.6em;"href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/programmes/' . html_entity_decode($value)); ?>"><?php echo $value; ?></a>
+                                        <a style="font-size: 0.5em;"href="<?php echo app\components\Utilities::generateUrl('/colleges/' . $unit_details->UnitAbreviationCode . '/programmes/' . html_entity_decode($value)); ?>"><?php echo $value; ?></a>
                                     </li>
                                     <?php
                                 }

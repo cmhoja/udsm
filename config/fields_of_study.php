@@ -10,3 +10,4 @@ return [
     7=>['en' => 'Natural Sciences', 'sw' => 'Sayansi Asilia'],
     8=>['en' => 'Applied Sciences', 'sw' => 'Sayansi Tumizi'],
 ];
+

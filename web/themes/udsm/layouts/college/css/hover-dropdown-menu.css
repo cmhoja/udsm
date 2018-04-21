@@ -487,7 +487,8 @@ li.search-dropdown a {
     display: block;
     padding: 1px 0;
 	color: #1e1e1e;
-	text-transform: capitalize;
+	/*text-transform: capitalize;*/
+	text-transform: none;
 	font-size: 13px;
 }
 .page-links div:last-child a{

@@ -2,7 +2,7 @@
 $page_content = $page_content;
 //$content = array('page_content' => $page_content, 'side_menus' => $page_side_menus, 'custom_blocks' => $custom_blocks);
 
-if (isset($page_content) && $page_content) {
+
     $title = Yii::$app->params['static_items']['leadership_and_administration'][Yii::$app->language];
     ?>
     <div class="page-header page-title-left">
@@ -31,6 +31,7 @@ if (isset($page_content) && $page_content) {
                         <!--<h2 class="title">Who is Who</h2>-->
                     </div>
                     <?php
+                    if (isset($page_content) && $page_content) {
                     foreach ($page_content as $leadership) {
                         ?>
 
@@ -60,9 +61,11 @@ if (isset($page_content) && $page_content) {
 
                         </div>
                         <hr>
-                        <?php
-                    }
-                    ?>
+                       <?php
+}} else {
+    echo $this->render('//site/emptypage');
+}
+?>
 
 
                 </div>
@@ -92,11 +95,7 @@ if (isset($page_content) && $page_content) {
         </div>
     </section>
 
-    <?php
-} else {
-    echo $this->render('//site/emptypage');
-}
-?>
+
 
 
 

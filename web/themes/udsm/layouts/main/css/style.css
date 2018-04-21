@@ -1545,7 +1545,8 @@ i,
 .sticky-wrapper.is-sticky #sticker,
 .sticky-wrapper{
 	z-index:9999;
-	margin-bottom: -32px;
+	/*margin-bottom: -32px;*/
+	margin-bottom: -30.5px;
 }
 
 .site_logo {

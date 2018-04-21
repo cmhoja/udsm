@@ -2,12 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=udsm_19_jan_2018',//udsm_web_03_nov_2007',
+    'dsn' => 'mysql:host=localhost;dbname=udsm_new',
     'username' => 'root',
-    'password' => 'inco@2015',
+    'password' => '1234@1234',
     'charset' => 'utf8',
 ];
-
-
-//udsm_new:X?6yXeg!lom
 

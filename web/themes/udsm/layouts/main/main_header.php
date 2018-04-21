@@ -22,7 +22,7 @@
                     echo $this->render('main_template_header_top_right'); //loading the main template header top left
                     ?>
                 </div> 
-                <img style="float: right" src="<?php echo \yii\helpers\HtmlPurifier::process($this->theme->baseUrl).'/layouts/main/img/nkr.png'; ?>">
+                <img style="float: right; max-height: 130px;" src="<?php echo \yii\helpers\HtmlPurifier::process($this->theme->baseUrl).'/layouts/main/img/nkr.png'; ?>">
 
             </div>
 

@@ -99,6 +99,7 @@ class SlideShowsController extends Controller {
                 $model->DatePosted = Date('Y-m-d H:i:s', time());
             }
             $model->Upload = \yii\web\UploadedFile::getInstance($model, 'Upload');
+            var_dump($model->Upload);
             if ($model->validate()) {
                 if ($model->Upload) {
                     //$fileName = $model->Upload->baseName . '.' . $model->Upload->extension;
@@ -112,7 +113,8 @@ class SlideShowsController extends Controller {
                     if ($model->Upload->saveAs($filePath)) {
                         $model->Image = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 90);
+                        //\app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 100);
                     }
                 }
                 if ($model->save(false)) {
@@ -170,7 +172,8 @@ class SlideShowsController extends Controller {
                     if ($model->Upload->saveAs($filePath)) {
                         $model->Image = $fileName;
                         //resize the image to a required size
-                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 90);
+                       // \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 90);
+                        \app\components\Utilities::ResizeImage($filePath, $filePath, 1200, 600, 100);
                         //  Image::getImagine()->open($filePath)->thumbnail(new Box($newWidth, $newHeight))->save($filePath, ['quality' => 90]);
                     }
                 } else {

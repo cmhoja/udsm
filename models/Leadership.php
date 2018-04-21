@@ -37,7 +37,7 @@ class Leadership extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['FName', 'LNames', 'PositionEn', 'PositionSw', 'ListOrder'], 'required'],
-            [['SummaryEn', 'SummarySw'], 'string'],
+            [['SummaryEn', 'SummarySw','LinkToPage'], 'string'],
             [['ListOrder', 'Status'], 'integer'],
             [['Photo'], 'file', 'maxFiles' => 1, 'extensions' => 'jpg,jpeg,png',],
             [['Photo', 'LNames'], 'string', 'max' => 255],
@@ -60,6 +60,7 @@ class Leadership extends \yii\db\ActiveRecord {
             'SummarySw' => 'Summary Sw',
             'ListOrder' => 'List Order',
             'Status' => 'Status',
+            'LinkToPage'=>'Link to Page or Website'
         ];
     }
 

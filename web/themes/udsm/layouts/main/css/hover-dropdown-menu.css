@@ -490,13 +490,15 @@ li.search-dropdown a {
     font-size: 15px;
     margin:0 0 1px;
     /*text-transform: uppercase;*/
+    text-transform:none;
 	font-weight: 500;
 }
 .page-links div a {
     display: block;
     padding: 1px 0;
 	color: #1e1e1e;
-	text-transform: capitalize;
+	/*text-transform: capitalize;*/
+	text-transform:none;
 	font-size: 13px;
 }
 .page-links div:last-child a{
@@ -622,7 +624,8 @@ li.search-dropdown a {
 }
 .top-bar-section.top-bar-bg-color.shop-top-bar .navbar-nav > li > ul.dropdown-menu li a{
 	color: #222;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
+	text-transform:none;
 	font-size: 12px;
 	padding: 0 0 0 5px;
 }

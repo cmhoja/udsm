@@ -90,9 +90,7 @@ class AboutController extends Controller {
         $lang = Yii::$app->language;
         $url = html_entity_decode(\app\components\Utilities::getPageUrl());
         $page_content = \app\models\Leadership::getActiveLeaders();
-        if ($page_content) {
-            $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
-        }
+       $page_side_menus = MenuItem::getActiveMenuItemsByMenuTypeRegionAndTemplateByUnitID(Menu::MENU_TYPE_SIDE_MENU, SiteRegions::CUSTOM_PAGE_CONTENT_SIDE_MENU, NULL, $url);
         $content = array('page_content' => $page_content, 'side_menus' => $page_side_menus);
         return $this->render('//site/pages/leadership', $content);
     }
